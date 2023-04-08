@@ -103,6 +103,13 @@
         </a>
       </li>
 
+      <li>
+        <a href="../qldonhang/" class="nav-link text-white">
+          <span class="bi-kanban"></span>
+          Quản lý Đơn Hàng
+        </a>
+      </li>
+
       <!-- <?php if(isset($_SESSION['nguoiDung']) && $_SESSION['nguoiDung']['quyen'] == 1){ ?>
 
       <li class="nav-item">
