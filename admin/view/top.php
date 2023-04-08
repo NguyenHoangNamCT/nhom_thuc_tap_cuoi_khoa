@@ -99,14 +99,21 @@
        <li>
         <a href="../qlthuonghieu/" class="nav-link text-white">
           <span class="bi-kanban"></span>
-          Quản lý Thương Hiệu
+          Quản lý thương hiệu
         </a>
       </li>
 
       <li>
         <a href="../qldonhang/" class="nav-link text-white">
           <span class="bi-kanban"></span>
-          Quản lý Đơn Hàng
+          Quản lý đơn hàng
+        </a>
+      </li>
+
+      <li>
+        <a href="../qlnguoidung/" class="nav-link text-white">
+          <span class="bi-kanban"></span>
+          Quản lý người dùng
         </a>
       </li>
 

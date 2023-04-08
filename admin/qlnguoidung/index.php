@@ -12,33 +12,30 @@
         case 'macDinh':
             include('main.php');
             break;
-        case 'themND':
+        case 'them':
             include('add.php');
             break;
-        case 'themNguoiDung':
-            $email = $_POST['txtEmail'];
-            $ten = $_POST['txtHoTen'];
-            $dienThoai = $_POST['txtDienThoai'];
-            $matKhau = $_POST['txtMatKhau'];
-            $quyen = $_POST['selectLoai'];
-            $diaChi = $_POST['txtDC'];
-            $hinh = $_FILES['filehinhanh']['name'];
-            // var_dump($email, $ten, $dienThoai, $matKhau, $quyen);
-
-            $nd->themnguoidung($email, $ten, $dienThoai, $matKhau, $quyen, 1, $hinh, $diaChi);
-
+        case 'xuLyThem':
+            $ten_dang_nhap = $_POST["ten_dang_nhap"];
+            $mat_khau = $_POST["mat_khau"];
+            $ho_ten = $_POST["ho_ten"];
+            $dia_chi = $_POST["dia_chi"];
+            $dien_thoai = $_POST["dien_thoai"];
+            $email = $_POST["email"];
+            $loai_nguoi_dung = $_POST["loai_nguoi_dung"];
+            $hinh_anh = $_FILES["hinh_anh"]["name"];
+            $trang_thai = $_POST["trang_thai"];
+            $nd->themNguoiDung($ten_dang_nhap, $mat_khau, $ho_ten, $dia_chi, $dien_thoai, $email, $loai_nguoi_dung, $hinh_anh);
             include('main.php');
             break;
         case 'xoa':
             $id = $_GET['id'];
-
-            if($_GET['quyen'] != 3 && isset($_GET['quyen'])){
-                $idNguoiDungKhongDuocPhepXoa = $id;
-                $idXoaNguoiDung = $id;
-            }
-            else
-                $nd->xoaNguoiDung($id);
+            $nd->xoaNguoiDung($id);
             include('main.php');
+            break;
+        case 'sua':
+            $id = $_GET['id'];
+            include('update.php');
             break;
         case 'thayDoiTrangThai':
             $id = $_GET['id'];

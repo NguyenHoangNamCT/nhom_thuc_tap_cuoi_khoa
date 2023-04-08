@@ -22,7 +22,7 @@ class NGUOIDUNG{
 	}
 
 	//lấy thông tin tất cả người dùng
-	public function laytatcanguoidung(){
+	public function layTatCaNguoiDung(){
 		$db = DATABASE::connect();
 		try{
 			$sql = "SELECT * FROM nguoidung";
@@ -57,7 +57,7 @@ class NGUOIDUNG{
 		}
 	}
 
-
+	//lấy thông tin người dùng theo email
 	public function layThongTinNguoiDungTheoEmail($email){
 		$db = DATABASE::connect();
 		try{
@@ -76,7 +76,7 @@ class NGUOIDUNG{
 		}
 	}
 
-
+	//thêm người dùng
 	public function themNguoiDung($ten_dang_nhap, $mat_khau, $ho_ten, $dia_chi, $dien_thoai, $email, $loai_nguoi_dung, $hinh_anh){
 		$db = DATABASE::connect();
 		try{
