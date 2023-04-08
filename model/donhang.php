@@ -66,5 +66,47 @@ class DONHANG{
             DATABASE::close();
         }
     }
+
+    //lấy danh sách đơn hàng
+    public function layDanhSachDonHang() {
+        $db = DATABASE::connect();
+        try {
+            $sql = "SELECT * FROM donhang";
+            $result = $db->query($sql);
+            $list = array();
+            foreach($result as $item){
+                $list[] = $item;
+            }
+            $result->closeCursor();
+            return $list;
+        }
+        catch(PDOException $e){
+            $error_message=$e->getMessage();
+            echo "<p>Lỗi truy vấn: $error_message</p>";
+            exit();
+        }
+    }
+
+
+    //lấy danh sách thương hiệu và cả tên người dùng
+    public function layDanhSachDonHangCoTenNguoiDung() {
+        $db = DATABASE::connect();
+        try{
+            $sql = "SELECT donhang.*, nguoidung.ho_ten
+                    FROM donhang
+                    INNER JOIN nguoidung ON donhang.id_nguoi_dung = nguoidung.id";
+            $cmd = $db->prepare($sql);
+            $cmd->execute();
+            $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            $cmd->closeCursor();
+            return $result;
+        }
+        catch(PDOException $e){
+            $error_message=$e->getMessage();
+            echo "<p>Lỗi truy vấn: $error_message</p>";
+            exit();
+        }
+    }
+
 }
 ?>
