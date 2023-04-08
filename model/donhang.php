@@ -2,7 +2,7 @@
 class DONHANG{
     public function themDonHang($id_nguoi_dung, $ngay_dat, $dia_chi_giao_hang, $dien_thoai_nguoi_nhan, $ho_ten_nguoi_nhan, $tong_tien, $tinh_trang_don_hang){
         $db = DATABASE::connect();
-        try{
+        // try{
             $sql = "INSERT INTO donhang (id_nguoi_dung, ngay_dat, dia_chi_giao_hang, dien_thoai_nguoi_nhan, ho_ten_nguoi_nhan, tong_tien, tinh_trang_don_hang) VALUES (:id_nguoi_dung, :ngay_dat, :dia_chi_giao_hang, :dien_thoai_nguoi_nhan, :ho_ten_nguoi_nhan, :tong_tien, :tinh_trang_don_hang)";
             $cmd = $db->prepare($sql);
             $cmd->bindValue(':id_nguoi_dung', $id_nguoi_dung);
@@ -15,15 +15,15 @@ class DONHANG{
             $cmd->execute();
             $rowCount = $cmd->rowCount();
             return $rowCount;
-        }
-        catch(PDOException $e){
-            $error_message = $e->getMessage();
-            echo "<p>Lỗi truy vấn ở themDonHang: $error_message</p>";
-            exit();
-        }
-        finally {
-            DATABASE::close();
-        }
+        // }
+        // catch(PDOException $e){
+        //     $error_message = $e->getMessage();
+        //     echo "<p>Lỗi truy vấn ở themDonHang: $error_message</p>";
+        //     exit();
+        // }
+        // finally {
+        //     DATABASE::close();
+        // }
     }
 
     public function xoaDonHang($id_don_hang){
@@ -84,6 +84,22 @@ class DONHANG{
             $error_message=$e->getMessage();
             echo "<p>Lỗi truy vấn: $error_message</p>";
             exit();
+        }
+    }
+
+      //lấy danh sách đơn hàng theo id
+    function layDonHangById($id) {
+        $conn = DATABASE::connect();
+        try {
+            $sql = 'SELECT * FROM thuonghieu WHERE id = :id';
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $loaiDonHang = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $loaiDonHang;
+        } catch(PDOException $e) {
+            echo "Lỗi truy vấn ở layDonHangById: " . $e->getMessage();
+            return null;
         }
     }
 

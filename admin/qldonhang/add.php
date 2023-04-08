@@ -15,67 +15,56 @@
 
 
 <div class="container mt-3">
-  <h2>Thêm sản phẩm</h2>
+  <h2>Thêm Đơn Hàng</h2>
   <form method="post" enctype="multipart/form-data">
 	<!-- Gửi dữ liệu ẩn -->
 	<input type="hidden" name="action" value="XuLyThem">
-  	<div class="mb-3 mt-3">
-      <label for="">Tên sản phẩm:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtTenSP">
-    </div>
-	
-    <div class="mb-3 mt-3">
-      <label for="">Giá tiền:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtGiaTien">
-    </div>
-	
-    <div class="mb-3 mt-3">
-      <label for="">Giảm giá:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtGiamGia">
-    </div>
-	
-    <div class="mb-3 mt-3">
-      <label>Loại sản phẩm</label>
-      <select class="form-control" name="selectLoaiSanPham">
+
+  <div class="mb-3 mt-3">
+      <label>Tên người dùng</label>
+      <select class="form-control" name="selectTenNguoiDung">
         <?php
-          $mangLoai = $l->layLoaiSP();
-          foreach($mangLoai as $arr):
+          $mangNguoiDung = $nd->laytatcanguoidung();
+          foreach($mangNguoiDung as $arr):
         ?>
-          <option value="<?php echo $arr["id"]; ?>"><?php echo $arr["ten_loai_san_pham"]; ?></option>
+          <option value="<?php echo $arr["id"]; ?>"><?php echo $arr["ho_ten"]; ?></option>
         <?php
           endforeach;
         ?>
       </select>
-    </div>	
+    </div>
+	
+    <div class="mb-3 mt-3">
+      <label for="">Ngày Đặt:</label>
+      <input type="text" class="form-control"  placeholder="" name="txtNgayDat">
+    </div>
+	
+    <div class="mb-3 mt-3">
+      <label for="">Địa Chỉ Giao Hàng:</label>
+      <input type="text" class="form-control"  placeholder="" name="txtDiaChiGH">
+    </div>
+
+	
+    <div class="mb-3 mt-3">
+      <label for="">Điện Thoại Người Nhận:</label>
+      <input type="text" class="form-control"  placeholder="" name="txtDienThoai">
+    </div>
 
     <div class="mb-3 mt-3">
-      <label>Thương hiệU</label>
-      <select class="form-control" name="selectThuongHieu">
-        <?php
-          $mangThuongHieu = $th->layThuongHieu();
-          foreach($mangThuongHieu as $arr):
-        ?>
-          <option value="<?php echo $arr["id"]; ?>"><?php echo $arr["TenThuongHieu"]; ?></option>
-        <?php
-          endforeach;
-        ?>
-      </select>
+      <label for="">Họ Tên Người Nhận:</label>
+      <input type="text" class="form-control"  placeholder="" name="txtHoTenNN">
     </div>
-	
+
     <div class="mb-3 mt-3">
-      <label for="">Số lượng:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtSoLuong">
+      <label for="">Tổng Tiền:</label>
+      <input type="text" class="form-control"  placeholder="" name="txtTongTien">
     </div>
-	
+
     <div class="mb-3 mt-3">
-      <label for="">Mô tả:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtMoTa">
+      <label for="">Tình Trạng Đơn Hàng:</label>
+      <input type="text" class="form-control"  placeholder="" name="txtTinhTrangDH">
     </div>
-	
-    <div class="mb-3 mt-3">
-            <label>Hình ảnh</label>
-            <input class="form-control" type="file" name="filehinhanh">
-    </div>
+
     
     
   <button type="submit" class="btn btn-primary">Submit</button>

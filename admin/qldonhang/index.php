@@ -1,8 +1,10 @@
 <?php 
 require('../../model/database.php');
-require('../../model/sanpham.php');
-require('../../model/loaisanpham.php');
-require('../../model/thuonghieu.php');
+require('../../model/donhang.php');
+require('../../model/nguoidung.php');
+// require('../../model/sanpham.php');
+// require('../../model/loaisanpham.php');
+// require('../../model/thuonghieu.php');
 if(isset($_REQUEST["action"])){
     $action = $_REQUEST["action"];
 }
@@ -10,10 +12,11 @@ else{
     $action="macdinh"; 
 }
 
-
-$sp = new SANPHAM();
-$l = new LOAISP();
-$th = new THUONGHIEU();
+$nd = new NGUOIDUNG();
+$dh = new DONHANG();
+// $sp = new SANPHAM();
+// $l = new LOAISP();
+// $th = new THUONGHIEU();
 
 switch($action){
     case "macdinh": 
@@ -23,24 +26,24 @@ switch($action){
 		include("add.php");
 		break;
 		case "XuLyThem":
-		$tenSP = $_POST['txtTenSP'];
-		$giaTien = $_POST['txtGiaTien'];
-		$giamGia = $_POST['txtGiamGia'];
-		$loaiSP = $_POST['selectLoaiSanPham'];
-		$thuongHieu = $_POST['selectThuongHieu'];
-		$soLuong = $_POST['txtSoLuong'];
-		$moTa = $_POST['txtMoTa'];
-		$hinh = $_FILES['filehinhanh']['name'];
+		$id_nguoi_dung = $_POST['selectTenNguoiDung'];
+		$ngay_dat = $_POST['txtNgayDat'];
+		$dia_chi_giao_hang = $_POST['txtDiaChiGH'];
+		$dien_thoai_nguoi_nhan = $_POST['txtDienThoai'];
+		$ho_ten_nguoi_nhan = $_POST['txtHoTenNN'];
+		$tong_tien = $_POST['txtTongTien'];
+		$tinh_trang_don_hang = $_POST['txtTinhTrangDH'];
+			
 		
 		// var_dump($loaiSP, $thuongHieu, $tenSP, $moTa, $giaTien, $giamGia, $soLuong, $hinh);
 
-		$sp->themSanPham($loaiSP, $thuongHieu, $tenSP, $moTa, $giaTien, $giamGia, $soLuong, $hinh);
+		$dh->themDonHang($id_nguoi_dung, $ngay_dat, $dia_chi_giao_hang, $dien_thoai_nguoi_nhan, $ho_ten_nguoi_nhan, $tong_tien, $tinh_trang_don_hang);
 
 		include("main.php");
 		break;
 	case "xoa":
 		$id = $_GET['id'];
-		$sp->xoaSanPham($id);
+		$dh->xoaDonHang($id);
 		include("main.php");
 		break;
 	case "sua":
@@ -48,20 +51,14 @@ switch($action){
 		include("update.php");
 		break;
 	case "xuLySua":
-		$id = $_POST['id'];
-		$tenSP = $_POST['txtTenSP'];
-		$giaTien = $_POST['txtGiaTien'];
-		$giamGia = $_POST['txtGiamGia'];
-		$loaiSP = $_POST['selectLoaiSanPham'];
-		$thuongHieu = $_POST['selectThuongHieu'];
-		$soLuong = $_POST['txtSoLuong'];
-		$moTa = $_POST['txtMoTa'];
-		$hinh = $_FILES['filehinhanh']['name'];
+		$id_nguoi_dung = $_POST['txtidNguoiDung'];
+		$ngay_dat = $_POST['txtNgayDat'];
+		$dia_chi_giao_hang = $_POST['txtDiaChiGH'];
+		$dien_thoai_nguoi_nhan = $_POST['txtDienThoai'];
+		$ho_ten_nguoi_nhan = $_POST['txtHoTenNN'];
+		$tong_tien = $_POST['txtTongTien'];
+		$tinh_trang_don_hang = $_POST['txtTinhTrangDH'];
 
-		if($hinh == '')
-			$sp->suaSanPham($id, $loaiSP, $thuongHieu, $tenSP, $moTa, $giaTien, $giamGia, $soLuong, $hinh);
-		else
-			$sp->suaSanPham($id, $loaiSP, $thuongHieu, $tenSP, $moTa, $giaTien, $giamGia, $soLuong);
 
 		include("main.php");
 		break;
