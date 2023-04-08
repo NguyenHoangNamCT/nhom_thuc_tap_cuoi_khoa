@@ -96,7 +96,14 @@
         </a>
       </li>
 
-      <?php if(isset($_SESSION['nguoiDung']) && $_SESSION['nguoiDung']['quyen'] == 1){ ?>
+       <li>
+        <a href="../qlthuonghieu/" class="nav-link text-white">
+          <span class="bi-kanban"></span>
+          Quản lý Thương Hiệu
+        </a>
+      </li>
+
+      <!-- <?php if(isset($_SESSION['nguoiDung']) && $_SESSION['nguoiDung']['quyen'] == 1){ ?>
 
       <li class="nav-item">
         <a href="" class="nav-link active" aria-current="page">
@@ -132,7 +139,7 @@
   </div>
   <div class="b-example-vr"></div>
    
-   <div></div>
+   <div></div> -->
 
    <!-- The Modal -->
    <div class="modal" id="hoSoCaNhan">

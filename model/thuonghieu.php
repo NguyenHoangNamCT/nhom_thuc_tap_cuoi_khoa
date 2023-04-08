@@ -18,28 +18,23 @@ class THUONGHIEU{
     }
 
     // Thêm mới
-    public function themThuongHieu($ten, $mota, $trangweb, $logo){
-        $dbcon = DATABASE::connect();
-        try{
-            $sql = "INSERT INTO thuongHieu (TenThuongHieu, MoTa, TrangWeb, Logo)
-            VALUES (:tenThuongHieu, :moTa, :trangWeb, :logo)";
-            $cmd = $dbcon->prepare($sql);
-            $cmd->bindValue(':ten', $ten);
-            $cmd->bindValue(':mota', $mota);
-            $cmd->bindValue(':trangweb', $trangweb);
-            $cmd->bindValue(':logo', $logo);
+    public function themThuongHieu($tenThuongHieu, $moTa, $trangWeb, $logo) {
+        $db = DATABASE::connect();
+        try {
+            $sql = "INSERT INTO thuongHieu (TenThuongHieu, MoTa, TrangWeb, Logo) VALUES (:tenThuongHieu, :moTa, :trangWeb, :logo)";
+            $cmd = $db->prepare($sql);
+            $cmd->bindValue(":tenThuongHieu", $tenThuongHieu);
+            $cmd->bindValue(":moTa", $moTa);
+            $cmd->bindValue(":trangWeb", $trangWeb);
+            $cmd->bindValue(":logo", $logo);
             $cmd->execute();
-            //trả về id của đối tượng vừa mớI thêm vào csdl           
-            $id = $dbcon->lastInsertId();
+            $id = $db->lastInsertId();
+            $cmd->closeCursor();
             return $id;
-        }
-        catch(PDOException $e){
+        } catch(PDOException $e) {
             $error_message = $e->getMessage();
-            echo "<p>Lỗi truy vấn ở themThuongHieu: $error_message</p>";
+            echo "<p>Lỗi truy vấn: $error_message</p>";
             exit();
-        }
-        finally {
-            DATABASE::close();
         }
     }
 
@@ -67,16 +62,21 @@ class THUONGHIEU{
     }
 
     // Cập nhật 
-    public function suaThuongHieu($id, $tenThuongHieu, $moTa, $trangWeb, $logo){
+    public function suaThuongHieu($id, $tenThuongHieu, $moTa, $trangWeb, $logo = NULL){
         $db = DATABASE::connect();
         try{
-            $sql = "UPDATE thuongHieu SET TenThuongHieu = :tenThuongHieu, MoTa = :moTa, TrangWeb = :trangWeb, Logo = :logo WHERE id = :id";
+            if($logo != NULL)
+                    $sql = "UPDATE thuongHieu SET TenThuongHieu = :tenThuongHieu, MoTa = :moTa, TrangWeb = :trangWeb, Logo = :logo WHERE id = :id";
+                else
+                    $sql = "UPDATE thuongHieu SET TenThuongHieu = :tenThuongHieu, MoTa = :moTa, TrangWeb = :trangWeb WHERE id = :id";
+           
             $cmd = $db->prepare($sql);
             $cmd->bindValue(':id', $id);
             $cmd->bindValue(':tenThuongHieu', $tenThuongHieu);
             $cmd->bindValue(':moTa', $moTa);
             $cmd->bindValue(':trangWeb', $trangWeb);
-            $cmd->bindValue(':logo', $logo);
+            if($logo != NULL)
+            $cmd->bindValue(':logo', $logo, PDO::PARAM_STR);
             $cmd->execute();
             $rowCount = $cmd->rowCount();
             return $rowCount;
@@ -90,6 +90,25 @@ class THUONGHIEU{
             DATABASE::close();
         }
     }
+    
+
+    
+    //lấy thương hiệu theo id
+    function layThuongHieuById($id) {
+        $conn = DATABASE::connect();
+        try {
+            $sql = 'SELECT * FROM thuonghieu WHERE id = :id';
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $loaiThuongHieu = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $loaiThuongHieu;
+        } catch(PDOException $e) {
+            echo "Lỗi truy vấn ở layThuongHieuById: " . $e->getMessage();
+            return null;
+        }
+    }
+
 
     //-------------------------------------------------------------
     // Lấy danh sách
@@ -143,6 +162,7 @@ class THUONGHIEU{
             exit();
         }
     }
+
 
 }
 ?>
