@@ -37,6 +37,25 @@
             $id = $_GET['id'];
             include('update.php');
             break;
+        case 'xuLySua':
+            $id = $_POST["id"];
+            $ten_dang_nhap = $_POST["ten_dang_nhap"];
+            $mat_khau = $_POST["mat_khau"];
+            $ho_ten = $_POST["ho_ten"];
+            $dia_chi = $_POST["dia_chi"];
+            $dien_thoai = $_POST["dien_thoai"];
+            $email = $_POST["email"];
+            $loai_nguoi_dung = $_POST["loai_nguoi_dung"];
+            $hinh_anh = $_FILES["hinh_anh"]["name"];
+            $trang_thai = $_POST["trang_thai"];
+            var_dump($trang_thai);
+
+            if($hinh_anh != '')
+                $nd->suaNguoiDung($id, $ten_dang_nhap, $mat_khau, $ho_ten, $dia_chi, $dien_thoai, $email, $loai_nguoi_dung, $trang_thai, $hinh_anh);
+            else
+                $nd->suaNguoiDung($id, $ten_dang_nhap, $mat_khau, $ho_ten, $dia_chi, $dien_thoai, $email, $loai_nguoi_dung, $trang_thai);
+            include('main.php');
+            break;
         case 'thayDoiTrangThai':
             $id = $_GET['id'];
             $trangThai = $_GET['trangThai'];

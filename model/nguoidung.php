@@ -100,7 +100,7 @@ class NGUOIDUNG{
 		}
 		catch(PDOException $e){
 			$error_message=$e->getMessage();
-			echo "<p>Lỗi truy vấn: $error_message</p>";
+			echo "<p>Lỗi truy vấn ở themNguoiDung: $error_message</p>";
 			exit();
 		}
 	}
@@ -117,16 +117,19 @@ class NGUOIDUNG{
 			return true;
 		} catch(PDOException $e) {
 			$error_message=$e->getMessage();
-			echo "<p>Lỗi truy vấn: $error_message</p>";
+			echo "<p>Lỗi truy vấn ở xoaNguoiDung: $error_message</p>";
 			exit();
 		}
 	}
 
 	// sửa người dùng và sửa cả tên đăng nhập
-	public function suaNguoiDung($id, $tenDangNhap, $matKhau, $hoTen, $diaChi, $dienThoai, $email, $loaiNguoiDung, $hinhAnh, $trangThai) {
+	public function suaNguoiDung($id, $tenDangNhap, $matKhau, $hoTen, $diaChi, $dienThoai, $email, $loaiNguoiDung, $trangThai, $hinhAnh = NULL) {
 		$db = DATABASE::connect();
 		try {
-			$sql = "UPDATE nguoidung SET ten_dang_nhap=:tenDangNhap, mat_khau=:matKhau, ho_ten=:hoTen, dia_chi=:diaChi, dien_thoai=:dienThoai, email=:email, loai_nguoi_dung=:loaiNguoiDung, hinh_anh=:hinhAnh, trang_thai=:trangThai WHERE id=:id";
+			if($hinhAnh != NULL)
+				$sql = "UPDATE nguoidung SET ten_dang_nhap=:tenDangNhap, mat_khau=:matKhau, ho_ten=:hoTen, dia_chi=:diaChi, dien_thoai=:dienThoai, email=:email, loai_nguoi_dung=:loaiNguoiDung, hinh_anh=:hinhAnh, trang_thai=$trangThai WHERE id=:id";
+			else
+				$sql = "UPDATE nguoidung SET ten_dang_nhap=:tenDangNhap, mat_khau=:matKhau, ho_ten=:hoTen, dia_chi=:diaChi, dien_thoai=:dienThoai, email=:email, loai_nguoi_dung=:loaiNguoiDung, trang_thai=$trangThai WHERE id=:id";
 			$cmd = $db->prepare($sql);
 			$cmd->bindValue(":id", $id);
 			$cmd->bindValue(":tenDangNhap", $tenDangNhap);
@@ -136,14 +139,15 @@ class NGUOIDUNG{
 			$cmd->bindValue(":dienThoai", $dienThoai);
 			$cmd->bindValue(":email", $email);
 			$cmd->bindValue(":loaiNguoiDung", $loaiNguoiDung);
-			$cmd->bindValue(":hinhAnh", $hinhAnh);
-			$cmd->bindValue(":trangThai", $trangThai);
+			if($hinhAnh != NULL)
+				$cmd->bindValue(":hinhAnh", $hinhAnh);
+			//$cmd->bindValue(":trangThai", $trangThai);
 			$cmd->execute();
 			$cmd->closeCursor();
 			return true;
 		} catch(PDOException $e) {
 			$error_message = $e->getMessage();
-			echo "<p>Lỗi truy vấn: $error_message</p>";
+			echo "<p>Lỗi truy vấn ở suaNguoiDung: $error_message</p>";
 			exit();
 		}
 	}
@@ -167,7 +171,7 @@ class NGUOIDUNG{
 			return true;
 		} catch(PDOException $e) {
 			$error_message=$e->getMessage();
-			echo "<p>Lỗi truy vấn: $error_message</p>";
+			echo "<p>Lỗi truy vấn ở suaNguoiDungKhongSuaTenDangNhap: $error_message</p>";
 			exit();
 		}
 	}
@@ -193,11 +197,12 @@ class NGUOIDUNG{
 			return $rows;
 		} catch (PDOException $e) {
 			$error_message = $e->getMessage();
-			echo "<p>Lỗi truy vấn: $error_message</p>";
+			echo "<p>Lỗi truy vấn ở suaNguoiDungTheoTenDangNhap: $error_message</p>";
 			exit();
 		}
 	}
 
+	//-----------------------------------------------------------------------------------------------------------
 	// Cập nhật thông tin ng dùng: họ tên, số đt, email, ảnh đại diện 
 	public function capnhatnguoidung($id,$email,$sodt,$hoten,$hinhanh, $diaChi){
 		$db = DATABASE::connect();

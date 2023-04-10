@@ -10,7 +10,8 @@
   <h2>Thêm người dùng</h2>
   <form action="" method="POST" enctype="multipart/form-data">
     <!-- Gửi dữ liệu ẩn -->
-    <input type="hidden" name="action" value="xuLyThem">
+    <input type="hidden" name="action" value="xuLySua">
+    <input type="hidden" name="id" value="<?php echo $arr['id']; ?>">
     <!-- End gửi dữ liệu ẩn -->
     <div class="form-group">
       <label for="ten-dang-nhap">Tên đăng nhập:</label>
