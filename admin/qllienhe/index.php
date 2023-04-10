@@ -1,8 +1,9 @@
 <?php 
 require('../../model/database.php');
-require('../../model/sanpham.php');
-require('../../model/loaisanpham.php');
-require('../../model/thuonghieu.php');
+// require('../../model/sanpham.php');
+// require('../../model/loaisanpham.php');
+// require('../../model/thuonghieu.php');
+require('../../model/lienhe.php');
 if(isset($_REQUEST["action"])){
     $action = $_REQUEST["action"];
 }
@@ -10,10 +11,10 @@ else{
     $action="macdinh"; 
 }
 
-
-$sp = new SANPHAM();
-$l = new LOAISP();
-$th = new THUONGHIEU();
+$lh = new LIENHE(); 
+// $sp = new SANPHAM();
+// $l = new LOAISP();
+// $th = new THUONGHIEU();
 
 switch($action){
     case "macdinh": 
@@ -23,24 +24,16 @@ switch($action){
 		include("add.php");
 		break;
 		case "XuLyThem":
-		$tenSP = $_POST['txtTenSP'];
-		$giaTien = $_POST['txtGiaTien'];
-		$giamGia = $_POST['txtGiamGia'];
-		$loaiSP = $_POST['selectLoaiSanPham'];
-		$thuongHieu = $_POST['selectThuongHieu'];
-		$soLuong = $_POST['txtSoLuong'];
-		$moTa = $_POST['txtMoTa'];
-		$hinh = $_FILES['filehinhanh']['name'];
-		
-		// var_dump($loaiSP, $thuongHieu, $tenSP, $moTa, $giaTien, $giamGia, $soLuong, $hinh);
-
-		$sp->themSanPham($loaiSP, $thuongHieu, $tenSP, $moTa, $giaTien, $giamGia, $soLuong, $hinh);
-
+		$ho_ten = $_POST['txtHoTen'];
+		$email = $_POST['txtEmail'];
+		$so_dien_thoai = $_POST['txtSoDienThoai'];
+		$noi_dung = $_POST['txtNoiDung'];
+		$lh->themLienHe($ho_ten, $email, $so_dien_thoai, $noi_dung);
 		include("main.php");
 		break;
 	case "xoa":
 		$id = $_GET['id'];
-		$sp->xoaSanPham($id);
+		$lh->xoaLienHe($id);
 		include("main.php");
 		break;
 	case "sua":
@@ -49,20 +42,11 @@ switch($action){
 		break;
 	case "xuLySua":
 		$id = $_POST['id'];
-		$tenSP = $_POST['txtTenSP'];
-		$giaTien = $_POST['txtGiaTien'];
-		$giamGia = $_POST['txtGiamGia'];
-		$loaiSP = $_POST['selectLoaiSanPham'];
-		$thuongHieu = $_POST['selectThuongHieu'];
-		$soLuong = $_POST['txtSoLuong'];
-		$moTa = $_POST['txtMoTa'];
-		$hinh = $_FILES['filehinhanh']['name'];
-
-		if($hinh == '')
-			$sp->suaSanPham($id, $loaiSP, $thuongHieu, $tenSP, $moTa, $giaTien, $giamGia, $soLuong, $hinh);
-		else
-			$sp->suaSanPham($id, $loaiSP, $thuongHieu, $tenSP, $moTa, $giaTien, $giamGia, $soLuong);
-
+		$ho_ten = $_POST['txtHoTen'];
+		$email = $_POST['txtEmail'];
+		$so_dien_thoai = $_POST['txtSoDienThoai'];
+		$noi_dung = $_POST['txtNoiDung'];
+		$lh->suaLienHe($id, $ho_ten, $email, $so_dien_thoai, $noi_dung);
 		include("main.php");
 		break;
 	//----------------------------------------------------
