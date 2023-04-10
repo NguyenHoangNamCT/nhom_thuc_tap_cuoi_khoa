@@ -117,6 +117,29 @@
         </a>
       </li>
 
+      <li>
+        <a href="../qlkhuyenmai/" class="nav-link text-white">
+          <span class="bi-kanban"></span>
+          Quản lý Khuyến Mãi
+        </a>
+      </li>
+
+      <li>
+        <a href="../qllienhe/" class="nav-link text-white">
+          <span class="bi-kanban"></span>
+          Quản lý Liên Hệ
+        </a>
+      </li>
+
+      <li>
+        <a href="../qlquangcao/" class="nav-link text-white">
+          <span class="bi-kanban"></span>
+          Quản lý Quảng Cáo
+        </a>
+      </li>
+
+
+
       <!-- <?php if(isset($_SESSION['nguoiDung']) && $_SESSION['nguoiDung']['quyen'] == 1){ ?>
 
       <li class="nav-item">
