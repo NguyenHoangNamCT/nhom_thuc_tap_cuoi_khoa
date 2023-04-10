@@ -2,8 +2,8 @@
     require("../view/top.php");
 ?> 
 <div class="container">
-  <h2>Quản lý sản phẩm</h2>
-  <a href="index.php?action=them" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Thêm sản phẩm</a>
+  <h2>Quản lý đơn hàng</h2>
+  <a href="index.php?action=them" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Thêm đơn hàng</a>
   <div class="table-responsive">
     <table class="table table-hover">
       <thead>

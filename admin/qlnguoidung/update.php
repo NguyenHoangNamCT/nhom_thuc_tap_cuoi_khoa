@@ -7,7 +7,7 @@
 ?>
 
 <div class="container">
-  <h2>Thêm người dùng</h2>
+  <h2>Sửa người dùng</h2>
   <form action="" method="POST" enctype="multipart/form-data">
     <!-- Gửi dữ liệu ẩn -->
     <input type="hidden" name="action" value="xuLySua">
