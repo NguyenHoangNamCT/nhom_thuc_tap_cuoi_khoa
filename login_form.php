@@ -57,7 +57,7 @@
   <form method="post">
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
     <div class="form-floating">
-      <input name="txtUserName" type="email" class="form-control" id="floatingInput" placeholder="User name">
+      <input name="txtUserName" type="text" class="form-control" id="floatingInput" placeholder="User name">
       <label for="floatingInput">User name</label>
     </div>
     <div class="form-floating">

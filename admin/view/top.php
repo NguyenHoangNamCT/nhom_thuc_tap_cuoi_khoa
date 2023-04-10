@@ -138,35 +138,17 @@
         </a>
       </li>
 
-
-
-      <!-- <?php if(isset($_SESSION['nguoiDung']) && $_SESSION['nguoiDung']['quyen'] == 1){ ?>
-
-      <li class="nav-item">
-        <a href="" class="nav-link active" aria-current="page">
-          <span class="bi-alexa"></span>
-          Người dùng
-        </a>
-      </li>
-
-      <li>
-        <a href="../qlnguoidung/" class="nav-link text-white">
-          <span class="bi-people"></span>
-          Quản lý người dùng
-        </a>
-      </li>
-    <?php } ?>
     </ul>
     <hr>
     <div class="dropdown">
       <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
         <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-        <strong><?php echo $_SESSION['nguoiDung']['hoten'] ?></strong>
+        <strong><?php echo $_SESSION['nguoiDung']['ho_ten'] ?></strong>
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#hoSoCaNhan">Hồ sơ cá nhân</a></li>
         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#doiMK">Đổi mật khẩu</a></li>
-        <!-- <li><a class="dropdown-item" href="#">Profile</a></li> -->
+        <li><a class="dropdown-item" href="#">Profile</a></li>
         <li><hr class="dropdown-divider"></li>
         <li><a class="dropdown-item" href="../../index.php?action=dangXuat">Sign out</a></li>
       </ul>
@@ -176,7 +158,7 @@
   </div>
   <div class="b-example-vr"></div>
    
-   <div></div> -->
+   <div></div>
 
    <!-- The Modal -->
    <div class="modal" id="hoSoCaNhan">

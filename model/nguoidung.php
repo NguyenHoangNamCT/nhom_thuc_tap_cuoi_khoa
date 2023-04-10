@@ -1,7 +1,7 @@
 <?php
 class NGUOIDUNG{
 	//nếu trả về 1 thì người dùng hợp lệ ngược lại thì không
-	public function kiemtranguoidunghople($tendangnhap,$matkhau){
+	public function kiemTraNguoiDungHopLe($tendangnhap,$matkhau){
 		$db = DATABASE::connect();
 		try{
 			$sql = "SELECT * FROM nguoidung WHERE ten_dang_nhap=:tendangnhap AND mat_khau=:matkhau AND trang_thai=1";
@@ -36,6 +36,25 @@ class NGUOIDUNG{
 			$error_message=$e->getMessage();
 			echo "<p>Lỗi truy vấn ở laytatcanguoidung: $error_message</p>";
 			exit();
+		}
+	}
+
+	//lấy người dùng theo tên đăng nhập
+	public function layNguoiDungTheoTenDangNhap($tenDangNhap) {
+		$db = DATABASE::connect();
+		try {
+			$sql = "SELECT * FROM nguoidung WHERE ten_dang_nhap = :tenDangNhap";
+			$cmd = $db->prepare($sql);
+			$cmd->bindValue(':tenDangNhap', $tenDangNhap);
+			$cmd->execute();
+			$result = $cmd->fetch(PDO::FETCH_ASSOC);
+			return $result;
+		} catch(PDOException $e) {
+			$error_message = $e->getMessage();
+			echo "<p>Lỗi truy vấn ở layNguoiDungTheoTenDangNhap: $error_message</p>";
+			exit();
+		} finally {
+			DATABASE::close();
 		}
 	}
 

@@ -1,5 +1,6 @@
 <?php
     require("../view/top.php");
+
 ?> 
 <div class="container">
   <h2>Quản lý sản phẩm</h2>

@@ -3,6 +3,8 @@ require('../../model/database.php');
 require('../../model/sanpham.php');
 require('../../model/loaisanpham.php');
 require('../../model/thuonghieu.php');
+
+
 if(isset($_REQUEST["action"])){
     $action = $_REQUEST["action"];
 }

@@ -54,11 +54,6 @@
           </ul>
         </li>
         
-        <li class="nav-item">
-          <?php if(isset($_SESSION['nguoiDung']) && $_SESSION['nguoiDung']['quyen'] != 3){ ?>
-            <a class="nav-link active" aria-current="page" href="admin/qldiensanpham/" style="color: yellow;">Trang quản lý</a>
-          <?php } ?>
-        </li>
         <a class="nav-link active" aria-current="page" href="admin/qlsanpham/" style="color: yellow;">Trang quản lý</a>
         
       </ul>
