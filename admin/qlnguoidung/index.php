@@ -48,7 +48,7 @@
             $loai_nguoi_dung = $_POST["loai_nguoi_dung"];
             $hinh_anh = $_FILES["hinh_anh"]["name"];
             $trang_thai = $_POST["trang_thai"];
-            var_dump($trang_thai);
+         
 
             if($hinh_anh != '')
                 $nd->suaNguoiDung($id, $ten_dang_nhap, $mat_khau, $ho_ten, $dia_chi, $dien_thoai, $email, $loai_nguoi_dung, $trang_thai, $hinh_anh);
@@ -56,23 +56,23 @@
                 $nd->suaNguoiDung($id, $ten_dang_nhap, $mat_khau, $ho_ten, $dia_chi, $dien_thoai, $email, $loai_nguoi_dung, $trang_thai);
             include('main.php');
             break;
-        case 'thayDoiTrangThai':
-            $id = $_GET['id'];
-            $trangThai = $_GET['trangThai'];
-            $nd->thayDoiTrangThaiNguoiDung($id, $trangThai);
-            include('main.php');
-            break;
-        case 'capNhatHoSo':
-            $email = $_POST['txtemail'];
-            $ten = $_POST['txthoten'];
-            $dienThoai = $_POST['txtdienthoai'];
-            $diaChi = $_POST['txtDC'];
-            $hinh = $_FILES['fhinh']['name'];
-            $nd->capnhatnguoidung($_SESSION['nguoiDung']['id'], $email, $dienThoai, $ten, $hinh, $diaChi);
-            $_SESSION['nguoiDung'] = $nd->laythongtinnguoidung($email);
-            include('main.php');
-            break;
-        case 'doiMK':
+        // case 'thayDoiTrangThai':
+        //     $id = $_GET['id'];
+        //     $trangThai = $_GET['trangThai'];
+        //     $nd->thayDoiTrangThaiNguoiDung($id, $trangThai);
+        //     include('main.php');
+        //     break;
+        // case 'capNhatHoSo':
+        //     $email = $_POST['txtemail'];
+        //     $ten = $_POST['txthoten'];
+        //     $dienThoai = $_POST['txtdienthoai'];
+        //     $diaChi = $_POST['txtDC'];
+        //     $hinh = $_FILES['fhinh']['name'];
+        //     $nd->capnhatnguoidung($_SESSION['nguoiDung']['id'], $email, $dienThoai, $ten, $hinh, $diaChi);
+        //     $_SESSION['nguoiDung'] = $nd->laythongtinnguoidung($email);
+        //     include('main.php');
+        //     break;
+        case 'doiMatKhau':
             $mk = $_POST['txtMatKhau'];
             $nd->doimatkhau($_SESSION['nguoiDung']['email'], $mk);
             $_SESSION['nguoiDung'] = $nd->laythongtinnguoidung($_SESSION['nguoiDung']['email']);

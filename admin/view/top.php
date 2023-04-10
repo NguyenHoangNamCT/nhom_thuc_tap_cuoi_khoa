@@ -256,10 +256,18 @@
 
           <!-- Modal body -->
           <div class="modal-body">
-            <form method="post" enctype="multipart/form-data" action="">
-            <label>Mật khẩu</label>
-            <input class="form-control" type="password" name="txtMatKhau"
-            placeholder="Mật khẩu">
+            <form method="post" enctype="multipart/form-data" action="doiMatKhau">
+
+      
+            <label>Mật khẩu cũ</label>
+            <input class="form-control" type="password" name="txtmatKhauCu"  placeholder="Mật khẩu cũ">
+
+            <label>Mật khẩu mới</label>
+            <input class="form-control" type="password" name="txtmatKhauMoi"  placeholder="Mật khẩu mới">
+
+            <label>Nhập Lại Mật khẩu mới</label>
+            <input class="form-control" type="password" name="txtmatKhauMoi"  placeholder="Nhập Lại Mật khẩu mới">
+
               <div class="form-group">
               <input type="hidden" name="txtid" value="<?php echo $_SESSION["nguoiDung"]["id"]; ?>" >
               <input type="hidden" name="action" value="doiMK" >
