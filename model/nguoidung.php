@@ -221,6 +221,39 @@ class NGUOIDUNG{
 		}
 	}
 
+	public function doiMatKhau($id, $matKhauCu, $matKhauMoi) {
+		$db = DATABASE::connect();
+		try {
+			// Kiểm tra mật khẩu cũ có đúng không
+			$sql = "SELECT * FROM nguoidung WHERE id = :id AND mat_khau = :matKhauCu";
+			$cmd = $db->prepare($sql);
+			$cmd->bindValue(':id', $id, PDO::PARAM_INT);
+			$cmd->bindValue(':matKhauCu', $matKhauCu);
+			$cmd->execute();
+			$user = $cmd->fetch(PDO::FETCH_ASSOC);
+	
+			if (!$user) {
+				// Nếu mật khẩu cũ không đúng
+				return false;
+			}
+	
+			// Cập nhật mật khẩu mới vào cơ sở dữ liệu
+			$sql = "UPDATE nguoidung SET mat_khau = :matKhauMoi WHERE id = :id";
+			$cmd = $db->prepare($sql);
+			$cmd->bindValue(':id', $id, PDO::PARAM_INT);
+			$cmd->bindValue(':matKhauMoi', $matKhauMoi);
+			$cmd->execute();
+	
+			return true;
+		} catch(PDOException $e) {
+			$error_message = $e->getMessage();
+			echo "<p>Lỗi truy vấn ở doiMatKhau: $error_message</p>";
+			exit();
+		} finally {
+			DATABASE::close();
+		}
+	}
+
 	//-----------------------------------------------------------------------------------------------------------
 	// Cập nhật thông tin ng dùng: họ tên, số đt, email, ảnh đại diện 
 	public function capnhatnguoidung($id,$email,$sodt,$hoten,$hinhanh, $diaChi){
@@ -266,24 +299,6 @@ class NGUOIDUNG{
 			 exit();
 		}
    }
-
-	// Đổi mật khẩu
-	public function doimatkhau($email,$matkhau){
-		$db = DATABASE::connect();
-		try{
-			$sql = "UPDATE nguoidung set matkhau=:matkhau where email=:email";
-			$cmd = $db->prepare($sql);
-			$cmd->bindValue(':email',$email);
-			$cmd->bindValue(':matkhau',md5($matkhau));
-			$ketqua = $cmd->execute();            
-            return $ketqua;
-		}
-		catch(PDOException $e){
-			$error_message=$e->getMessage();
-			echo "<p>Lỗi truy vấn: $error_message</p>";
-			exit();
-		}
-	}
 
 	// Đổi quyền (loại người dùng: 1 quản trị, 2 nhân viên. Không cần nâng cấp quyền đối với loại người dùng 3-khách hàng)
 	public function doiloainguoidung($email,$quyen){
