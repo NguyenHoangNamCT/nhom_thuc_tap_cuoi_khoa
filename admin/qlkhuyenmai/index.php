@@ -1,8 +1,6 @@
 <?php 
 require('../../model/database.php');
-require('../../model/sanpham.php');
-require('../../model/loaisanpham.php');
-require('../../model/thuonghieu.php');
+require('../../model/khuyenmai.php');
 if(isset($_REQUEST["action"])){
     $action = $_REQUEST["action"];
 }
@@ -11,9 +9,7 @@ else{
 }
 
 
-$sp = new SANPHAM();
-$l = new LOAISP();
-$th = new THUONGHIEU();
+$km = new KHUYENMAI();
 
 switch($action){
     case "macdinh": 
@@ -22,25 +18,19 @@ switch($action){
     case "them":
 		include("add.php");
 		break;
-		case "XuLyThem":
-		$tenSP = $_POST['txtTenSP'];
-		$giaTien = $_POST['txtGiaTien'];
-		$giamGia = $_POST['txtGiamGia'];
-		$loaiSP = $_POST['selectLoaiSanPham'];
-		$thuongHieu = $_POST['selectThuongHieu'];
-		$soLuong = $_POST['txtSoLuong'];
-		$moTa = $_POST['txtMoTa'];
-		$hinh = $_FILES['filehinhanh']['name'];
-		
-		// var_dump($loaiSP, $thuongHieu, $tenSP, $moTa, $giaTien, $giamGia, $soLuong, $hinh);
-
-		$sp->themSanPham($loaiSP, $thuongHieu, $tenSP, $moTa, $giaTien, $giamGia, $soLuong, $hinh);
-
+	case "XuLyThem":
+		$ten_khuyen_mai = $_POST['txtTenKhuyenMai'];
+		$mo_ta = $_POST['txtMoTa'];
+		$ngay_bat_dau = $_POST['txtNgayBatDau'];
+		$ngay_ket_thuc = $_POST['txtNgayKetThuc'];
+		$trang_thai = $_POST['selectTrangThai'];
+		$gia_tri = $_POST['txtGiaTri'];
+		$km->themKhuyenMai($ten_khuyen_mai, $mo_ta, $ngay_bat_dau, $ngay_ket_thuc, $trang_thai, $gia_tri);
 		include("main.php");
 		break;
 	case "xoa":
 		$id = $_GET['id'];
-		$sp->xoaSanPham($id);
+		$km->xoaKhuyenMai($id);
 		include("main.php");
 		break;
 	case "sua":
@@ -49,19 +39,14 @@ switch($action){
 		break;
 	case "xuLySua":
 		$id = $_POST['id'];
-		$tenSP = $_POST['txtTenSP'];
-		$giaTien = $_POST['txtGiaTien'];
-		$giamGia = $_POST['txtGiamGia'];
-		$loaiSP = $_POST['selectLoaiSanPham'];
-		$thuongHieu = $_POST['selectThuongHieu'];
-		$soLuong = $_POST['txtSoLuong'];
-		$moTa = $_POST['txtMoTa'];
-		$hinh = $_FILES['filehinhanh']['name'];
-
-		if($hinh == '')
-			$sp->suaSanPham($id, $loaiSP, $thuongHieu, $tenSP, $moTa, $giaTien, $giamGia, $soLuong, $hinh);
-		else
-			$sp->suaSanPham($id, $loaiSP, $thuongHieu, $tenSP, $moTa, $giaTien, $giamGia, $soLuong);
+		$ten_khuyen_mai = $_POST['txtTenKhuyenMai'];
+		$mo_ta = $_POST['txtMoTa'];
+		$ngay_bat_dau = $_POST['txtNgayBatDau'];
+		$ngay_ket_thuc = $_POST['txtNgayKetThuc'];
+		$trang_thai = $_POST['selectTrangThai'];
+		$gia_tri = $_POST['txtGiaTri'];
+		// var_dump($id, $ten_khuyen_mai, $mo_ta, $ngay_bat_dau, $ngay_ket_thuc, $trang_thai, $gia_tri);
+		$km->suaKhuyenMai($id, $ten_khuyen_mai, $mo_ta, $ngay_bat_dau, $ngay_ket_thuc, $trang_thai, $gia_tri);
 
 		include("main.php");
 		break;

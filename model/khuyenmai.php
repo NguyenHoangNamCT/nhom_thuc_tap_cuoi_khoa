@@ -68,5 +68,44 @@ class KHUYENMAI{
             DATABASE::close();
         }
     }
+
+    //lấy danh sách khuyến mãi
+    public function layDanhSachKhuyenMai() {
+        $db = DATABASE::connect();
+        try {
+            $sql = "SELECT * FROM khuyenmai";
+            $cmd = $db->prepare($sql);
+            $cmd->execute();
+            $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở layDanhSachKhuyenMai: $error_message</p>";
+            exit();
+        } finally {
+            DATABASE::close();
+        }
+    }
+
+    //lấy khuyến mãi theo id
+    public function layKhuyenMaiTheoId($id) {
+        $db = DATABASE::connect();
+        try {
+            $sql = "SELECT * FROM khuyenmai WHERE id = :id";
+            $cmd = $db->prepare($sql);
+            $cmd->bindValue(':id', $id, PDO::PARAM_INT);
+            $cmd->execute();
+            $result = $cmd->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        } catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở layKhuyenMaiTheoId: $error_message</p>";
+            exit();
+        } finally {
+            DATABASE::close();
+        }
+    }
+    
+
 }
 ?>

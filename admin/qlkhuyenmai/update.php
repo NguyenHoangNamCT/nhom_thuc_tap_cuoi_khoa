@@ -1,90 +1,46 @@
 <?php
     require("../view/top.php");
 ?> 
-<div>
-<!-- <table>
-	<tr>
-		<td><h3>Quản lý điện thoại</h3></td>
-	</tr>
-	<tr>
-		<td><a href="index.php?action=them" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span> Thêm mặt hàng</a></td>
-	</tr>
-</table> -->
-<br>
-</div>
 
 <?php 
-  $arr = $sp->laySanPhamTheoID($id);
+  $arr = $km->layKhuyenMaiTheoId($id);
 ?>
 
 <div class="container mt-3">
-  <h2>Update Form</h2>
-
-
-  <form method="post" enctype="multipart/form-data">
-	<!-- Gửi dữ liệu ẩn -->
-	<input type="hidden" name="action" value="xuLySua">
-  <input type="hidden" name="id" value="<?php echo $arr['id']; ?>">
-  	<div class="mb-3 mt-3">
-      <label for="">Tên sản phẩm:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtTenSP" value="<?php echo $arr['ten_san_pham'] ?>">
-    </div>
-	
+  <h2>Thêm khuyến mãi</h2>
+  <form method="post">
+    <!-- Gửi dữ liệu ẩn -->
+    <input type="hidden" name="action" value="xuLySua">
+    <input type="hidden" name="id" value="<?php echo $id; ?>">
+    <!-- END -->
     <div class="mb-3 mt-3">
-      <label for="">Giá tiền:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtGiaTien" value="<?php echo $arr['gia_tien'] ?>">
+      <label for="">Tên khuyến mãi:</label>
+      <input type="text" class="form-control" placeholder="" name="txtTenKhuyenMai" value="<?php echo $arr['ten_khuyen_mai']; ?>">
     </div>
-	
-    <div class="mb-3 mt-3">
-      <label for="">Giảm giá:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtGiamGia" value="<?php echo $arr['giam_gia'] ?>">
-    </div>
-	
-    <div class="mb-3 mt-3">
-      <label for="">Số lượng:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtSoLuong" value="<?php echo $arr['so_luong'] ?>">
-    </div>
-	
     <div class="mb-3 mt-3">
       <label for="">Mô tả:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtMoTa" value="<?php echo $arr['mo_ta'] ?>">
+      <input type="text" class="form-control" placeholder="" name="txtMoTa" value="<?php echo $arr['mo_ta']; ?>">
     </div>
-
     <div class="mb-3 mt-3">
-      <label>Loại sản phẩm</label>
-      <select class="form-control" name="selectLoaiSanPham">
-        <?php
-          $mangLoai = $l->layLoaiSP();
-          foreach($mangLoai as $arr_i):
-        ?>
-          <option <?php if($arr_i['id'] == $arr['id_loai_san_pham']) echo 'selected' ?> value="<?php echo $arr_i["id"]; ?>"><?php echo $arr_i["ten_loai_san_pham"]; ?></option>
-        <?php
-          endforeach;
-        ?>
-      </select>
-    </div>	
-
+      <label for="">Ngày bắt đầu:</label>
+      <input type="datetime-local" class="form-control" placeholder="" name="txtNgayBatDau"  value="<?php echo $arr['ngay_bat_dau']; ?>">
+    </div>
     <div class="mb-3 mt-3">
-      <label>Thương hiệU</label>
-      <select class="form-control" name="selectThuongHieu">
-        <?php
-          $mangThuongHieu = $th->layThuongHieu();
-          foreach($mangThuongHieu as $arr_i):
-        ?>
-          <option <?php if($arr_i['id'] == $arr['id_thuong_hieu']) echo 'selected' ?> value="<?php echo $arr["id"]; ?>"><?php echo $arr_i["TenThuongHieu"]; ?></option>
-        <?php
-          endforeach;
-        ?>
+      <label for="">Ngày kết thúc:</label>
+      <input type="datetime-local" class="form-control" placeholder="" name="txtNgayKetThuc" value="<?php echo $arr['ngay_ket_thuc']; ?>">
+    </div>
+    <div class="mb-3 mt-3">
+      <label for="">Trạng thái:</label>
+      <select class="form-control" name="selectTrangThai">
+        <option <?php if($arr['trang_thai'] == 1) echo "selected"; ?> value="1">Hoạt động</option>
+        <option <?php if($arr['trang_thai'] == 0) echo "selected"; ?> value="0">Ngưng hoạt động</option>
       </select>
     </div>
-	
     <div class="mb-3 mt-3">
-      <label>Hình ảnh</label>
-      <input class="form-control" type="file" name="filehinhanh">
-  </div>
-    
-    
-  <button type="submit" class="btn btn-primary">Submit</button>
+      <label for="">Giá trị:</label>
+      <input type="text" class="form-control" placeholder="" name="txtGiaTri" value="<?php echo $arr['gia_tri'] ?>">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
 
