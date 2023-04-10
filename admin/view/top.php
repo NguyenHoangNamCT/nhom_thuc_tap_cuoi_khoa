@@ -175,25 +175,52 @@
           <div class="modal-body">
             <form method="post" enctype="multipart/form-data" action="">
               <div class="text-center">
-                <img class="img-circle" src="../../images/<?php echo $_SESSION['nguoiDung']['hinhanh'] ?>" alt="<?php echo $_SESSION['nguoiDung']['hoten']; ?>" width="100px">
+                <img class="img-circle" src="../../images/<?php echo $_SESSION['nguoiDung']['hinh_anh'] ?>" alt="<?php echo $_SESSION['nguoiDung']['ho_ten']; ?>" width="100px">
               </div>
               <input type="hidden" name="txtid" value="<?php echo $_SESSION["nguoiDung"]["id"]; ?>">
+
+              <div class="form-group">    
+              <label>Tên Đăng Nhập</label>    
+              <input class="form-control" type="text" name="txtTenDangNhap" placeholder="Tên Đăng Nhập" value="<?php echo $_SESSION["nguoiDung"]["ten_dang_nhap"]; ?>" required>
+              </div>
+
+              <div class="form-group">
+              <label>Họ tên</label>
+              <input class="form-control"  type="text" name="txthoten" placeholder="Họ tên" value="<?php echo $_SESSION["nguoiDung"]["ho_ten"]; ?>" required>
+              </div>
+
+              <div class="form-group">
+              <label>Địa chỉ</label>
+              <input class="form-control"  type="text" name="txtDC" placeholder="Địa chỉ" value="<?php echo $_SESSION["nguoiDung"]["dia_chi"]; ?>" required>
+              </div>
+
+              <div class="form-group">    
+              <label>Số điện thoại</label>    
+              <input class="form-control" type="number" name="txtdienthoai" placeholder="Số điện thoại" value="<?php echo $_SESSION["nguoiDung"]["dien_thoai"]; ?>" required>
+              </div>  
+
               <div class="form-group">    
               <label>Email</label>    
               <input class="form-control" type="email" name="txtemail" placeholder="Email" value="<?php echo $_SESSION["nguoiDung"]["email"]; ?>" required>
               </div>
-              <div class="form-group">    
-              <label>Số điện thoại</label>    
-              <input class="form-control" type="number" name="txtdienthoai" placeholder="Số điện thoại" value="<?php echo $_SESSION["nguoiDung"]["sdt"]; ?>" required>
-              </div>            
+
               <div class="form-group">
-              <label>Họ tên</label>
-              <input class="form-control"  type="text" name="txthoten" placeholder="Họ tên" value="<?php echo $_SESSION["nguoiDung"]["hoten"]; ?>" required>
+              <label>Ngày Đăng Ký</label>
+              <input class="form-control"  type="text" name="txtNgayDangKy" placeholder="Ngày Đăng Ký" value="<?php echo $_SESSION["nguoiDung"]["ngay_dang_ky"]; ?>" required>
               </div>
+
               <div class="form-group">
-              <label>Địa chỉ</label>
-              <input class="form-control"  type="text" name="txtDC" placeholder="Địa chỉ" value="<?php echo $_SESSION["nguoiDung"]["diachi"]; ?>" required>
+              <label>Loại Người Dùng</label>
+              <input class="form-control"  type="text" name="txtLoaiNguoiDung" placeholder="Loại Người Dùng" value="<?php echo $_SESSION["nguoiDung"]["loai_nguoi_dung"]; ?>" required>
               </div>
+
+              <div class="form-group">
+              <label>Trạng Thái</label>
+              <input class="form-control"  type="text" name="txtTrangThai" placeholder="Trang Thái" value="<?php echo $_SESSION["nguoiDung"]["trang_thai"]; ?>" required>
+              </div>
+                       
+              
+              
               <div class="form-group">
                 <label>Đổi hình đại diện</label>
                 <input type="file" name="fhinh">
