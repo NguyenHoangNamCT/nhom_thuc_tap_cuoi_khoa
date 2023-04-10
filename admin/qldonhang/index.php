@@ -27,18 +27,13 @@ switch($action){
 		break;
 		case "XuLyThem":
 		$id_nguoi_dung = $_POST['selectTenNguoiDung'];
-		$ngay_dat = $_POST['txtNgayDat'];
+		$ngay_dat = $_POST['dateNgayDat'];
 		$dia_chi_giao_hang = $_POST['txtDiaChiGH'];
 		$dien_thoai_nguoi_nhan = $_POST['txtDienThoai'];
 		$ho_ten_nguoi_nhan = $_POST['txtHoTenNN'];
 		$tong_tien = $_POST['txtTongTien'];
 		$tinh_trang_don_hang = $_POST['txtTinhTrangDH'];
-			
-		
-		// var_dump($loaiSP, $thuongHieu, $tenSP, $moTa, $giaTien, $giamGia, $soLuong, $hinh);
-
 		$dh->themDonHang($id_nguoi_dung, $ngay_dat, $dia_chi_giao_hang, $dien_thoai_nguoi_nhan, $ho_ten_nguoi_nhan, $tong_tien, $tinh_trang_don_hang);
-
 		include("main.php");
 		break;
 	case "xoa":
@@ -51,15 +46,15 @@ switch($action){
 		include("update.php");
 		break;
 	case "xuLySua":
-		$id_nguoi_dung = $_POST['txtidNguoiDung'];
-		$ngay_dat = $_POST['txtNgayDat'];
+		$id = $_POST['id'];
+		$id_nguoi_dung = $_POST['selectTenNguoiDung'];
+		$ngay_dat = $_POST['dateNgayDat'];
 		$dia_chi_giao_hang = $_POST['txtDiaChiGH'];
 		$dien_thoai_nguoi_nhan = $_POST['txtDienThoai'];
 		$ho_ten_nguoi_nhan = $_POST['txtHoTenNN'];
 		$tong_tien = $_POST['txtTongTien'];
 		$tinh_trang_don_hang = $_POST['txtTinhTrangDH'];
-
-
+		$suaDonHang = $donhangDAO->suaDonHang($id, $id_nguoi_dung, $ngay_dat, $dia_chi_giao_hang, $dien_thoai_nguoi_nhan, $ho_ten_nguoi_nhan, $tong_tien, $tinh_trang_don_hang);
 		include("main.php");
 		break;
 	//----------------------------------------------------

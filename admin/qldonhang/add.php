@@ -9,49 +9,51 @@
 	<input type="hidden" name="action" value="XuLyThem">
 
   <div class="mb-3 mt-3">
-      <label>Tên người dùng</label>
-      <select class="form-control" name="selectTenNguoiDung">
-        <?php
-          $mangNguoiDung = $nd->laytatcanguoidung();
-          foreach($mangNguoiDung as $arr):
-        ?>
-          <option value="<?php echo $arr["id"]; ?>"><?php echo $arr["ho_ten"]; ?></option>
-        <?php
-          endforeach;
-        ?>
-      </select>
-    </div>
-	
-    <div class="mb-3 mt-3">
-      <label for="">Ngày Đặt:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtNgayDat">
-    </div>
-	
-    <div class="mb-3 mt-3">
-      <label for="">Địa Chỉ Giao Hàng:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtDiaChiGH">
-    </div>
+    <label for="selectTenNguoiDung">Tên người dùng:</label>
+    <select class="form-control" name="selectTenNguoiDung" id="selectTenNguoiDung">
+      <?php
+        $mangNguoiDung = $nd->laytatcanguoidung();
+        foreach($mangNguoiDung as $arr):
+      ?>
+        <option value="<?php echo $arr["id"]; ?>"><?php echo $arr["ho_ten"]; ?></option>
+      <?php
+        endforeach;
+      ?>
+    </select>
+  </div> 
 
-	
-    <div class="mb-3 mt-3">
-      <label for="">Điện Thoại Người Nhận:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtDienThoai">
+  <label for="dateNgayDat">Ngày Đặt:</label>
+  <div class="input-group date" data-provide="datepicker">
+    <input type="datetime-local" class="form-control" id="dateNgayDat" name="dateNgayDat">
+    <div class="input-group-addon">
+      <span class="glyphicon glyphicon-th"></span>
     </div>
+  </div>   
 
-    <div class="mb-3 mt-3">
-      <label for="">Họ Tên Người Nhận:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtHoTenNN">
-    </div>
+  <div class="mb-3 mt-3">
+    <label for="txtDiaChiGH">Địa Chỉ Giao Hàng:</label>
+    <input type="text" class="form-control"  placeholder="" name="txtDiaChiGH" id="txtDiaChiGH">
+  </div>
 
-    <div class="mb-3 mt-3">
-      <label for="">Tổng Tiền:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtTongTien">
-    </div>
+  <div class="mb-3 mt-3">
+    <label for="txtDienThoai">Điện Thoại Người Nhận:</label>
+    <input type="text" class="form-control"  placeholder="" name="txtDienThoai" id="txtDienThoai">
+  </div>
 
-    <div class="mb-3 mt-3">
-      <label for="">Tình Trạng Đơn Hàng:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtTinhTrangDH">
-    </div>
+  <div class="mb-3 mt-3">
+    <label for="txtHoTenNN">Họ Tên Người Nhận:</label>
+    <input type="text" class="form-control"  placeholder="" name="txtHoTenNN" id="txtHoTenNN">
+  </div>
+
+  <div class="mb-3 mt-3">
+    <label for="txtTongTien">Tổng Tiền:</label>
+    <input type="text" class="form-control"  placeholder="" name="txtTongTien" id="txtTongTien">
+  </div>
+
+  <div class="mb-3 mt-3">
+    <label for="txtTinhTrangDH">Tình Trạng Đơn Hàng:</label>
+    <input type="text" class="form-control"  placeholder="" name="txtTinhTrangDH" id="txtTinhTrangDH">
+  </div>
 
     
     

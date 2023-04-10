@@ -1,12 +1,14 @@
 <?php 
 class DONHANG{
     public function themDonHang($id_nguoi_dung, $ngay_dat, $dia_chi_giao_hang, $dien_thoai_nguoi_nhan, $ho_ten_nguoi_nhan, $tong_tien, $tinh_trang_don_hang){
+        //chuyển $ngay_dat_mysql sang dạng date time
+        $ngay_dat_mysql = date('Y-m-d H:i:s', strtotime($ngay_dat));
         $db = DATABASE::connect();
-        // try{
+        try{
             $sql = "INSERT INTO donhang (id_nguoi_dung, ngay_dat, dia_chi_giao_hang, dien_thoai_nguoi_nhan, ho_ten_nguoi_nhan, tong_tien, tinh_trang_don_hang) VALUES (:id_nguoi_dung, :ngay_dat, :dia_chi_giao_hang, :dien_thoai_nguoi_nhan, :ho_ten_nguoi_nhan, :tong_tien, :tinh_trang_don_hang)";
             $cmd = $db->prepare($sql);
             $cmd->bindValue(':id_nguoi_dung', $id_nguoi_dung);
-            $cmd->bindValue(':ngay_dat', $ngay_dat);
+            $cmd->bindValue(':ngay_dat', $ngay_dat_mysql);
             $cmd->bindValue(':dia_chi_giao_hang', $dia_chi_giao_hang);
             $cmd->bindValue(':dien_thoai_nguoi_nhan', $dien_thoai_nguoi_nhan);
             $cmd->bindValue(':ho_ten_nguoi_nhan', $ho_ten_nguoi_nhan);
@@ -15,15 +17,15 @@ class DONHANG{
             $cmd->execute();
             $rowCount = $cmd->rowCount();
             return $rowCount;
-        // }
-        // catch(PDOException $e){
-        //     $error_message = $e->getMessage();
-        //     echo "<p>Lỗi truy vấn ở themDonHang: $error_message</p>";
-        //     exit();
-        // }
-        // finally {
-        //     DATABASE::close();
-        // }
+        }
+        catch(PDOException $e){
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở themDonHang: $error_message</p>";
+            exit();
+        }
+        finally {
+            DATABASE::close();
+        }
     }
 
     public function xoaDonHang($id_don_hang){
@@ -46,20 +48,27 @@ class DONHANG{
         }
     }
 
-    public function suaDanhGia($id_danh_gia, $danh_gia){
+    public function suaDonHang($id_don_hang, $ngay_dat, $dia_chi_giao_hang, $dien_thoai_nguoi_nhan, $ho_ten_nguoi_nhan, $tong_tien, $tinh_trang_don_hang) {
+        //chuyển $ngay_dat_mysql sang dạng date time
+        $ngay_dat_mysql = date('Y-m-d H:i:s', strtotime($ngay_dat));
         $db = DATABASE::connect();
         try{
-            $sql = "UPDATE danhgia SET danh_gia = :danh_gia WHERE id = :id_danh_gia";
+            $sql = "UPDATE donhang SET ngay_dat = :ngay_dat, dia_chi_giao_hang = :dia_chi_giao_hang, dien_thoai_nguoi_nhan = :dien_thoai_nguoi_nhan, ho_ten_nguoi_nhan = :ho_ten_nguoi_nhan, tong_tien = :tong_tien, tinh_trang_don_hang = :tinh_trang_don_hang WHERE id_don_hang = :id_don_hang";
             $cmd = $db->prepare($sql);
-            $cmd->bindValue(':id_danh_gia', $id_danh_gia);
-            $cmd->bindValue(':danh_gia', $danh_gia);
+            $cmd->bindValue(':ngay_dat', $ngay_dat_mysql);
+            $cmd->bindValue(':dia_chi_giao_hang', $dia_chi_giao_hang);
+            $cmd->bindValue(':dien_thoai_nguoi_nhan', $dien_thoai_nguoi_nhan);
+            $cmd->bindValue(':ho_ten_nguoi_nhan', $ho_ten_nguoi_nhan);
+            $cmd->bindValue(':tong_tien', $tong_tien);
+            $cmd->bindValue(':tinh_trang_don_hang', $tinh_trang_don_hang);
+            $cmd->bindValue(':id_don_hang', $id_don_hang);
             $cmd->execute();
             $rowCount = $cmd->rowCount();
             return $rowCount;
         }
         catch(PDOException $e){
             $error_message = $e->getMessage();
-            echo "<p>Lỗi truy vấn ở suaDanhGia: $error_message</p>";
+            echo "<p>Lỗi truy vấn ở suaDonHang: $error_message</p>";
             exit();
         }
         finally {
@@ -87,11 +96,11 @@ class DONHANG{
         }
     }
 
-      //lấy danh sách đơn hàng theo id
+      //lấy đơn hàng theo id
     function layDonHangById($id) {
         $conn = DATABASE::connect();
         try {
-            $sql = 'SELECT * FROM thuonghieu WHERE id = :id';
+            $sql = 'SELECT * FROM donhang WHERE id = :id';
             $stmt = $conn->prepare($sql);
             $stmt->bindValue(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
