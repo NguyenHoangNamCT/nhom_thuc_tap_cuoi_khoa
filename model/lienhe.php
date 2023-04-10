@@ -64,5 +64,38 @@ class LIENHE{
             DATABASE::close();
         }
     }
+
+    //lấy ds liên hệ
+    public function layDanhSachLienHe() {
+        $db = DATABASE::connect();
+        try {
+            $sql = "SELECT * FROM lienhe";
+            $result = $db->query($sql);
+            $rows = $result->fetchAll(PDO::FETCH_ASSOC);
+            return $rows;
+        } catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở layDanhSachLienHe: $error_message</p>";
+            exit();
+        } finally {
+            DATABASE::close();
+        }
+    }
+
+    //lấy liên hệ theo id
+    function layLienHeById($id) {
+        $conn = DATABASE::connect();
+        try {
+            $sql = 'SELECT * FROM lienhe WHERE id = :id';
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $loaiSanPham = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $loaiSanPham;
+        } catch(PDOException $e) {
+            echo "Lỗi truy vấn ở layLienHeById: " . $e->getMessage();
+            return null;
+        }
+    }
 }
 ?>

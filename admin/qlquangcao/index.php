@@ -1,8 +1,9 @@
 <?php 
 require('../../model/database.php');
-require('../../model/sanpham.php');
-require('../../model/loaisanpham.php');
-require('../../model/thuonghieu.php');
+// require('../../model/sanpham.php');
+// require('../../model/loaisanpham.php');
+// require('../../model/thuonghieu.php');
+require('../../model/quangcao.php');
 if(isset($_REQUEST["action"])){
     $action = $_REQUEST["action"];
 }
@@ -11,9 +12,10 @@ else{
 }
 
 
-$sp = new SANPHAM();
-$l = new LOAISP();
-$th = new THUONGHIEU();
+// $sp = new SANPHAM();
+// $l = new LOAISP();
+// $th = new THUONGHIEU();
+$qc= new QUANGCAO();
 
 switch($action){
     case "macdinh": 
@@ -23,24 +25,16 @@ switch($action){
 		include("add.php");
 		break;
 		case "XuLyThem":
-		$tenSP = $_POST['txtTenSP'];
-		$giaTien = $_POST['txtGiaTien'];
-		$giamGia = $_POST['txtGiamGia'];
-		$loaiSP = $_POST['selectLoaiSanPham'];
-		$thuongHieu = $_POST['selectThuongHieu'];
-		$soLuong = $_POST['txtSoLuong'];
-		$moTa = $_POST['txtMoTa'];
-		$hinh = $_FILES['filehinhanh']['name'];
-		
-		// var_dump($loaiSP, $thuongHieu, $tenSP, $moTa, $giaTien, $giamGia, $soLuong, $hinh);
-
-		$sp->themSanPham($loaiSP, $thuongHieu, $tenSP, $moTa, $giaTien, $giamGia, $soLuong, $hinh);
-
+		$tieuDe = $_POST['txtTieuDe'];
+		$hinhAnh = $_FILES['filehinhanh']['name'];
+		$trangThai = $_POST['txtTrangThai'];
+		$url = $_POST['txtUrl'];
+		$qc->themQuangCao($tieuDe, $hinhAnh, $url, $trangThai);
 		include("main.php");
 		break;
 	case "xoa":
 		$id = $_GET['id'];
-		$sp->xoaSanPham($id);
+		$qc->xoaQuangCao($id);
 		include("main.php");
 		break;
 	case "sua":
@@ -49,19 +43,15 @@ switch($action){
 		break;
 	case "xuLySua":
 		$id = $_POST['id'];
-		$tenSP = $_POST['txtTenSP'];
-		$giaTien = $_POST['txtGiaTien'];
-		$giamGia = $_POST['txtGiamGia'];
-		$loaiSP = $_POST['selectLoaiSanPham'];
-		$thuongHieu = $_POST['selectThuongHieu'];
-		$soLuong = $_POST['txtSoLuong'];
-		$moTa = $_POST['txtMoTa'];
-		$hinh = $_FILES['filehinhanh']['name'];
+		$tieuDe = $_POST['txtTieuDe'];
+		$url = $_POST['txtUrl'];
+		$trangThai = $_POST['txtTrangThai'];
+		$hinhAnh = $_FILES['filehinhanh']['name'];
 
-		if($hinh == '')
-			$sp->suaSanPham($id, $loaiSP, $thuongHieu, $tenSP, $moTa, $giaTien, $giamGia, $soLuong, $hinh);
+		if($hinhAnh != '')
+			$qc->suaQuangCao($id, $tieuDe, $url, $trangThai, $hinhAnh);
 		else
-			$sp->suaSanPham($id, $loaiSP, $thuongHieu, $tenSP, $moTa, $giaTien, $giamGia, $soLuong);
+			$qc->suaQuangCao($id, $tieuDe, $url, $trangThai);
 
 		include("main.php");
 		break;

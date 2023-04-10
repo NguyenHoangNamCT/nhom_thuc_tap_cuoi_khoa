@@ -45,14 +45,18 @@ class QUANGCAO{
     }
 
     //sửa quảng cáo
-    public function suaQuangCao($id, $tieuDe, $hinhAnh, $url, $trangThai) {
+    public function suaQuangCao($id, $tieuDe,  $url, $trangThai, $hinhAnh = NULL) {
         $db = DATABASE::connect();
         try {
-            $sql = "UPDATE quangcao SET tieu_de = :tieuDe, hinh_anh = :hinhAnh, url = :url, trang_thai = :trangThai WHERE id = :id";
+            if($hinhAnh != NULL)
+                    $sql = "UPDATE quangcao SET tieu_de = :tieuDe, hinh_anh = :hinhAnh, url = :url, trang_thai = :trangThai WHERE id = :id";
+                else
+                    $sql = "UPDATE quangcao SET tieu_de = :tieuDe, url = :url, trang_thai = :trangThai WHERE id = :id";
             $cmd = $db->prepare($sql);
             $cmd->bindValue(':id', $id, PDO::PARAM_INT);
             $cmd->bindValue(':tieuDe', $tieuDe, PDO::PARAM_STR);
-            $cmd->bindValue(':hinhAnh', $hinhAnh, PDO::PARAM_STR);
+            if($hinhAnh != NULL )
+                $cmd->bindValue(':hinhAnh', $hinhAnh, PDO::PARAM_STR);
             $cmd->bindValue(':url', $url, PDO::PARAM_STR);
             $cmd->bindValue(':trangThai', $trangThai, PDO::PARAM_BOOL);
             $cmd->execute();
@@ -64,6 +68,40 @@ class QUANGCAO{
             exit();
         } finally {
             DATABASE::close();
+        }
+    }
+
+    // lấy ds quảng cáo
+    public function layDanhSachQuangCao() {
+        $db = DATABASE::connect();
+        try {
+            $sql = "SELECT * FROM quangcao";
+            $cmd = $db->prepare($sql);
+            $cmd->execute();
+            $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở layDanhSachQuangCao: $error_message</p>";
+            exit();
+        } finally {
+            DATABASE::close();
+        }
+    }
+
+    //lấy quảng cáo theo id
+    function layQuangCaoById($id) {
+        $conn = DATABASE::connect();
+        try {
+            $sql = 'SELECT * FROM quangcao WHERE id = :id';
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $loaiSanPham = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $loaiSanPham;
+        } catch(PDOException $e) {
+            echo "Lỗi truy vấn ở layQuangCaoById: " . $e->getMessage();
+            return null;
         }
     }
 }
