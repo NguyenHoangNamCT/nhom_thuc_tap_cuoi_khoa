@@ -152,6 +152,15 @@
         </a>
       </li>
 
+      <li>
+        <a href="../qlhoadon/" class="nav-link text-white">
+          <span class="bi-kanban"></span>
+          Quản lý Hóa Đơn
+        </a>
+      </li>
+
+     
+
     </ul>
     <hr>
     <div class="dropdown">

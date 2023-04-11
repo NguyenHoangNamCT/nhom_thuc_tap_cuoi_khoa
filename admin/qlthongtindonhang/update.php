@@ -57,7 +57,7 @@
       <input type="text" class="form-control"  placeholder="" name="txtSoDienThoaiNN" value="<?php echo $arr['so_dien_thoai_nguoi_nhan'] ?>">
     </div>
 
-    <label for="dateNgayDat">Ngày Giao Hàng:</label>
+    <label for="dateNgayGiaoHang">Ngày Giao Hàng:</label>
   <div class="input-group date" data-provide="datepicker">
     <input type="datetime-local" class="form-control" id="dateNgayGiaoHang" name="dateNgayGiaoHang" value="<?php echo $arr['ngay_giao_hang']; ?>">
     <div class="input-group-addon">

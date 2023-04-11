@@ -66,5 +66,40 @@ class HOADON{
             DATABASE::close();
         }
     }
+    function layHoaDonById($id) {
+        $conn = DATABASE::connect();
+        try {
+            $sql = 'SELECT * FROM hoadon WHERE id = :id';
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $loaiThuongHieu = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $loaiThuongHieu;
+        } catch(PDOException $e) {
+            echo "Lỗi truy vấn ở layHoaDonById: " . $e->getMessage();
+            return null;
+        }
+    }
+
+    //lấy ds chi tiết hoa đơn
+    public function layDanhSachChiTietHoaDon() {
+        $db = DATABASE::connect();
+        try {
+            $sql = "SELECT hoadon.*, donhang.id AS id_don_hang
+                    FROM hoadon, donhang
+                    WHERE hoadon.id_don_hang = donhang.id";
+                 
+            $cmd = $db->prepare($sql);
+            $cmd->execute();
+            $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn trong layDanhSachChiTietHoaDon: $error_message</p>";
+            exit();
+        } finally {
+            DATABASE::close();
+        }
+    }
 }
 ?>
