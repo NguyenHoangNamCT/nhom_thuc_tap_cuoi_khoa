@@ -4,16 +4,9 @@
 ?> 
 
 <?php 
-  $arr = $hd->layHoaDonById($id);
+  $arr = $hd->layHoaDonByID($id);
 ?>
-<div>
-  <?php 
-  var_dump($id);
-  var_dump($arr);
-  var_dump("---------------------------------------");
-  var_dump($mangDH);
-  ?>
-</div>
+
 
 <div class="container mt-3">
   <h2>Update For</h2>
