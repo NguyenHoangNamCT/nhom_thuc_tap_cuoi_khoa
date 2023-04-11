@@ -1,24 +1,22 @@
 <?php
     require("../view/top.php");
+    $mangDH = $dh->layDanhSachDonHang();
 ?> 
-<div>
-<!-- <table>
-	<tr>
-		<td><h3>Quản lý điện thoại</h3></td>
-	</tr>
-	<tr>
-		<td><a href="index.php?action=them" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span> Thêm mặt hàng</a></td>
-	</tr>
-</table> -->
-<br>
-</div>
 
 <?php 
   $arr = $hd->layHoaDonById($id);
 ?>
+<div>
+  <?php 
+  var_dump($id);
+  var_dump($arr);
+  var_dump("---------------------------------------");
+  var_dump($mangDH);
+  ?>
+</div>
 
 <div class="container mt-3">
-  <h2>Update Form</h2>
+  <h2>Update For</h2>
 
 
   <form method="post" enctype="multipart/form-data">
@@ -30,10 +28,9 @@
       <label>ID Đơn Hàng</label>
       <select class="form-control" name="selectDonHang">
         <?php
-          $mangHD = $hd->layDanhSachDonHang();
-          foreach($mangHD as $arr_j):
+          foreach($mangDH as $arr_j):
         ?>
-          <option <?php if($arr_j['id'] == $arr['id_don_hang']) echo 'selected'; ?> value="<?php echo $arr_j['id']; ?>"><?php echo $arr_j["id"]; ?></option>
+          <option <?php if($arr_j['id'] == $arr['id_don_hang']) echo "selected";?> value="<?php echo $arr_j['id']; ?>"><?php echo $arr_j["id"]; ?></option>
         <?php
           endforeach;
         ?>
@@ -54,9 +51,6 @@
       <input type="text" class="form-control"  placeholder="" name="txtTongTien" value="<?php echo $arr['tong_tien'] ?>">
     </div>
 	
-    
-    
-    
   <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>

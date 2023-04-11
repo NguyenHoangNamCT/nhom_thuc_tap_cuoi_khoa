@@ -66,39 +66,44 @@ class HOADON{
             DATABASE::close();
         }
     }
-    function layHoaDonById($id) {
-        $conn = DATABASE::connect();
-        try {
-            $sql = 'SELECT * FROM hoadon WHERE id = :id';
-            $stmt = $conn->prepare($sql);
-            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-            $stmt->execute();
-            $loaiThuongHieu = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $loaiThuongHieu;
-        } catch(PDOException $e) {
-            echo "Lỗi truy vấn ở layHoaDonById: " . $e->getMessage();
-            return null;
+
+
+    //Lấy điện thoại theo id
+    public function layHoaDonByID($id){
+        $dbcon = DATABASE::connect();
+        try{
+            $sql = "SELECT * FROM hoadon where id = :id";
+            $cmd = $dbcon->prepare($sql);
+            $cmd->bindValue(":id", $id);
+            $cmd->execute();
+            $result = $cmd->fetch();
+            return $result;
+        }
+        catch(PDOException $e){
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn layHoaDonByID: $error_message</p>";
+            exit();
         }
     }
 
     //lấy ds chi tiết hoa đơn
-    public function layDanhSachChiTietHoaDon() {
+    public function layDanhSachHoaDon() {
         $db = DATABASE::connect();
         try {
-            $sql = "SELECT hoadon.*, donhang.id AS id_don_hang, sanpham.ten_san_pham
-                    FROM hoadon, sanpham, donhang
-                    WHERE hoadon.id_san_pham = sanpham.id
-                    AND hoadon.id_don_hang = donhang.id ";
-                        
-            $cmd = $db->prepare($sql);
-            $cmd->execute();
-            $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
-            return $result;
-        } catch(PDOException $e) {
+            $sql = "SELECT *
+            FROM hoadon
+            INNER JOIN donhang ON hoadon.id_don_hang = donhang.id";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+            $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $list;
+        }
+        catch(PDOException $e) {
             $error_message = $e->getMessage();
-            echo "<p>Lỗi truy vấn trong layDanhSachChiTietHoaDon: $error_message</p>";
+            echo "<p>Lỗi truy vấn: $error_message</p>";
             exit();
-        } finally {
+        }
+        finally {
             DATABASE::close();
         }
     }

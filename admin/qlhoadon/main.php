@@ -2,8 +2,8 @@
     require("../view/top.php");
 ?> 
 <div class="container">
-  <h2>Quản lý sản phẩm</h2>
-  <a href="index.php?action=them" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Thêm sản phẩm</a>
+  <h2>Quản lý hoá đơn</h2>
+  <a href="index.php?action=them" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Thêm hoá đơn</a>
   <div class="table-responsive">
     <table class="table table-hover">
       <thead>
@@ -17,16 +17,14 @@
       </thead>
       <tbody>
         <?php
-          $mangDH = $dh->layDanhSachChiTietHoaDon();
-          foreach($mangDH as $arr){
+          $mangHD = $hd->layDanhSachHoaDon();
+          foreach($mangHD as $arr){
         ?>
         <tr>
           <td><?php echo $arr["id_don_hang"]; ?></td>
           <td><?php echo $arr["ngay_tao"]; ?></td>
           <td><?php echo number_format($arr["tong_tien"]).'đ'; ?></td>
 
-         
-      
          
           <td><a class="btn btn-warning" href="index.php?action=sua&id=<?php echo $arr["id"]; ?>"><span class="glyphicon glyphicon-edit"></span> Sửa</a></td>
           <td><a class="btn btn-danger" href="index.php?action=xoa&id=<?php echo $arr["id"]; ?>"><span class="glyphicon glyphicon-trash"></span> Xoá</a></td>

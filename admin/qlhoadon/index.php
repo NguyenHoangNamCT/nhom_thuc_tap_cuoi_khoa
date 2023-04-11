@@ -28,11 +28,12 @@ switch($action){
     case "them":
 		include("add.php");
 		break;
+		
+	case "XuLyThem":
 		$id_don_hang = $_POST['selectDonHang'];
 		$ngay_tao = $_POST['dateNgayTao'];
-		$to = $_POST['txtTongTien'];
+		$tong_tien = $_POST['txtTongTien'];
 		$hd->themHoaDon($id_don_hang, $ngay_tao, $tong_tien);
-
 		include("main.php");
 		break;
 	case "xoa":
