@@ -5,7 +5,7 @@
         $action = $_REQUEST['action'];
     else
         $action = 'macDinh';
-
+    
     $nd = new NGUOIDUNG();
 
     switch($action){
@@ -73,9 +73,24 @@
         //     include('main.php');
         //     break;
         case 'doiMatKhau':
-            $mk = $_POST['txtMatKhau'];
-            $nd->doimatkhau($_SESSION['nguoiDung']['email'], $mk);
-            $_SESSION['nguoiDung'] = $nd->laythongtinnguoidung($_SESSION['nguoiDung']['email']);
+            $matKhauCu = $_POST['txtmatKhauCu'];
+            $matKhauMoi = $_POST['txtmatKhauMoi'];
+            $nhapLaiMatKhau = $_POST['txtnhapLaiMatKhau'];
+            $kq = $nd->doiMatKhau($_SESSION['nguoiDung']['id'], $matKhauCu, $matKhauMoi);
+            if($kq && $matKhauMoi == $nhapLaiMatKhau)
+                $thongBao = "Đổi mật khẩu thành công!";
+            else if(!$kq){
+                $thongBao = "Bạn nhập sai mật khẩu!";
+                include('main.php');
+                return;
+            }
+            else{
+                $thongBao = "Mật khẩu mớI không trùng khớp!";
+                include('main.php');
+                return;
+            }
+           
+            $_SESSION['nguoiDung'] = $nd->layNguoiDungTheoTenDangNhap($_SESSION['nguoiDung']['ten_dang_nhap']);
             include('main.php');
             break;
         default:

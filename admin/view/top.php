@@ -256,9 +256,10 @@
 
           <!-- Modal body -->
           <div class="modal-body">
-            <form method="post" enctype="multipart/form-data" action="doiMatKhau">
-
-      
+            <form  method="post" enctype="multipart/form-data" action="../qlnguoidung/">
+            <!-- Gửi dữ liệu ẩn -->
+            <input type="hidden" name="action" value="doiMatKhau">
+            <!-- End -->
             <label>Mật khẩu cũ</label>
             <input class="form-control" type="password" name="txtmatKhauCu"  placeholder="Mật khẩu cũ">
 
@@ -266,11 +267,9 @@
             <input class="form-control" type="password" name="txtmatKhauMoi"  placeholder="Mật khẩu mới">
 
             <label>Nhập Lại Mật khẩu mới</label>
-            <input class="form-control" type="password" name="txtmatKhauMoi"  placeholder="Nhập Lại Mật khẩu mới">
+            <input class="form-control" type="password" name="txtnhapLaiMatKhau"  placeholder="Nhập Lại Mật khẩu mới">
 
               <div class="form-group">
-              <input type="hidden" name="txtid" value="<?php echo $_SESSION["nguoiDung"]["id"]; ?>" >
-              <input type="hidden" name="action" value="doiMK" >
               <input class="btn btn-primary"  type="submit" value="Lưu">
               <input class="btn btn-warning"  type="reset" value="Hủy"></div>
             </form>

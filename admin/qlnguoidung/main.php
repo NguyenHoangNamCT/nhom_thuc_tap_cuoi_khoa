@@ -2,6 +2,13 @@
     include("../view/top.php");
 ?>
   <div class="container">
+  <div>
+      <?php if(isset($thongBao)){ ?>
+        <div class="alert alert-info">
+          <strong><?php echo $thongBao; ?></strong>.
+        </div>
+      <?php } ?>
+    </div>
   <h2>Quản lý người dùng</h2>
   <a href="index.php?action=them" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Thêm người dùng</a>
   <div class="table-responsive">

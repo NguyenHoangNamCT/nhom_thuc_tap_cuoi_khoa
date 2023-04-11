@@ -228,12 +228,12 @@ class NGUOIDUNG{
 			$sql = "SELECT * FROM nguoidung WHERE id = :id AND mat_khau = :matKhauCu";
 			$cmd = $db->prepare($sql);
 			$cmd->bindValue(':id', $id, PDO::PARAM_INT);
-			$cmd->bindValue(':matKhauCu', $matKhauCu);
+			$cmd->bindValue(':matKhauCu', md5($matKhauCu));
 			$cmd->execute();
 			$user = $cmd->fetch(PDO::FETCH_ASSOC);
 	
+			//nếu người dùng nhập sai thông tin (biến user không có giá trị hoặc là giá trị của nó là null, false hoặc empty. thì sẽ trả về false)
 			if (!$user) {
-				// Nếu mật khẩu cũ không đúng
 				return false;
 			}
 	
@@ -241,7 +241,7 @@ class NGUOIDUNG{
 			$sql = "UPDATE nguoidung SET mat_khau = :matKhauMoi WHERE id = :id";
 			$cmd = $db->prepare($sql);
 			$cmd->bindValue(':id', $id, PDO::PARAM_INT);
-			$cmd->bindValue(':matKhauMoi', $matKhauMoi);
+			$cmd->bindValue(':matKhauMoi', md5($matKhauMoi));
 			$cmd->execute();
 	
 			return true;
