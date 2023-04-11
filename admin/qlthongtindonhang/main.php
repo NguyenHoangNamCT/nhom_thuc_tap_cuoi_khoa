@@ -2,21 +2,18 @@
     require("../view/top.php");
 ?> 
 <div class="container">
-  <h2>Quản lý sản phẩm</h2>
-  <a href="index.php?action=them" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Thêm sản phẩm</a>
+  <h2>Quản lý Thông Tin Đơn Hàng</h2>
+  <a href="index.php?action=them" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Thêm Thông Tin Đơn Hàng</a>
   <div class="table-responsive">
     <table class="table table-hover">
       <thead>
         <tr>
-          <th>Tên sản phẩm</th>
-          <th>Giá tiền</th>
-          <th>Giảm giá</th>
-          <th>Loại sản phẩm</th>
-          <th>Thương hiệu</th>
-          <th>So lượng</th>
-          <th>Trạng thái</th>
-          <th>Mô tả</th>
-          <th>Hình ảnh</th>
+          <th>Tên Khách Hàng</th>
+          <th>Địa Chỉ Người Nhận</th>
+          <th>Số Điện Thoại người Nhận</th>
+          <th>Tiền Ship</th>
+          <th>Phí Vận Chuyển</th>
+          <th>Ghi Chú</th>
           <th>Sửa</th>
           <th>Xóa</th>
         </tr>

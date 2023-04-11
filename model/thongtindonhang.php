@@ -70,5 +70,21 @@ class THONGTINDONHANG{
             DATABASE::close();
         }
     }
+
+     //lấy thông tin đơn hàng theo id
+     function layThongTinDonHangById($id) {
+        $conn = DATABASE::connect();
+        try {
+            $sql = 'SELECT * FROM thongtindonhang WHERE id = :id';
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $loaiThuongHieu = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $loaiThuongHieu;
+        } catch(PDOException $e) {
+            echo "Lỗi truy vấn ở layThongTinDonHangById: " . $e->getMessage();
+            return null;
+        }
+    }
 }
 ?>
