@@ -1,9 +1,9 @@
 <?php 
 require('../../model/database.php');
 require('../../model/sanpham.php');
-// require('../../model/loaisanpham.php');
-// require('../../model/thuonghieu.php');
 require('../../model/chitietdonhang.php');
+require('../../model/donhang.php');
+
 if(isset($_REQUEST["action"])){
     $action = $_REQUEST["action"];
 }
@@ -13,8 +13,7 @@ else{
 
 
 $sp = new SANPHAM();
-// $l = new LOAISP();
-// $th = new THUONGHIEU();
+$dh = new DONHANG();
 $ctdh = new CHITIETDONHANG();
 
 switch($action){
@@ -24,17 +23,17 @@ switch($action){
     case "them":
 		include("add.php");
 		break;
-		case "XuLyThem":
-		$id_don_hang = $_POST['txtIdDonHang'];
-		$id_san_pham = $_POST['txtIdSanPham'];
+	case "XuLyThem":
+		$id_don_hang = $_POST['selectDonHang'];
+		$id_san_pham = $_POST['selectSanPham'];
 		$so_luong = $_POST['txtSoLuong'];
-		$don_gia = $_POST['txtDongia'];
+		$don_gia = $_POST['txtDonGia'];
 		$ctdh->themChiTietDonHang($id_don_hang, $id_san_pham, $so_luong, $don_gia);
 		include("main.php");
 		break;
 	case "xoa":
 		$id = $_GET['id'];
-		$sp->xoaChiTietDonHang($id);
+		$ctdh->xoaChiTietDonHang($id);
 		include("main.php");
 		break;
 	case "sua":
@@ -43,10 +42,10 @@ switch($action){
 		break;
 	case "xuLySua":
 		$id = $_POST['id'];
-		$id_don_hang = $_POST['txtIdDonHang'];
-		$id_san_pham = $_POST['txtIdSanPham'];
+		$id_don_hang = $_POST['selectDonHang'];
+		$id_san_pham = $_POST['selectSanPham'];
 		$so_luong = $_POST['txtSoLuong'];
-		$don_gia = $_POST['txtDongia'];
+		$don_gia = $_POST['txtDonGia'];
 		$suaChiTietDonHang = $ctdh->suaChiTietDonHang($id, $id_don_hang, $id_san_pham, $so_luong, $don_gia);
 		include("main.php");
 		break;

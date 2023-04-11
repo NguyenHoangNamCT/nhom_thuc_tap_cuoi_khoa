@@ -23,7 +23,7 @@
         ?>
         <tr>
           <td><?php echo $arr["id_don_hang"]; ?></td>
-          <td><?php echo $arr["id_san_pham"]; ?></td>
+          <td><?php echo $arr["ten_san_pham"]; ?></td>
           <td><?php echo $arr["so_luong"]; ?></td>
           <td><?php echo number_format($arr["don_gia"]).'đ'; ?></td>
           <td><a class="btn btn-warning" href="index.php?action=sua&id=<?php echo $arr["id"]; ?>"><span class="glyphicon glyphicon-edit"></span> Sửa</a></td>

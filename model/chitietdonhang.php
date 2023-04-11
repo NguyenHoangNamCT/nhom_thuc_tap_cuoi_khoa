@@ -65,7 +65,7 @@ class CHITIETDONHANG{
     public function layDanhSachChiTietDonHang() {
         $db = DATABASE::connect();
         try {
-            $sql = "SELECT chitietdonhang.id, donhang.id AS id_don_hang, sanpham.ten_san_pham
+            $sql = "SELECT chitietdonhang.*, donhang.id AS id_don_hang, sanpham.ten_san_pham
                     FROM chitietdonhang, sanpham, donhang
                     WHERE chitietdonhang.id_san_pham = sanpham.id
                     AND chitietdonhang.id_don_hang = donhang.id ";

@@ -25,63 +25,49 @@
 	<!-- Gửi dữ liệu ẩn -->
 	<input type="hidden" name="action" value="xuLySua">
   <input type="hidden" name="id" value="<?php echo $arr['id']; ?>">
+  <!-- END -->
   	<div class="mb-3 mt-3">
       <label for="">Tên sản phẩm:</label>
       <input type="text" class="form-control"  placeholder="" name="txtTenSP" value="<?php echo $arr['ten_san_pham'] ?>">
     </div>
 	
     <div class="mb-3 mt-3">
-      <label for="">Giá tiền:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtGiaTien" value="<?php echo $arr['gia_tien'] ?>">
+      <label>ID Đơn Hàng</label>
+      <select class="form-control" name="selectDonHang">
+        <?php
+          $mangDH = $dh->layDanhSachDonHang();
+          foreach($mangDH as $arr_i):
+        ?>
+          <option <?php if($arr_i['id'] == $arr['id_don_hang']) echo 'selected' ?> value="<?php echo $arr_i["id"]; ?>"><?php echo $arr_i["id_don_hang"]; ?></option>
+        <?php
+          endforeach;
+        ?>
+      </select>
     </div>
-	
+
     <div class="mb-3 mt-3">
-      <label for="">Giảm giá:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtGiamGia" value="<?php echo $arr['giam_gia'] ?>">
+      <label>ID Sản phẩm</label>
+      <select class="form-control" name="selectSanPham">
+        <?php
+          $mangSP = $sp->layDanhSachSanPham();
+          foreach($mangSP as $arr_i):
+        ?>
+          <option <?php if($arr_i['id'] == $arr['id_san_pham']) echo 'selected' ?> value="<?php echo $arr["id"]; ?>"><?php echo $arr_i["ten_san_pham"]; ?></option>
+        <?php
+          endforeach;
+        ?>
+      </select>
     </div>
-	
+
     <div class="mb-3 mt-3">
       <label for="">Số lượng:</label>
       <input type="text" class="form-control"  placeholder="" name="txtSoLuong" value="<?php echo $arr['so_luong'] ?>">
     </div>
-	
-    <div class="mb-3 mt-3">
-      <label for="">Mô tả:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtMoTa" value="<?php echo $arr['mo_ta'] ?>">
-    </div>
 
     <div class="mb-3 mt-3">
-      <label>Loại sản phẩm</label>
-      <select class="form-control" name="selectLoaiSanPham">
-        <?php
-          $mangLoai = $l->layLoaiSP();
-          foreach($mangLoai as $arr_i):
-        ?>
-          <option <?php if($arr_i['id'] == $arr['id_loai_san_pham']) echo 'selected' ?> value="<?php echo $arr_i["id"]; ?>"><?php echo $arr_i["ten_loai_san_pham"]; ?></option>
-        <?php
-          endforeach;
-        ?>
-      </select>
-    </div>	
-
-    <div class="mb-3 mt-3">
-      <label>Thương hiệU</label>
-      <select class="form-control" name="selectThuongHieu">
-        <?php
-          $mangThuongHieu = $th->layThuongHieu();
-          foreach($mangThuongHieu as $arr_i):
-        ?>
-          <option <?php if($arr_i['id'] == $arr['id_thuong_hieu']) echo 'selected' ?> value="<?php echo $arr["id"]; ?>"><?php echo $arr_i["TenThuongHieu"]; ?></option>
-        <?php
-          endforeach;
-        ?>
-      </select>
+      <label for="">Đơn Giá:</label>
+      <input type="text" class="form-control"  placeholder="" name="txtDonGia" value="<?php echo $arr['don_gia'] ?>">
     </div>
-	
-    <div class="mb-3 mt-3">
-      <label>Hình ảnh</label>
-      <input class="form-control" type="file" name="filehinhanh">
-  </div>
     
     
   <button type="submit" class="btn btn-primary">Submit</button>
