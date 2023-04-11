@@ -74,11 +74,11 @@
         //     break;
         case "updateUser":
             $id = $_POST["id"];
-            $ho_ten = $_POST["ho_ten"];
-            $dia_chi = $_POST["dia_chi"];
-            $dien_thoai = $_POST["dien_thoai"];
-            $email = $_POST["email"];
-            $hinh_anh = $_FILES["hinh_anh"]["name"];
+            $ho_ten = $_POST["txthoten"];
+            $dia_chi = $_POST["txtDC"];
+            $dien_thoai = $_POST["txtdienthoai"];
+            $email = $_POST["txtemail"];
+            $hinh_anh = $_FILES["fhinh"]["name"];
             
             if($hinh_anh != '')
                 $nd->capNhatNguoiDung($id, $ho_ten, $dia_chi, $dien_thoai, $email, $hinh_anh);
@@ -112,9 +112,5 @@
             break;
         default:
             break;
-
-            
-
-            
     }
 ?>

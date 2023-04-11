@@ -172,7 +172,7 @@
 
           <!-- Modal body -->
           <div class="modal-body">
-            <form method="post" enctype="multipart/form-data" action="">
+            <form method="post" enctype="multipart/form-data" action="../qlnguoidung/">
               <div class="text-center">
                 <img class="img-circle" src="../../images/<?php echo $_SESSION['nguoiDung']['hinh_anh'] ?>" alt="<?php echo $_SESSION['nguoiDung']['ho_ten']; ?>" width="100px">
               </div>
@@ -225,7 +225,7 @@
                 <input type="file" name="fhinh">
               </div>
               <div class="form-group">
-              <input type="hidden" name="txtid" value="<?php echo $_SESSION["nguoiDung"]["id"]; ?>" >
+              <input type="hidden" name="id" value="<?php echo $_SESSION["nguoiDung"]["id"]; ?>" >
               <input type="hidden" name="action" value="updateUser" >
               <input class="btn btn-primary"  type="submit" value="Lưu">
               <input class="btn btn-warning"  type="reset" value="Hủy Thay Đổi"></div>

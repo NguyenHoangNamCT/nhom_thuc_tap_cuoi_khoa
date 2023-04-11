@@ -259,9 +259,9 @@ class NGUOIDUNG{
 		$db = DATABASE::connect();
 		try {
 			if($hinh_anh != NULL)
-				$sql = "UPDATE nguoidung SET ten = :ten, email = :email, so_dien_thoai = :soDienThoai, dia_chi = :diaChi, mat_khau = :matKhau, hinh_anh=:hinhAnh WHERE id = :id";
+				$sql = "UPDATE nguoidung SET ho_ten = :ten, email = :email, dien_thoai = :soDienThoai, dia_chi = :diaChi, hinh_anh=:hinhAnh WHERE id = :id";
 			else
-				$sql = "UPDATE nguoidung SET ten = :ten, email = :email, so_dien_thoai = :soDienThoai, dia_chi = :diaChi, mat_khau = :matKhau WHERE id = :id";
+				$sql = "UPDATE nguoidung SET ho_ten = :ten, email = :email, dien_thoai = :soDienThoai, dia_chi = :diaChi WHERE id = :id";
 			$cmd = $db->prepare($sql);
 			$cmd->bindValue(':id', $id, PDO::PARAM_INT);
 			$cmd->bindValue(':ten', $ho_ten);
