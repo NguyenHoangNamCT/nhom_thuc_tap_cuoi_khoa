@@ -31,7 +31,7 @@ switch($action){
 		$ten_khach_hang = $_POST['txtTenKH'];
 		$dia_chi_nguoi_nhan = $_POST['txtDiaChiNN'];
 		$so_dien_thoai_nguoi_nhan = $_POST['txtSoDienThoaiNN'];
-		$ngay_giao_hang = $_POST['selectLoaiSanPham'];
+		$ngay_giao_hang = $_POST['dateNgayGiaoHang'];
 		$tien_ship = $_POST['txtTienShip'];
 		$phi_van_chuyen = $_POST['txtPhiVanChuyen'];
 		$ghi_chu = $_POST['txtGhiChu'];
@@ -56,11 +56,11 @@ switch($action){
 			$ten_khach_hang = $_POST['txtTenKH'];
 			$dia_chi_nguoi_nhan = $_POST['txtDiaChiNN'];
 			$so_dien_thoai_nguoi_nhan = $_POST['txtSoDienThoaiNN'];
-			$ngay_giao_hang = $_POST['selectLoaiSanPham'];
+			$ngay_giao_hang = $_POST['dateNgayGiaoHang'];
 			$tien_ship = $_POST['txtTienShip'];
 			$phi_van_chuyen = $_POST['txtPhiVanChuyen'];
 			$ghi_chu = $_POST['txtGhiChu'];
-			$suaThongTinDonHang = $ttdh->suaThongTinDonHang($id, $id_don_hang, $id_san_pham, $so_luong, $don_gia);
+			$suaThongTinDonHang = $ttdh-> suaThongTinDonHang($id, $ten_khach_hang, $dia_chi_nguoi_nhan, $so_dien_thoai_nguoi_nhan, $ngay_giao_hang, $tien_ship, $phi_van_chuyen, $ghi_chu);
 			include("main.php");
 			break;
 	//----------------------------------------------------

@@ -14,7 +14,7 @@
 </div>
 
 <?php 
-  $arr = $sp->laySanPhamTheoID($id);
+  $arr = $ttdh->layThongTinDonHangById($id);
 ?>
 
 <div class="container mt-3">
@@ -26,11 +26,7 @@
 	<input type="hidden" name="action" value="xuLySua">
   <input type="hidden" name="id" value="<?php echo $arr['id']; ?>">
   <!-- END -->
-  	<div class="mb-3 mt-3">
-      <label for="">Tên sản phẩm:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtTenSP" value="<?php echo $arr['ten_san_pham'] ?>">
-    </div>
-	
+  	
     <div class="mb-3 mt-3">
       <label>ID Đơn Hàng</label>
       <select class="form-control" name="selectDonHang">
@@ -38,7 +34,7 @@
           $mangDH = $dh->layDanhSachDonHang();
           foreach($mangDH as $arr_i):
         ?>
-          <option <?php if($arr_i['id'] == $arr['id_don_hang']) echo 'selected' ?> value="<?php echo $arr_i["id"]; ?>"><?php echo $arr_i["id_don_hang"]; ?></option>
+          <option <?php if($arr_i['id'] == $arr['id']) echo 'selected'; ?> value="<?php echo $arr_i["id"]; ?>"><?php echo $arr_i["id"]; ?></option>
         <?php
           endforeach;
         ?>
@@ -46,27 +42,42 @@
     </div>
 
     <div class="mb-3 mt-3">
-      <label>ID Sản phẩm</label>
-      <select class="form-control" name="selectSanPham">
-        <?php
-          $mangSP = $sp->layDanhSachSanPham();
-          foreach($mangSP as $arr_i):
-        ?>
-          <option <?php if($arr_i['id'] == $arr['id_san_pham']) echo 'selected' ?> value="<?php echo $arr["id"]; ?>"><?php echo $arr_i["ten_san_pham"]; ?></option>
-        <?php
-          endforeach;
-        ?>
-      </select>
+      <label for="">Tên Khách hàng:</label>
+      <input type="text" class="form-control"  placeholder="" name="txtTenKH" value="<?php echo $arr['ten_khach_hang'] ?>">
     </div>
 
     <div class="mb-3 mt-3">
-      <label for="">Số lượng:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtSoLuong" value="<?php echo $arr['so_luong'] ?>">
+      <label for="">Địa chỉ người Nhận:</label>
+      <input type="text" class="form-control"  placeholder="" name="txtDiaChiNN" value="<?php echo $arr['dia_chi_nguoi_nhan'] ?>">
+    </div>
+
+
+    <div class="mb-3 mt-3">
+      <label for="">Số Điện Thoại Người Nhận:</label>
+      <input type="text" class="form-control"  placeholder="" name="txtSoDienThoaiNN" value="<?php echo $arr['so_dien_thoai_nguoi_nhan'] ?>">
+    </div>
+
+    <label for="dateNgayDat">Ngày Giao Hàng:</label>
+  <div class="input-group date" data-provide="datepicker">
+    <input type="datetime-local" class="form-control" id="dateNgayGiaoHang" name="dateNgayGiaoHang" value="<?php echo $arr['ngay_giao_hang']; ?>">
+    <div class="input-group-addon">
+      <span class="glyphicon glyphicon-th"></span>
+    </div>
+  </div>  
+
+    <div class="mb-3 mt-3">
+      <label for="">Tiền Ship:</label>
+      <input type="text" class="form-control"  placeholder="" name="txtTienShip" value="<?php echo $arr['tien_ship'] ?>">
     </div>
 
     <div class="mb-3 mt-3">
-      <label for="">Đơn Giá:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtDonGia" value="<?php echo $arr['don_gia'] ?>">
+      <label for="">Phí Vận Chuyển</label>
+      <input type="text" class="form-control"  placeholder="" name="txtPhiVanChuyen" value="<?php echo $arr['phi_van_chuyen'] ?>">
+    </div>
+
+    <div class="mb-3 mt-3">
+      <label for="">Ghi Chú:</label>
+      <input type="text" class="form-control"  placeholder="" name="txtGhiChu" value="<?php echo $arr['ghi_chu'] ?>">
     </div>
     
     

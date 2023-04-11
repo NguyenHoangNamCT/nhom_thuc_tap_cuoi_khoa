@@ -20,19 +20,17 @@
       </thead>
       <tbody>
         <?php
-          $mangSP = $sp->layDanhSachSanPham();
-          foreach($mangSP as $arr){
+          $mangTTDH = $ttdh->layDanhSachThongTinDonHang();
+          foreach($mangTTDH as $arr){
         ?>
         <tr>
-          <td><?php echo $arr["ten_san_pham"]; ?></td>
-          <td><?php echo number_format($arr["gia_tien"]).'đ'; ?></td>
-          <td><?php echo number_format($arr["giam_gia"]).'%'; ?></td>
-          <td><?php echo $arr["ten_loai_san_pham"]; ?></td>
-          <td><?php echo $arr["tenthuonghieu"]; ?></td>
-          <td><?php echo $arr["so_luong"]; ?></td>
-          <td><?php if($arr["so_luong"] > 0) echo "Còn hàng"; else echo "Hết hàng"; ?></td>
-          <td><?php echo $arr["mo_ta"]; ?></td>
-          <td><img src="../../images/<?php echo $arr["hinh_anh"]; ?>" width="80" class="img-thumbnail"></td>
+          <td><?php echo $arr["ten_khach_hang"]; ?></td>
+          <td><?php echo $arr["dia_chi_nguoi_nhan"]; ?></td>
+          <td><?php echo $arr["so_dien_thoai_nguoi_nhan"]; ?></td>
+          <td><?php echo $arr["ngay_giao_hang"]; ?></td>
+          <td><?php echo number_format($arr["tien_ship"]).'đ'; ?></td>
+          <td><?php echo number_format($arr["phi_van_chuyen"]).'đ'; ?></td>
+          <td><?php echo $arr["ghi_chu"]; ?></td>
           <td><a class="btn btn-warning" href="index.php?action=sua&id=<?php echo $arr["id"]; ?>"><span class="glyphicon glyphicon-edit"></span> Sửa</a></td>
           <td><a class="btn btn-danger" href="index.php?action=xoa&id=<?php echo $arr["id"]; ?>"><span class="glyphicon glyphicon-trash"></span> Xoá</a></td>
         </tr>
