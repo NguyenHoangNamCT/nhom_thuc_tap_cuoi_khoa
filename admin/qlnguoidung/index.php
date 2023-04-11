@@ -72,6 +72,23 @@
         //     $_SESSION['nguoiDung'] = $nd->laythongtinnguoidung($email);
         //     include('main.php');
         //     break;
+        case "updateUser":
+            $id = $_POST["id"];
+            $ho_ten = $_POST["ho_ten"];
+            $dia_chi = $_POST["dia_chi"];
+            $dien_thoai = $_POST["dien_thoai"];
+            $email = $_POST["email"];
+            $hinh_anh = $_FILES["hinh_anh"]["name"];
+            
+            if($hinh_anh != '')
+                $nd->capNhatNguoiDung($id, $ho_ten, $dia_chi, $dien_thoai, $email, $hinh_anh);
+            else
+                $nd->capNhatNguoiDung($id, $ho_ten, $dia_chi, $dien_thoai, $email);
+            $_SESSION['nguoiDung'] = $nd->layThongTinNguoiDungTheoID($id);
+            $message = "Cập nhật thành công !!!";
+            include('main.php');
+            break;
+
         case 'doiMatKhau':
             $matKhauCu = $_POST['txtmatKhauCu'];
             $matKhauMoi = $_POST['txtmatKhauMoi'];
@@ -95,5 +112,9 @@
             break;
         default:
             break;
+
+            
+
+            
     }
 ?>

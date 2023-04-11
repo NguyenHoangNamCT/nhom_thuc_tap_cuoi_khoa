@@ -226,7 +226,7 @@
               </div>
               <div class="form-group">
               <input type="hidden" name="txtid" value="<?php echo $_SESSION["nguoiDung"]["id"]; ?>" >
-              <input type="hidden" name="action" value="capNhatHoSo" >
+              <input type="hidden" name="action" value="updateUser" >
               <input class="btn btn-primary"  type="submit" value="Lưu">
               <input class="btn btn-warning"  type="reset" value="Hủy Thay Đổi"></div>
             </form>
