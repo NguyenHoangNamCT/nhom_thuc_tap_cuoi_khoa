@@ -85,10 +85,11 @@ class HOADON{
     public function layDanhSachChiTietHoaDon() {
         $db = DATABASE::connect();
         try {
-            $sql = "SELECT hoadon.*, donhang.id AS id_don_hang
-                    FROM hoadon, donhang
-                    WHERE hoadon.id_don_hang = donhang.id";
-                 
+            $sql = "SELECT hoadon.*, donhang.id AS id_don_hang, sanpham.ten_san_pham
+                    FROM hoadon, sanpham, donhang
+                    WHERE hoadon.id_san_pham = sanpham.id
+                    AND hoadon.id_don_hang = donhang.id ";
+                        
             $cmd = $db->prepare($sql);
             $cmd->execute();
             $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
