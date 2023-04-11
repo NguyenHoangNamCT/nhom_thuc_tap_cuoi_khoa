@@ -49,7 +49,7 @@ switch($action){
 		$id = $_POST['id'];
 		$id_don_hang = $_POST['selectDonHang'];
 		$ngay_tao = $_POST['dateNgayTao'];
-		$to = $_POST['txtTongTien'];
+		$tong_tien = $_POST['txtTongTien'];
 		$suaHoaDon = $hd->suaHoaDon($id, $id_don_hang, $ngay_tao, $tong_tien);
 		include("main.php");
 		break;
