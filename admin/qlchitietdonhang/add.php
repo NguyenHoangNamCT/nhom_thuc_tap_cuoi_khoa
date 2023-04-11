@@ -19,63 +19,46 @@
   <form method="post" enctype="multipart/form-data">
 	<!-- Gửi dữ liệu ẩn -->
 	<input type="hidden" name="action" value="XuLyThem">
-  	<div class="mb-3 mt-3">
-      <label for="">ID Đơn Hàng:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtIdDonHang">
-    </div>
-	
-    <div class="mb-3 mt-3">
-      <label for="">ID Sản Phẩm</label>
-      <input type="text" class="form-control"  placeholder="" name="txtIdSanPham">
-    </div>
-	
-    <div class="mb-3 mt-3">
-      <label for="">Giảm giá:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtGiamGia">
-    </div>
-	
-    <div class="mb-3 mt-3">
+  <div class="mb-3 mt-3">
       <label>ID Đơn Hàng</label>
-      <select class="form-control" name="selectLoaiSanPham">
+      <select class="form-control" name="selectDonHang">
         <?php
-          $mangLoai = $l->layLoaiSP();
-          foreach($mangLoai as $arr):
+          $mangDH = $dh->layDanhSachDonHang();
+          foreach($mangDH as $arr):
         ?>
-          <option value="<?php echo $arr["id"]; ?>"><?php echo $arr["ten_loai_san_pham"]; ?></option>
+         <option value="<?php echo $arr["id"]; ?>"><?php echo $arr["id_don_hang"]; ?></option>
         <?php
           endforeach;
         ?>
       </select>
-    </div>	
+    </div>
 
     <div class="mb-3 mt-3">
-      <label>Thương hiệU</label>
-      <select class="form-control" name="selectThuongHieu">
+      <label>ID Sản phẩm</label>
+      <select class="form-control" name="selectSanPham">
         <?php
-          $mangThuongHieu = $th->layThuongHieu();
-          foreach($mangThuongHieu as $arr):
+          $mangSP = $sp->layDanhSachSanPham();
+          foreach($mangSP as $arr):
         ?>
-          <option value="<?php echo $arr["id"]; ?>"><?php echo $arr["TenThuongHieu"]; ?></option>
+         <option value="<?php echo $arr["id"]; ?>"><?php echo $arr["ten_san_pham"]; ?></option>
         <?php
           endforeach;
         ?>
       </select>
     </div>
-	
+
     <div class="mb-3 mt-3">
       <label for="">Số lượng:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtSoLuong">
+      <input type="text" class="form-control"  placeholder="" name="txtSoLuong" id="txtSoLuong">
     </div>
-	
+
     <div class="mb-3 mt-3">
-      <label for="">Mô tả:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtMoTa">
+      <label for="">Đơn Giá:</label>
+      <input type="text" class="form-control"  placeholder="" name="txtDonGia" id="txtDonGia">
     </div>
+
+
 	
-    <div class="mb-3 mt-3">
-            <label>Hình ảnh</label>
-            <input class="form-control" type="file" name="filehinhanh">
-    </div>
     
     
   <button type="submit" class="btn btn-primary">Submit</button>
