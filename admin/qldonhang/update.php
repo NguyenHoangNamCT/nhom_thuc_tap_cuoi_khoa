@@ -13,7 +13,7 @@
   <h2>Sửa Đơn Hàng</h2>
   <form method="post" enctype="multipart/form-data">
 	<!-- Gửi dữ liệu ẩn -->
-	<input type="hidden" name="action" value="XuLyThem">
+	<input type="hidden" name="action" value="xuLySua">
   <input type="hidden" name="id" value="<?php echo $arr['id']; ?>">
   <!-- End -->
   <div class="mb-3 mt-3">

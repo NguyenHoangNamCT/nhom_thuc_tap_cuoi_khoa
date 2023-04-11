@@ -62,9 +62,9 @@ switch($action){
         unset($_SESSION['nguoiDung']);
         include('main.php');
         break;
-    // case "xemGioHang":
-	// 	include('cart.php');
-    //     break;
+    case "xemGioHang":
+		include('cart.php');
+        break;
     // case "choVaoGio":
     //     $id = $_REQUEST['id'];
     //     $soLuong = $_REQUEST['soLuong'];
