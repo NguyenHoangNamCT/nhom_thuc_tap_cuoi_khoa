@@ -1,5 +1,23 @@
 <?php
 class THONGTINDONHANG{
+    
+    public function layDanhSachThongTinDonHang(){
+        $dbcon = DATABASE::connect();
+        try{
+            $sql = "SELECT * FROM thongtindonhang";
+            $cmd = $dbcon->prepare($sql);
+            $cmd->execute();
+            $result = $cmd->fetchAll();
+            rsort($result); // sắp xếp giảm thay cho order by desc
+            return $result;
+        }
+        catch(PDOException $e){
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở layDanhSachThongTinDonHang: $error_message</p>";
+            exit();
+        }
+    }
+
     public function themThongTinDonHang($ten_khach_hang, $dia_chi_nguoi_nhan, $so_dien_thoai_nguoi_nhan, $ngay_giao_hang, $tien_ship, $phi_van_chuyen, $ghi_chu) {
         $db = DATABASE::connect();
         try{
