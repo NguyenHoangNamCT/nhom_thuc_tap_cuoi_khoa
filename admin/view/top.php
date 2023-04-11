@@ -229,7 +229,7 @@
               <input type="hidden" name="txtid" value="<?php echo $_SESSION["nguoiDung"]["id"]; ?>" >
               <input type="hidden" name="action" value="capNhatHoSo" >
               <input class="btn btn-primary"  type="submit" value="Lưu">
-              <input class="btn btn-warning"  type="reset" value="Hủy"></div>
+              <input class="btn btn-warning"  type="reset" value="Hủy Thay Đổi"></div>
             </form>
           </div>
 
@@ -254,12 +254,21 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
 
+        
+
           <!-- Modal body -->
           <div class="modal-body">
             <form  method="post" enctype="multipart/form-data" action="../qlnguoidung/">
             <!-- Gửi dữ liệu ẩn -->
             <input type="hidden" name="action" value="doiMatKhau">
             <!-- End -->
+            <div class="form-group">
+                <label>Tài khoản</label>
+                <input class="form-control" type="hidden" name="txtid" value="<?php echo $_SESSION["nguoiDung"]["id"]; ?>">
+                <input class="form-control" type="text" name="txtTenDangNhap" value="<?php echo $_SESSION["nguoiDung"]["ten_dang_nhap"]; ?>" disabled>
+              </div>
+         
+
             <label>Mật khẩu cũ</label>
             <input class="form-control" type="password" name="txtmatKhauCu"  placeholder="Mật khẩu cũ">
 
@@ -271,7 +280,7 @@
 
               <div class="form-group">
               <input class="btn btn-primary"  type="submit" value="Lưu">
-              <input class="btn btn-warning"  type="reset" value="Hủy"></div>
+              <input class="btn btn-warning"  type="reset" value="Hủy Thay Đổi"></div>
             </form>
           </div>
 
