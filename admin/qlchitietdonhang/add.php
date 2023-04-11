@@ -15,18 +15,18 @@
 
 
 <div class="container mt-3">
-  <h2>Thêm sản phẩm</h2>
+  <h2>Thêm chi tiết đơn hàng</h2>
   <form method="post" enctype="multipart/form-data">
 	<!-- Gửi dữ liệu ẩn -->
 	<input type="hidden" name="action" value="XuLyThem">
   	<div class="mb-3 mt-3">
-      <label for="">Tên sản phẩm:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtTenSP">
+      <label for="">ID Đơn Hàng:</label>
+      <input type="text" class="form-control"  placeholder="" name="txtIdDonHang">
     </div>
 	
     <div class="mb-3 mt-3">
-      <label for="">Giá tiền:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtGiaTien">
+      <label for="">ID Sản Phẩm</label>
+      <input type="text" class="form-control"  placeholder="" name="txtIdSanPham">
     </div>
 	
     <div class="mb-3 mt-3">
@@ -35,7 +35,7 @@
     </div>
 	
     <div class="mb-3 mt-3">
-      <label>Loại sản phẩm</label>
+      <label>ID Đơn Hàng</label>
       <select class="form-control" name="selectLoaiSanPham">
         <?php
           $mangLoai = $l->layLoaiSP();

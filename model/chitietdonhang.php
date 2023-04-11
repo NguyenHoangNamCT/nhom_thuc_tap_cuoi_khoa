@@ -60,5 +60,42 @@ class CHITIETDONHANG{
             DATABASE::close();
         }
     }
+
+    // lấy ds chi tiết đơn hàng
+    public function layDanhSachChiTietDonHang() {
+        $db = DATABASE::connect();
+        try {
+            $sql = "SELECT chitietdonhang.id, donhang.id AS id_don_hang, sanpham.ten_san_pham
+                    FROM chitietdonhang, sanpham, donhang
+                    WHERE chitietdonhang.id_san_pham = sanpham.id
+                    AND chitietdonhang.id_don_hang = donhang.id ";
+            $cmd = $db->prepare($sql);
+            $cmd->execute();
+            $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn trong layDanhSachChiTietDonHang: $error_message</p>";
+            exit();
+        } finally {
+            DATABASE::close();
+        }
+    }
+
+    //lấy chi tiết đơn hàng theo id
+    function layChiTietDonHangById($id) {
+        $conn = DATABASE::connect();
+        try {
+            $sql = 'SELECT * FROM chitietdonhang WHERE id = :id';
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $loaiSanPham = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $loaiSanPham;
+        } catch(PDOException $e) {
+            echo "Lỗi truy vấn ở layChiTietDonHangById: " . $e->getMessage();
+            return null;
+        }
+    }
 }
 ?>

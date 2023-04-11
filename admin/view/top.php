@@ -138,6 +138,13 @@
         </a>
       </li>
 
+      <li>
+        <a href="../qlchitietdonhang/" class="nav-link text-white">
+          <span class="bi-kanban"></span>
+          Quản lý Chi Tiết Đơn Hàng
+        </a>
+      </li>
+
     </ul>
     <hr>
     <div class="dropdown">
