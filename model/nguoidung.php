@@ -254,32 +254,34 @@ class NGUOIDUNG{
 		}
 	}
 
-	//-----------------------------------------------------------------------------------------------------------
-	// Cập nhật thông tin ng dùng: họ tên, số đt, email, ảnh đại diện 
-	public function capnhatnguoidung($id,$email,$sodt,$hoten,$hinhanh, $diaChi){
+	//cập nhật ngưỜi dùng
+	public function capNhatNguoiDung($id, $ho_ten, $dia_chi, $dien_thoai, $email, $hinh_anh=NULL) {
 		$db = DATABASE::connect();
-		try{
-			if($hinhanh != '')
-				$sql = "UPDATE nguoidung set hoten=:hoten, email=:email, sdt=:sodt,diachi = :diachi, hinhanh=:hinhanh where id=:id";
+		try {
+			if($hinh_anh != NULL)
+				$sql = "UPDATE nguoidung SET ten = :ten, email = :email, so_dien_thoai = :soDienThoai, dia_chi = :diaChi, mat_khau = :matKhau, hinh_anh=:hinhAnh WHERE id = :id";
 			else
-				$sql = "UPDATE nguoidung set hoten=:hoten, email=:email, sdt=:sodt,diachi = :diachi where id=:id";
+				$sql = "UPDATE nguoidung SET ten = :ten, email = :email, so_dien_thoai = :soDienThoai, dia_chi = :diaChi, mat_khau = :matKhau WHERE id = :id";
 			$cmd = $db->prepare($sql);
-			$cmd->bindValue(':id',$id);
-			$cmd->bindValue(':email',$email);
-			$cmd->bindValue(':sodt',$sodt);
-			$cmd->bindValue(':hoten',$hoten);
-			$cmd->bindValue(':diachi',$diaChi);
-			if($hinhanh != '')
-				$cmd->bindValue(':hinhanh',$hinhanh);
-			$ketqua = $cmd->execute();            
-            return $ketqua;
-		}
-		catch(PDOException $e){
-			$error_message=$e->getMessage();
-			echo "<p>Lỗi truy vấn: $error_message</p>";
+			$cmd->bindValue(':id', $id, PDO::PARAM_INT);
+			$cmd->bindValue(':ten', $ho_ten);
+			$cmd->bindValue(':email', $email);
+			$cmd->bindValue(':soDienThoai', $dien_thoai);
+			$cmd->bindValue(':diaChi', $dia_chi);
+			if($hinh_anh!=NULL)
+				$cmd->bindValue(':hinhAnh', $hinh_anh);
+			$cmd->execute();
+	
+			return true;
+		} catch(PDOException $e) {
+			$error_message = $e->getMessage();
+			echo "<p>Lỗi truy vấn ở capNhatNguoiDung: $error_message</p>";
 			exit();
+		} finally {
+			DATABASE::close();
 		}
 	}
+	//-----------------------------------------------------------------------------------------------------------
 
 	public function thayDoiTrangThaiNguoiDung($id, $trangThai){
 		$db = DATABASE::connect();

@@ -142,13 +142,12 @@
     <hr>
     <div class="dropdown">
       <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+        <img src="../../images/<?php echo $_SESSION['nguoiDung']['hinh_anh']; ?>" alt="" width="32" height="32" class="rounded-circle me-2">
         <strong><?php echo $_SESSION['nguoiDung']['ho_ten'] ?></strong>
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#hoSoCaNhan">Hồ sơ cá nhân</a></li>
         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#doiMK">Đổi mật khẩu</a></li>
-        <li><a class="dropdown-item" href="#">Profile</a></li>
         <li><hr class="dropdown-divider"></li>
         <li><a class="dropdown-item" href="../../index.php?action=dangXuat">Sign out</a></li>
       </ul>
@@ -181,7 +180,7 @@
 
               <div class="form-group">    
               <label>Tên Đăng Nhập</label>    
-              <input class="form-control" type="text" name="txtTenDangNhap" placeholder="Tên Đăng Nhập" value="<?php echo $_SESSION["nguoiDung"]["ten_dang_nhap"]; ?>" required>
+              <input class="form-control" type="text" name="txtTenDangNhap" placeholder="Tên Đăng Nhập" value="<?php echo $_SESSION["nguoiDung"]["ten_dang_nhap"]; ?>" required disabled>
               </div>
 
               <div class="form-group">
@@ -206,17 +205,17 @@
 
               <div class="form-group">
               <label>Ngày Đăng Ký</label>
-              <input class="form-control"  type="text" name="txtNgayDangKy" placeholder="Ngày Đăng Ký" value="<?php echo $_SESSION["nguoiDung"]["ngay_dang_ky"]; ?>" required>
+              <input class="form-control"  type="text" name="txtNgayDangKy" placeholder="Ngày Đăng Ký" value="<?php echo $_SESSION["nguoiDung"]["ngay_dang_ky"]; ?>" required disabled>
               </div>
 
               <div class="form-group">
               <label>Loại Người Dùng</label>
-              <input class="form-control"  type="text" name="txtLoaiNguoiDung" placeholder="Loại Người Dùng" value="<?php echo $_SESSION["nguoiDung"]["loai_nguoi_dung"]; ?>" required>
+              <input class="form-control"  type="text" name="txtLoaiNguoiDung" placeholder="Loại Người Dùng" value="<?php echo $_SESSION["nguoiDung"]["loai_nguoi_dung"]; ?>" required disabled>
               </div>
 
               <div class="form-group">
               <label>Trạng Thái</label>
-              <input class="form-control"  type="text" name="txtTrangThai" placeholder="Trang Thái" value="<?php echo $_SESSION["nguoiDung"]["trang_thai"]; ?>" required>
+              <input class="form-control"  type="text" name="txtTrangThai" placeholder="Trang Thái" value="<?php echo $_SESSION["nguoiDung"]["trang_thai"]; ?>" required disabled>
               </div>
                        
               
@@ -262,6 +261,9 @@
             <!-- Gửi dữ liệu ẩn -->
             <input type="hidden" name="action" value="doiMatKhau">
             <!-- End -->
+            <div class="text-center">
+                <img class="img-circle" src="../../images/<?php echo $_SESSION['nguoiDung']['hinh_anh'] ?>" alt="<?php echo $_SESSION['nguoiDung']['ho_ten']; ?>" width="100px">
+            </div>
             <div class="form-group">
                 <label>Tài khoản</label>
                 <input class="form-control" type="hidden" name="txtid" value="<?php echo $_SESSION["nguoiDung"]["id"]; ?>">
