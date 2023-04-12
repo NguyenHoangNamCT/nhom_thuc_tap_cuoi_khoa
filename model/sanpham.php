@@ -116,200 +116,50 @@ class SANPHAM{
             exit();
         }
     }
-//--------------------------------------------------------------------------------------------
 
-//lấy danh sách điện thoại
-public function layDanhSachDienThoai(){
-    $dbcon = DATABASE::connect();
-    try{
-        $sql = "SELECT dt.*, h.tenhang FROM dienthoai dt, hangdt h where dt.hangdt_id = h.id";
-        $cmd = $dbcon->prepare($sql);
-        $cmd->execute();
-        $result = $cmd->fetchAll();
-        rsort($result); // sắp xếp giảm thay cho order by desc
-        return $result;
-    }
-    catch(PDOException $e){
-        $error_message = $e->getMessage();
-        echo "<p>Lỗi truy vấn layDanhSachDienThoai: $error_message</p>";
-        exit();
-    }
-}
-	// Đếm tổng số mặt hàng
-    public function demTongSoDienThoai(){
-        $dbcon = DATABASE::connect();
-        try{
-            $sql = "SELECT COUNT(*) FROM dienthoai";
-            $cmd = $dbcon->prepare($sql);
+    //tìm kiếm sp theo tên gần đúng
+    public function timkiemSanPham($tenSP) {
+        $db = DATABASE::connect();
+        try {
+            $sql = "SELECT * FROM sanpham WHERE ten_san_pham LIKE :tenSP";
+            $cmd = $db->prepare($sql);
+            $cmd->bindValue(':tenSP', '%' . $tenSP . '%');
             $cmd->execute();
-            $result = $cmd->fetchColumn();            
-            return $result;
+            $products = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $tenSP;
         }
-        catch(PDOException $e){
+        catch(PDOException $e) {
             $error_message = $e->getMessage();
-            echo "<p>Lỗi truy vấn demTongSoDienThoai: $error_message</p>";
+            echo "<p>Lỗi truy vấn ở timkiemSanPham: $error_message</p>";
             exit();
         }
+        finally {
+            DATABASE::close();
+        }
     }
-	
-	// Lấy mặt hàng phân trang (các sản phẩm trong khoảng chỉ định: bắt đầu từ $m, lấy $n mẫu tin)
-    // public function laymathangphantrang($m, $n){
-    //     $dbcon = DATABASE::connect();
-    //     try{
-    //         $sql = "SELECT m.*, d.tendanhmuc 
-	// 			FROM mathang m, danhmuc d 
-	// 			WHERE d.id=m.danhmuc_id 
-	// 			ORDER BY id DESC 
-	// 			LIMIT $m, $n";
-    //         $cmd = $dbcon->prepare($sql);
-    //         $cmd->execute();
-    //         $ketqua = $cmd->fetchAll();
-    //         return $ketqua;
-    //     }
-    //     catch(PDOException $e){
-    //         $error_message = $e->getMessage();
-    //         echo "<p>Lỗi truy vấn: $error_message</p>";
-    //         exit();
-    //     }
-    // }
-	
-	// Lấy mặt hàng nổi bật top 4 có lượt xem cao nhất
-    // public function laymathangnoibat(){
-    //     $dbcon = DATABASE::connect();
-    //     try{
-    //         $sql = "SELECT m.*, d.tendanhmuc FROM mathang m, danhmuc d WHERE d.id=m.danhmuc_id ORDER BY luotxem DESC LIMIT 0, 4";
-    //         $cmd = $dbcon->prepare($sql);
-    //         $cmd->execute();
-    //         $ketqua = $cmd->fetchAll();
-    //         return $ketqua;
-    //     }
-    //     catch(PDOException $e){
-    //         $error_message = $e->getMessage();
-    //         echo "<p>Lỗi truy vấn: $error_message</p>";
-    //         exit();
-    //     }
-    // }
 
-	    // Lấy danh sách mặt hàng thuộc 1 danh mục
-    // public function laymathangtheodanhmuc($danhmuc_id){
-    //     $dbcon = DATABASE::connect();
-    //     try{
-    //         $sql = "SELECT * FROM mathang WHERE danhmuc_id=:madm" ;
-    //         $cmd = $dbcon->prepare($sql);
-	// 		$cmd->bindValue(":madm",$danhmuc_id);
-    //         $cmd->execute();
-    //         $result = $cmd->fetchAll();
-    //         return $result;
-    //     }
-    //     catch(PDOException $e){
-    //         $error_message = $e->getMessage();
-    //         echo "<p>Lỗi truy vấn: $error_message</p>";
-    //         exit();
-    //     }
-    // }
-
-
-
-    //Lấy điện thoại theo ten
-    public function layDienThoaiTheoTen($tendt){
-        $dbcon = DATABASE::connect();
-        try{
-            $sql = "SELECT dt.*, hdt.tenhang FROM dienthoai dt, hangdt hdt WHERE dt.hangdt_id = hdt.id AND tendt=:ten";
-            $cmd = $dbcon->prepare($sql);
-            $cmd->bindValue(":ten", $tendt);
+    //tìm kiếm sp theo giá tiền
+    public function timKiemSanPhamTheoGiaTien($gia_tien) {
+        $db = DATABASE::connect();
+        try {
+            $sql = "SELECT * FROM sanpham WHERE gia_tien LIKE :gia_tien";
+            $cmd = $db->prepare($sql);
+            $cmd->bindValue(':gia_tien', '%' . $gia_tien . '%');
             $cmd->execute();
-            $result = $cmd->fetchAll();
+            $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
             return $result;
         }
-        catch(PDOException $e){
+        catch(PDOException $e) {
             $error_message = $e->getMessage();
-            echo "<p>Lỗi truy vấn laymathangtheoid: $error_message</p>";
+            echo "<p>Lỗi truy vấn ở timKiemSanPhamTheoGiaTien: $error_message</p>";
             exit();
         }
-    }
-
-    // Cập nhật lượt xem
-    // public function tangluotxem($id){
-    //     $dbcon = DATABASE::connect();
-    //     try{
-    //         $sql = "UPDATE mathang SET luotxem=luotxem+1 WHERE id=:id";
-    //         $cmd = $dbcon->prepare($sql);
-    //         $cmd->bindValue(":id", $id);
-    //         $result = $cmd->execute();            
-    //         return $result;
-    //     }
-    //     catch(PDOException $e){
-    //         $error_message = $e->getMessage();
-    //         echo "<p>Lỗi truy vấn: $error_message</p>";
-    //         exit();
-    //     }
-    // }
-	
-	// Thêm mới
-    public function themDienThoai($tenDT, $manHinh, $camSau, $camTruoc, $dungLuong, $CPU, $ram, $trongLuong, $ngayNhap, $tinhTrang, $hangDT_ID, $hinh, $gia, $giamGia)
-    {
-        $giamGia = 1 - $giamGia/100;
-        $dbcon = DATABASE::connect();
-        try{
-            $sql = "INSERT INTO `dienthoai`(`tendt`, `manhinh`, `camerasau`, `cameratruoc`, `dungluong`, `cpu`, `ram`, `trongluong`, `ngaynhap`, `tinhtrang`, `hangdt_id`, `hinh`, `gia`, `giamgia`, `luotxem`, `luotmua`)
-            VALUES (:tenDT,:manHinh,:camSau,:camTruoc,:dungLuong,:cpu,:ram,:trongLuong,:ngayNhap,$tinhTrang,$hangDT_ID,:hinh,$gia,$giamGia,0,0)";
-            $cmd = $dbcon->prepare($sql);
-            $cmd->bindValue(":tenDT", $tenDT);
-            $cmd->bindValue(":manHinh", $manHinh);
-            $cmd->bindValue(":camSau", $camSau);
-            $cmd->bindValue(":camTruoc", $camTruoc);
-            $cmd->bindValue(":dungLuong", $dungLuong);
-            $cmd->bindValue(":cpu", $CPU);
-            $cmd->bindValue(":ram", $ram);
-            $cmd->bindValue(":trongLuong", $trongLuong);
-            $cmd->bindValue(":ngayNhap", $ngayNhap);
-            $cmd->bindValue(":hinh", $hinh);
-            $result = $cmd->execute();            
-            return $result;
-        }
-        catch(PDOException $e){
-            $error_message = $e->getMessage();
-            echo "<p>Lỗi truy vấn themDienThoai: $error_message</p>";
-            exit();
+        finally {
+            DATABASE::close();
         }
     }
-
-    // Cập nhật 
-    public function suaDienThoai($id, $tenDT, $manHinh, $camSau, $camTruoc, $dungLuong, $cpu, $ram, $trongLuong, $ngayNhap, $tinhTrang, $hangDT, $gia, $giamGia, $luotXem, $luotMua, $hinh){
-        $giamGia = 1 - $giamGia/100;
-        $dbcon = DATABASE::connect();
-        // try{
-            // if($hinh != '')
-            //     $sql = "UPDATE `dienthoai` SET `tendt`=:tenDT,`manhinh`=:manHinh,`camerasau`=camSau,`cameratruoc`=:camTruoc,`dungluong`=:dungLuong,`cpu`=:CPU,`ram`=:Ram,`trongluong`=:trongLuong,`ngaynhap`=:ngayNhap,`tinhtrang`=$tinhTrang,`hangdt_id`=$hangDT,`hinh`=:hinh,`gia`=$gia,`giamgia`=$giamGia,`luotxem`=$luotXem,`luotmua`=$luotMua WHERE id=:id";
-            // else 
-            //     $sql = "UPDATE `dienthoai` SET `tendt`=:tenDT,`manhinh`=:manHinh,`camerasau`=camSau,`cameratruoc`=:camTruoc,`dungluong`=:dungLuong,`cpu`=:CPU,`ram`=:Ram,`trongluong`=:trongLuong,`ngaynhap`=:ngayNhap,`tinhtrang`=$tinhTrang,`hangdt_id`=$hangDT,`gia`=$gia,`giamgia`=$giamGia,`luotxem`=$luotXem,`luotmua`=$luotMua WHERE id=:id";
-            
-            if($hinh != '')
-                $sql = "UPDATE `dienthoai` SET `tendt`=:tenDT,`manhinh`=:manHinh,`camerasau`=:camSau,`cameratruoc`=:camTruoc,`dungluong`=:dungLuong,`cpu`=:CPU,`ram`=:Ram,`trongluong`=:trongLuong,`ngaynhap`=:ngayNhap,`tinhtrang`=$tinhTrang,`hangdt_id`=$hangDT,`hinh`=:hinh,`gia`=$gia,`giamgia`=$giamGia,`luotxem`=$luotXem,`luotmua`=$luotMua WHERE id=$id";
-            else
-                $sql = "UPDATE `dienthoai` SET `tendt`=:tenDT,`manhinh`=:manHinh,`camerasau`=:camSau,`cameratruoc`=:camTruoc,`dungluong`=:dungLuong,`cpu`=:CPU,`ram`=:Ram,`trongluong`=:trongLuong,`ngaynhap`=:ngayNhap,`tinhtrang`=$tinhTrang,`hangdt_id`=$hangDT,`gia`=$gia,`giamgia`=$giamGia,`luotxem`=$luotXem,`luotmua`=$luotMua WHERE id=$id";
-            
-            $cmd = $dbcon->prepare($sql);
-            $cmd->bindValue(":tenDT", $tenDT);
-            $cmd->bindValue(":manHinh", $manHinh);
-            $cmd->bindValue(":camSau", $camSau);
-            $cmd->bindValue(":camTruoc", $camTruoc);
-            $cmd->bindValue(":dungLuong", $dungLuong);
-            $cmd->bindValue(":CPU", $cpu);
-            $cmd->bindValue(":Ram", $ram);
-            $cmd->bindValue(":trongLuong", $trongLuong);
-            $cmd->bindValue(":ngayNhap", $ngayNhap);
-            if($hinh != '')    
-                $cmd->bindValue(":hinh", $hinh);
-            $result = $cmd->execute();            
-            return $result;
-        // }
-        // catch(PDOException $e){
-        //     $error_message = $e->getMessage();
-        //     echo "<p>Lỗi truy vấn suaDienThoai: $error_message</p>";
-        //     exit();
-        // }
-    }
+    
+    
 
 }
 ?>

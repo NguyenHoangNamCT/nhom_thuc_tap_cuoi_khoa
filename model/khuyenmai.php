@@ -106,6 +106,27 @@ class KHUYENMAI{
         }
     }
     
+    //tìm kiếm theo tên gần đúng
+    public function timKiemKhuyenMaiTheoTen($ten_khuyen_mai) {
+        $db = DATABASE::connect();
+        try {
+            $sql = "SELECT * FROM khuyenmai WHERE ten_khuyen_mai LIKE :ten_khuyen_mai";
+            $cmd = $db->prepare($sql);
+            $cmd->bindValue(':ten_khuyen_mai', "%$ten_khuyen_mai%");
+            $cmd->execute();
+            $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+        catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở timKiemKhuyenMaiTheoTen: $error_message</p>";
+            exit();
+        }
+        finally {
+            DATABASE::close();
+        }
+    }
+    
 
 }
 ?>

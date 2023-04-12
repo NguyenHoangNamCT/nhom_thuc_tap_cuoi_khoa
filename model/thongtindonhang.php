@@ -104,5 +104,27 @@ class THONGTINDONHANG{
             return null;
         }
     }
+
+    // tìm kiếm bằng tên khách hàng
+    public function timKiemDonHangTheoTenKhachHang($ten_khach_hang) {
+        $db = DATABASE::connect();
+        try {
+            $sql = "SELECT * FROM thongtindonhang WHERE ten_khach_hang = :ten_khach_hang";
+            $cmd = $db->prepare($sql);
+            $cmd->bindValue(':ten_khach_hang', $ten_khach_hang);
+            $cmd->execute();
+            $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+        catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở timKiemDonHangTheoTenKhachHang: $error_message</p>";
+            exit();
+        }
+        finally {
+            DATABASE::close();
+        }
+    }
+    
 }
 ?>

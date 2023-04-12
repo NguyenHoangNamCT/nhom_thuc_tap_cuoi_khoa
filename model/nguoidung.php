@@ -21,6 +21,8 @@ class NGUOIDUNG{
 		}
 	}
 
+
+
 	//lấy thông tin tất cả người dùng
 	public function layTatCaNguoiDung(){
 		$db = DATABASE::connect();

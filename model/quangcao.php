@@ -104,5 +104,28 @@ class QUANGCAO{
             return null;
         }
     }
+
+    //tìm kiếm quảng cáo theo tiêu đề
+    public function timKiemQuangCao($tieu_de) {
+        $db = DATABASE::connect();
+        try {
+            $tieu_de = "%{$tieu_de}%"; //Thêm % ở đầu và cuối chuỗi để tìm kiếm gần đúng
+            $sql = "SELECT * FROM quangcao WHERE tieu_de LIKE :tieu_de";
+            $cmd = $db->prepare($sql);
+            $cmd->bindValue(':tieu_de', $tieu_de, PDO::PARAM_STR);
+            $cmd->execute();
+            $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+        catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở timKiemQuangCao: $error_message</p>";
+            exit();
+        }
+        finally {
+            DATABASE::close();
+        }
+    }
+    
 }
 ?>

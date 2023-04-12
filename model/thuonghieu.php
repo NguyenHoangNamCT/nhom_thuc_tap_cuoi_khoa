@@ -17,6 +17,29 @@ class THUONGHIEU{
         }
     }
 
+    //tìm kiếm thương hiệu theo tên gân đúng
+    public function timKiemThuongHieu($tuKhoa) {
+        $db = DATABASE::connect();
+        try {
+            $sql = "SELECT * FROM thuongHieu WHERE TenThuongHieu LIKE CONCAT('%', :tuKhoa, '%')";
+            $cmd = $db->prepare($sql);
+            $cmd->bindValue(':tuKhoa', $tuKhoa);
+            $cmd->execute();
+            $thuongHieu = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $thuongHieu;
+        }
+        catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở timKiemThuongHieu: $error_message</p>";
+            exit();
+        }
+        finally {
+            DATABASE::close();
+        }
+    }
+    
+    
+
     // Thêm mới
     public function themThuongHieu($tenThuongHieu, $moTa, $trangWeb, $logo) {
         $db = DATABASE::connect();

@@ -104,5 +104,25 @@
                 return null;
             }
         }
+
+        //tìm kiếm theo tên gần đúng
+        public function timKiemLoaiSanPham($ten_loai_san_pham) {
+            $db = DATABASE::connect();
+            try {
+                $sql = "SELECT * FROM loaisanpham WHERE ten_loai_san_pham LIKE :ten_loai_san_pham";
+                $stmt = $db->prepare($sql);
+                $stmt->bindValue(':ten_loai_san_pham', "%$ten_loai_san_pham%");
+                $stmt->execute();
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $result;
+            } catch (PDOException $e) {
+                $error_message = $e->getMessage();
+                echo "<p>Lỗi truy vấn ở timKiemLoaiSanPham: $error_message</p>";
+                exit();
+            } finally {
+                DATABASE::close();
+            }
+        }
+        
     }
-    ?>
+?>
