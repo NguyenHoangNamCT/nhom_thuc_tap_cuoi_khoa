@@ -4,6 +4,7 @@ require('model/sanpham.php');
 require('model/loaisanpham.php');
 require('model/thuonghieu.php');
 require('model/nguoidung.php');
+require('model/giohang.php');
 //------------------------------
 
 if(isset($_REQUEST["action"])){
@@ -18,6 +19,7 @@ $sp = new SANPHAM();
 $lsp = new LOAISP();
 $th = new THUONGHIEU();
 $nd = new NGUOIDUNG();
+$gh = new GIOHANG();
 $mangLoaiSP = $lsp->layLoaiSP();
 $mangThuongHieu = $th->layThuongHieu();
 
@@ -65,16 +67,18 @@ switch($action){
     case "xemGioHang":
 		include('cart.php');
         break;
-    // case "choVaoGio":
-    //     $id = $_REQUEST['id'];
-    //     $soLuong = $_REQUEST['soLuong'];
-    //     if(kiemtramathang($id)){
-    //         tangsoluong($id, $soLuong);
-    //     }
-    //     else
-    //         themhangvaogio($id, $soLuong);
-    //     include('cart.php');
-    //     break;
+    case "choVaoGio":
+        $id = $_REQUEST['id'];
+        $soLuong = $_REQUEST['soLuong'];
+        $gh->themSanPhamVaoGioHang($_SESSION['nguoiDung']['id'], $id, $soLuong);
+        
+        // if(kiemtramathang($id)){
+        //     tangsoluong($id, $soLuong);
+        // }
+        // else
+        //     themhangvaogio($id, $soLuong);
+        include('cart.php');
+        break;
     // case "xoaSPTrongGio":
     //     $maDT = $_REQUEST['id'];
     //     xoamotmathang($maDT);

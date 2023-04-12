@@ -8,17 +8,18 @@
       <table class="table table-borderless" align="center">
         <h2>Giỏ Hàng</h2>
         <?php 
-          $gioHang = laygiohang();
-          if(count($gioHang) < 1)
+          $mangGioHang = $gh->layGioHang($_SESSION['nguoiDung']['id']);
+          if(count($mangGioHang) < 1)
             echo '<p>   Giỏ hàng trống</p>';
           else
           {
         ?>
         <thead>
           <tr>
-            <th>Điện thoại</th>
-            <th>Giá</th>
+            <th>Tên sản phẩm</th>
+            <th>Hình ảnh</th>
             <th>Số lượng</th>
+            <th>Giá tiền</th>
             <th>Thành tiền</th>
             <th>Xoá</th>
           </tr>
@@ -27,15 +28,16 @@
           <tr>
             <?php
               
-              foreach($gioHang as $maDT => $dt)
+              foreach($mangGioHang as $arr)
               {
             ?>
                 <tr>
-                  <td><img class="img-thumbnail" width="30" src="images/<?php echo $dt["hinh"]; ?>"> <?php echo $dt["tendt"]; ?></td>
-                  <td><?php echo number_format($dt["gia"]); ?>đ</td>
-                  <td><input class="form-control" name="dt[<?php echo $maDT; ?>]" type="number" value="<?php echo $dt["soluong"]; ?>"></td>
-                  <td><?php echo number_format($dt["thanhtien"]).'đ'; ?></td>
-                  <td><a class="btn btn-danger" href="?action=xoaSPTrongGio&id=<?php echo $maDT; ?>"><span class="glyphicon glyphicon-trash"></span>Xoá</a></td>
+                  <td><?php echo $arr["ten_san_pham"]; ?></td>
+                  <td><img class="img-thumbnail" width="75" src="images/<?php echo $arr["hinh_anh"]; ?>"></td>
+                  <td><input min="1" type="number" class="form-control"  placeholder="" name="txtSoLuong" value="<?php echo $arr["so_luong"]; ?>"></td>
+                  <td><?php echo number_format($arr["gia_tien"]).'đ'; ?></td>
+                  <td><?php echo $arr["gia_tien"]*$arr["so_luong"]; ?></td>
+                  <td><a class="btn btn-danger" href="?action=xoaSPTrongGio&idSanPham=<?php echo $arr["id_san_pham"]; ?>"><span class="glyphicon glyphicon-trash"></span>Xoá</a></td>
                 </tr>
             <?php
               } // end for
@@ -45,14 +47,15 @@
         <tfoot>
           <tr>
             <td colspan="3"></td>
-            <td><b>Tổng tiền: <?php echo number_format(round(tinhtiengiohang(), 2)).'đ'; ?></b></td>
+            <td><b>Tổng tiền: <?php echo number_format(round(GIOHANG::tinhThanhTien($mangGioHang), 2)).'đ'; ?></b></td>
           </tr>
         </tfoot>
         <?php 
           }
         ?>
       </table>
-    <td><a class="btn btn-danger" href="?action=thanhToan"><span class=""></span>Thanh toán</a></td>
+    <td><a class="btn btn-success" href="?action=capNhatSoLuong"><span class=""></span>Cập nhật số lượng</a></td>  
+    <td><a class="btn btn-warning" href="?action=thanhToan"><span class=""></span>Thanh toán</a></td>
     </div>
 
   </div>

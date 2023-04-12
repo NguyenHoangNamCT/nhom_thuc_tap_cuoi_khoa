@@ -1,28 +1,148 @@
 <?php
     Class GIOHANG{
+        public static function tinhThanhTien($mangGioHang) {
+            $tongTien = 0;
+            foreach($mangGioHang as $arr)
+                $tongTien += $arr['gia_tien']*$arr['so_luong'];
+            return $tongTien;
+        }
+
+
         public function layGioHang($id_nguoi_dung) {
             $db = DATABASE::connect();
             try {
-                $sql = "SELECT giohang.id_nguoi_dung, giohang.id_san_pham, giohang.so_luong, sanpham.ten, sanpham.gia
+                $sql = "SELECT giohang.id_nguoi_dung, giohang.id_san_pham, giohang.so_luong, sanpham.ten_san_pham, sanpham.gia_tien, sanpham.hinh_anh
                         FROM giohang
                         JOIN sanpham ON giohang.id_san_pham = sanpham.id
                         WHERE giohang.id_nguoi_dung = :id_nguoi_dung";
                 $cmd = $db->prepare($sql);
                 $cmd->bindValue(':id_nguoi_dung', $id_nguoi_dung);
                 $cmd->execute();
-                $list = array();
-                foreach ($cmd->fetchAll() as $item) {
-                    $gio_hang = array(
-                        'id_nguoi_dung' => $item['id_nguoi_dung'],
-                        'id_san_pham' => $item['id_san_pham'],
-                        'ten_san_pham' => $item['ten'],
-                        'so_luong' => $item['so_luong'],
-                        'gia' => $item['gia']
-                    );
-                    $list[] = $gio_hang;
-                }
-                return $list;
+                return $cmd->fetchAll();
+                // $list = array();
+                // foreach ($cmd->fetchAll() as $item) {
+                //     $gio_hang = array(
+                //         'id_nguoi_dung' => $item['id_nguoi_dung'],
+                //         'id_san_pham' => $item['id_san_pham'],
+                //         'ten_san_pham' => $item['ten_san_pham'],
+                //         'so_luong' => $item['so_luong'],
+                //         'gia' => $item['gia_tien']
+                //     );
+                //     $list[] = $gio_hang;
+                // }
+                // return $list;
             } catch(PDOException $e) {
+                $error_message = $e->getMessage();
+                echo "<p>Lỗi truy vấn ở layGioHang: $error_message</p>";
+                exit();
+            } finally {
+                DATABASE::close();
+            }
+        }
+
+
+        public function themSanPhamVaoGioHang($id_nguoi_dung, $id_san_pham, $so_luong) {
+            $db = DATABASE::connect();
+            try {
+                $sql = "INSERT INTO giohang(id_nguoi_dung, id_san_pham, so_luong) VALUES (:id_nguoi_dung, :id_san_pham, :so_luong) ON DUPLICATE KEY UPDATE so_luong = so_luong + :so_luong";
+                $cmd = $db->prepare($sql);
+                $cmd->bindValue(':id_nguoi_dung', $id_nguoi_dung);
+                $cmd->bindValue(':id_san_pham', $id_san_pham);
+                $cmd->bindValue(':so_luong', $so_luong);
+                $cmd->execute();
+                $rowCount = $cmd->rowCount();
+                return $rowCount;
+            }
+            catch(PDOException $e) {
+                $error_message = $e->getMessage();
+                echo "<p>Lỗi truy vấn ở themSanPhamVaoGioHang: $error_message</p>";
+                exit();
+            }
+            finally {
+                DATABASE::close();
+            }
+        }
+
+        //cập nhật số lượng cho một sản phẩm
+        public function capNhatSoLuongSanPhamTrongGioHang($id_nguoi_dung, $id_san_pham, $so_luong) {
+            $db = DATABASE::connect();
+            try {
+                $sql = "UPDATE giohang SET so_luong = :so_luong WHERE id_nguoi_dung = :id_nguoi_dung AND id_san_pham = :id_san_pham";
+                $cmd = $db->prepare($sql);
+                $cmd->bindValue(':id_nguoi_dung', $id_nguoi_dung);
+                $cmd->bindValue(':id_san_pham', $id_san_pham);
+                $cmd->bindValue(':so_luong', $so_luong);
+                $cmd->execute();
+                $rowCount = $cmd->rowCount();
+                return $rowCount;
+            }
+            catch(PDOException $e) {
+                $error_message = $e->getMessage();
+                echo "<p>Lỗi truy vấn ở capNhatSoLuongSanPhamTrongGioHang: $error_message</p>";
+                exit();
+            }
+            finally {
+                DATABASE::close();
+            }
+        }
+
+        //xoá giỏ hàng
+        public function xoaGioHang($id_nguoi_dung, $id_san_pham) {
+            $db = DATABASE::connect();
+            try {
+                $sql = "DELETE FROM giohang WHERE id_nguoi_dung = :id_nguoi_dung AND id_san_pham = :id_san_pham";
+                $cmd = $db->prepare($sql);
+                $cmd->bindValue(':id_nguoi_dung', $id_nguoi_dung);
+                $cmd->bindValue(':id_san_pham', $id_san_pham);
+                $cmd->execute();
+                $rowCount = $cmd->rowCount();
+                return $rowCount;
+            }
+            catch(PDOException $e) {
+                $error_message = $e->getMessage();
+                echo "<p>Lỗi truy vấn ở xoaGioHang: $error_message</p>";
+                exit();
+            }
+            finally {
+                DATABASE::close();
+            }
+        }
+
+        //Lấy số lượng tất cả sản phẩm trong giỏ hàng
+        public function laySoLuongGioHang($id_nguoi_dung) {
+            $db = DATABASE::connect();
+            try {
+                $sql = "SELECT COUNT(*) AS so_luong FROM giohang WHERE id_nguoi_dung = :id_nguoi_dung";
+                $cmd = $db->prepare($sql);
+                $cmd->bindValue(':id_nguoi_dung', $id_nguoi_dung);
+                $cmd->execute();
+                $result = $cmd->fetch(PDO::FETCH_ASSOC);
+                return $result['so_luong'];
+            }
+            catch(PDOException $e) {
+                $error_message = $e->getMessage();
+                echo "<p>Lỗi truy vấn ở laySoLuongGioHang: $error_message</p>";
+                exit();
+            }
+            finally {
+                DATABASE::close();
+            }
+        }
+
+        //lấy số lương 1 sản phẩm trong giỏ hàng
+        public function laySoLuongSanPhamTrongGioHang($id_nguoi_dung, $id_san_pham) {
+            $db = DATABASE::connect();
+            try {
+                $sql = "SELECT so_luong FROM giohang WHERE id_nguoi_dung = :id_nguoi_dung AND id_san_pham = :id_san_pham";
+                $cmd = $db->prepare($sql);
+                $cmd->bindValue(':id_nguoi_dung', $id_nguoi_dung);
+                $cmd->bindValue(':id_san_pham', $id_san_pham);
+                $cmd->execute();
+                //fetchColumn dùng khi lấy 1 giá trị duy nhất
+                $so_luong = $cmd->fetchColumn();
+                $cmd->closeCursor();
+                return $so_luong;
+            } catch (PDOException $e) {
                 $error_message = $e->getMessage();
                 echo "<p>Lỗi truy vấn: $error_message</p>";
                 exit();
@@ -30,6 +150,7 @@
                 DATABASE::close();
             }
         }
+            
     }
 // // Tạo mảng SESSION giohang rỗng nếu nó không tồn tại
 // if (!isset($_SESSION['giohang']) ) {
