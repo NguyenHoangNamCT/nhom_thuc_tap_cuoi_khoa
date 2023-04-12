@@ -41,7 +41,7 @@
 
     <div class="mb-3 mt-3">
       <label for="">Tổng Tiền:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtTongTien" value="<?php echo $arr['tong_tien'] ?>">
+      <input type="text" class="form-control"  placeholder="" name="txtTongTien" value="<?php echo $arr['tong_tien']; ?>">
     </div>
 	
   <button type="submit" class="btn btn-primary">Submit</button>
