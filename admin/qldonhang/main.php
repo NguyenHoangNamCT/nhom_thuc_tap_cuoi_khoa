@@ -17,6 +17,7 @@
           <th>Tình Trang Đơn Hàng</th>
           <th>Sửa</th>
           <th>Xóa</th>
+          <th>Thêm Thông Tin Đơn Hàng</th>
         </tr>
       </thead>
       <tbody>
@@ -34,6 +35,7 @@
           <td><?php if($arr["tinh_trang_don_hang"] == 1 ) echo "Chưa Giao"; else echo "Đã Giao"; ?></td>
           <td><a class="btn btn-warning" href="index.php?action=sua&id=<?php echo $arr["id"]; ?>"><span class="glyphicon glyphicon-edit"></span> Sửa</a></td>
           <td><a class="btn btn-danger" href="index.php?action=xoa&id=<?php echo $arr["id"]; ?>"><span class="glyphicon glyphicon-trash"></span> Xoá</a></td>
+          <td><a class="btn btn-danger" href="index.php?action=ThemTTDH&id=<?php echo $arr["id"]; ?>"><span class="glyphicon glyphicon-trash"></span> Thêm Thông Tin Đơn Hàng</a></td>
         </tr>
         <?php
             }

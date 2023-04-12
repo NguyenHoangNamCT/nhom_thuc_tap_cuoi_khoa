@@ -5,6 +5,7 @@ require('../../model/nguoidung.php');
 // require('../../model/sanpham.php');
 // require('../../model/loaisanpham.php');
 // require('../../model/thuonghieu.php');
+require('../../model/thongtindonhang.php');
 if(isset($_REQUEST["action"])){
     $action = $_REQUEST["action"];
 }
@@ -12,6 +13,7 @@ else{
     $action="macdinh"; 
 }
 
+$ttdh = new THONGTINDONHANG();
 $nd = new NGUOIDUNG();
 $dh = new DONHANG();
 // $sp = new SANPHAM();
@@ -46,11 +48,7 @@ switch($action){
 		include("update.php");
 		break;
 	case "xuLySua":
-		var_dump('Hi I am here');
-		var_dump('Hi I am here');
-		var_dump('Hi I am here');
-		var_dump('Hi I am here');
-		var_dump('Hi I am here');
+		
 		$id = $_POST['id'];
 		$id_nguoi_dung = $_POST['selectTenNguoiDung'];
 		$ngay_dat = $_POST['dateNgayDat'];
@@ -62,6 +60,23 @@ switch($action){
 		$dh->suaDonHang($id, $id_nguoi_dung, $ngay_dat, $dia_chi_giao_hang, $dien_thoai_nguoi_nhan, $ho_ten_nguoi_nhan, $tong_tien, $tinh_trang_don_hang);
 		include("main.php");
 		break;
+
+		case "ThemTTDH":
+			$id_don_hang = $_GET['id'];
+			include("addthongtindonhang.php");
+			break;
+		case "XuLyThemTTDH":
+			$id = $_POST['id'];
+			$ten_khach_hang = $_POST['txtTenKH'];
+			$dia_chi_nguoi_nhan = $_POST['txtDiaChiNN'];
+			$so_dien_thoai_nguoi_nhan = $_POST['txtSoDienThoaiNN'];
+			$ngay_giao_hang = $_POST['dateNgayGiaoHang'];
+			$tien_ship = $_POST['txtTienShip'];
+			$phi_van_chuyen = $_POST['txtPhiVanChuyen'];
+			$ghi_chu = $_POST['txtGhiChu'];
+			$suaThongTinDonHang = $ttdh-> suaThongTinDonHang($id, $ten_khach_hang, $dia_chi_nguoi_nhan, $so_dien_thoai_nguoi_nhan, $ngay_giao_hang, $tien_ship, $phi_van_chuyen, $ghi_chu);
+			include("main.php");
+			break;
 	//----------------------------------------------------
     default:
         break;
