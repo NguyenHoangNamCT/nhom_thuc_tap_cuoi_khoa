@@ -62,7 +62,7 @@
         }
       ?>
       <tr>
-        <td colspan="4" align="right"><b>Tổng tiền: <?php echo number_format($tongTien); ?></b></td>
+        <td colspan="5" align="right"><b>Tổng tiền: <?php echo number_format($tongTien); ?></b></td>
       </tr>
     </tbody>
   </table>

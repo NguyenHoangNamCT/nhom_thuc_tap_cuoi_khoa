@@ -114,6 +114,27 @@
             }
         }
 
+        //Xoá hết sản phẩm trong giỏ hàng của người dùng
+        public function xoaSachGioHang($id_nguoi_dung) {
+            $db = DATABASE::connect();
+            try {
+                $sql = "DELETE FROM giohang WHERE id_nguoi_dung = :id_nguoi_dung";
+                $cmd = $db->prepare($sql);
+                $cmd->bindValue(':id_nguoi_dung', $id_nguoi_dung);
+                $cmd->execute();
+                $rowCount = $cmd->rowCount();
+                return $rowCount;
+            }
+            catch(PDOException $e) {
+                $error_message = $e->getMessage();
+                echo "<p>Lỗi truy vấn ở xoaSachGioHang: $error_message</p>";
+                exit();
+            }
+            finally {
+                DATABASE::close();
+            }
+        }
+
         //Lấy số lượng tất cả sản phẩm trong giỏ hàng
         public function laySoLuongGioHang($id_nguoi_dung) {
             $db = DATABASE::connect();
