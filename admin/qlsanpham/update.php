@@ -1,19 +1,10 @@
 <?php
     require("../view/top.php");
 ?> 
-<div>
-<!-- <table>
-	<tr>
-		<td><h3>Quản lý điện thoại</h3></td>
-	</tr>
-	<tr>
-		<td><a href="index.php?action=them" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span> Thêm mặt hàng</a></td>
-	</tr>
-</table> -->
-<br>
-</div>
 
 <?php 
+  $mangLoai = $l->layLoaiSP();
+  $mangThuongHieu = $th->layThuongHieu();
   $arr = $sp->laySanPhamTheoID($id);
 ?>
 
@@ -54,10 +45,9 @@
       <label>Loại sản phẩm</label>
       <select class="form-control" name="selectLoaiSanPham">
         <?php
-          $mangLoai = $l->layLoaiSP();
           foreach($mangLoai as $arr_i):
         ?>
-          <option <?php if($arr_i['id'] == $arr['id_loai_san_pham']) echo 'selected' ?> value="<?php echo $arr_i["id"]; ?>"><?php echo $arr_i["ten_loai_san_pham"]; ?></option>
+          <option <?php if($arr_i['id'] == $arr['id_loai_san_pham']) echo 'selected'; ?> value="<?php echo $arr_i["id"]; ?>"><?php echo $arr_i["ten_loai_san_pham"]; ?></option>
         <?php
           endforeach;
         ?>
@@ -68,10 +58,9 @@
       <label>Thương hiệU</label>
       <select class="form-control" name="selectThuongHieu">
         <?php
-          $mangThuongHieu = $th->layThuongHieu();
           foreach($mangThuongHieu as $arr_i):
         ?>
-          <option <?php if($arr_i['id'] == $arr['id_thuong_hieu']) echo 'selected' ?> value="<?php echo $arr["id"]; ?>"><?php echo $arr_i["TenThuongHieu"]; ?></option>
+          <option <?php if($arr_i['id'] == $arr['id_thuong_hieu']) echo 'selected'; ?> value="<?php echo $arr_i["id"]; ?>"><?php echo $arr_i["TenThuongHieu"]; ?></option>
         <?php
           endforeach;
         ?>

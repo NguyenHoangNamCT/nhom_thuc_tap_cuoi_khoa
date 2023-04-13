@@ -98,7 +98,7 @@ class SANPHAM{
 
             if($hinhAnh != NULL)
                 $sql = "UPDATE `sanpham` 
-                SET `id_loai_san_pham`=$idLoai,`id_thuong_hieu`=$idThuongHieu,`ten_san_pham`=:tenSP,`mo_ta`=:moTa,`gia_tien`=$giaTien,`giam_gia`=$giamGia,`so_luong`=$soLuong,`hinh_anh`=$hinhAnh WHERE id = $id";
+                SET `id_loai_san_pham`=$idLoai,`id_thuong_hieu`=$idThuongHieu,`ten_san_pham`=:tenSP,`mo_ta`=:moTa,`gia_tien`=$giaTien,`giam_gia`=$giamGia,`so_luong`=$soLuong,`hinh_anh`=:hinhAnh WHERE id = $id";
             else
                 $sql = "UPDATE `sanpham` 
                 SET `id_loai_san_pham`=$idLoai,`id_thuong_hieu`=$idThuongHieu,`ten_san_pham`=:tenSP,`mo_ta`=:moTa,`gia_tien`=$giaTien,`giam_gia`=$giamGia,`so_luong`=$soLuong WHERE id = $id";

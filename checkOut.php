@@ -2,7 +2,7 @@
 <br>
 <div class="container-fluid row">
 <h1 align="center">Trang thanh toán</h1>
-<div class="container col-sm-5" style="margin: 20px;">
+<!-- <div class="container col-sm-5" style="margin: 20px;">
   <h2>Form điền thông tin</h2>
   <form method="post">
     <div class="form-group">
@@ -26,17 +26,18 @@
   </form>
   <br>
 
-</div>
+</div> -->
 
 
 
-<div class="container col-sm-5">
+<div class="container col-sm-8">
   <h2>Sản phẩm</h2>
   <p>Các sản phẩm bạn đã chọn mua</p>
   <table class="table">
     <thead>
       <tr class="success">
-        <th>Sản phẩm</th>
+        <th>Tên sản phẩm</th>
+        <th>Hình ảnh</th>
         <th>Đơn giá</th>
         <th>Số lượng</th>
         <th>Thành tiền</th>
@@ -44,16 +45,18 @@
     </thead>
     <tbody>
       <?php 
-        $mangMHTrongGio = laygiohang();
+        $mangMHTrongGio = $gh->layGioHang($_SESSION['nguoiDung']['id']);
         $tongTien = 0;
-        foreach($mangMHTrongGio as $mh){
-            $tongTien += $mh['thanhtien'];
+        foreach($mangMHTrongGio as $arr){
+            $thanhTien = $arr['gia_tien'] * $arr['so_luong'];
+            $tongTien += $thanhTien;
       ?>
         <tr>
-            <td><?php echo $mh['tendt']; ?></td>
-            <td><?php echo number_format($mh['gia']); ?></td>
-            <td><?php echo number_format($mh['soluong']);?></td>
-            <td><?php echo number_format($mh['thanhtien']);?></td>
+            <td><?php echo $arr['ten_san_pham']; ?></td>
+            <td><img width="75" src="images/<?php echo $arr['hinh_anh']; ?>" alt=""></td>
+            <td><?php echo number_format($arr['gia_tien']).'đ'; ?></td>
+            <td><?php echo number_format($arr['so_luong']);?></td>
+            <td><?php echo number_format($thanhTien);?></td>
         </tr>
       <?php 
         }

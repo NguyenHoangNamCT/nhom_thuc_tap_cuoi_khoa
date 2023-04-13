@@ -92,9 +92,9 @@ switch($action){
         }
         include('cart.php');
         break;
-    // case "thanhToan":
-    //     include("checkOut.php");
-    //     break;
+    case "thanhToan":
+        include("checkOut.php");
+        break;
     // case "xuLyThanhToan";
     //     $email = $_POST['inputEmail'];
     //     $hoTen = $_POST['inputHoTen'];

@@ -60,7 +60,7 @@ switch($action){
 		$moTa = $_POST['txtMoTa'];
 		$hinh = $_FILES['filehinhanh']['name'];
 
-		if($hinh == '')
+		if($hinh != '')
 			$sp->suaSanPham($id, $loaiSP, $thuongHieu, $tenSP, $moTa, $giaTien, $giamGia, $soLuong, $hinh);
 		else
 			$sp->suaSanPham($id, $loaiSP, $thuongHieu, $tenSP, $moTa, $giaTien, $giamGia, $soLuong);
