@@ -44,6 +44,7 @@
         public function themSanPhamVaoGioHang($id_nguoi_dung, $id_san_pham, $so_luong) {
             $db = DATABASE::connect();
             try {
+                //nếu sản phẩm đã có trong giỏ hàng rồi thì tiến hành cập nhật số lượng cho sản phẩm
                 $sql = "INSERT INTO giohang(id_nguoi_dung, id_san_pham, so_luong) VALUES (:id_nguoi_dung, :id_san_pham, :so_luong) ON DUPLICATE KEY UPDATE so_luong = so_luong + :so_luong";
                 $cmd = $db->prepare($sql);
                 $cmd->bindValue(':id_nguoi_dung', $id_nguoi_dung);
@@ -65,6 +66,11 @@
 
         //cập nhật số lượng cho một sản phẩm
         public function capNhatSoLuongSanPhamTrongGioHang($id_nguoi_dung, $id_san_pham, $so_luong) {
+            //nếu số lượng nhỏ hơn 1 thì xoá sản phẩm khỏi giỏ hàng luôn k cần cập nhật số lượng
+            if($so_luong < 1){
+                $this->xoaGioHang($id_nguoi_dung, $id_san_pham);
+                return;
+            }
             $db = DATABASE::connect();
             try {
                 $sql = "UPDATE giohang SET so_luong = :so_luong WHERE id_nguoi_dung = :id_nguoi_dung AND id_san_pham = :id_san_pham";

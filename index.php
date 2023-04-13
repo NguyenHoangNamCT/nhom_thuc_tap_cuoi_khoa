@@ -70,13 +70,9 @@ switch($action){
     case "choVaoGio":
         $id = $_REQUEST['id'];
         $soLuong = $_REQUEST['soLuong'];
+        if($soLuong == '')
+            $soLuong = 1;
         $gh->themSanPhamVaoGioHang($_SESSION['nguoiDung']['id'], $id, $soLuong);
-        
-        // if(kiemtramathang($id)){
-        //     tangsoluong($id, $soLuong);
-        // }
-        // else
-        //     themhangvaogio($id, $soLuong);
         include('cart.php');
         break;
     // case "xoaSPTrongGio":
@@ -84,10 +80,20 @@ switch($action){
     //     xoamotmathang($maDT);
     //     include('cart.php');
     //     break;
-    // case 'capNhatGioHang':
-    //     include('cart.php');
-    //     break;
-
+    case 'capNhatSoLuong':
+        $mangGioHang = $gh->layGioHang($_SESSION['nguoiDung']['id']);
+        
+        //Nhận dữ liệu từ form, bên form gửi txtSoLuong+id_san_pham
+        // var_dump($mangGioHang);
+        $end = count($mangGioHang) - 1;
+        foreach($mangGioHang as $key => $arr){
+            $gh->capNhatSoLuongSanPhamTrongGioHang($_SESSION['nguoiDung']['id'], $arr['id_san_pham'], $_POST['txtSoLuong'.$arr['id_san_pham']]);
+            if($key == $end)
+                $capNhatThanhCong = true;
+        }
+        
+        include('cart.php');
+        break;
     // case "thanhToan":
     //     include("checkOut.php");
     //     break;

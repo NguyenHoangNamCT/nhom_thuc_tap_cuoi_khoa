@@ -4,7 +4,15 @@
 <div class="container">  
   <div class="row"> 
     <div class="container mt-3">
-      
+      <?php 
+        //nếu cập nhật số lương thành công thì thông báo
+        if(isset($capNhatThanhCong))
+          echo '
+          <div class="alert alert-success">
+            Cập nhật giỏ hàng <strong>Thành công.</strong>
+          </div>
+          ';
+      ?>
       <table class="table table-borderless" align="center">
         <h2>Giỏ Hàng</h2>
         <?php 
@@ -31,14 +39,19 @@
               foreach($mangGioHang as $arr)
               {
             ?>
-                <tr>
-                  <td><?php echo $arr["ten_san_pham"]; ?></td>
-                  <td><img class="img-thumbnail" width="75" src="images/<?php echo $arr["hinh_anh"]; ?>"></td>
-                  <td><input min="1" type="number" class="form-control"  placeholder="" name="txtSoLuong" value="<?php echo $arr["so_luong"]; ?>"></td>
-                  <td><?php echo number_format($arr["gia_tien"]).'đ'; ?></td>
-                  <td><?php echo $arr["gia_tien"]*$arr["so_luong"]; ?></td>
-                  <td><a class="btn btn-danger" href="?action=xoaSPTrongGio&idSanPham=<?php echo $arr["id_san_pham"]; ?>"><span class="glyphicon glyphicon-trash"></span>Xoá</a></td>
-                </tr>
+                <form method="post">
+                  <!-- Gửi dữ liệu ẩn -->
+                  <input type="hidden" name="action" value="capNhatSoLuong">
+                  <!-- END -->
+                  <tr>
+                    <td><?php echo $arr["ten_san_pham"]; ?></td>
+                    <td><img class="img-thumbnail" width="75" src="images/<?php echo $arr["hinh_anh"]; ?>"></td>
+                    <!-- Gửi số lượng của từng sản phẩm giỏ hàng theo cách txtSoLuong+id_san_pham -->
+                    <td><input type="number" class="form-control"  placeholder="" name="<?php echo "txtSoLuong".$arr['id_san_pham']; ?>" value="<?php echo $arr["so_luong"]; ?>"></td>
+                    <td><?php echo number_format($arr["gia_tien"]).'đ'; ?></td>
+                    <td><?php echo $arr["gia_tien"]*$arr["so_luong"]; ?></td>
+                    <td><a class="btn btn-danger" href="?action=xoaSPTrongGio&idSanPham=<?php echo $arr["id_san_pham"]; ?>"><span class="glyphicon glyphicon-trash"></span>Xoá</a></td>
+                  </tr>
             <?php
               } // end for
             ?>
@@ -54,8 +67,9 @@
           }
         ?>
       </table>
-    <td><a class="btn btn-success" href="?action=capNhatSoLuong"><span class=""></span>Cập nhật số lượng</a></td>  
+    <td><button type="submit" class="btn btn-success">Cập nhật số lượng</button></td>
     <td><a class="btn btn-warning" href="?action=thanhToan"><span class=""></span>Thanh toán</a></td>
+                </form>
     </div>
 
   </div>

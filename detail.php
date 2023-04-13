@@ -14,10 +14,12 @@
     
     <div class="col-sm-6">
       <form class="form-inline" method="post">
+        <!-- Gửi dữ liệu ẩn -->
         <input type="hidden" name="action" value="choVaoGio">
         <input type="hidden" name="id" value="<?php echo $thongTinSanPham["id"]; ?>">
+        <!-- END -->
         <label for="">Số lượng</label>
-        <input style="margin-bottom: 0.1rem;" type="number" class="form-control" name="soLuong">
+        <input style="margin-bottom: 0.1rem;" type="number" class="form-control" name="soLuong" value="1">
         <input type="submit" class="btn btn-warning" value="Cho vào giỏ">
       </form>
     </div>
