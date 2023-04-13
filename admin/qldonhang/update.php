@@ -18,7 +18,7 @@
   <!-- End -->
   <div class="mb-3 mt-3">
     <label for="selectTenNguoiDung">Tên người dùng:</label>
-    <select class="form-control" name="selectTenNguoiDung" id="selectTenNguoiDung">
+    <select class="form-control" name="selectTenNguoiDung" id="selectTenNguoiDung" disabled>
       <?php
         $mangNguoiDung = $nd->layTatCaNguoiDung();
         foreach($mangNguoiDung as $arr_i){
