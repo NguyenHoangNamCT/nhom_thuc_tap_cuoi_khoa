@@ -75,23 +75,21 @@ switch($action){
         $gh->themSanPhamVaoGioHang($_SESSION['nguoiDung']['id'], $id, $soLuong);
         include('cart.php');
         break;
-    // case "xoaSPTrongGio":
-    //     $maDT = $_REQUEST['id'];
-    //     xoamotmathang($maDT);
-    //     include('cart.php');
-    //     break;
+    case "xoaSPTrongGio":
+        $idSP = $_REQUEST['idSanPham'];
+        $gh->xoaGioHang($_SESSION['nguoiDung']['id'], $idSP);
+        include('cart.php');
+        break;
     case 'capNhatSoLuong':
         $mangGioHang = $gh->layGioHang($_SESSION['nguoiDung']['id']);
-        
-        //Nhận dữ liệu từ form, bên form gửi txtSoLuong+id_san_pham
         // var_dump($mangGioHang);
+        //Nhận dữ liệu từ form, bên form gửi txtSoLuong+id_san_pham
         $end = count($mangGioHang) - 1;
         foreach($mangGioHang as $key => $arr){
             $gh->capNhatSoLuongSanPhamTrongGioHang($_SESSION['nguoiDung']['id'], $arr['id_san_pham'], $_POST['txtSoLuong'.$arr['id_san_pham']]);
             if($key == $end)
                 $capNhatThanhCong = true;
         }
-        
         include('cart.php');
         break;
     // case "thanhToan":
