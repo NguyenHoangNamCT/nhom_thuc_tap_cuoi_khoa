@@ -11,7 +11,7 @@
         public function layGioHang($id_nguoi_dung) {
             $db = DATABASE::connect();
             try {
-                $sql = "SELECT giohang.id_nguoi_dung, giohang.id_san_pham, giohang.so_luong, sanpham.ten_san_pham, sanpham.gia_tien, sanpham.hinh_anh
+                $sql = "SELECT giohang.id_nguoi_dung, giohang.id_san_pham, giohang.so_luong, sanpham.ten_san_pham, sanpham.gia_tien, sanpham.hinh_anh, sanpham.giam_gia
                         FROM giohang
                         JOIN sanpham ON giohang.id_san_pham = sanpham.id
                         WHERE giohang.id_nguoi_dung = :id_nguoi_dung";

@@ -5,6 +5,9 @@ require('model/loaisanpham.php');
 require('model/thuonghieu.php');
 require('model/nguoidung.php');
 require('model/giohang.php');
+require('model/donhang.php');
+require('model/chitietdonhang.php');
+require('model/thongtindonhang.php');
 //------------------------------
 
 if(isset($_REQUEST["action"])){
@@ -20,11 +23,13 @@ $lsp = new LOAISP();
 $th = new THUONGHIEU();
 $nd = new NGUOIDUNG();
 $gh = new GIOHANG();
+$dh = new DONHANG();
+$ctdh = new CHITIETDONHANG();
+$ttdh = new THONGTINDONHANG();
+
 $mangLoaiSP = $lsp->layLoaiSP();
 $mangThuongHieu = $th->layThuongHieu();
 
-// $nd = new NGUOIDUNG();
-// $tk = false;
 switch($action){
     case "macdinh": 
         $tk = false;
@@ -92,8 +97,44 @@ switch($action){
         }
         include('cart.php');
         break;
-    case "thanhToan":
+    case "datMua":
         include("checkOut.php");
+        break;
+    case "taoDonHang":
+        var_dump("Hello");
+        var_dump("Hello");
+        var_dump("Hello");
+        var_dump("Hello");
+        var_dump("Hello");
+        var_dump("Hello");
+        //Thay đổi thông tin người dùng nếu có
+        $email = $_POST['inputEmail'];
+        $sdt = $_POST['inputSDT'];
+        $diaChi = $_POST['inputDiaChi'];
+        $nd->capNhatDiaChiDienThoaiEmailNguoiDung($_SESSION['nguoiDung']['id'], $diaChi, $sdt, $email);
+
+        //tính tổng tiền cho đơn hàng
+        $tongTien = 0;
+        $mangGioHang = $gh->layGioHang($_SESSION['nguoiDung']['id']);
+        foreach($mangGioHang as $arr)
+            $tongTien += $arr['so_luong'] * ($arr['gia_tien'] * (1 - $arr['giam_gia']));
+
+
+        //Tạo đơn hàng
+        $idDH = $dh->themDonHang($_SESSION['nguoiDung']['id'], $diaChi, $sdt, $_SESSION['nguoiDung']['ho_ten'], $tongTien, 0);
+
+        //Thêm các chi tiết đơn hàng
+        foreach($mangGioHang as $arr)
+            $ctdh->themChiTietDonHang($idDH, $arr['id_san_pham'], $arr['so_luong'], ($arr['gia_tien']*(1-$arr['giam_gia'])));
+
+        //Thêm thông tin đơn hàng
+        $phiVanChuyen = 25000;
+        $ttdh->themThongTinDonHang($_SESSION['nguoiDung']['ho_ten'], $diaChi, $sdt, "0001-01-01 00:00:00", $phiVanChuyen, "kHÔNG CÓ GHI CHÚ");
+
+        //Xoá hết thông tin giỏ hàng
+        $gh->xoaSachGioHang($_SESSION['nguoiDung']['id']);
+        
+        include("thanks.php");
         break;
     // case "xuLyThanhToan";
     //     $email = $_POST['inputEmail'];

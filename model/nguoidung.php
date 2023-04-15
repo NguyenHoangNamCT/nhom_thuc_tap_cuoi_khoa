@@ -143,6 +143,27 @@ class NGUOIDUNG{
 		}
 	}
 
+	// Cập nhật thông tin người bao gồm (Địa chỉ, Email, Số điện thoại)
+	public function capNhatDiaChiDienThoaiEmailNguoiDung($id, $diaChi, $dienThoai, $email) {
+		$db = DATABASE::connect();
+		try {
+			$sql = "UPDATE nguoidung SET dia_chi=:diaChi, dien_thoai=:dienThoai, email=:email WHERE id=:id";
+			$cmd = $db->prepare($sql);
+			$cmd->bindValue(":id", $id);
+			$cmd->bindValue(":diaChi", $diaChi);
+			$cmd->bindValue(":dienThoai", $dienThoai);
+			$cmd->bindValue(":email", $email);
+			//$cmd->bindValue(":trangThai", $trangThai);
+			$cmd->execute();
+			$cmd->closeCursor();
+			return true;
+		} catch(PDOException $e) {
+			$error_message = $e->getMessage();
+			echo "<p>Lỗi truy vấn ở suaNguoiDung: $error_message</p>";
+			exit();
+		}
+	}
+
 	// sửa người dùng và sửa cả tên đăng nhập
 	public function suaNguoiDung($id, $tenDangNhap, $matKhau, $hoTen, $diaChi, $dienThoai, $email, $loaiNguoiDung, $trangThai, $hinhAnh = NULL) {
 		$db = DATABASE::connect();

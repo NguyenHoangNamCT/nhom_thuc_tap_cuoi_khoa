@@ -8,12 +8,6 @@
      <br>
      <br>
     <?php
-    /*
-    if($tk == false)
-      $mangDT = $dt->layDanhSachDienThoai();
-    else
-      $mangDT = $dt->layDienThoaiTheoTen($tenDT);
-    */
     $mangSP = $sp->layDanhSachSanPham();
     $mangLoaiSP = $lsp->layLoaiSP();
 
@@ -30,8 +24,6 @@
         foreach($mangSP as $arr_j)
           if($arr_j['ten_loai_san_pham'] == $arr_i['ten_loai_san_pham'])
           {
-    
-    //foreach($mangSP as $arr){
     ?>
      <div class="col-sm-3 container" style="margin-bottom: 1.5rem;">
       <div class="card" style="width:300px">

@@ -1,22 +1,24 @@
 <?php 
 class DONHANG{
-    public function themDonHang($id_nguoi_dung, $ngay_dat, $dia_chi_giao_hang, $dien_thoai_nguoi_nhan, $ho_ten_nguoi_nhan, $tong_tien, $tinh_trang_don_hang){
+    public function themDonHang($id_nguoi_dung, $dia_chi_giao_hang, $dien_thoai_nguoi_nhan, $tong_tien, $tinh_trang_don_hang){
         //chuyển $ngay_dat_mysql sang dạng date time
-        $ngay_dat_mysql = date('Y-m-d H:i:s', strtotime($ngay_dat));
+        //$ngay_dat_mysql = date('Y-m-d H:i:s', strtotime($ngay_dat));
+        
+        //làm tròn xuống cho tổng tiền vd 3.1 còn 3.0
+        $tong_tien = floor($tong_tien);
         $db = DATABASE::connect();
         try{
-            $sql = "INSERT INTO donhang (id_nguoi_dung, ngay_dat, dia_chi_giao_hang, dien_thoai_nguoi_nhan, ho_ten_nguoi_nhan, tong_tien, tinh_trang_don_hang) VALUES (:id_nguoi_dung, :ngay_dat, :dia_chi_giao_hang, :dien_thoai_nguoi_nhan, :ho_ten_nguoi_nhan, :tong_tien, :tinh_trang_don_hang)";
+            $sql = "INSERT INTO donhang (id_nguoi_dung, ngay_dat, dia_chi_giao_hang, dien_thoai_nguoi_nhan, tong_tien, tinh_trang_don_hang) VALUES (:id_nguoi_dung, NOW(), :dia_chi_giao_hang, :dien_thoai_nguoi_nhan, :tong_tien, :tinh_trang_don_hang)";
             $cmd = $db->prepare($sql);
             $cmd->bindValue(':id_nguoi_dung', $id_nguoi_dung);
-            $cmd->bindValue(':ngay_dat', $ngay_dat_mysql);
             $cmd->bindValue(':dia_chi_giao_hang', $dia_chi_giao_hang);
             $cmd->bindValue(':dien_thoai_nguoi_nhan', $dien_thoai_nguoi_nhan);
-            $cmd->bindValue(':ho_ten_nguoi_nhan', $ho_ten_nguoi_nhan);
+            // $cmd->bindValue(':ho_ten_nguoi_nhan', $ho_ten_nguoi_nhan);
             $cmd->bindValue(':tong_tien', $tong_tien);
             $cmd->bindValue(':tinh_trang_don_hang', $tinh_trang_don_hang);
             $cmd->execute();
-            $rowCount = $cmd->rowCount();
-            return $rowCount;
+            $lastInsertId = $db->lastInsertId();
+            return $lastInsertId;
         }
         catch(PDOException $e){
             $error_message = $e->getMessage();
@@ -53,7 +55,7 @@ class DONHANG{
         $ngay_dat_mysql = date('Y-m-d H:i:s', strtotime($ngay_dat));
         $db = DATABASE::connect();
         try{
-            $sql = "UPDATE donhang SET ngay_dat = :ngay_dat, dia_chi_giao_hang = :dia_chi_giao_hang, dien_thoai_nguoi_nhan = :dien_thoai_nguoi_nhan, ho_ten_nguoi_nhan = :ho_ten_nguoi_nhan, tong_tien = :tong_tien, tinh_trang_don_hang = :tinh_trang_don_hang WHERE id = :id_don_hang";
+            $sql = "UPDATE donhang SET ngay_dat = NOW(), dia_chi_giao_hang = :dia_chi_giao_hang, dien_thoai_nguoi_nhan = :dien_thoai_nguoi_nhan, ho_ten_nguoi_nhan = :ho_ten_nguoi_nhan, tong_tien = :tong_tien, tinh_trang_don_hang = :tinh_trang_don_hang WHERE id = :id_don_hang";
             $cmd = $db->prepare($sql);
             $cmd->bindValue(':ngay_dat', $ngay_dat_mysql);
             $cmd->bindValue(':dia_chi_giao_hang', $dia_chi_giao_hang);

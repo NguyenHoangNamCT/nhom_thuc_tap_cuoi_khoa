@@ -97,5 +97,25 @@ class CHITIETDONHANG{
             return null;
         }
     }
+
+    public function layDanhSachChiTietDonHangTheoIDDonHang($id_don_hang){
+        $db = DATABASE::connect();
+        try{
+            $sql = "SELECT * FROM chitietdonhang WHERE id_don_hang = :id_don_hang";
+            $cmd = $db->prepare($sql);
+            $cmd->bindValue(':id_don_hang', $id_don_hang);
+            $cmd->execute();
+            $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+        catch(PDOException $e){
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở layDanhSachChiTietDonHang: $error_message</p>";
+            exit();
+        }
+        finally {
+            DATABASE::close();
+        }
+    }
 }
 ?>
