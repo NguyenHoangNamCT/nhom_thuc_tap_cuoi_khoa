@@ -12,7 +12,6 @@
           <th>Ngày Đặt</th>
           <th>Địa Chỉ Giao Hàng</th>
           <th>Điện Thoại Người Nhận</th>
-          <th>Họ Tên Người Nhận</th>
           <th>Tổng Tiền</th>
           <th>Tình Trang Đơn Hàng</th>
           <th>Sửa</th>
@@ -30,9 +29,12 @@
           <td><?php echo $arr["ngay_dat"]; ?></td>
           <td><?php echo $arr["dia_chi_giao_hang"]; ?></td>
           <td><?php echo $arr["dien_thoai_nguoi_nhan"]; ?></td>
-          <td><?php echo $arr["ho_ten_nguoi_nhan"]; ?></td>
           <td><?php echo number_format($arr["tong_tien"]).'đ'; ?></td>
-          <td><?php if($arr["tinh_trang_don_hang"] == 1 ) echo "Chưa Giao"; else echo "Đã Giao"; ?></td>
+          <td><?php if($arr["tinh_trang_don_hang"] == 0 ) echo "Chưa thanh toán"; 
+                    else if($arr["tinh_trang_don_hang"] == 1 )echo "Đã thanh toán Online"; 
+                    else if($arr["tinh_trang_don_hang"] == 2 )echo "chờ ngươi vận chuyển"; 
+                    else if($arr["tinh_trang_don_hang"] == 3 )echo "đang giao"; 
+                    else echo " đã giao"?></td>       
           <td><a class="btn btn-warning" href="index.php?action=sua&id=<?php echo $arr["id"]; ?>"><span class="glyphicon glyphicon-edit"></span> Sửa</a></td>
           <td><a class="btn btn-danger" href="index.php?action=xoa&id=<?php echo $arr["id"]; ?>"><span class="glyphicon glyphicon-trash"></span> Xoá</a></td>
           <td><a class="btn btn-danger" href="index.php?action=ThemTTDH&id=<?php echo $arr["id"]; ?>"><span class="glyphicon glyphicon-trash"></span> Thêm Thông Tin Đơn Hàng</a></td>

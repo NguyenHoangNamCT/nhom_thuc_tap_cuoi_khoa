@@ -90,7 +90,7 @@ class HOADON{
     public function layDanhSachHoaDon() {
         $db = DATABASE::connect();
         try {
-            $sql = "SELECT hoadon.*, donhang.id_nguoi_dung, donhang.ngay_dat, donhang.dia_chi_giao_hang, donhang.dien_thoai_nguoi_nhan, donhang.ho_ten_nguoi_nhan, donhang.tong_tien as tong_tien_don_hang, donhang.tinh_trang_don_hang
+            $sql = "SELECT hoadon.*, donhang.id_nguoi_dung, donhang.ngay_dat, donhang.dia_chi_giao_hang, donhang.dien_thoai_nguoi_nhan, donhang.tong_tien as tong_tien_don_hang, donhang.tinh_trang_don_hang
             FROM hoadon
             INNER JOIN donhang ON hoadon.id_don_hang = donhang.id";
             $stmt = $db->prepare($sql);

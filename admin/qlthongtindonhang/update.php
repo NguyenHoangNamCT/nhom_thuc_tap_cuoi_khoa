@@ -2,14 +2,7 @@
     require("../view/top.php");
 ?> 
 <div>
-<!-- <table>
-	<tr>
-		<td><h3>Quản lý điện thoại</h3></td>
-	</tr>
-	<tr>
-		<td><a href="index.php?action=them" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span> Thêm mặt hàng</a></td>
-	</tr>
-</table> -->
+  
 <br>
 </div>
 
@@ -64,11 +57,6 @@
       <span class="glyphicon glyphicon-th"></span>
     </div>
   </div>  
-
-    <div class="mb-3 mt-3">
-      <label for="">Tiền Ship:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtTienShip" value="<?php echo $arr['tien_ship'] ?>">
-    </div>
 
     <div class="mb-3 mt-3">
       <label for="">Phí Vận Chuyển</label>

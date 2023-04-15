@@ -101,12 +101,6 @@ switch($action){
         include("checkOut.php");
         break;
     case "taoDonHang":
-        var_dump("Hello");
-        var_dump("Hello");
-        var_dump("Hello");
-        var_dump("Hello");
-        var_dump("Hello");
-        var_dump("Hello");
         //Thay đổi thông tin người dùng nếu có
         $email = $_POST['inputEmail'];
         $sdt = $_POST['inputSDT'];

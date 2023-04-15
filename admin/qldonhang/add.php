@@ -40,10 +40,6 @@
     <input type="text" class="form-control"  placeholder="" name="txtDienThoai" id="txtDienThoai">
   </div>
 
-  <div class="mb-3 mt-3">
-    <label for="txtHoTenNN">Họ Tên Người Nhận:</label>
-    <input type="text" class="form-control"  placeholder="" name="txtHoTenNN" id="txtHoTenNN">
-  </div>
 
   <div class="mb-3 mt-3">
     <label for="txtTongTien">Tổng Tiền:</label>

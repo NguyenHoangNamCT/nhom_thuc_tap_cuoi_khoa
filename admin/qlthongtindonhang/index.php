@@ -32,10 +32,9 @@ switch($action){
 		$dia_chi_nguoi_nhan = $_POST['txtDiaChiNN'];
 		$so_dien_thoai_nguoi_nhan = $_POST['txtSoDienThoaiNN'];
 		$ngay_giao_hang = $_POST['dateNgayGiaoHang'];
-		$tien_ship = $_POST['txtTienShip'];
 		$phi_van_chuyen = $_POST['txtPhiVanChuyen'];
 		$ghi_chu = $_POST['txtGhiChu'];
-		$ttdh->themThongTinDonHang($ten_khach_hang, $dia_chi_nguoi_nhan, $so_dien_thoai_nguoi_nhan, $ngay_giao_hang, $tien_ship, $phi_van_chuyen, $ghi_chu);
+		$ttdh->themThongTinDonHang($ten_khach_hang, $dia_chi_nguoi_nhan, $so_dien_thoai_nguoi_nhan, $ngay_giao_hang, $phi_van_chuyen, $ghi_chu);
 		include("main.php");
 		break;
 	case "xoa":
@@ -57,10 +56,9 @@ switch($action){
 			$dia_chi_nguoi_nhan = $_POST['txtDiaChiNN'];
 			$so_dien_thoai_nguoi_nhan = $_POST['txtSoDienThoaiNN'];
 			$ngay_giao_hang = $_POST['dateNgayGiaoHang'];
-			$tien_ship = $_POST['txtTienShip'];
 			$phi_van_chuyen = $_POST['txtPhiVanChuyen'];
 			$ghi_chu = $_POST['txtGhiChu'];
-			$suaThongTinDonHang = $ttdh-> suaThongTinDonHang($id, $ten_khach_hang, $dia_chi_nguoi_nhan, $so_dien_thoai_nguoi_nhan, $ngay_giao_hang, $tien_ship, $phi_van_chuyen, $ghi_chu);
+			$suaThongTinDonHang = $ttdh-> suaThongTinDonHang($id, $ten_khach_hang, $dia_chi_nguoi_nhan, $so_dien_thoai_nguoi_nhan, $ngay_giao_hang, $phi_van_chuyen, $ghi_chu);
 			include("main.php");
 			break;
 	//----------------------------------------------------
