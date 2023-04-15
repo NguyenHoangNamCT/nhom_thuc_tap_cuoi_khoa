@@ -110,7 +110,7 @@ class CHITIETDONHANG{
         }
         catch(PDOException $e){
             $error_message = $e->getMessage();
-            echo "<p>Lỗi truy vấn ở layDanhSachChiTietDonHang: $error_message</p>";
+            echo "<p>Lỗi truy vấn ở layDanhSachChiTietDonHangTheoIDDonHang: $error_message</p>";
             exit();
         }
         finally {
