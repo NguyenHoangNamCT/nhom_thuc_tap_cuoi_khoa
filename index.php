@@ -169,6 +169,23 @@ switch($action){
         $_SESSION['nguoiDung'] = $nd->layNguoiDungTheoTenDangNhap($_SESSION['nguoiDung']['ten_dang_nhap']);
         include('main.php');
         break;
+
+        case 'them':
+            include('add.php');
+            break;
+        case 'xuLyThem':
+            $ten_dang_nhap = $_POST["ten_dang_nhap"];
+            $mat_khau = $_POST["mat_khau"];
+            $ho_ten = $_POST["ho_ten"];
+            $dia_chi = $_POST["dia_chi"];
+            $dien_thoai = $_POST["dien_thoai"];
+            $email = $_POST["email"];
+            $loai_nguoi_dung = $_POST["loai_nguoi_dung"];
+            $hinh_anh = $_FILES["hinh_anh"]["name"];
+            $trang_thai = $_POST["trang_thai"];
+            $nd->themNguoiDung($ten_dang_nhap, $mat_khau, $ho_ten, $dia_chi, $dien_thoai, $email, $loai_nguoi_dung, $hinh_anh);
+            include('main.php');
+            break;
     // case 'timKiem':
     //     $tk = true;
     //     $tenDT = $_REQUEST['txtTuKhoa'];
