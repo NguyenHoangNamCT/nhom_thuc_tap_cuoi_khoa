@@ -98,7 +98,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form method="post" enctype="multipart/form-data" action="admin/qlnguoidung/">
+        <form method="post" enctype="multipart/form-data" action="">
           <!-- Gửi dữ liệu ẩn -->
           <input type="hidden" name="id" value="<?php echo $_SESSION["nguoiDung"]["id"]; ?>" >
           <input type="hidden" name="action" value="updateUser">
@@ -134,27 +134,19 @@
             <label for="txtLoaiNguoiDung" class="form-label">Ngày Đăng Ký</label>
             <input class="form-control"  type="text" name="txtLoaiNguoiDung" placeholder="Loại người dùng" value="<?php echo $_SESSION["nguoiDung"]["loai_nguoi_dung"]; ?>" required disabled>
           </div>
-
           <div class="mb-3">
             <label for="txtTrangThai" class="form-label">Trạng Thái</label>
             <input class="form-control"  type="text" name="txtTrangThai" placeholder="Trạng Thái" value="<?php echo $_SESSION["nguoiDung"]["trang_thai"]; ?>" required disabled>
           </div>
-
-          <!-- <div class="row">
-          <div class="col-md-6">
-            <form action="post" enctype="multipart/form-data"> -->
-              <div class="mb-3">
-                <label for="fhinh" class="form-label">Đổi hình đại diện</label>
-                <input type="file" class="form-control" id="fhinh" name="fhinh">
-              </div>
-              <div class="mb-3">
-                <button type="submit" class="btn btn-primary">Lưu</button>
-                <button type="reset" class="btn btn-warning">Hủy Thay Đổi</button>
-              </div>
-            </form>
-          <!-- </div>
-        </div> -->
-
+          <div class="mb-3">
+            <label for="fhinh" class="form-label">Đổi hình đại diện</label>
+            <input type="file" class="form-control" id="fhinh" name="fhinh">
+          </div>
+          <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Lưu</button>
+            <button type="reset" class="btn btn-warning">Hủy Thay Đổi</button>
+          </div>
+        </form>
 
     </div>
   </div>

@@ -132,26 +132,22 @@ switch($action){
         
         include("thanks.php");
         break;
-    // case "xuLyThanhToan";
-    //     $email = $_POST['inputEmail'];
-    //     $hoTen = $_POST['inputHoTen'];
-    //     $sdt = $_POST['inputSDT'];
-    //     $diaChi = $_POST['inputDiaChi'];
-    //     $kh = new NGUOIDUNG();
-    //     $donHang = new DONHANG();
-    //     $chiTietHoaDon = new CHITIETHOADON();
-    //     //thêm người dùng mới và lưu id của người dùng đó vào biến idKHMoi
-    //     $idKHMoi = $kh->themKhachHang($email, $hoTen, $sdt);
-    //     //thêm đơn hàng mới
-    //     $tongTien = tinhtiengiohang();
-    //     $hoaDonId = $donHang->themDonHang($idKHMoi, $tongTien, '');
-    //     //thêm các chi tiết vào đơn hàng
-    //     $gioHang = laygiohang();
-    //     foreach($gioHang as $maMH => $thongTinMH)
-    //         $chiTietHoaDon->themChiTietHoaDon($hoaDonId, $maMH, $thongTinMH['gia'], $thongTinMH['soluong']);
-    //     xoagiohang();
-    //     include("thanks.php");
-    //     break;
+    case 'updateUser':
+        $id = $_POST["id"];
+        $ho_ten = $_POST["txthoten"];
+        $dia_chi = $_POST["txtDC"];
+        $dien_thoai = $_POST["txtdienthoai"];
+        $email = $_POST["txtemail"];
+        $hinh_anh = $_FILES["fhinh"]["name"];
+        
+        if($hinh_anh != '')
+            $nd->capNhatNguoiDung($id, $ho_ten, $dia_chi, $dien_thoai, $email, $hinh_anh);
+        else
+            $nd->capNhatNguoiDung($id, $ho_ten, $dia_chi, $dien_thoai, $email);
+        $_SESSION['nguoiDung'] = $nd->layThongTinNguoiDungTheoID($id);
+        // $message = "Cập nhật thành công !!!";
+        include('main.php');
+        break;
     // case 'timKiem':
     //     $tk = true;
     //     $tenDT = $_REQUEST['txtTuKhoa'];
