@@ -109,10 +109,11 @@ switch($action){
 
         //tính tổng tiền cho đơn hàng
         $tongTien = 0;
+        $phiVanChuyen = 25000;
         $mangGioHang = $gh->layGioHang($_SESSION['nguoiDung']['id']);
         foreach($mangGioHang as $arr)
-            $tongTien += $arr['so_luong'] * ($arr['gia_tien'] * (1 - $arr['giam_gia']));
-
+            $tongTien += $arr['so_luong'] * ($arr['gia_tien'] * (1 - $arr['giam_gia']/100));
+        $tongTien+=$phiVanChuyen;
 
         //Tạo đơn hàng
         $idDH = $dh->themDonHang($_SESSION['nguoiDung']['id'], $diaChi, $sdt, $_SESSION['nguoiDung']['ho_ten'], $tongTien, 0);
@@ -122,7 +123,6 @@ switch($action){
             $ctdh->themChiTietDonHang($idDH, $arr['id_san_pham'], $arr['so_luong'], ($arr['gia_tien']*(1-$arr['giam_gia'])));
 
         //Thêm thông tin đơn hàng
-        $phiVanChuyen = 25000;
         $ttdh->themThongTinDonHang($idDH, $_SESSION['nguoiDung']['ho_ten'], $diaChi, $sdt, "0001-01-01 00:00:00", $phiVanChuyen, "kHÔNG CÓ GHI CHÚ");
 
         //Xoá hết thông tin giỏ hàng
