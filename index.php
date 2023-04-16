@@ -148,6 +148,27 @@ switch($action){
         // $message = "Cập nhật thành công !!!";
         include('main.php');
         break;
+    case 'doiMatKhau':
+        $matKhauCu = $_POST['txtmatKhauCu'];
+        $matKhauMoi = $_POST['txtmatKhauMoi'];
+        $nhapLaiMatKhau = $_POST['txtnhapLaiMatKhau'];
+        $kq = $nd->doiMatKhau($_SESSION['nguoiDung']['id'], $matKhauCu, $matKhauMoi);
+        if($kq && $matKhauMoi == $nhapLaiMatKhau)
+            $thongBao = "Đổi mật khẩu thành công!";
+        else if(!$kq){
+            $thongBao = "Bạn nhập sai mật khẩu!";
+            include('main.php');
+            return;
+        }
+        else{
+            $thongBao = "Mật khẩu mớI không trùng khớp!";
+            include('main.php');
+            return;
+        }
+        
+        $_SESSION['nguoiDung'] = $nd->layNguoiDungTheoTenDangNhap($_SESSION['nguoiDung']['ten_dang_nhap']);
+        include('main.php');
+        break;
     // case 'timKiem':
     //     $tk = true;
     //     $tenDT = $_REQUEST['txtTuKhoa'];

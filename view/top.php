@@ -156,6 +156,51 @@
   </div>
   </div>
   </div>
+  
+  <!-- modal đổi mk -->
+      <div class="modal fade" id="doiMK" tabindex="-1" aria-labelledby="doiMKLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="doiMKLabel">Form đổi mật khẩu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form method="post" enctype="multipart/form-data" action="">
+              <input type="hidden" name="action" value="doiMatKhau">
+              <div class="text-center">
+                <img class="rounded-circle" src="images/<?php echo $_SESSION['nguoiDung']['hinh_anh'] ?>" alt="<?php echo $_SESSION['nguoiDung']['ho_ten']; ?>" width="100px">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Tài khoản</label>
+                <input class="form-control" type="hidden" name="txtid" value="<?php echo $_SESSION["nguoiDung"]["id"]; ?>">
+                <input class="form-control" type="text" name="txtTenDangNhap" value="<?php echo $_SESSION["nguoiDung"]["ten_dang_nhap"]; ?>" disabled>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Mật khẩu cũ</label>
+                <input class="form-control" type="password" name="txtmatKhauCu" placeholder="Mật khẩu cũ">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Mật khẩu mới</label>
+                <input class="form-control" type="password" name="txtmatKhauMoi" placeholder="Mật khẩu mới">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Nhập lại mật khẩu mới</label>
+                <input class="form-control" type="password" name="txtnhapLaiMatKhau" placeholder="Nhập lại mật khẩu mới">
+              </div>
+              <div class="form-group text-center">
+                <input class="btn btn-primary" type="submit" value="Lưu">
+                <input class="btn btn-warning" type="reset" value="Hủy Thay Đổi">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
 </nav>
 
 <?php 
