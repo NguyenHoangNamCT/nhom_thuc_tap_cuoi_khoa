@@ -149,6 +149,12 @@
         </form>
 
     </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+          </div>
+  </div>
+  </div>
   </div>
 </nav>
 
