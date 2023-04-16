@@ -69,7 +69,7 @@ switch($action){
 			$ngay_giao_hang = $_POST['dateNgayGiaoHang'];
 			$phi_van_chuyen = $_POST['txtPhiVanChuyen'];
 			$ghi_chu = $_POST['txtGhiChu'];
-			$suaThongTinDonHang = $ttdh-> suaThongTinDonHang($id, $ten_khach_hang, $dia_chi_nguoi_nhan, $so_dien_thoai_nguoi_nhan, $ngay_giao_hang, $phi_van_chuyen, $ghi_chu);
+			$themThongTinDonHang = $ttdh-> themThongTinDonHang($id, $ten_khach_hang, $dia_chi_nguoi_nhan, $so_dien_thoai_nguoi_nhan, $ngay_giao_hang, $phi_van_chuyen, $ghi_chu);
 			include("main.php");
 			break;
 	//----------------------------------------------------

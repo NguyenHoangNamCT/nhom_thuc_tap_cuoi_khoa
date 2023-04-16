@@ -117,5 +117,25 @@ class CHITIETDONHANG{
             DATABASE::close();
         }
     }
+
+    public function layChiTietDonHang($id_donhang) {
+        $db = DATABASE::connect();
+        try {
+            $sql = "SELECT chitietdonhang.*, sanpham.ten_san_pham, sanpham.gia_tien, sanpham.hinh_anh , sanpham.giam_gia
+                    FROM chitietdonhang, sanpham 
+                    WHERE chitietdonhang.id_san_pham = sanpham.id AND chitietdonhang.id_don_hang = :id_donhang";
+            $cmd = $db->prepare($sql);
+            $cmd->bindValue(':id_donhang', $id_donhang, PDO::PARAM_INT);
+            $cmd->execute();
+            $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn trong layChiTietDonHang: $error_message</p>";
+            exit();
+        } finally {
+            DATABASE::close();
+        }
+    }
 }
 ?>

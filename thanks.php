@@ -2,7 +2,7 @@
 
 <div class="container-fluid d-flex justify-content-center flex-column align-items-center">
 <h1 style="color: #CDAD00;">Cảm ơn bạn đã mua hàng</h1>
-<p>Hãy chuẩn bị <?php echo number_format($tongTien+$phiVanChuyen). 'đ'; ?> để nhận đơn hàng có mã: <?php echo $idDH; ?></p>
+<p>Hãy chuẩn bị <?php echo number_format($tongTien). 'đ'; ?> để nhận đơn hàng có mã: <?php echo $idDH; ?></p>
 <a href="?action=macdinh" class="btn btn-danger">Quay về trang mua hàng</a>
 
 <div class="col-sm-6 px-5">
@@ -49,11 +49,9 @@
     </thead>
     <tbody>
       <?php 
-        $mangChiTietDonHang = $ctdh->layDanhSachChiTietDonHangTheoIDDonHang($idDH);
-        $tongTien = 0;
+        $mangChiTietDonHang = $ctdh->layChiTietDonHang($idDH);
         foreach($mangChiTietDonHang as $arr){
-            $thanhTien = $arr['gia_tien'] *(1-$arr['giam_gia']) * $arr['so_luong'];
-            $tongTien += $thanhTien;
+            $thanhTien = $arr['don_gia']  * $arr['so_luong'];
       ?>
         <tr>
             <td><?php echo $arr['ten_san_pham']; ?></td>
