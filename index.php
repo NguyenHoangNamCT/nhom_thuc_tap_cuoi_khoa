@@ -55,6 +55,7 @@ switch($action){
         include("login_form.php");
         break;
     case "xuLyDangNhap":
+        //nếu ngườI dùng click vào nút đăng ký ở trang đăng nhập thì đi đến trang đăng ký ngược lại thì xử lý đăng nhập bình thường
         $tenDangNhap = $_POST['txtUserName'];
         $matKhau = $_POST['txtPassword'];
         if($nd->kiemTraNguoiDungHopLe($tenDangNhap, $matKhau))
@@ -169,23 +170,17 @@ switch($action){
         $_SESSION['nguoiDung'] = $nd->layNguoiDungTheoTenDangNhap($_SESSION['nguoiDung']['ten_dang_nhap']);
         include('main.php');
         break;
-
-        case 'them':
-            include('add.php');
-            break;
-        case 'xuLyThem':
-            $ten_dang_nhap = $_POST["ten_dang_nhap"];
-            $mat_khau = $_POST["mat_khau"];
-            $ho_ten = $_POST["ho_ten"];
-            $dia_chi = $_POST["dia_chi"];
-            $dien_thoai = $_POST["dien_thoai"];
-            $email = $_POST["email"];
-            $loai_nguoi_dung = $_POST["loai_nguoi_dung"];
-            $hinh_anh = $_FILES["hinh_anh"]["name"];
-            $trang_thai = $_POST["trang_thai"];
-            $nd->themNguoiDung($ten_dang_nhap, $mat_khau, $ho_ten, $dia_chi, $dien_thoai, $email, $loai_nguoi_dung, $hinh_anh);
-            include('main.php');
-            break;
+    case 'xuLyDangKy':
+        $ten_dang_nhap = $_POST["ten_dang_nhap"];
+        $mat_khau = $_POST["mat_khau"];
+        $ho_ten = $_POST["ho_ten"];
+        $dia_chi = $_POST["dia_chi"];
+        $dien_thoai = $_POST["dien_thoai"];
+        $email = $_POST["email"];
+        $hinh_anh = $_FILES["hinh_anh"]["name"];
+        $nd->themNguoiDung($ten_dang_nhap, $mat_khau, $ho_ten, $dia_chi, $dien_thoai, $email, "Member", $hinh_anh);
+        include('main.php');
+        break;
     // case 'timKiem':
     //     $tk = true;
     //     $tenDT = $_REQUEST['txtTuKhoa'];

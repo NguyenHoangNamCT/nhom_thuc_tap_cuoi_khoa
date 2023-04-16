@@ -19,7 +19,7 @@
     <h2>Đăng ký</h2>
     <form action="" method="POST" enctype="multipart/form-data">
       <!-- Gửi dữ liệu ẩn -->
-      <input type="hidden" name="action" value="xuLyThem">
+      <input type="hidden" name="action" value="xuLyDangKy">
       <!-- End gửi dữ liệu ẩn -->
       <div class="form-group">
         <label for="ten-dang-nhap">Tên đăng nhập:</label>
