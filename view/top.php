@@ -98,11 +98,14 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form method="post" enctype="multipart/form-data" action="../qlnguoidung/">
+        <form method="post" enctype="multipart/form-data" action="admin/qlnguoidung/">
+          <!-- Gửi dữ liệu ẩn -->
+          <input type="hidden" name="id" value="<?php echo $_SESSION["nguoiDung"]["id"]; ?>" >
+          <input type="hidden" name="action" value="updateUser">
+          <!-- END -->
           <div class="text-center mb-3">
             <img class="rounded-circle" src="images/<?php echo $_SESSION['nguoiDung']['hinh_anh'] ?>" alt="<?php echo $_SESSION['nguoiDung']['ho_ten']; ?>" width="100px">
           </div>
-          <input type="hidden" name="txtid" value="<?php echo $_SESSION["nguoiDung"]["id"]; ?>">
           <div class="mb-3">
             <label for="txtTenDangNhap" class="form-label">Tên Đăng Nhập</label>
             <input class="form-control" type="text" name="txtTenDangNhap" placeholder="Tên Đăng Nhập" value="<?php echo $_SESSION["nguoiDung"]["ten_dang_nhap"]; ?>" required disabled>
@@ -137,22 +140,20 @@
             <input class="form-control"  type="text" name="txtTrangThai" placeholder="Trạng Thái" value="<?php echo $_SESSION["nguoiDung"]["trang_thai"]; ?>" required disabled>
           </div>
 
-          <div class="row">
+          <!-- <div class="row">
           <div class="col-md-6">
-            <form action="post" enctype="multipart/form-data">
+            <form action="post" enctype="multipart/form-data"> -->
               <div class="mb-3">
                 <label for="fhinh" class="form-label">Đổi hình đại diện</label>
                 <input type="file" class="form-control" id="fhinh" name="fhinh">
               </div>
               <div class="mb-3">
-                <input type="hidden" name="id" value="<?php echo $_SESSION["nguoiDung"]["id"]; ?>" >
-                <input type="hidden" name="action" value="updateUser" >
                 <button type="submit" class="btn btn-primary">Lưu</button>
                 <button type="reset" class="btn btn-warning">Hủy Thay Đổi</button>
               </div>
             </form>
-          </div>
-        </div>
+          <!-- </div>
+        </div> -->
 
 
     </div>
