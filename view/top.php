@@ -89,6 +89,72 @@
       <?php } ?>
       <!-- END -->
 
+      <!-- The Modal -->
+  <div class="modal fade" id="hoSoCaNhan" tabindex="-1" aria-labelledby="hoSoCaNhanLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="hoSoCaNhanLabel">Thông tin của bạn</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" enctype="multipart/form-data" action="../qlnguoidung/">
+          <div class="text-center mb-3">
+            <img class="rounded-circle" src="images/<?php echo $_SESSION['nguoiDung']['hinh_anh'] ?>" alt="<?php echo $_SESSION['nguoiDung']['ho_ten']; ?>" width="100px">
+          </div>
+          <input type="hidden" name="txtid" value="<?php echo $_SESSION["nguoiDung"]["id"]; ?>">
+          <div class="mb-3">
+            <label for="txtTenDangNhap" class="form-label">Tên Đăng Nhập</label>
+            <input class="form-control" type="text" name="txtTenDangNhap" placeholder="Tên Đăng Nhập" value="<?php echo $_SESSION["nguoiDung"]["ten_dang_nhap"]; ?>" required disabled>
+          </div>
+          <div class="mb-3">
+            <label for="txthoten" class="form-label">Họ tên</label>
+            <input class="form-control"  type="text" name="txthoten" placeholder="Họ tên" value="<?php echo $_SESSION["nguoiDung"]["ho_ten"]; ?>" required>
+          </div>
+          <div class="mb-3">
+            <label for="txtDC" class="form-label">Địa chỉ</label>
+            <input class="form-control"  type="text" name="txtDC" placeholder="Địa chỉ" value="<?php echo $_SESSION["nguoiDung"]["dia_chi"]; ?>" required>
+          </div>
+          <div class="mb-3">
+            <label for="txtdienthoai" class="form-label">Số điện thoại</label>
+            <input class="form-control" type="number" name="txtdienthoai" placeholder="Số điện thoại" value="<?php echo $_SESSION["nguoiDung"]["dien_thoai"]; ?>" required>
+          </div>
+          <div class="mb-3">
+            <label for="txtemail" class="form-label">Email</label>
+            <input class="form-control" type="email" name="txtemail" placeholder="Email" value="<?php echo $_SESSION["nguoiDung"]["email"]; ?>" required>
+          </div>
+          <div class="mb-3">
+            <label for="txtNgayDangKy" class="form-label">Ngày Đăng Ký</label>
+            <input class="form-control"  type="text" name="txtNgayDangKy" placeholder="Ngày Đăng Ký" value="<?php echo $_SESSION["nguoiDung"]["ngay_dang_ky"]; ?>" required disabled>
+          </div>
+          <div class="mb-3">
+            <label for="txtLoaiNguoiDung" class="form-label">Ngày Đăng Ký</label>
+            <input class="form-control"  type="text" name="txtLoaiNguoiDung" placeholder="Loại người dùng" value="<?php echo $_SESSION["nguoiDung"]["loai_nguoi_dung"]; ?>" required disabled>
+          </div>
+
+          <div class="mb-3">
+            <label for="txtTrangThai" class="form-label">Trạng Thái</label>
+            <input class="form-control"  type="text" name="txtTrangThai" placeholder="Trạng Thái" value="<?php echo $_SESSION["nguoiDung"]["trang_thai"]; ?>" required disabled>
+          </div>
+
+          <div class="row">
+          <div class="col-md-6">
+            <form action="post" enctype="multipart/form-data">
+              <div class="mb-3">
+                <label for="fhinh" class="form-label">Đổi hình đại diện</label>
+                <input type="file" class="form-control" id="fhinh" name="fhinh">
+              </div>
+              <div class="mb-3">
+                <input type="hidden" name="id" value="<?php echo $_SESSION["nguoiDung"]["id"]; ?>" >
+                <input type="hidden" name="action" value="updateUser" >
+                <button type="submit" class="btn btn-primary">Lưu</button>
+                <button type="reset" class="btn btn-warning">Hủy Thay Đổi</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+
     </div>
   </div>
 </nav>
