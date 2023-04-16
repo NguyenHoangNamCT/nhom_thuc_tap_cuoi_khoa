@@ -67,12 +67,28 @@
         <a class="btn btn-outline-warning me-2 bi-cart3" href="?action=xemGioHang">Giỏ hàng</a>
         
         <?php 
-          if(isset($_SESSION['nguoiDung']))
-            echo '<a class="btn btn-warning" href="?action=dangXuat">Đăng xuất</a>'; 
-          else
-            echo '<a class="btn btn-warning me-2" href="?action=dangNhap">Login</a>';
+            if(isset($_SESSION['nguoiDung']))
+              echo '<a class="btn btn-warning" href="?action=dangXuat">Đăng xuất</a>'; 
+            else
+              echo '<a class="btn btn-warning me-2" href="?action=dangNhap">Login</a>';
         ?>       
       </form>
+      
+
+      <!-- Biểu tượng người dùng trong trang chủ -->
+      <div class="dropdown">
+      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle ms-2" data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="images/<?php echo $_SESSION['nguoiDung']['hinh_anh']; ?>" alt="" width="50" height="50" class="rounded-circle me-2">
+      </a>
+      <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#hoSoCaNhan">Hồ sơ cá nhân</a></li>
+        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#doiMK">Đổi mật khẩu</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="../../index.php?action=dangXuat">Sign out</a></li>
+      </ul>
+    </div>
+      <!-- END -->
+
     </div>
   </div>
 </nav>
