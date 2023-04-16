@@ -123,7 +123,7 @@ switch($action){
 
         //Thêm thông tin đơn hàng
         $phiVanChuyen = 25000;
-        $ttdh->themThongTinDonHang($_SESSION['nguoiDung']['ho_ten'], $diaChi, $sdt, "0001-01-01 00:00:00", $phiVanChuyen, "kHÔNG CÓ GHI CHÚ");
+        $ttdh->themThongTinDonHang($idDH, $_SESSION['nguoiDung']['ho_ten'], $diaChi, $sdt, "0001-01-01 00:00:00", $phiVanChuyen, "kHÔNG CÓ GHI CHÚ");
 
         //Xoá hết thông tin giỏ hàng
         $gh->xoaSachGioHang($_SESSION['nguoiDung']['id']);

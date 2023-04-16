@@ -18,11 +18,12 @@ class THONGTINDONHANG{
         }
     }
 
-    public function themThongTinDonHang($ten_khach_hang, $dia_chi_nguoi_nhan, $so_dien_thoai_nguoi_nhan, $ngay_giao_hang, $phi_van_chuyen, $ghi_chu) {
+    public function themThongTinDonHang($id ,$ten_khach_hang, $dia_chi_nguoi_nhan, $so_dien_thoai_nguoi_nhan, $ngay_giao_hang, $phi_van_chuyen, $ghi_chu) {
         $db = DATABASE::connect();
         try{
-            $sql = "INSERT INTO thongtindonhang (ten_khach_hang, dia_chi_nguoi_nhan, so_dien_thoai_nguoi_nhan, ngay_giao_hang, phi_van_chuyen, ghi_chu) VALUES (:ten_khach_hang, :dia_chi_nguoi_nhan, :so_dien_thoai_nguoi_nhan, :ngay_giao_hang, :phi_van_chuyen, :ghi_chu)";
+            $sql = "INSERT INTO thongtindonhang(id, ten_khach_hang, dia_chi_nguoi_nhan, so_dien_thoai_nguoi_nhan, ngay_giao_hang, phi_van_chuyen, ghi_chu) VALUES (:id, :ten_khach_hang, :dia_chi_nguoi_nhan, :so_dien_thoai_nguoi_nhan, :ngay_giao_hang, :phi_van_chuyen, :ghi_chu)";
             $cmd = $db->prepare($sql);
+            $cmd->bindValue(':id', $id);
             $cmd->bindValue(':ten_khach_hang', $ten_khach_hang);
             $cmd->bindValue(':dia_chi_nguoi_nhan', $dia_chi_nguoi_nhan);
             $cmd->bindValue(':so_dien_thoai_nguoi_nhan', $so_dien_thoai_nguoi_nhan);
