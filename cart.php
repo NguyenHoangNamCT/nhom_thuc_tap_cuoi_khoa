@@ -49,7 +49,7 @@
                     <!-- Gửi số lượng của từng sản phẩm giỏ hàng theo cách txtSoLuong+id_san_pham -->
                     <td><input type="number" class="form-control"  placeholder="" name="<?php echo "txtSoLuong".$arr['id_san_pham']; ?>" value="<?php echo $arr["so_luong"]; ?>"></td>
                     <td><?php $giaBan = $arr["gia_tien"] * (1-$arr['giam_gia']/100); echo number_format($giaBan).'đ'; ?></td>
-                    <td><?php echo $giaBan*$arr["so_luong"]; ?></td>
+                    <td><?php echo number_format($giaBan*$arr["so_luong"]); ?></td>
                     <td><a class="btn btn-danger" href="?action=xoaSPTrongGio&idSanPham=<?php echo $arr["id_san_pham"]; ?>"><span class="glyphicon glyphicon-trash"></span>Xoá</a></td>
                   </tr>
             <?php

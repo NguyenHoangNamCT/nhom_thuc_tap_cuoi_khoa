@@ -3,7 +3,7 @@
         public static function tinhThanhTien($mangGioHang) {
             $tongTien = 0;
             foreach($mangGioHang as $arr)
-                $tongTien += $arr['gia_tien']*$arr['so_luong'];
+                $tongTien += $arr['gia_tien'] * (1-$arr['giam_gia']/100) *$arr['so_luong'];
             return $tongTien;
         }
 

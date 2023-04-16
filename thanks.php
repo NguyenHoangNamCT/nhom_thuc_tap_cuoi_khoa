@@ -52,6 +52,7 @@
         $mangChiTietDonHang = $ctdh->layChiTietDonHang($idDH);
         foreach($mangChiTietDonHang as $arr){
             $thanhTien = $arr['don_gia']  * $arr['so_luong'];
+
       ?>
         <tr>
             <td><?php echo $arr['ten_san_pham']; ?></td>
@@ -63,6 +64,9 @@
       <?php 
         }
       ?>
+      <tr>
+      <td colspan="5" align="right">Phí vận chuyển: <?php echo number_format($phiVanChuyen); ?></td>
+      </tr>
       <tr>
         <td colspan="5" align="right"><b>Tổng tiền: <?php echo number_format($tongTien); ?></b></td>
       </tr>

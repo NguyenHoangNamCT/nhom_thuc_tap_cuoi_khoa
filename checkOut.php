@@ -50,21 +50,25 @@
     <tbody>
       <?php 
         $mangMHTrongGio = $gh->layGioHang($_SESSION['nguoiDung']['id']);
-        $tongTien = 0;
+        $phiVanChuyen = 25000;
+        $tongTien = $phiVanChuyen;
         foreach($mangMHTrongGio as $arr){
-            $thanhTien = $arr['gia_tien'] *(1-$arr['giam_gia']) * $arr['so_luong'];
-            $tongTien += $thanhTien;
+            $thanhTien = $arr['gia_tien'] *(1-$arr['giam_gia']/100) * $arr['so_luong'];
+            $tongTien+= $thanhTien;
       ?>
         <tr>
             <td><?php echo $arr['ten_san_pham']; ?></td>
             <td><img width="75" src="images/<?php echo $arr['hinh_anh']; ?>" alt=""></td>
             <td><?php echo number_format($thanhTien/$arr['so_luong']).'đ'; ?></td>
             <td><?php echo number_format($arr['so_luong']);?></td>
-            <td><?php echo number_format($thanhTien);?></td>
+            <td><?php echo number_format($thanhTien); ?></td>
         </tr>
       <?php 
         }
       ?>
+      <tr>
+        <td colspan="5" align="right">Phí vận chuyển: <?php echo number_format($phiVanChuyen); ?></td>
+      </tr>
       <tr>
         <td colspan="5" align="right"><b>Tổng tiền: <?php echo number_format($tongTien); ?></b></td>
       </tr>

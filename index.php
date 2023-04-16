@@ -98,6 +98,7 @@ switch($action){
         include('cart.php');
         break;
     case "datMua":
+        $phiVanChuyen = 25000;
         include("checkOut.php");
         break;
     case "taoDonHang":
@@ -106,6 +107,7 @@ switch($action){
         $sdt = $_POST['inputSDT'];
         $diaChi = $_POST['inputDiaChi'];
         $nd->capNhatDiaChiDienThoaiEmailNguoiDung($_SESSION['nguoiDung']['id'], $diaChi, $sdt, $email);
+        $_SESSION['nguoiDung'] = $nd->layThongTinNguoiDungTheoID($_SESSION['nguoiDung']['id']);
 
         //tính tổng tiền cho đơn hàng
         $tongTien = 0;
@@ -116,11 +118,11 @@ switch($action){
         $tongTien+=$phiVanChuyen;
 
         //Tạo đơn hàng
-        $idDH = $dh->themDonHang($_SESSION['nguoiDung']['id'], $diaChi, $sdt, $_SESSION['nguoiDung']['ho_ten'], $tongTien, 0);
+        $idDH = $dh->themDonHang($_SESSION['nguoiDung']['id'], $diaChi, $sdt, $tongTien, 0);
 
         //Thêm các chi tiết đơn hàng
         foreach($mangGioHang as $arr)
-            $ctdh->themChiTietDonHang($idDH, $arr['id_san_pham'], $arr['so_luong'], ($arr['gia_tien']*(1-$arr['giam_gia'])));
+            $ctdh->themChiTietDonHang($idDH, $arr['id_san_pham'], $arr['so_luong'], ($arr['gia_tien']*(1-$arr['giam_gia']/100)));
 
         //Thêm thông tin đơn hàng
         $ttdh->themThongTinDonHang($idDH, $_SESSION['nguoiDung']['ho_ten'], $diaChi, $sdt, "0001-01-01 00:00:00", $phiVanChuyen, "kHÔNG CÓ GHI CHÚ");
