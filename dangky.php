@@ -1,79 +1,73 @@
-<?php include("view/top.php"); ?>
-<br>
-<div class="container-fluid d-flex justify-content-center flex-column align-items-center">
-<h1 style="color: #CDAD00;">TRANG THANH TOÁN</h1>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <!-- Bootstrap -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Bootstrap icon -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"> 
 
-<div class="col-sm-6 px-5">
-  <h4 class="pt-4">Đây là thông tin nhận hàng của bạn, hãy thay đổi nếu chưa đúng</h4>
-  <form method="post" action="">
-    <!-- Gữi dữ liệu ẩn -->
-    <input type="hidden" name="action" value="taoDonHang">
-    <!-- END -->
-    <div class="form-group">
-      <label>Họ tên:</label>
-      <input type="text" class="form-control" id="email" placeholder="Enter your name" name="inputHoTen" value="<?php echo $_SESSION['nguoiDung']['ho_ten']; ?>" disabled>
-    </div>
-    <div class="form-group">
-      <label>Email:</label>
-      <input type="text" class="form-control" id="email" placeholder="Enter your email" name="inputEmail" value="<?php echo $_SESSION['nguoiDung']['email']; ?>">
-    </div>
-    <div class="form-group">
-      <label>Số điện thoại:</label>
-      <input type="text" class="form-control" id="email" placeholder="Enter your phone number" name="inputSDT" value="<?php echo $_SESSION['nguoiDung']['dien_thoai']; ?>">
-    </div>
-    <div class="form-group">
-      <label>Địa chỉ:</label>
-      <input type="text" class="form-control" id="email" placeholder="Enter your address" name="inputDiaChi" value="<?php echo $_SESSION['nguoiDung']['dia_chi']; ?>">
-    </div>
-    <div class="d-flex justify-content-center py-3">
-      <button type="submit" class="btn btn-info">Hoàn tất đơn hàng</button>
-    </div>
-  </form>
-  <br>
-</div>
-
-
-
-<div class="col-sm-6 row px-5">
-  <h2>Sản phẩm</h2>
-  <p>Các sản phẩm bạn đã chọn mua</p>
-  <table class="table">
-    <thead>
-      <tr class="success">
-        <th>Tên sản phẩm</th>
-        <th>Hình ảnh</th>
-        <th>Đơn giá</th>
-        <th>Số lượng</th>
-        <th>Thành tiền</th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php 
-        $mangMHTrongGio = $gh->layGioHang($_SESSION['nguoiDung']['id']);
-        $phiVanChuyen = 25000;
-        $tongTien = $phiVanChuyen;
-        foreach($mangMHTrongGio as $arr){
-            $thanhTien = $arr['gia_tien'] *(1-$arr['giam_gia']/100) * $arr['so_luong'];
-            $tongTien+= $thanhTien;
-      ?>
-        <tr>
-            <td><?php echo $arr['ten_san_pham']; ?></td>
-            <td><img width="75" src="images/<?php echo $arr['hinh_anh']; ?>" alt=""></td>
-            <td><?php echo number_format($thanhTien/$arr['so_luong']).'đ'; ?></td>
-            <td><?php echo number_format($arr['so_luong']);?></td>
-            <td><?php echo number_format($thanhTien); ?></td>
-        </tr>
-      <?php 
-        }
-      ?>
-      <tr>
-        <td colspan="5" align="right">Phí vận chuyển: <?php echo number_format($phiVanChuyen); ?></td>
-      </tr>
-      <tr>
-        <td colspan="5" align="right"><b>Tổng tiền: <?php echo number_format($tongTien); ?></b></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-</div>
-<?php include("view/footer.php"); ?>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/">
+    
+    <!-- Custom styles for this template -->
+    <!-- <link href="sign-in.css" rel="stylesheet"> -->
+  </head>
+  <body class="">
+    <div class="container">
+    <h2>Đăng ký</h2>
+    <form action="" method="POST" enctype="multipart/form-data">
+      <!-- Gửi dữ liệu ẩn -->
+      <input type="hidden" name="action" value="xuLyThem">
+      <!-- End gửi dữ liệu ẩn -->
+      <div class="form-group">
+        <label for="ten-dang-nhap">Tên đăng nhập:</label>
+        <input type="text" class="form-control" id="ten-dang-nhap" name="ten_dang_nhap" required>
+      </div>
+      <div class="form-group">
+        <label for="mat-khau">Mật khẩu:</label>
+        <input type="password" class="form-control" id="mat-khau" name="mat_khau" required>
+      </div>
+      <div class="form-group">
+        <label for="ho-ten">Họ và tên:</label>
+        <input type="text" class="form-control" id="ho-ten" name="ho_ten" required>
+      </div>
+      <div class="form-group">
+        <label for="dia-chi">Địa chỉ:</label>
+        <input type="text" class="form-control" id="dia-chi" name="dia_chi" required>
+      </div>
+      <div class="form-group">
+        <label for="dien-thoai">Điện thoại:</label>
+        <input type="tel" class="form-control" id="dien-thoai" name="dien_thoai" pattern="[0-9]{10,11}" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="hinh-anh">Hình ảnh:</label>
+        <input type="file" class="form-control" id="hinh-anh" name="hinh_anh">
+      </div>
+      <div class="form-group">
+        <label for="loai-nguoi-dung">Loại người dùng:</label>
+        <select class="form-control" id="loai-nguoi-dung" name="loai_nguoi_dung" required>
+          <option value="">--Chọn loại người dùng--</option>
+          <option value="admin">Admin</option>
+          <option value="member">Member</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="trang-thai">Trạng thái:</label>
+        <div class="radio">
+          <label><input type="radio" name="trang_thai" value="1" checked>Kích hoạt</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="trang_thai" value="0">Không kích hoạt</label>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Thêm người dùng</button>
+    </form>
+  </div>
+  </body>
+</html>
