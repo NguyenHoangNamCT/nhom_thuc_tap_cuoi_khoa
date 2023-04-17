@@ -126,6 +126,18 @@ class QUANGCAO{
             DATABASE::close();
         }
     }
+
+    //
+    public function TimKiemQuangCaoByUrl($url) {
+        $db = DATABASE::connect();
+        $sql = "SELECT * FROM quangcao WHERE url = ?";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(1, $url);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    
     
 }
 ?>

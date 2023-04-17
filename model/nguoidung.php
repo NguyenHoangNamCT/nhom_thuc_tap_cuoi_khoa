@@ -45,11 +45,11 @@ class NGUOIDUNG{
 	public function layNguoiDungTheoTenDangNhap($tenDangNhap) {
 		$db = DATABASE::connect();
 		try {
-			$sql = "SELECT * FROM nguoidung WHERE ten_dang_nhap = :tenDangNhap";
+			$sql = "SELECT * FROM nguoidung WHERE ten_dang_nhap LIKE :tenDangNhap";
 			$cmd = $db->prepare($sql);
-			$cmd->bindValue(':tenDangNhap', $tenDangNhap);
+			$cmd->bindValue(':tenDangNhap','%' .$tenDangNhap. '%');
 			$cmd->execute();
-			$result = $cmd->fetch(PDO::FETCH_ASSOC);
+			$result = $cmd->fetchAll(PDO::FETCH_ASSOC);
 			return $result;
 		} catch(PDOException $e) {
 			$error_message = $e->getMessage();
@@ -82,11 +82,11 @@ class NGUOIDUNG{
 	public function layThongTinNguoiDungTheoEmail($email){
 		$db = DATABASE::connect();
 		try{
-			$sql = "SELECT * FROM nguoidung WHERE email=:email";
+			$sql = "SELECT * FROM nguoidung WHERE email LIKE :email";
 			$cmd = $db->prepare($sql);
-			$cmd->bindValue(":email", $email);
+			$cmd->bindValue(":email",'%' .$email. '%');
 			$cmd->execute();
-			$nguoidung = $cmd->fetch(PDO::FETCH_ASSOC);
+			$nguoidung = $cmd->fetchAll(PDO::FETCH_ASSOC);
 			$cmd->closeCursor();
 			return $nguoidung;    
 		}

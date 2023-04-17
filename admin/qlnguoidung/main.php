@@ -11,6 +11,7 @@
     </div>
   <h2>Quản lý người dùng</h2>
   <a href="index.php?action=them" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Thêm người dùng</a>
+  <a href="" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalTimKiem">Tìm kiếm</a>
   <div class="table-responsive">
     <table class="table table-striped">
       <thead>
@@ -32,7 +33,12 @@
       <tbody>
         
           <?php 
-          $mangND = $nd->layTatCaNguoiDung();
+            if(!isset($tuKhoa))
+              $mangND = $nd->layTatCaNguoiDung();
+            else if($loaiTimKiem == "theoTenDangNhap")
+              $mangND = $nd->layNguoiDungTheoTenDangNhap($tuKhoa);
+            else if($loaiTimKiem == "theoEmail")
+              $mangND = $nd->layThongTinNguoiDungTheoEmail($tuKhoa);
             foreach ($mangND as $arr) { 
           ?>
           <tr>
@@ -57,3 +63,40 @@
 <?php 
     include("../view/footer.php");
 ?>
+
+
+<!-- Các modal -->
+<div class="modal fade" id="modalTimKiem" tabindex="-1" aria-labelledby="modalTimKiemLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+              <h4 class="modal-title" id="modalTimKiemLabel"><span class="glyphicon glyphicon-search"></span> Bạn cần tìm gì?</h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <div class="modal-body">
+            <div class="my-3" >
+              <form action="" class="" method="post">
+                <!-- Gửi dữ liệu ẩn -->
+                <input type="hidden" name="action" value="timKiemNguoiDung">
+                <!-- END -->
+                <label for="txtTuKhoa">Tìm kiếm theo:</label>
+                <input type="text" class="form-control" name="txtTuKhoa" id="txtTuKhoa" placeholder="Tìm kiếm">
+                
+                <div class="form-group">
+                  <label for="loai-tim-kiem">Tìm kiếm theo:</label>
+                  <select class="form-control" id="loai-tim-kiem" name="loaiTimKiem" required>
+                    <option value="">--Chọn loại tìm kiếm--</option>
+                    <option value="theoTenDangNhap">Theo tên đăng nhập</option>
+                    <option value="theoEmail">Theo Email</option>
+                  </select>
+                </div>
+
+                <button type="submit" class="btn btn-success my-2">Tìm kiếm</button>
+              </form>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

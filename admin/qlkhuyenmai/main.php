@@ -4,6 +4,7 @@
 <div class="container">
   <h2>Quản lý khuyến mãi</h2>
   <a href="?action=them" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Thêm khuyến mãi</a>
+  <a href="" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalTimKiem">Tìm kiếm</a>
   <div class="table-responsive">
     <table class="table table-hover">
       <thead>
@@ -19,7 +20,10 @@
       </thead>
       <tbody>
         <?php
-          $mangKM = $km->layDanhSachKhuyenMai();
+          if(!isset($tuKhoa))
+            $mangKM = $km->layDanhSachKhuyenMai();
+          else
+            $mangKM = $km->timKiemKhuyenMaiTheoTen($tuKhoa);
           foreach($mangKM as $arr){
         ?>
         <tr>
@@ -43,3 +47,40 @@
 <?php
     require("../view/footer.php");
 ?>
+
+
+
+<!-- Các modal -->
+<div class="modal fade" id="modalTimKiem" tabindex="-1" aria-labelledby="modalTimKiemLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+              <h4 class="modal-title" id="modalTimKiemLabel"><span class="glyphicon glyphicon-search"></span> Bạn cần tìm gì?</h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <div class="modal-body">
+            <div class="my-3" >
+              <form action="" class="" method="post">
+                <!-- Gửi dữ liệu ẩn -->
+                <input type="hidden" name="action" value="timKiemKhuyenMai">
+                <!-- END -->
+                <label for="txtTuKhoa">Tìm kiếm:</label>
+                <input type="text" class="form-control" name="txtTuKhoa" id="txtTuKhoa" placeholder="Tìm kiếm">
+                
+                <div class="form-group">
+                  <label for="loai-tim-kiem">Tìm kiếm theo:</label>
+                  <select class="form-control" id="loai-tim-kiem" name="loaiTimKiem" required>
+                    <option value="">--Chọn loại tìm kiếm--</option>
+                    <option value="theoTen">Theo Tên </option>
+                  </select>
+                </div>
+
+                <button type="submit" class="btn btn-success my-2">Tìm kiếm</button>
+              </form>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -61,6 +61,12 @@ switch($action){
 			$suaThongTinDonHang = $ttdh-> suaThongTinDonHang($id, $ten_khach_hang, $dia_chi_nguoi_nhan, $so_dien_thoai_nguoi_nhan, $ngay_giao_hang, $phi_van_chuyen, $ghi_chu);
 			include("main.php");
 			break;
+
+		case "timKiemThongTin":
+			$tuKhoa = $_POST['txtTuKhoa'];
+			$loaiTimKiem = $_POST['loaiTimKiem'];
+			include('main.php');
+			break;
 	//----------------------------------------------------
     default:
         break;

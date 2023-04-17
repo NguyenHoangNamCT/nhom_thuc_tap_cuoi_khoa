@@ -110,6 +110,12 @@
             $_SESSION['nguoiDung'] = $nd->layNguoiDungTheoTenDangNhap($_SESSION['nguoiDung']['ten_dang_nhap']);
             include('main.php');
             break;
+
+        case "timKiemNguoiDung":
+            $tuKhoa = $_POST['txtTuKhoa'];
+            $loaiTimKiem = $_POST['loaiTimKiem'];
+            include('main.php');
+            break;
         default:
             break;
     }

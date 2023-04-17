@@ -18,12 +18,12 @@ class THUONGHIEU{
     }
 
     //tìm kiếm thương hiệu theo tên gân đúng
-    public function timKiemThuongHieu($tuKhoa) {
+    public function timKiemThuongHieu($tenth) {
         $db = DATABASE::connect();
         try {
-            $sql = "SELECT * FROM thuongHieu WHERE TenThuongHieu LIKE CONCAT('%', :tuKhoa, '%')";
+            $sql = "SELECT * FROM thuongHieu WHERE TenThuongHieu LIKE CONCAT('%', :tenth, '%')";
             $cmd = $db->prepare($sql);
-            $cmd->bindValue(':tuKhoa', $tuKhoa);
+            $cmd->bindValue(':tenth', $tenth);
             $cmd->execute();
             $thuongHieu = $cmd->fetchAll(PDO::FETCH_ASSOC);
             return $thuongHieu;
