@@ -36,7 +36,7 @@
             if(!isset($tuKhoa))
               $mangND = $nd->layTatCaNguoiDung();
             else if($loaiTimKiem == "theoTenDangNhap")
-              $mangND = $nd->layNguoiDungTheoTenDangNhap($tuKhoa);
+              $mangND = $nd->layNguoiDungTheoTenDangNhapTK($tuKhoa);
             else if($loaiTimKiem == "theoEmail")
               $mangND = $nd->layThongTinNguoiDungTheoEmail($tuKhoa);
             foreach ($mangND as $arr) { 

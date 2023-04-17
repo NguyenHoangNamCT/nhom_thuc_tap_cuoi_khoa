@@ -47,6 +47,25 @@ class NGUOIDUNG{
 		try {
 			$sql = "SELECT * FROM nguoidung WHERE ten_dang_nhap LIKE :tenDangNhap";
 			$cmd = $db->prepare($sql);
+			$cmd->bindValue(':tenDangNhap',$tenDangNhap);
+			$cmd->execute();
+			$result = $cmd->fetch(PDO::FETCH_ASSOC);
+			return $result;
+		} catch(PDOException $e) {
+			$error_message = $e->getMessage();
+			echo "<p>Lỗi truy vấn ở layNguoiDungTheoTenDangNhap: $error_message</p>";
+			exit();
+		} finally {
+			DATABASE::close();
+		}
+	}
+
+	//lấy người dùng theo tên đăng nhập
+	public function layNguoiDungTheoTenDangNhapTK($tenDangNhap) {
+		$db = DATABASE::connect();
+		try {
+			$sql = "SELECT * FROM nguoidung WHERE ten_dang_nhap LIKE :tenDangNhap";
+			$cmd = $db->prepare($sql);
 			$cmd->bindValue(':tenDangNhap','%' .$tenDangNhap. '%');
 			$cmd->execute();
 			$result = $cmd->fetchAll(PDO::FETCH_ASSOC);
@@ -59,7 +78,7 @@ class NGUOIDUNG{
 			DATABASE::close();
 		}
 	}
-
+	
 	//lấy thông tin một người dùng theo id
 	public function layThongTinNguoiDungTheoID($id) {
 		$db = DATABASE::connect();
