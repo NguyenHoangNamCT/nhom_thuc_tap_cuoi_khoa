@@ -69,21 +69,21 @@
     <input type="hidden" name="action" value="xuLyDangNhap">
     <!-- ------------------ -->
     <hr>
-    <a href="" data-bs-toggle="modal" data-bs-target="#doiMK" class="w-50 btn btn-lg btn" type="submit" style="background-color: #00CC00;" >Đăng ký</a>
+    <a href="" data-bs-toggle="modal" data-bs-target="#modalDK" class="w-50 btn btn-lg btn" type="submit" style="background-color: #00CC00;" >Đăng ký</a>
     <!-- Gữi dữ liệu ẩn -->
     <!-- END -->
-    <p class="mt-5 mb-3 text-muted">&copy; 2022</p>
+    <p class="mt-5 mb-3 text-muted">&copy; 2023 D&Nshop</p>
   </form>
 </main>
 
     <!-- Modal đăng ký -->
-    <div class="modal" id="doiMK">
+    <div class="modal" id="modalDk">
       <div class="modal-dialog">
         <div class="modal-content">
 
           <!-- Modal Header -->
           <div class="modal-header">
-            <h4 class="modal-title">Form đổi mật khẩu</h4>
+            <h4 class="modal-title">Form Đăng Ký</h4>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
 
