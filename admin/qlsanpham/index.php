@@ -67,6 +67,11 @@ switch($action){
 
 		include("main.php");
 		break;
+	case "timKiemSanPham":
+		$tuKhoa = $_POST['txtTuKhoa'];
+		$loaiTimKiem = $_POST['loaiTimKiem'];
+		include('main.php');
+		break;
 	//----------------------------------------------------
     default:
         break;
