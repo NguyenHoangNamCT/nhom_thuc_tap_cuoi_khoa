@@ -27,7 +27,7 @@
     ?>
      <div class="col-sm-3 container" style="margin-bottom: 1.5rem;">
       <div class="card" style="width:300px">
-        <a href="?action=xemChiTiet&id=<?php echo $arr_j['id']; ?>"><img alt="<?php echo $arr_j['hinh_anh']; ?>" class="card-img" src="images/<?php echo $arr_j['hinh_anh']; ?>" alt="Card image" style="width:100%"></a>
+        <a href="?action=xemChiTiet&id=<?php echo $arr_j['id']; ?>"><img style="object-fit: cover;" width="350dp" height="300dp" alt="<?php echo $arr_j['hinh_anh']; ?>" class="card-img" src="images/<?php echo $arr_j['hinh_anh']; ?>" alt="Card image" style="width:100%"></a>
 
         <div class="card-body">
           <a href="?action=xemChiTiet&id=<?php echo $arr_j['id']; ?>"><h4 class="card-title"><?php echo $arr_j['ten_san_pham']; ?></h4></a>
