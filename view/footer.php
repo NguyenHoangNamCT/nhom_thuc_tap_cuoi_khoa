@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-md-6">
         <h4>Về chúng tôi</h4>
-        <p>Giới thiệu sơ lược: là một website làm ra nhầm báo cáo tiến độ học tập.</p>
+        <p class ="message">Giới thiệu sơ lược: là một website làm ra nhầm báo cáo tiến độ học tập.</p>
         <p>Số điện thoại: 0123456789</p>
         <p>Email: vlxd@gmail.com</p>
         <p>Địa chỉ: Long Xuyên, An Giang</p>
