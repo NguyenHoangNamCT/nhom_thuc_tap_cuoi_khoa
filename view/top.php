@@ -92,7 +92,9 @@
       </div>
       <?php } ?>
       <!-- END -->
+</nav>
 
+      <!-- ----------------------------------Danh sách modal---------------------------------- -->
       <!-- The Modal -->
   <div class="modal fade" id="hoSoCaNhan" tabindex="-1" aria-labelledby="hoSoCaNhanLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -204,9 +206,3 @@
         </div>
       </div>
     </div>
-
-</nav>
-
-<?php 
-  include('footer.php');
-?>

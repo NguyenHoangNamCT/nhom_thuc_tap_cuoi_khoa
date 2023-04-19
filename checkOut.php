@@ -76,4 +76,5 @@
   </table>
 </div>
 </div>
+
 <?php include("view/footer.php"); ?>

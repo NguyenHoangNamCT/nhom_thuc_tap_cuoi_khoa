@@ -79,38 +79,7 @@
         }
     ?>
   </div>
-
-  
-    <!-- <div class = "row" align="center">
-      <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-      </ul>
-    </div> -->
-
-
-<!-- <div class="row">
-	<ul class="pagination">
-		<li><a href="index.php?trang=1"><span class="glyphicon glyphicon-step-backward"></span></a></li>
-	<?php
-	//for($i=1; $i<=$tongsotrang; $i++){
-	?>	
-		<li <?php //if($tranghh == $i) echo " class=\"active\"" ?>>
-		<a href="index.php?trang=<?php //echo $i; ?>"><?php //echo $i; ?></a></li>
-	<?php	
-	//}
-	?>
-		<li><a href="index.php?trang=<?php //echo $tongsotrang; ?>"><span class="glyphicon glyphicon-step-forward"></span></a></li>
-	</ul>
-</div> -->
-  
-  <?php //include("topview.php"); ?>
-  
-
 </div>
 
-<?php //include("view/carousel.php"); ?>
-<?php //include("view/bottom.php"); ?>
+<?php include('view/footer.php'); ?>
+

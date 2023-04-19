@@ -12,7 +12,7 @@
     
     <div class="col-sm-6">
       <h2 style="color:#FF00FF;" class=""><?php echo $thongTinSanPham['ten_san_pham']; ?></h2>
-      <form class="form-inline" method="post">
+      <form class="form-inline" method="post" enctype="multipart/form-data">
         <!-- Gửi dữ liệu ẩn -->
         <input type="hidden" name="action" value="choVaoGio">
         <input type="hidden" name="id" value="<?php echo $thongTinSanPham["id"]; ?>">
@@ -104,6 +104,8 @@
 
 </div>
 
+<?php include('view/footer.php'); ?>
+
 
 <!-- Modal đánh giá -->
 <div class="modal fade" id="modalDanhGia" tabindex="-1" aria-labelledby="" aria-hidden="true">
@@ -117,20 +119,24 @@
           <h3 class="mb-0">Đánh giá sản phẩm</h3>
         </div>
         <div class="card-body">
-          <form>
+          <form method="post" enctype="multipart/form-data">
+            <!-- Gửi dữ liệu ẩn -->
+            <input type="hidden" name="action" value="themDanhGia">
+            <input type="hidden" name="sp_id" value="<?php echo $sp_id; ?>">
+            <!-- END -->
             <div class="form-group">
               <label for="rating">Đánh giá:</label>
-              <select class="form-control" id="rating" name="rating">
-                <option>5 sao</option>
-                <option>4 sao</option>
-                <option>3 sao</option>
-                <option>2 sao</option>
-                <option>1 sao</option>
+              <select class="form-control" id="rating" name="txtRating">
+                <option value="5">5 sao</option>
+                <option value="4">4 sao</option>
+                <option value="3">3 sao</option>
+                <option value="2">2 sao</option>
+                <option value="1">1 sao</option>
               </select>
             </div>
             <div class="form-group">
               <label for="comment">Nhận xét:</label>
-              <textarea class="form-control" id="comment" name="comment" rows="5"></textarea>
+              <textarea class="form-control" id="comment" name="txtNoiDung" rows="5"></textarea>
             </div>
             <div class="form-group">
               <label for="name">Tên:</label>

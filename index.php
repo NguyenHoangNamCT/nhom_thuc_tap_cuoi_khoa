@@ -8,6 +8,7 @@ require('model/giohang.php');
 require('model/donhang.php');
 require('model/chitietdonhang.php');
 require('model/thongtindonhang.php');
+require('model/danhgia.php');
 //------------------------------
 
 if(isset($_REQUEST["action"])){
@@ -26,6 +27,7 @@ $gh = new GIOHANG();
 $dh = new DONHANG();
 $ctdh = new CHITIETDONHANG();
 $ttdh = new THONGTINDONHANG();
+$dg = new DANHGIA();
 
 $mangLoaiSP = $lsp->layLoaiSP();
 $mangThuongHieu = $th->layThuongHieu();
@@ -180,6 +182,25 @@ switch($action){
         $hinh_anh = $_FILES["hinh_anh"]["name"];
         $nd->themNguoiDung($ten_dang_nhap, $mat_khau, $ho_ten, $dia_chi, $dien_thoai, $email, "Member", $hinh_anh);
         include('main.php');
+        break;
+    case "themDanhGia":
+        $rating = $_POST['txtRating'];
+        $noiDung = $_POST['txtNoiDung'];
+        $mangFileHinhAnh = $_FILES['fileHinhAnh'];
+        $mangTMP = $mangFileHinhAnh['tmp_name'];
+        $mangTen = $mangFileHinhAnh['name'];
+        $sp_id = $_POST['sp_id'];
+        $images = '';
+        foreach($mangTMP as $key => $tmp_name){
+            if($images == '')
+                $images .= $mangTen[$key];
+            else
+                $images .= ', ' . $mangTen[$key];
+            move_uploaded_file($tmp_name,"images/".(uniqid() . '_' .$mangTen[$key]));
+        }
+        var_dump($sp_id, $rating, $noiDung, $images);
+        $dg->themDanhGia($_SESSION['nguoiDung']['id'], $sp_id, $rating, $noiDung, $images);
+        include('detail.php');
         break;
     // case 'timKiem':
     //     $tk = true;
