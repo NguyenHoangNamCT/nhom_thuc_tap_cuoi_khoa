@@ -3,9 +3,11 @@
   <div class="container py-3">
     <div class="row">
       <div class="col-md-6">
-        <h4>Thông tin liên hệ</h4>
+        <h4>Về chúng tôi</h4>
+        <p>giới thiệu sơ lược: là một website làm ra nhầm báo cáo tiến độ học tập.</p>
         <p>Số điện thoại: 0123456789</p>
-        <p>Địa chỉ: Số 1 Đại Cồ Việt, Hai Bà Trưng, Hà Nội</p>
+        <p>Email: vlxd@gmail.com</p>
+        <p>Địa chỉ: Long Xuyên, An Giang</p>
       </div>
       <div class="col-md-6">
         <h4>Đăng ký nhận tin tức</h4>

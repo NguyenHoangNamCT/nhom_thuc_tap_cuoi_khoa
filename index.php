@@ -210,6 +210,12 @@ switch($action){
     case "gioithieu":
 		include('gioithieu.php');
 		break;
+    case "baomat":
+        include('gioithieu.php');
+        break;
+    case "dieukhoansudung":
+        include('gioithieu.php');
+        break;
     default:
         break;
 }
