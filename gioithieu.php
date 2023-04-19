@@ -43,41 +43,9 @@
       <p>Với đội ngũ nhân viên chuyên nghiệp, kinh nghiệm lâu năm trong lĩnh vực vật liệu xây dựng, chúng tôi cam kết sẽ mang lại cho khách hàng sự hài lòng và tin tưởng với các sản phẩm và dịch vụ của chúng tôi.</p>
       <p>Hãy ghé thăm trang web của chúng tôi để tìm hiểu thêm về các sản phẩm vật liệu xây dựng mà chúng tôi cung cấp và để đặt hàng ngay hôm nay!</p>
 
-      <br></br>
-      <br></br>
-      <hr>
-      <br></br>
-      <br></br>
-
-    <div class="row">
-      <div class="col-md-6" >
-        <h3 style="color:#00FF00;" class ="py-1">Về chúng tôi</h3>
-        <p>Là Trang website xây dựng nhằm mục đích báo cao tiến độ thực tập.</p>
-        <p>Số điện thoại: 0123456789</p>
-        <p>Địa chỉ: Long Xuyên, An Giang</p>
-        <p>Email: admin@gmail.com</p>
-      </div>
-      <div class="col-md-6">
-        <h3 style="color:#00FF00;" class ="py-1">Đăng ký nhận tin tức mới nhất</h3>
-        <form action="#" method="post">
-          <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput">Địa chỉ email của bạn</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingName" placeholder="Họ và tên">
-            <label for="floatingName">Họ và tên của bạn</label>
-          </div>
-          <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Đồng ý nhận tin tức mới nhất từ chúng tôi
-            </label>
-          </div>
-          <button type="submit" class="btn btn-primary">Đăng ký</button>
-        </form>
-      </div>
-    </div>
-    </div>
+     
   </body>
 </html>
+
+  
+<?php include("footer.php"); ?>
