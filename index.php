@@ -186,6 +186,9 @@ switch($action){
     //     $tenDT = $_REQUEST['txtTuKhoa'];
     //     include('main.php');
     //     break;
+    case "gioithieu":
+		include('gioithieu.php');
+		break;
     default:
         break;
 }
