@@ -64,7 +64,7 @@
 	
     <div class="mb-3 mt-3">
       <label for="">Số lượng:</label>
-      <input type="text" class="form-control"  placeholder="" name="txtSoLuong">
+      <input type="number" class="form-control"  placeholder="" name="txtSoLuong">
     </div>
 	
     <div class="mb-3 mt-3">
