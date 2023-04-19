@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-md-6">
         <h4>Về chúng tôi</h4>
-        <p>giới thiệu sơ lược: là một website làm ra nhầm báo cáo tiến độ học tập.</p>
+        <p>Giới thiệu sơ lược: là một website làm ra nhầm báo cáo tiến độ học tập.</p>
         <p>Số điện thoại: 0123456789</p>
         <p>Email: vlxd@gmail.com</p>
         <p>Địa chỉ: Long Xuyên, An Giang</p>
@@ -27,8 +27,8 @@
         <p>&copy; 2023 - Trang web bán vật liệu xây dựng</p>
       </div>
       <div class="col-md-6 text-end">
-        <a href="#" class="text-light mx-3">Chính sách bảo mật</a>
-        <a href="#" class="text-light mx-3">Điều khoản sử dụng</a>
+        <a href="?action=chinhsachbaomat" class="text-light mx-3">Chính sách bảo mật</a>
+        <a href="?action=dieukhoansudung" class="text-light mx-3">Điều khoản sử dụng</a>
       </div>
     </div>
   </div>
