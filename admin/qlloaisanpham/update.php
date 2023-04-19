@@ -2,16 +2,6 @@
     require("../view/top.php");
 ?> 
 <div>
-<!-- <table>
-	<tr>
-		<td><h3>Quản lý điện thoại</h3></td>
-	</tr>
-	<tr>
-		<td><a href="index.php?action=them" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span> Thêm mặt hàng</a></td>
-	</tr>
-</table> -->
-<br>
-</div>
 
 <?php 
   $arr = $l->layLoaiSanPhamById($id);

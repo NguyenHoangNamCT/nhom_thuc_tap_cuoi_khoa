@@ -1,8 +1,5 @@
 <?php 
 require('../../model/database.php');
-// require('../../model/sanpham.php');
-// require('../../model/loaisanpham.php');
-// require('../../model/thuonghieu.php');
 require('../../model/quangcao.php');
 if(isset($_REQUEST["action"])){
     $action = $_REQUEST["action"];
@@ -12,9 +9,6 @@ else{
 }
 
 
-// $sp = new SANPHAM();
-// $l = new LOAISP();
-// $th = new THUONGHIEU();
 $qc= new QUANGCAO();
 
 switch($action){

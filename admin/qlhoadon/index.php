@@ -1,8 +1,5 @@
 <?php 
 require('../../model/database.php');
-// require('../../model/sanpham.php');
-// require('../../model/loaisanpham.php');
-// require('../../model/thuonghieu.php');
 require('../../model/donhang.php');
 require('../../model/hoadon.php');
 
@@ -17,9 +14,6 @@ else{
 
 $hd = new HOADON();
 $dh = new DONHANG();
-// $sp = new SANPHAM();
-// $l = new LOAISP();
-// $th = new THUONGHIEU();
 
 switch($action){
     case "macdinh": 

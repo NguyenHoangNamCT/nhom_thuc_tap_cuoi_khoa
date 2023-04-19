@@ -1,8 +1,6 @@
 <?php 
 require('../../model/database.php');
-// require('../../model/sanpham.php');
 require('../../model/loaisanpham.php');
-// require('../../model/thuonghieu.php');
 if(isset($_REQUEST["action"])){
     $action = $_REQUEST["action"];
 }
@@ -10,10 +8,8 @@ else{
     $action="macdinh"; 
 }
 
-
-//$sp = new SANPHAM();
 $l = new LOAISP();
-//$th = new THUONGHIEU();
+
 
 switch($action){
     case "macdinh": 

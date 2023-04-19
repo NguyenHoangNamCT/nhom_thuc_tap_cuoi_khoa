@@ -33,11 +33,7 @@ switch($action){
 		$soLuong = $_POST['txtSoLuong'];
 		$moTa = $_POST['txtMoTa'];
 		$hinh = $_FILES['filehinhanh']['name'];
-		
-		// var_dump($loaiSP, $thuongHieu, $tenSP, $moTa, $giaTien, $giamGia, $soLuong, $hinh);
-
 		$sp->themSanPham($loaiSP, $thuongHieu, $tenSP, $moTa, $giaTien, $giamGia, $soLuong, $hinh);
-
 		include("main.php");
 		break;
 	case "xoa":

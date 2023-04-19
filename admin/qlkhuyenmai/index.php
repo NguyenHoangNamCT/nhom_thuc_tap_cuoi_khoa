@@ -45,7 +45,6 @@ switch($action){
 		$ngay_ket_thuc = $_POST['txtNgayKetThuc'];
 		$trang_thai = $_POST['selectTrangThai'];
 		$gia_tri = $_POST['txtGiaTri'];
-		// var_dump($id, $ten_khuyen_mai, $mo_ta, $ngay_bat_dau, $ngay_ket_thuc, $trang_thai, $gia_tri);
 		$km->suaKhuyenMai($id, $ten_khuyen_mai, $mo_ta, $ngay_bat_dau, $ngay_ket_thuc, $trang_thai, $gia_tri);
 
 		include("main.php");

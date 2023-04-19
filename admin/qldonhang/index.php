@@ -2,9 +2,6 @@
 require('../../model/database.php');
 require('../../model/donhang.php');
 require('../../model/nguoidung.php');
-// require('../../model/sanpham.php');
-// require('../../model/loaisanpham.php');
-// require('../../model/thuonghieu.php');
 require('../../model/thongtindonhang.php');
 if(isset($_REQUEST["action"])){
     $action = $_REQUEST["action"];
@@ -16,9 +13,7 @@ else{
 $ttdh = new THONGTINDONHANG();
 $nd = new NGUOIDUNG();
 $dh = new DONHANG();
-// $sp = new SANPHAM();
-// $l = new LOAISP();
-// $th = new THUONGHIEU();
+
 
 switch($action){
     case "macdinh": 
