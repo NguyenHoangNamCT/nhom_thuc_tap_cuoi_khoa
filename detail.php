@@ -54,53 +54,120 @@
         </ul>
       </div>
     </div>
-
-    <!-- Giao diện đánh giá cá nhân -->
-    
-
-      <!-- Giao diện dnah sách đánh giá -->
-      <div class="container my-5">  
-        <div class="row justify-content-center">
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-body">
-                <h5 style="color: #FF4500;" class="card-title">Đánh giá sản phẩm từ khách hàng</h5>
-                <hr>
-                <div class="list-group">
-                  <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-                    <div class="d-flex w-100 justify-content-between">
-                      <h5 class="mb-1">Đánh giá 1</h5>
-                      <small>3 days ago</small>
-                    </div>
-                    <p class="mb-1">"Sản phẩm rất tốt, tôi rất hài lòng về chất lượng."</p>
-                    <small>Người dùng: John Doe</small>
-                  </a>
-                  <a href="#" class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
-                      <h5 class="mb-1">Đánh giá 2</h5>
-                      <small>5 days ago</small>
-                    </div>
-                    <p class="mb-1">"Sản phẩm không được như mong đợi, tôi không hài lòng về chất lượng."</p>
-                    <small>Người dùng: Jane Smith</small>
-                  </a>
-                  <a href="#" class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
-                      <h5 class="mb-1">Đánh giá 3</h5>
-                      <small>7 days ago</small>
-                    </div>
-                    <p class="mb-1">"Sản phẩm khá tốt, nhưng có chút khó sử dụng."</p>
-                    <small>Người dùng: David Brown</small>
-                  </a>
-                </div>
+    <div class="container">
+  <h2>Danh sách đánh giá sản phẩm</h2>
+  <div class="row">
+    <?php 
+      $mangDanhGia = $dg->layDanhSachDanhGiaTheoIDSanPham($sp_id); 
+      foreach($mangDanhGia as $arr){
+        $nguoiDungThamGiaDanhGia = $nd->layThongTinNguoiDungTheoID($arr['id_nguoi_dung']);
+    ?>
+        <div class="">
+        <div class="card mb-4">
+          <div class="card-body">
+          <div class="d-flex">
+            <div class="flex-shrink-0">
+              <img width="64" src="images/<?php echo $nguoiDungThamGiaDanhGia['hinh_anh']; ?>" class="rounded-circle" alt="Ảnh đại diện của khách hàng">
+            </div>
+            <div class="flex-grow-1 ps-3">
+              <h5 class="card-title pt-3">Nguyễn Văn A</h5>
+            </div>
+          </div>
+            <p class="card-text" style="clear: both;"> <?php echo $arr['noi_dung']; ?> </p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="rating-stars text-warning ">
+                <?php 
+                  for($i=1; $i <= 5; $i++)
+                    if($i <= $arr['diem_danh_gia'])
+                      echo '<span class="bi-star-fill"></span>';
+                    else
+                      echo '<span class="bi-star"></span>';
+                ?>
               </div>
+              <div class="">
+                <?php 
+                  $mangHinh = explode(", ", $arr['hinh_anh']);
+                  foreach($mangHinh as $hinhArr){
+                ?>
+                    <img src="images/<?php echo $hinhArr; ?>" class="" alt="Hình ảnh đánh giá" style="width: 150px; height: 150px; object-fit: cover;">
+                <?php 
+                  }
+                ?>
+              </div>
+            </div>  
+          </div>
+        </div>
+      </div>
+    <?php 
+      } 
+    ?>
+
+    <div class="col-md-12">
+      <div class="card mb-4">
+        <div class="card-body">
+        <div class="d-flex">
+          <div class="flex-shrink-0">
+            <img src="https://via.placeholder.com/64" class="rounded-circle" alt="Ảnh đại diện của khách hàng">
+          </div>
+          <div class="flex-grow-1 ps-3">
+            <h5 class="card-title pt-3">Nguyễn Văn A</h5>
+          </div>
+        </div>
+          <p class="card-text" style="clear: both;">Sản phẩm rất tốt. Tôi rất hài lòng với chất lượng của sản phẩm này.</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="rating-stars text-warning ">
+              <span class="bi-star-fill"></span>
+              <span class="bi-star-fill"></span>
+              <span class="bi-star-fill"></span>
+              <span class="bi-star-half"></span>
+              <span class="bi-star"></span>
+            </div>
+            <div class="">
+              <img src="https://via.placeholder.com/150" class="img-fluid " alt="Hình ảnh đánh giá">
+              <img src="https://via.placeholder.com/150" class="img-fluid " alt="Hình ảnh đánh giá">
+              <img src="https://via.placeholder.com/150" class="img-fluid" alt="Hình ảnh đánh giá">
+              <img src="https://via.placeholder.com/150" class="img-fluid" alt="Hình ảnh đánh giá">
+              <img src="https://via.placeholder.com/150" class="img-fluid" alt="Hình ảnh đánh giá">
+            </div>
+          </div>  
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="d-flex">
+            <div class="flex-shrink-0">
+              <img src="https://via.placeholder.com/64" class="rounded-circle" alt="Ảnh đại diện của khách hàng">
+            </div>
+            <div class="flex-grow-1 ps-3">
+              <h5 class="card-title pt-3">Nguyễn Thị B</h5>
+            </div>
+          </div>
+          <p class="card-text">Sản phẩm không tốt như mong đợi. Chất lượng kém và không đáp ứng được nhu cầu sử dụng.</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="rating-stars text-warning ">
+              <span class="bi-star-fill"></span>
+              <span class="bi-star-fill"></span>
+              <span class="bi-star-fill"></span>
+              <span class="bi-star-half"></span>
+              <span class="bi-star"></span>
+            </div>
+            <div class="">
+              <img src="https://via.placeholder.com/150" class="img-fluid " alt="Hình ảnh đánh giá">
+              <img src="https://via.placeholder.com/150" class="img-fluid " alt="Hình ảnh đánh giá">
+              <img src="https://via.placeholder.com/150" class="img-fluid" alt="Hình ảnh đánh giá">
             </div>
           </div>
         </div>
       </div>
+    </div>
   </div>
+</div>
+</div>  
 
-  <?php //include("topview.php"); ?>
-  
+
 
 </div>
 

@@ -192,11 +192,12 @@ switch($action){
         $sp_id = $_POST['sp_id'];
         $images = '';
         foreach($mangTMP as $key => $tmp_name){
+            $tenDuyNhat = uniqid() . '_' . $mangTen[$key];
             if($images == '')
-                $images .= $mangTen[$key];
+                $images .= $tenDuyNhat;
             else
-                $images .= ', ' . $mangTen[$key];
-            move_uploaded_file($tmp_name,"images/".(uniqid() . '_' .$mangTen[$key]));
+                $images .= ', ' . $tenDuyNhat;
+            move_uploaded_file($tmp_name,"images/".$tenDuyNhat);
         }
         var_dump($sp_id, $rating, $noiDung, $images);
         $dg->themDanhGia($_SESSION['nguoiDung']['id'], $sp_id, $rating, $noiDung, $images);
