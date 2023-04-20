@@ -304,7 +304,62 @@ class SANPHAM{
         }
     }
     
+    //lấy sản phẩm phân trang
+    public function laySanPhamPhanTrang($trang, $soluong) {
+        $dbcon = DATABASE::connect();
+        try {
+            $batDau = ($trang - 1) * $soluong;
+            $sql = "SELECT * FROM san_pham LIMIT :batDau, :soluong";
+            $cmd = $dbcon->prepare($sql);
+            $cmd->bindValue(':batDau', $batDau, PDO::PARAM_INT);
+            $cmd->bindValue(':soluong', $soluong, PDO::PARAM_INT);
+            $cmd->execute();
+            $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn: $error_message</p>";
+            exit();
+        } finally {
+            DATABASE::close();
+        }
+    }
     
+    
+
+    //lấy sản phẩm nổi bật
+    public function laySanPhamNoiBat($soLuongSanPham = 4) {
+        $dbcon = DATABASE::connect();
+        try {
+            $sql = "SELECT * FROM sanpham ORDER BY luot_xem DESC LIMIT :so_luong_san_pham";
+            $cmd = $dbcon->prepare($sql);
+            $cmd->bindParam(':so_luong_san_pham', $soLuongSanPham, PDO::PARAM_INT);
+            $cmd->execute();
+            $ketqua = $cmd->fetchAll();
+            return $ketqua;
+        } catch (PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn: $error_message</p>";
+            exit();
+        }
+    }
+
+    //đếm tổng số lượng sản phẩm
+    public function laySoLuongSanPham() {
+        $db = DATABASE::connect();
+        try {
+            $sql = "SELECT COUNT(*) as so_luong_san_pham FROM sanpham";
+            $result = $db->query($sql);
+            $row = $result->fetch(PDO::FETCH_ASSOC);
+            return $row['so_luong_san_pham'];
+        } catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở laySoLuongSanPham: $error_message</p>";
+            exit();
+        } finally {
+            DATABASE::close();
+        }
+    }
 
 }
 ?>

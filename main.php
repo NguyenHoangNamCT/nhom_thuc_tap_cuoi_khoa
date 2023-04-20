@@ -80,6 +80,8 @@
     ?>
   </div>
 </div>
-
+<br></br>
+<?php include('topview.php'); ?>
+<br></br>
 <?php include('view/footer.php'); ?>
 
