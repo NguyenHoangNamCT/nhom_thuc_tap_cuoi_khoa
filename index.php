@@ -39,6 +39,7 @@ switch($action){
         break;
     case "xemChiTiet":
         $sp_id = $_GET['id'];
+        $sp->tangLuotXem($sp_id);
         include('detail.php');
         break;
     case "locSanPhamTheoLoai":
@@ -93,7 +94,33 @@ switch($action){
         // var_dump($mangGioHang);
         //Nhận dữ liệu từ form, bên form gửi txtSoLuong+id_san_pham
         $end = count($mangGioHang) - 1;
+        $mangVuotSoLuong = array();
+        $count = 0;
         foreach($mangGioHang as $key => $arr){
+            
+            if($sp->laySoLuongSanPhamTheoID($arr['id_san_pham']) < $_POST['txtSoLuong'.$arr['id_san_pham']]){
+                if($count == 0)
+                    $message = '';
+                $mangVuotSoLuong[$arr['ten_san_pham'].'_'.$arr['id_san_pham']] = $sp->laySoLuongSanPhamTheoID($arr['id_san_pham']);
+                $count++;
+            }
+        }
+        if(isset($message)){
+            foreach($mangVuotSoLuong as $key => $str){
+                $pos = strpos($str, "_"); // Tìm vị trí của ký tự "_"
+                $strTMP = substr($key, 0, $pos); // Cắt chuỗi từ vị trí đầu đến vị trí của ký tự "_"
+                if($message == '')
+                    $message .= $strTMP.': Chỉ còn ' . $sp->laySoLuongSanPhamTheoID($arr['id_san_pham']). 'sản phẩm.';
+                else
+                    $message .= ', ' . $strTMP.': Chỉ còn ' . $sp->laySoLuongSanPhamTheoID($arr['id_san_pham']). 'sản phẩm.';
+            }
+            if($count > 1)
+                $messageTMP = 'Các sản phẩm '. $message .' Vui lòng nhập số lượng sản phẩm nhỏ hơn số lượng có trong kho';
+            else
+                $messageTMP = 'Sản phẩm'. $message . ' Vui lòng nhập số lượng sản phẩm nhỏ hơn số lượng có trong kho';
+            $message = $messageTMP;
+        }
+        else{
             $gh->capNhatSoLuongSanPhamTrongGioHang($_SESSION['nguoiDung']['id'], $arr['id_san_pham'], $_POST['txtSoLuong'.$arr['id_san_pham']]);
             if($key == $end)
                 $capNhatThanhCong = true;
@@ -123,9 +150,13 @@ switch($action){
         //Tạo đơn hàng
         $idDH = $dh->themDonHang($_SESSION['nguoiDung']['id'], $diaChi, $sdt, $tongTien, 0);
 
-        //Thêm các chi tiết đơn hàng
-        foreach($mangGioHang as $arr)
+        //Thêm các chi tiết đơn hàng, và tăng lượt mua, giảm số lượng trong kho
+        foreach($mangGioHang as $arr){
             $ctdh->themChiTietDonHang($idDH, $arr['id_san_pham'], $arr['so_luong'], ($arr['gia_tien']*(1-$arr['giam_gia']/100)));
+            $sp->tangLuotMuaTheoSoLuongSanPhamBanDuoc($arr['id_san_pham'], $arr['so_luong']);
+            $sp->giamSoLuongSanPham($arr['id_san_pham'], $arr['so_luong']);
+        }
+            
 
         //Thêm thông tin đơn hàng
         $ttdh->themThongTinDonHang($idDH, $_SESSION['nguoiDung']['ho_ten'], $diaChi, $sdt, "0001-01-01 00:00:00", $phiVanChuyen, "kHÔNG CÓ GHI CHÚ");

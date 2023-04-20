@@ -199,6 +199,111 @@ class SANPHAM{
             DATABASE::close();
         }
     }
+
+    //tăng lượt xem
+    public function tangLuotXem($id){
+        $db = DATABASE::connect();
+        try{
+            $sql = "UPDATE sanpham SET luot_xem = luot_xem + 1 WHERE id = :id";
+            $cmd = $db->prepare($sql);
+            $cmd->bindValue(':id', $id, PDO::PARAM_INT);
+            $cmd->execute();
+            $rowCount = $cmd->rowCount();
+            return $rowCount;
+        }
+        catch(PDOException $e){
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở tangLuotXem: $error_message</p>";
+            exit();
+        }
+        finally {
+            DATABASE::close();
+        }
+    }
+    
+    //mỗi lần mua không cần biết mua bao nhiêu chỉ tăng 1
+    public function tangLuotMua($id){
+        $db = DATABASE::connect();
+        try{
+            $sql = "UPDATE sanpham SET luot_mua = luot_mua + 1 WHERE id = :id";
+            $cmd = $db->prepare($sql);
+            $cmd->bindValue(':id', $id, PDO::PARAM_INT);
+            $cmd->execute();
+            $rowCount = $cmd->rowCount();
+            return $rowCount;
+        }
+        catch(PDOException $e){
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở tangLuotMua: $error_message</p>";
+            exit();
+        }
+        finally {
+            DATABASE::close();
+        }
+    }
+
+    //mua bao nhiêu thì tăng bao nhiêu
+    public function tangLuotMuaTheoSoLuongSanPhamBanDuoc($id, $soLuong) {
+        $db = DATABASE::connect();
+        try {
+            $sql = "UPDATE sanpham SET luot_mua = luot_mua + :soLuong WHERE id = :id";
+            $cmd = $db->prepare($sql);
+            $cmd->bindValue(':id', $id, PDO::PARAM_INT);
+            $cmd->bindValue(':soLuong', $soLuong, PDO::PARAM_INT);
+            $cmd->execute();
+            $rowCount = $cmd->rowCount();
+            return $rowCount;
+        } catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở tangLuotMua: $error_message</p>";
+            exit();
+        } finally {
+            DATABASE::close();
+        }
+    }
+
+    //Giảm số lượng
+    public function giamSoLuongSanPham($id, $soLuong)
+    {
+        $db = DATABASE::connect();
+        try {
+            $sql = "UPDATE sanpham SET so_luong = so_luong - :so_luong WHERE id = :id";
+            $cmd = $db->prepare($sql);
+            $cmd->bindValue(':id', $id, PDO::PARAM_INT);
+            $cmd->bindValue(':so_luong', $soLuong, PDO::PARAM_INT);
+            $cmd->execute();
+            $rowCount = $cmd->rowCount();
+            return $rowCount;
+        } catch (PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở giamSoLuongSanPham: $error_message</p>";
+            exit();
+        } finally {
+            DATABASE::close();
+        }
+    }
+
+    //lấy số lượng sản phẩm theo id
+    public function laySoLuongSanPhamTheoID($id) {
+        $db = DATABASE::connect();
+        try{
+            $sql = "SELECT so_luong FROM sanpham WHERE id = :id";
+            $cmd = $db->prepare($sql);
+            $cmd->bindValue(':id', $id, PDO::PARAM_INT);
+            $cmd->execute();
+            $result = $cmd->fetch(PDO::FETCH_ASSOC);
+            return $result['so_luong'];
+        }
+        catch(PDOException $e){
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở laySoLuongSanPham: $error_message</p>";
+            exit();
+        }
+        finally {
+            DATABASE::close();
+        }
+    }
+    
     
 
 }

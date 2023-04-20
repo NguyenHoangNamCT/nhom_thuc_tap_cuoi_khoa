@@ -55,7 +55,7 @@
       </div>
     </div>
     <div class="container">
-  <h2>Danh sách đánh giá sản phẩm</h2>
+  <h2 class="mt-3" style="color: #FF4500;">Danh sách đánh giá sản phẩm</h2>
   <div class="row">
     <?php 
       $mangDanhGia = $dg->layDanhSachDanhGiaTheoIDSanPham($sp_id); 

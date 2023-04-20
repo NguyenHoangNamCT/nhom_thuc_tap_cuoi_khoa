@@ -12,6 +12,13 @@
             Cập nhật giỏ hàng <strong>Thành công.</strong>
           </div>
           ';
+        else if(isset($message)){
+      ?>
+          <div class="alert alert-danger">
+            Cập nhật giỏ hàng <strong>Thất bại!</strong> <?php echo $message; ?>
+          </div>
+      <?php 
+        } 
       ?>
       <table class="table table-borderless" align="center">
         <h2>Giỏ Hàng</h2>
