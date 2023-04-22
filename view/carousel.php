@@ -1,19 +1,21 @@
-<!--  Carousel -->
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-       <!-- Indicators -->
-       <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-      <li data-target="#myCarousel" data-slide-to="3"></li>
-    </ol>
-    <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+
+<!-- Giao diện phân trang -->
+<ul class="pagination justify-content-center">
+  <li class="page-item">
+    <a class="page-link" href="#" aria-label="Trước">
+      <span aria-hidden="true">&laquo;</span>
       <span class="sr-only">Trước</span>
     </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+  </li>
+  <li class="page-item"><a class="page-link" href="#">1</a></li>
+  <li class="page-item"><a class="page-link" href="#">2</a></li>
+  <li class="page-item"><a class="page-link" href="#">3</a></li>
+  <li class="page-item"><a class="page-link" href="#">4</a></li>
+  <li class="page-item"><a class="page-link" href="#">5</a></li>
+  <li class="page-item">
+    <a class="page-link" href="#" aria-label="Tiếp">
+      <span aria-hidden="true">&raquo;</span>
       <span class="sr-only">Tiếp</span>
     </a>
-</div>
+  </li>
+</ul>
