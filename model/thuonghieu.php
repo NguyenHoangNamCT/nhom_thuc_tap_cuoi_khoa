@@ -18,12 +18,17 @@ class THUONGHIEU{
     }
 
     //tìm kiếm thương hiệu theo tên gân đúng
-    public function timKiemThuongHieu($tenth) {
+    public function timKiemThuongHieu($tenth, $trang, $soluong) {
         $db = DATABASE::connect();
         try {
-            $sql = "SELECT * FROM thuongHieu WHERE TenThuongHieu LIKE CONCAT('%', :tenth, '%')";
+            $batDau = ($trang - 1) * $soluong;
+            if($batDau < 0)
+                $batDau = 0;
+            $sql = "SELECT * FROM thuongHieu WHERE TenThuongHieu LIKE CONCAT('%', :tenth, '%') ORDER BY id LIMIT :batDau, :soluong" ;
             $cmd = $db->prepare($sql);
             $cmd->bindValue(':tenth', $tenth);
+            $cmd->bindValue(':batDau', $batDau, PDO::PARAM_INT);
+            $cmd->bindValue(':soluong', $soluong, PDO::PARAM_INT);
             $cmd->execute();
             $thuongHieu = $cmd->fetchAll(PDO::FETCH_ASSOC);
             return $thuongHieu;
@@ -114,8 +119,6 @@ class THUONGHIEU{
         }
     }
     
-
-    
     //lấy thương hiệu theo id
     function layThuongHieuById($id) {
         $conn = DATABASE::connect();
@@ -132,59 +135,6 @@ class THUONGHIEU{
         }
     }
 
-
-    //-------------------------------------------------------------
-    // Lấy danh sách
-    public function layHangDT(){
-        $dbcon = DATABASE::connect();
-        try{
-            $sql = "SELECT * FROM hangdt";
-            $cmd = $dbcon->prepare($sql);
-            $cmd->execute();
-            $result = $cmd->fetchAll();
-            return $result;
-        }
-        catch(PDOException $e){
-            $error_message = $e->getMessage();
-            echo "<p>Lỗi truy vấn layHangDT: $error_message</p>";
-            exit();
-        }
-    }
-
-    // Cập nhật 
-    public function suaHangDT($id, $tenHang){
-        $dbcon = DATABASE::connect();
-        try{
-            $sql = "UPDATE hangdt SET tenhang=:tenhang WHERE id=:id";
-            $cmd = $dbcon->prepare($sql);
-            $cmd->bindValue(":tenhang", $tenHang);
-            $cmd->bindValue(":id", $id);
-            $result = $cmd->execute();            
-            return $result;
-        }
-        catch(PDOException $e){
-            $error_message = $e->getMessage();
-            echo "<p>Lỗi truy vấn: $error_message</p>";
-            exit();
-        }
-    }
-
-    public function layHangDTTheoID($id){
-        $dbcon = DATABASE::connect();
-        try{
-            $sql = "SELECT * FROM danhmuc WHERE id=:id";
-            $cmd = $dbcon->prepare($sql);
-            $cmd->bindValue(":id", $id);
-            $cmd->execute();
-            $result = $cmd->fetch();             
-            return $result;
-        }
-        catch(PDOException $e){
-            $error_message = $e->getMessage();
-            echo "<p>Lỗi truy vấn: $error_message</p>";
-            exit();
-        }
-    }
     //đếm tổng số lượng thương hiệu
     public function laySoLuongThuongHieu() {
         $db = DATABASE::connect();

@@ -101,12 +101,18 @@ class NGUOIDUNG{
 	}
 
 	//lấy người dùng theo tên đăng nhập
-	public function layNguoiDungTheoTenDangNhapTK($tenDangNhap) {
+	public function layNguoiDungTheoTenDangNhapTK($tenDangNhap,  $trang, $soluong)
+	 {
 		$db = DATABASE::connect();
 		try {
-			$sql = "SELECT * FROM nguoidung WHERE ten_dang_nhap LIKE :tenDangNhap";
+			$batDau = ($trang - 1) * $soluong;
+			if($batDau < 0)
+				$batDau = 0;
+			$sql = "SELECT * FROM nguoidung WHERE ten_dang_nhap LIKE :tenDangNhap  ORDER BY id LIMIT :batDau, :soluong";
 			$cmd = $db->prepare($sql);
 			$cmd->bindValue(':tenDangNhap','%' .$tenDangNhap. '%');
+			 $cmd->bindValue(':batDau', $batDau, PDO::PARAM_INT);
+            $cmd->bindValue(':soluong', $soluong, PDO::PARAM_INT);
 			$cmd->execute();
 			$result = $cmd->fetchAll(PDO::FETCH_ASSOC);
 			return $result;
@@ -138,12 +144,17 @@ class NGUOIDUNG{
 	}
 
 	//lấy thông tin người dùng theo email
-	public function layThongTinNguoiDungTheoEmail($email){
+	public function layThongTinNguoiDungTheoEmail($email,  $trang, $soluong){
 		$db = DATABASE::connect();
 		try{
-			$sql = "SELECT * FROM nguoidung WHERE email LIKE :email";
+			$batDau = ($trang - 1) * $soluong;
+			if($batDau < 0)
+				$batDau = 0;
+			$sql = "SELECT * FROM nguoidung WHERE email LIKE :email  ORDER BY id LIMIT :batDau, :soluong";
 			$cmd = $db->prepare($sql);
 			$cmd->bindValue(":email",'%' .$email. '%');
+			$cmd->bindValue(':batDau', $batDau, PDO::PARAM_INT);
+            $cmd->bindValue(':soluong', $soluong, PDO::PARAM_INT);
 			$cmd->execute();
 			$nguoidung = $cmd->fetchAll(PDO::FETCH_ASSOC);
 			$cmd->closeCursor();

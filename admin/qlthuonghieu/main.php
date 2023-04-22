@@ -36,7 +36,7 @@
             if(!isset($tuKhoa))
               $mangth = $th->layThuongHieuPhanTrang($trangHienTai, $soLuong);
             else
-              $mangth = $th->timKiemThuongHieu($tuKhoa);
+              $mangth = $th->timKiemThuongHieu($tuKhoa, $trangHienTai, $soLuong);
             foreach ($mangth as $arr) { 
           ?>
           <tr>

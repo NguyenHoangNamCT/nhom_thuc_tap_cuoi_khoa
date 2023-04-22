@@ -36,7 +36,7 @@
             if(!isset($tuKhoa))
               $mangLoai = $l->layLoaiSanPhamPhanTrang($trangHienTai, $soLuong);
             else
-            $mangLoai = $l->timKiemLoaiSanPham($tuKhoa);
+            $mangLoai = $l->timKiemLoaiSanPham($tuKhoa, $trangHienTai, $soLuong);
             foreach ($mangLoai as $arr) { 
           ?>
           <tr>

@@ -147,12 +147,17 @@
         }
 
         //tìm kiếm theo tên gần đúng
-        public function timKiemLoaiSanPham($ten_loai_san_pham) {
+        public function timKiemLoaiSanPham($ten_loai_san_pham,  $trang, $soluong) {
             $db = DATABASE::connect();
             try {
-                $sql = "SELECT * FROM loaisanpham WHERE ten_loai_san_pham LIKE :ten_loai_san_pham";
+                $batDau = ($trang - 1) * $soluong;
+                if($batDau < 0)
+                    $batDau = 0;
+                $sql = "SELECT * FROM loaisanpham WHERE ten_loai_san_pham LIKE :ten_loai_san_pham ORDER BY id LIMIT :batDau, :soluong";
                 $stmt = $db->prepare($sql);
                 $stmt->bindValue(':ten_loai_san_pham', "%$ten_loai_san_pham%");
+                $stmt->bindValue(':batDau', $batDau, PDO::PARAM_INT);
+                $stmt->bindValue(':soluong', $soluong, PDO::PARAM_INT);
                 $stmt->execute();
                 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 return $result;
