@@ -3,13 +3,13 @@
   <li class="page-item">
     <a class="page-link" href="#" aria-label="Trang đầu">
       <span aria-hidden="true">&laquo;&laquo;</span>
-      <span class="sr-only">Trang đầu</span>
+      <span class="sr-only"></span>
     </a>
   </li>
   <li class="page-item">
     <a class="page-link" href="#" aria-label="Trước">
       <span aria-hidden="true">&laquo;</span>
-      <span class="sr-only">Trước</span>
+      <span class="sr-only"></span>
     </a>
   </li>
   <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -20,13 +20,13 @@
   <li class="page-item">
     <a class="page-link" href="#" aria-label="Tiếp">
       <span aria-hidden="true">&raquo;</span>
-      <span class="sr-only">Tiếp</span>
+      <span class="sr-only"></span>
     </a>
   </li>
   <li class="page-item">
     <a class="page-link" href="#" aria-label="Trang cuối">
       <span aria-hidden="true">&raquo;&raquo;</span>
-      <span class="sr-only">Trang cuối</span>
+      <span class="sr-only"></span>
     </a>
   </li>
 </ul>
