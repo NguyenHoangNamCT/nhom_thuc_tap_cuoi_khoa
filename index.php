@@ -114,13 +114,20 @@ switch($action){
         $end = count($mangGioHang) - 1;
         $mangVuotSoLuong = array();
         $count = 0;
-        foreach($mangGioHang as $key => $arr){
+        foreach($mangGioHang as $key_i => $arr){
             
             if($sp->laySoLuongSanPhamTheoID($arr['id_san_pham']) < $_POST['txtSoLuong'.$arr['id_san_pham']]){
                 if($count == 0)
                     $message = '';
                 $mangVuotSoLuong[$arr['ten_san_pham'].'_'.$arr['id_san_pham']] = $sp->laySoLuongSanPhamTheoID($arr['id_san_pham']);
                 $count++;
+                $capNhatThatBai = true;
+            }
+            else{
+                $soLuongMoi = $_POST['txtSoLuong'.$arr['id_san_pham']];
+                $gh->capNhatSoLuongSanPhamTrongGioHang($_SESSION['nguoiDung']['id'], $arr['id_san_pham'], $soLuongMoi);
+                if($key_i == $end)
+                    $capNhatThanhCong = true;
             }
         }
         if(isset($message)){
@@ -137,11 +144,6 @@ switch($action){
             else
                 $messageTMP = 'Sản phẩm'. $message . ' Vui lòng nhập số lượng sản phẩm nhỏ hơn số lượng có trong kho';
             $message = $messageTMP;
-        }
-        else{
-            $gh->capNhatSoLuongSanPhamTrongGioHang($_SESSION['nguoiDung']['id'], $arr['id_san_pham'], $_POST['txtSoLuong'.$arr['id_san_pham']]);
-            if($key == $end)
-                $capNhatThanhCong = true;
         }
         include('cart.php');
         break;

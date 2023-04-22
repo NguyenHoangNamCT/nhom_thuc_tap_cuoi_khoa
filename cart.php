@@ -6,7 +6,7 @@
     <div class="container mt-3 col">
       <?php
         //nếu cập nhật số lương thành công thì thông báo
-        if(isset($capNhatThanhCong))
+        if(!isset($capNhatThatBai))
           echo '
           <div class="alert alert-success">
             Cập nhật giỏ hàng <strong>Thành công.</strong>
