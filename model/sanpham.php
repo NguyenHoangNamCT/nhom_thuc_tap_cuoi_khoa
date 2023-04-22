@@ -309,7 +309,9 @@ class SANPHAM{
         $dbcon = DATABASE::connect();
         try {
             $batDau = ($trang - 1) * $soluong;
-            $sql = "SELECT * FROM san_pham LIMIT :batDau, :soluong";
+            if($batDau < 0)
+                $batDau = 0;
+            $sql = "SELECT sp.*, th.tenthuonghieu, l.ten_loai_san_pham FROM sanpham sp, loaisanpham l, thuonghieu th where sp.id_loai_san_pham = l.id and sp.id_thuong_hieu = th.id LIMIT :batDau, :soluong";
             $cmd = $dbcon->prepare($sql);
             $cmd->bindValue(':batDau', $batDau, PDO::PARAM_INT);
             $cmd->bindValue(':soluong', $soluong, PDO::PARAM_INT);
@@ -359,6 +361,15 @@ class SANPHAM{
         } finally {
             DATABASE::close();
         }
+    }
+
+    //-------------------------- PHương thức tĩnh --------------------------
+    public static function mangSanPhamKhongCoTrongLoaiSP($mangSanPham, $idLoai) {
+        foreach ($mangSanPham as $arr) {
+            if ($arr['id_loai_san_pham'] == $idLoai)
+                return false;
+        }
+        return true;
     }
 
 }

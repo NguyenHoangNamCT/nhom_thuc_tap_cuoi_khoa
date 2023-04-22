@@ -34,19 +34,7 @@ $mangThuongHieu = $th->layThuongHieu();
 
 switch($action){
     case "macdinh": 
-        $tk = false;
-        // $tongsp = $sp->laySoLuongSanPham();
-        // $sanpham = $sp->layDanhSachSanPham();
-        // $soluong = 8;
-        // $tongsotrang = ceil($tongsp / $soluong);
-        // if (!isset($_REQUEST["trang"]))
-        //     $tranght = 1;
-        // else
-        //     $tranght = $_REQUEST["trang"];
-        // $batdau = ($tranght - 1) * $soluong;
-        // $batdau = max($batdau, 0);
-        // $sanpham = $sp->laySanPhamPhanTrang($batdau, $soluong, null, null);
-        $sanpham_noibat = $sp -> laySanPhamNoiBat();
+        $tranght = 1;
         include("main.php");
         break;
     case "xemChiTiet":

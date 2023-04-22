@@ -8,7 +8,10 @@
      <br>
      <br>
     <?php
-    $mangSP = $sp->layDanhSachSanPham();
+    $tongsp = $sp->laySoLuongSanPham();
+    $soluong = 10;
+    $tongsotrang = ceil($tongsp / $soluong);
+    $mangSP = $sp->laySanPhamPhanTrang($tranght, $soluong);
     $mangLoaiSP = $lsp->layLoaiSP();
 
     //nếu có lọc theo thương hiệu thì k cần hiển thị danh sách sản phẩm
@@ -20,7 +23,9 @@
         if(isset($l_id))
           if($arr_i['id'] != $l_id)
               continue;
-        echo '<h3>'.$arr_i['ten_loai_san_pham'].'</h3>';
+        //nếu 10 sản phẩm trong trang có tồn tại trong loại sản phẩm đó thì mới in tên của loại sản phẩm đó ra
+        if(SANPHAM::mangSanPhamKhongCoTrongLoaiSP($mangSP, $arr_i['id']) == false)
+          echo '<h3>'.$arr_i['ten_loai_san_pham'].'</h3>';
         foreach($mangSP as $arr_j)
           if($arr_j['ten_loai_san_pham'] == $arr_i['ten_loai_san_pham'])
           {
