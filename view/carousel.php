@@ -20,16 +20,10 @@
   </li>
 
   <?php
-    // Số trang tối đa
-    $soTrang = 100;
-
-    // Số trang hiện tại
-    $trangHienTai = 1;
-
     // Hiển thị các nút phân trang
-    for ($i = max(1, $trangHienTai - 2); $i <= min($trangHienTai + 2, $soTrang); $i++) {
+    for ($i = max(1, $trangHienTai - 2); $i <= min($trangHienTai + 2, $tongsotrang); $i++) {
       $active = ($i == $trangHienTai) ? ' active' : '';
-      echo '<li class="page-item' . $active . '"><a class="page-link" href="#">' . $i . '</a></li>';
+      echo '<li class="page-item' . $active . '"><a class="page-link" href="?trangHienTai='.$i.'">' . $i . '</a></li>';
     }
   ?>
 

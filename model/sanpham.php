@@ -311,7 +311,7 @@ class SANPHAM{
             $batDau = ($trang - 1) * $soluong;
             if($batDau < 0)
                 $batDau = 0;
-            $sql = "SELECT sp.*, th.tenthuonghieu, l.ten_loai_san_pham FROM sanpham sp, loaisanpham l, thuonghieu th where sp.id_loai_san_pham = l.id and sp.id_thuong_hieu = th.id LIMIT :batDau, :soluong";
+            $sql = "SELECT sp.*, th.tenthuonghieu, l.ten_loai_san_pham FROM sanpham sp, loaisanpham l, thuonghieu th where sp.id_loai_san_pham = l.id and sp.id_thuong_hieu = th.id order by sp.id LIMIT :batDau, :soluong";
             $cmd = $dbcon->prepare($sql);
             $cmd->bindValue(':batDau', $batDau, PDO::PARAM_INT);
             $cmd->bindValue(':soluong', $soluong, PDO::PARAM_INT);

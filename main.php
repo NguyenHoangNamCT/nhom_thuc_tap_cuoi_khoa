@@ -8,10 +8,19 @@
      <br>
      <br>
     <?php
+    if(isset($_REQUEST['trangHienTai']))
+      $trangHienTai = $_REQUEST['trangHienTai'];
+    else
+      $trangHienTai = 1;
+
+    //đếm số lượng sản phẩm có trong database
     $tongsp = $sp->laySoLuongSanPham();
-    $soluong = 10;
-    $tongsotrang = ceil($tongsp / $soluong);
-    $mangSP = $sp->laySanPhamPhanTrang($tranght, $soluong);
+    //số lượng sản phẩm trong mộT trang
+    $soLuongSPTrenMotTrang = 10;
+    //làm tròn lên 
+    $tongsotrang = ceil($tongsp / $soLuongSPTrenMotTrang);
+
+    $mangSP = $sp->laySanPhamPhanTrang($trangHienTai, $soLuongSPTrenMotTrang);
     $mangLoaiSP = $lsp->layLoaiSP();
 
     //nếu có lọc theo thương hiệu thì k cần hiển thị danh sách sản phẩm
@@ -26,8 +35,10 @@
         //nếu 10 sản phẩm trong trang có tồn tại trong loại sản phẩm đó thì mới in tên của loại sản phẩm đó ra
         if(SANPHAM::mangSanPhamKhongCoTrongLoaiSP($mangSP, $arr_i['id']) == false)
           echo '<h3>'.$arr_i['ten_loai_san_pham'].'</h3>';
+        else
+          continue;
         foreach($mangSP as $arr_j)
-          if($arr_j['ten_loai_san_pham'] == $arr_i['ten_loai_san_pham'])
+          if($arr_j['id_loai_san_pham'] == $arr_i['id'])
           {
     ?>
      <div class="col-sm-3 container" style="margin-bottom: 1.5rem;">

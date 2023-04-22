@@ -34,7 +34,6 @@ $mangThuongHieu = $th->layThuongHieu();
 
 switch($action){
     case "macdinh": 
-        $tranght = 1;
         include("main.php");
         break;
     case "xemChiTiet":
