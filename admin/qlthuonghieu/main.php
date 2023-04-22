@@ -6,9 +6,9 @@
     else
       $trangHienTai = 1;
 
-    //đếm số lượng sản phẩm có trong database
+    //đếm số lượng th có trong database
     $tongth = $th->laySoLuongThuongHieu();
-    //số lượng sản phẩm trong mộT trang
+    //số lượng th trong mộT trang
     $soLuong = 10;
     //làm tròn lên 
     $tongsotrang = ceil($tongth / $soLuong);

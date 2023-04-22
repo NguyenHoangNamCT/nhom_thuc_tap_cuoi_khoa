@@ -1,5 +1,17 @@
 <?php
     require("../view/top.php");
+
+    if(isset($_REQUEST['trangHienTai']))
+      $trangHienTai = $_REQUEST['trangHienTai'];
+    else
+      $trangHienTai = 1;
+
+    //đếm số lượng lh có trong database
+    $tonglh = $lh-> laySoLuongLienHe();
+    //số lượng lh trong mộT trang
+    $soLuong = 10;
+    //làm tròn lên 
+    $tongsotrang = ceil($tonglh / $soLuong);
 ?> 
 <div class="container">
   <h2>Quản lý sản phẩm</h2>
@@ -18,7 +30,7 @@
       </thead>
       <tbody>
         <?php
-          $mangLH = $lh->layDanhSachLienHe();
+          $mangLH = $lh->layLienHePhanTrang($trangHienTai, $soLuong);
           foreach($mangLH as $arr){
         ?>
         <tr>
@@ -35,6 +47,9 @@
       </tbody>
     </table>
   </div>
+  <?php 
+    require("../../view/carousel.php");
+  ?>
 </div>
 
 </div>

@@ -1,5 +1,17 @@
 <?php
     require("../view/top.php");
+
+    if(isset($_REQUEST['trangHienTai']))
+      $trangHienTai = $_REQUEST['trangHienTai'];
+    else
+      $trangHienTai = 1;
+
+    //đếm số lượng qc có trong database
+    $tongqc = $qc->laySoLuongQuangCao();
+    //số lượng qc trong mộT trang
+    $soLuong = 10;
+    //làm tròn lên 
+    $tongsotrang = ceil($tongqc / $soLuong);
 ?> 
 <div class="container">
   <h2>Quản lý Quảng cáo</h2>
@@ -20,7 +32,7 @@
       <tbody>
         <?php
           if(!isset($tuKhoa))
-            $mangQC = $qc->layDanhSachQuangCao();
+            $mangQC = $qc->layQuangCaoPhanTrang($trangHienTai, $soLuong);
           else 
             $mangQC = $qc->timKiemQuangCao($tuKhoa);
             foreach($mangQC as $arr){
@@ -39,6 +51,9 @@
       </tbody>
     </table>
   </div>
+  <?php 
+    require("../../view/carousel.php");
+  ?>
 </div>
 
 </div>

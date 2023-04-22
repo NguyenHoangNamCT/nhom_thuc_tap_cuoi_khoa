@@ -1,5 +1,17 @@
 <?php
     require("../view/top.php");
+
+    if(isset($_REQUEST['trangHienTai']))
+      $trangHienTai = $_REQUEST['trangHienTai'];
+    else
+      $trangHienTai = 1;
+
+    //đếm số lượng ctdh có trong database
+    $tongctdh = $ctdh-> laySoLuongChiTietDH();
+    //số lượng ctdh trong mộT trang
+    $soLuong = 10;
+    //làm tròn lên 
+    $tongsotrang = ceil($tongctdh / $soLuong);
 ?> 
 <div class="container">
   <h2>Quản lý Chi Tiết Đơn Hàng</h2>
@@ -18,7 +30,7 @@
       </thead>
       <tbody>
         <?php
-          $mangCTDH = $ctdh->layDanhSachChiTietDonHang();
+          $mangCTDH = $ctdh->layChiTietDonHangPhanTrang($trangHienTai, $soLuong);
           foreach($mangCTDH as $arr){
         ?>
         <tr>
@@ -35,6 +47,9 @@
       </tbody>
     </table>
   </div>
+  <?php 
+    require("../../view/carousel.php");
+  ?>
 </div>
 
 </div>

@@ -1,5 +1,17 @@
 <?php
     require("../view/top.php");
+
+    if(isset($_REQUEST['trangHienTai']))
+      $trangHienTai = $_REQUEST['trangHienTai'];
+    else
+      $trangHienTai = 1;
+
+    //đếm số lượng lsp có trong database
+    $tonglsp = $l-> laySoLuongLoaiSP();
+    //số lượng lsp trong mộT trang
+    $soLuong = 10;
+    //làm tròn lên 
+    $tongsotrang = ceil($tonglsp / $soLuong);
 ?> 
 <div class="container">
   <h2>Quản lý loại sản phẩm</h2>
@@ -22,7 +34,7 @@
         
           <?php 
             if(!isset($tuKhoa))
-              $mangLoai = $l->layLoaiSP();
+              $mangLoai = $l->layLoaiSanPhamPhanTrang($trangHienTai, $soLuong);
             else
             $mangLoai = $l->timKiemLoaiSanPham($tuKhoa);
             foreach ($mangLoai as $arr) { 
@@ -40,7 +52,9 @@
       </tbody>
     </table>
   </div>
-  
+  <?php 
+    require("../../view/carousel.php");
+  ?>
 </div>
 
 </div>

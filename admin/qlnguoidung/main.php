@@ -1,5 +1,17 @@
 <?php 
     include("../view/top.php");
+
+    if(isset($_REQUEST['trangHienTai']))
+      $trangHienTai = $_REQUEST['trangHienTai'];
+    else
+      $trangHienTai = 1;
+
+    //đếm số lượng nd có trong database
+    $tongnd = $nd->laySoLuongNguoiDung();
+    //số lượng nd trong mộT trang
+    $soLuong = 10;
+    //làm tròn lên 
+    $tongsotrang = ceil($tongnd / $soLuong);
 ?>
   <div class="container">
   <div>
@@ -34,7 +46,7 @@
         
           <?php 
             if(!isset($tuKhoa))
-              $mangND = $nd->layTatCaNguoiDung();
+              $mangND = $nd->layNguoiDungPhanTrang($trangHienTai, $soLuong);
             else if($loaiTimKiem == "theoTenDangNhap")
               $mangND = $nd->layNguoiDungTheoTenDangNhapTK($tuKhoa);
             else if($loaiTimKiem == "theoEmail")
@@ -59,6 +71,9 @@
       </tbody>
     </table>
   </div>
+  <?php 
+    require("../../view/carousel.php");
+  ?>
 </div>
 <?php 
     include("../view/footer.php");

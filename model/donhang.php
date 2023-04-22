@@ -155,7 +155,9 @@ class DONHANG{
             $batDau = ($trang - 1) * $soluong;
             if($batDau < 0)
                 $batDau = 0;
-            $sql = "SELECT * FROM donhang ORDER BY id DESC LIMIT :batDau, :soluong";
+            $sql = "SELECT donhang.*, nguoidung.ho_ten FROM donhang 
+                INNER JOIN nguoidung ON donhang.id_nguoi_dung = nguoidung.id
+                ORDER BY id DESC LIMIT :batDau, :soluong";
             $cmd = $dbcon->prepare($sql);
             $cmd->bindValue(':batDau', $batDau, PDO::PARAM_INT);
             $cmd->bindValue(':soluong', $soluong, PDO::PARAM_INT);

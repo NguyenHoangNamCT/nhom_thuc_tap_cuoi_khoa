@@ -153,5 +153,32 @@ class CHITIETDONHANG{
             DATABASE::close();
         }
     }
+    //ctdh phân trang
+    public function layChiTietDonHangPhanTrang( $trang, $soLuong) {
+        $dbcon = DATABASE::connect();
+        try {
+            $batDau = ($trang - 1) * $soLuong;
+            if($batDau < 0)
+                $batDau = 0;
+            $sql = "SELECT chitietdonhang.*, donhang.id AS id_don_hang, sanpham.ten_san_pham
+            FROM chitietdonhang, sanpham, donhang
+            WHERE chitietdonhang.id_san_pham = sanpham.id
+            AND chitietdonhang.id_don_hang = donhang.id 
+            order by chitietdonhang.id LIMIT :batDau, :soLuong";
+            $cmd = $dbcon->prepare($sql);
+            $cmd->bindValue(':batDau', $batDau, PDO::PARAM_INT);
+            $cmd->bindValue(':soLuong', $soLuong, PDO::PARAM_INT);
+            $cmd->execute();
+            $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn: $error_message</p>";
+            exit();
+        } finally {
+            DATABASE::close();
+        }
+    }
+    
 }
 ?>

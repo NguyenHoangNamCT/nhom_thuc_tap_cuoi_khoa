@@ -6,9 +6,9 @@
     else
       $trangHienTai = 1;
 
-    //đếm số lượng sản phẩm có trong database
+    //đếm số lượng ttdh có trong database
     $tongttdh = $ttdh->laySoLuongThongTinDonHang();
-    //số lượng sản phẩm trong mộT trang
+    //số lượng ttdh trong mộT trang
     $soLuong = 10;
     //làm tròn lên 
     $tongsotrang = ceil($tongttdh / $soLuong);
@@ -32,7 +32,7 @@
       <tbody>
         <?php
         if(!isset($tuKhoa))
-          $mangTTDH = $ttdh->layTTonHangPhanTrang($trangHienTai, $soLuong);
+          $mangTTDH = $ttdh->layTTDonHangPhanTrang($trangHienTai, $soLuong);
         else
           $mangTTDH = $ttdh->timKiemDonHangTheoTenKhachHang($tuKhoa);
           foreach($mangTTDH as $arr){

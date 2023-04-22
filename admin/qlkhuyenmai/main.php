@@ -1,5 +1,17 @@
 <?php
     require("../view/top.php");
+
+    if(isset($_REQUEST['trangHienTai']))
+      $trangHienTai = $_REQUEST['trangHienTai'];
+    else
+      $trangHienTai = 1;
+
+    //đếm số lượng km có trong database
+    $tongkm = $km-> laySoLuongKhuyenMai();
+    //số lượng km trong mộT trang
+    $soLuong = 10;
+    //làm tròn lên 
+    $tongsotrang = ceil($tongkm / $soLuong);
 ?> 
 <div class="container">
   <h2>Quản lý khuyến mãi</h2>
@@ -21,7 +33,7 @@
       <tbody>
         <?php
           if(!isset($tuKhoa))
-            $mangKM = $km->layDanhSachKhuyenMai();
+            $mangKM = $km->layDanhSachKhuyenMaiPhanTrang($trangHienTai, $soLuong);
           else
             $mangKM = $km->timKiemKhuyenMaiTheoTen($tuKhoa);
           foreach($mangKM as $arr){
@@ -41,6 +53,9 @@
       </tbody>
     </table>
   </div>
+  <?php 
+    require("../../view/carousel.php");
+  ?>
 </div>
 
 </div>

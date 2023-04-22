@@ -1,5 +1,17 @@
 <?php
     require("../view/top.php");
+
+    if(isset($_REQUEST['trangHienTai']))
+      $trangHienTai = $_REQUEST['trangHienTai'];
+    else
+      $trangHienTai = 1;
+
+    //đếm số lượng hd có trong database
+    $tonghd = $hd-> laySoLuongHoaDon();
+    //số lượng hd trong mộT trang
+    $soLuong = 10;
+    //làm tròn lên 
+    $tongsotrang = ceil($tonghd / $soLuong);
 ?> 
 <div class="container">
   <h2>Quản lý hoá đơn</h2>
@@ -17,7 +29,7 @@
       </thead>
       <tbody>
         <?php
-          $mangHD = $hd->layDanhSachHoaDon();
+          $mangHD = $hd->layHoaDonPhanTrang($trangHienTai, $soLuong);
           foreach($mangHD as $arr){
         ?>
         <tr>
@@ -35,6 +47,9 @@
       </tbody>
     </table>
   </div>
+  <?php 
+    require("../../view/carousel.php");
+  ?>
 </div>
 
 </div>
