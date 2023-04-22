@@ -9,7 +9,7 @@
     //đếm số lượng sản phẩm có trong database
     $tongth = $th->laySoLuongThuongHieu();
     //số lượng sản phẩm trong mộT trang
-    $soLuong = 5;
+    $soLuong = 10;
     //làm tròn lên 
     $tongsotrang = ceil($tongth / $soLuong);
 ?> 
@@ -34,7 +34,7 @@
         
           <?php 
             if(!isset($tuKhoa))
-              $mangth = $th->layThuongHieu();
+              $mangth = $th->layThuongHieuPhanTrang($trangHienTai, $soLuong);
             else
               $mangth = $th->timKiemThuongHieu($tuKhoa);
             foreach ($mangth as $arr) { 

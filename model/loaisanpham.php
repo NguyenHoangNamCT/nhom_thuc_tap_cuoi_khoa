@@ -16,6 +16,47 @@
                 exit();
             }
         }
+                //đếm tổng số lượng loại sản phẩm
+            public function laySoLuongLoaiSP() {
+            $db = DATABASE::connect();
+            try {
+                $sql = "SELECT COUNT(*) as so_luong FROM loaisanpham";
+                $result = $db->query($sql);
+                $row = $result->fetch(PDO::FETCH_ASSOC);
+                return $row['so_luong'];
+            } catch(PDOException $e) {
+                $error_message = $e->getMessage();
+                echo "<p>Lỗi truy vấn : $error_message</p>";
+                exit();
+            } finally {
+                DATABASE::close();
+            }
+        }
+
+        //loại sp phân trang
+        public function layLoaiSanPhamPhanTrang($trang, $soluong) {
+            $dbcon = DATABASE::connect();
+            try {
+                $batDau = ($trang - 1) * $soluong;
+                if ($batDau < 0) {
+                    $batDau = 0;
+                }
+                $sql = "SELECT * FROM loaisanpham ORDER BY id LIMIT :batDau, :soluong";
+                $cmd = $dbcon->prepare($sql);
+                $cmd->bindValue(':batDau', $batDau, PDO::PARAM_INT);
+                $cmd->bindValue(':soluong', $soluong, PDO::PARAM_INT);
+                $cmd->execute();
+                $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
+                return $result;
+            } catch(PDOException $e) {
+                $error_message = $e->getMessage();
+                echo "<p>Lỗi truy vấn: $error_message</p>";
+                exit();
+            } finally {
+                DATABASE::close();
+            }
+        }
+        
         public function themLoaiSanPham($ten_loai_san_pham, $mo_ta, $trang_thai, $hinh_anh){
             $db = DATABASE::connect();
             try{

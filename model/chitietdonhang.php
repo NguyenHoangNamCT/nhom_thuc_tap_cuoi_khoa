@@ -137,5 +137,21 @@ class CHITIETDONHANG{
             DATABASE::close();
         }
     }
+     //đếm tổng số lượng chi tiết đơn hàng
+	  public function laySoLuongChiTietDH() {
+        $db = DATABASE::connect();
+        try {
+            $sql = "SELECT COUNT(*) as so_luong FROM chitietdonhang";
+            $result = $db->query($sql);
+            $row = $result->fetch(PDO::FETCH_ASSOC);
+            return $row['so_luong'];
+        } catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn : $error_message</p>";
+            exit();
+        } finally {
+            DATABASE::close();
+        }
+    }
 }
 ?>

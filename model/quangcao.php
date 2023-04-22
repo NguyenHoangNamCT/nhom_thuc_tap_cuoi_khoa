@@ -137,6 +137,44 @@ class QUANGCAO{
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+     //đếm tổng số lượng thông tin quảng cáo
+     public function laySoLuongQuangCao() {
+        $db = DATABASE::connect();
+        try {
+            $sql = "SELECT COUNT(*) as so_luong FROM quangcao";
+            $result = $db->query($sql);
+            $row = $result->fetch(PDO::FETCH_ASSOC);
+            return $row['so_luong'];
+        } catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở laySoLuongQuangCao: $error_message</p>";
+            exit();
+        } finally {
+            DATABASE::close();
+        }
+    }
+    //quảng cáo phân trang
+    public function layQuangCaoPhanTrang($trang, $soluong) {
+        $dbcon = DATABASE::connect();
+        try {
+            $batDau = ($trang - 1) * $soluong;
+            if($batDau < 0)
+                $batDau = 0;
+            $sql = "SELECT * FROM quangcao ORDER BY id DESC LIMIT :batDau, :soluong";
+            $cmd = $dbcon->prepare($sql);
+            $cmd->bindValue(':batDau', $batDau, PDO::PARAM_INT);
+            $cmd->bindValue(':soluong', $soluong, PDO::PARAM_INT);
+            $cmd->execute();
+            $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn: $error_message</p>";
+            exit();
+        } finally {
+            DATABASE::close();
+        }
+    }
     
     
 }

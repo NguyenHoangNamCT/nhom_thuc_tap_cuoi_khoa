@@ -1,5 +1,17 @@
 <?php
     require("../view/top.php");
+
+    if(isset($_REQUEST['trangHienTai']))
+      $trangHienTai = $_REQUEST['trangHienTai'];
+    else
+      $trangHienTai = 1;
+
+    //đếm số lượng sản phẩm có trong database
+    $tongttdh = $ttdh->laySoLuongThongTinDonHang();
+    //số lượng sản phẩm trong mộT trang
+    $soLuong = 10;
+    //làm tròn lên 
+    $tongsotrang = ceil($tongttdh / $soLuong);
 ?> 
 <div class="container">
   <h2>Quản lý Thông Tin Đơn Hàng</h2>
@@ -20,7 +32,7 @@
       <tbody>
         <?php
         if(!isset($tuKhoa))
-          $mangTTDH = $ttdh->layDanhSachThongTinDonHang();
+          $mangTTDH = $ttdh->layTTonHangPhanTrang($trangHienTai, $soLuong);
         else
           $mangTTDH = $ttdh->timKiemDonHangTheoTenKhachHang($tuKhoa);
           foreach($mangTTDH as $arr){
@@ -41,6 +53,9 @@
       </tbody>
     </table>
   </div>
+  <?php 
+    require("../../view/carousel.php");
+  ?>
 </div>
 
 </div>

@@ -97,5 +97,45 @@ class LIENHE{
             return null;
         }
     }
+     //đếm tổng số lượng liên hệ
+	  public function laySoLuongLienHe() {
+        $db = DATABASE::connect();
+        try {
+            $sql = "SELECT COUNT(*) as so_luong FROM lienhe";
+            $result = $db->query($sql);
+            $row = $result->fetch(PDO::FETCH_ASSOC);
+            return $row['so_luong'];
+        } catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn : $error_message</p>";
+            exit();
+        } finally {
+            DATABASE::close();
+        }
+    }
+    //liên hệ phân trang
+    public function layLienHePhanTrang($trang, $soluong) {
+        $dbcon = DATABASE::connect();
+        try {
+            $batDau = ($trang - 1) * $soluong;
+            if ($batDau < 0) {
+                $batDau = 0;
+            }
+            $sql = "SELECT * FROM lienhe ORDER BY id LIMIT :batDau, :soluong";
+            $cmd = $dbcon->prepare($sql);
+            $cmd->bindValue(':batDau', $batDau, PDO::PARAM_INT);
+            $cmd->bindValue(':soluong', $soluong, PDO::PARAM_INT);
+            $cmd->execute();
+            $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn: $error_message</p>";
+            exit();
+        } finally {
+            DATABASE::close();
+        }
+    }
+    
 }
 ?>
