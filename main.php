@@ -85,6 +85,7 @@
     ?>
   </div>
 </div>
+<?php include("view/carousel.php"); ?>
 <br></br>
 <?php include('topview.php'); ?>
 <br></br>
