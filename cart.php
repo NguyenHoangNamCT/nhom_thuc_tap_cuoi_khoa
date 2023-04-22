@@ -4,7 +4,7 @@
 <div class="container">  
   <div class="row"> 
     <div class="container mt-3 col">
-      <?php 
+      <?php
         //nếu cập nhật số lương thành công thì thông báo
         if(isset($capNhatThanhCong))
           echo '
@@ -18,7 +18,14 @@
             Cập nhật giỏ hàng <strong>Thất bại!</strong> <?php echo '<br>'; echo $message; ?>
           </div>
       <?php 
-        } 
+        }
+        else if(isset($messageThem)){
+      ?>
+          <div class="alert alert-danger">
+            Thêm sản phẩm <strong>Thất bại!</strong> <?php echo '<br>'; echo $messageThem; ?>
+          </div>
+      <?php 
+        }
       ?>
       <table class="table table-borderless" align="center">
         <h2>Giỏ Hàng</h2>

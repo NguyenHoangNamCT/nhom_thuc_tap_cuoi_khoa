@@ -89,11 +89,17 @@ switch($action){
 		include('cart.php');
         break;
     case "choVaoGio":
-        $id = $_REQUEST['id'];
+        $id = $_REQUEST['id'];//id sản phẩm
         $soLuong = $_REQUEST['soLuong'];
         if($soLuong == '')
             $soLuong = 1;
-        $gh->themSanPhamVaoGioHang($_SESSION['nguoiDung']['id'], $id, $soLuong);
+        
+        $soLuongTrongKho = $sp->laySoLuongSanPhamTheoID($id);
+        $soLuongTrongGioHang = $gh->laySoLuongSanPhamTrongGioHang($_SESSION['nguoiDung']['id'], $id);
+        if($soLuong > $soLuongTrongKho || ($soLuongTrongGioHang + $soLuong) > $soLuongTrongKho)
+            $messageThem = "Không thể thêm nhiều hơn số lượng sản phẩm có trong kho. trong kho chỉ còn ".$soLuongTrongKho." sản phẩm.";
+        else
+            $gh->themSanPhamVaoGioHang($_SESSION['nguoiDung']['id'], $id, $soLuong);
         include('cart.php');
         break;
     case "xoaSPTrongGio":
