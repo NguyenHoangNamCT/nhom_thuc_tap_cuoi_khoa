@@ -6,6 +6,11 @@
     else
       $trangHienTai = 1;
 
+      if(isset($_REQUEST['txtTuKhoa']))
+      $tuKhoa = $_REQUEST['txtTuKhoa'];
+    if(isset($_REQUEST['loaiTimKiem']))
+      $loaiTimKiem = $_REQUEST['loaiTimKiem'];
+
     //đếm số lượng ttdh có trong database
     $tongttdh = $ttdh->laySoLuongThongTinDonHang();
     //số lượng ttdh trong mộT trang
@@ -34,7 +39,12 @@
         if(!isset($tuKhoa))
           $mangTTDH = $ttdh->layTTDonHangPhanTrang($trangHienTai, $soLuong);
         else
-          $mangTTDH = $ttdh->timKiemDonHangTheoTenKhachHang($tuKhoa);
+        {
+          $mangTTDH = $ttdh->timKiemDonHangTheoTenKhachHangPhanTrang($tuKhoa, $trangHienTai, $soLuong);
+          $tongttdh = count($ttdh->timKiemDonHangTheoTenKhachHang($tuKhoa));
+          $tongsotrang = ceil($tongttdh / $soLuong);
+        }
+          
           foreach($mangTTDH as $arr){
         ?>
         <tr>

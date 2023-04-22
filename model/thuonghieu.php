@@ -17,8 +17,8 @@ class THUONGHIEU{
         }
     }
 
-    //tìm kiếm thương hiệu theo tên gân đúng
-    public function timKiemThuongHieu($tenth, $trang, $soluong) {
+    //tìm kiếm thương hiệu theo tên gân đúng phân trang
+    public function timKiemThuongHieuPhanTrang($tenth, $trang, $soluong) {
         $db = DATABASE::connect();
         try {
             $batDau = ($trang - 1) * $soluong;
@@ -42,8 +42,26 @@ class THUONGHIEU{
             DATABASE::close();
         }
     }
-    
-    
+     //tìm kiếm thương hiệu theo tên gân đúng 
+     public function timKiemThuongHieu($tenth) {
+        $db = DATABASE::connect();
+        try {
+            $sql = "SELECT * FROM thuongHieu WHERE TenThuongHieu LIKE CONCAT('%', :tenth, '%') " ;
+            $cmd = $db->prepare($sql);
+            $cmd->bindValue(':tenth', $tenth);
+            $cmd->execute();
+            $thuongHieu = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $thuongHieu;
+        }
+        catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở timKiemThuongHieu: $error_message</p>";
+            exit();
+        }
+        finally {
+            DATABASE::close();
+        }
+    }
 
     // Thêm mới
     public function themThuongHieu($tenThuongHieu, $moTa, $trangWeb, $logo) {

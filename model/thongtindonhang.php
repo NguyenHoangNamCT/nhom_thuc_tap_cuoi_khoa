@@ -105,9 +105,37 @@ class THONGTINDONHANG{
     }
 
     // tìm kiếm bằng tên khách hàng
-    public function timKiemDonHangTheoTenKhachHang($ten_khach_hang) {
+    public function timKiemDonHangTheoTenKhachHangPhanTrang($ten_khach_hang,   $trang, $soluong )
+     {
         $db = DATABASE::connect();
         try {
+            $batDau = ($trang - 1) * $soluong;
+            if($batDau < 0)
+                $batDau = 0;
+            $sql = "SELECT * FROM thongtindonhang WHERE ten_khach_hang = :ten_khach_hang   ORDER BY id LIMIT :batDau, :soluong";
+            $cmd = $db->prepare($sql);
+            $cmd->bindValue(':ten_khach_hang', $ten_khach_hang);
+            $cmd->bindValue(':batDau', $batDau, PDO::PARAM_INT);
+            $cmd->bindValue(':soluong', $soluong, PDO::PARAM_INT);
+            $cmd->execute();
+            $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+        catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở timKiemDonHangTheoTenKhachHang: $error_message</p>";
+            exit();
+        }
+        finally {
+            DATABASE::close();
+        }
+    }
+    // tìm kiếm bằng tên khách hàng
+    public function timKiemDonHangTheoTenKhachHang($ten_khach_hang)
+     {
+        $db = DATABASE::connect();
+        try {
+
             $sql = "SELECT * FROM thongtindonhang WHERE ten_khach_hang = :ten_khach_hang";
             $cmd = $db->prepare($sql);
             $cmd->bindValue(':ten_khach_hang', $ten_khach_hang);
@@ -124,7 +152,7 @@ class THONGTINDONHANG{
             DATABASE::close();
         }
     }
-     //đếm tổng số lượng thông tin đơn hàng
+     //đếm tổng số lượng thông tin đơn hàng phân trang
      public function laySoLuongThongTinDonHang() {
         $db = DATABASE::connect();
         try {

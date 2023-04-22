@@ -6,6 +6,11 @@
     else
       $trangHienTai = 1;
 
+      if(isset($_REQUEST['txtTuKhoa']))
+      $tuKhoa = $_REQUEST['txtTuKhoa'];
+    if(isset($_REQUEST['loaiTimKiem']))
+      $loaiTimKiem = $_REQUEST['loaiTimKiem'];
+
     //đếm số lượng lsp có trong database
     $tonglsp = $l-> laySoLuongLoaiSP();
     //số lượng lsp trong mộT trang
@@ -36,7 +41,13 @@
             if(!isset($tuKhoa))
               $mangLoai = $l->layLoaiSanPhamPhanTrang($trangHienTai, $soLuong);
             else
-            $mangLoai = $l->timKiemLoaiSanPham($tuKhoa, $trangHienTai, $soLuong);
+            {
+              $mangLoai = $l->timKiemLoaiSanPhamPhanTrang($tuKhoa, $trangHienTai, $soLuong);
+              $tonglsp = count($l->timKiemLoaiSanPham($tuKhoa));
+              $tongsotrang = ceil($tonglsp / $soLuong);
+
+            }
+            
             foreach ($mangLoai as $arr) { 
           ?>
           <tr>

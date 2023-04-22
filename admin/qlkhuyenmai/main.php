@@ -6,6 +6,11 @@
     else
       $trangHienTai = 1;
 
+      if(isset($_REQUEST['txtTuKhoa']))
+      $tuKhoa = $_REQUEST['txtTuKhoa'];
+    if(isset($_REQUEST['loaiTimKiem']))
+      $loaiTimKiem = $_REQUEST['loaiTimKiem'];
+
     //đếm số lượng km có trong database
     $tongkm = $km-> laySoLuongKhuyenMai();
     //số lượng km trong mộT trang
@@ -35,7 +40,12 @@
           if(!isset($tuKhoa))
             $mangKM = $km->layDanhSachKhuyenMaiPhanTrang($trangHienTai, $soLuong);
           else
-            $mangKM = $km->timKiemKhuyenMaiTheoTen($tuKhoa);
+          {
+            $mangKM = $km->timKiemKhuyenMaiTheoTenPhanTrang($tuKhoa, $trangHienTai, $soLuong);
+            $tongkm = count($km->timKiemKhuyenMaiTheoTen($tuKhoa));
+            $tongsotrang = ceil($tongkm / $soLuong);
+          }
+            
           foreach($mangKM as $arr){
         ?>
         <tr>

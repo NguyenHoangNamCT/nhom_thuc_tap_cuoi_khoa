@@ -5,6 +5,11 @@
       $trangHienTai = $_REQUEST['trangHienTai'];
     else
       $trangHienTai = 1;
+    
+    if(isset($_REQUEST['txtTuKhoa']))
+      $tuKhoa = $_REQUEST['txtTuKhoa'];
+    if(isset($_REQUEST['loaiTimKiem']))
+      $loaiTimKiem = $_REQUEST['loaiTimKiem'];
 
     //đếm số lượng qc có trong database
     $tongqc = $qc->laySoLuongQuangCao();
@@ -34,7 +39,12 @@
           if(!isset($tuKhoa))
             $mangQC = $qc->layQuangCaoPhanTrang($trangHienTai, $soLuong);
           else 
-            $mangQC = $qc->timKiemQuangCao($tuKhoa);
+          {
+            $mangQC = $qc->timKiemQuangCaoPhanTrang($tuKhoa, $trangHienTai, $soLuong);
+            $tongqc = count($qc->timKiemQuangCao($tuKhoa));
+            $tongsotrang = ceil($tongqc / $soLuong);
+          }
+           
             foreach($mangQC as $arr){
         ?>
         <tr>

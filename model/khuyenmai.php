@@ -107,12 +107,39 @@ class KHUYENMAI{
     }
     
     //tìm kiếm theo tên gần đúng
-    public function timKiemKhuyenMaiTheoTen($ten_khuyen_mai) {
+    public function timKiemKhuyenMaiTheoTen($ten_khuyen_mai)
+     {
         $db = DATABASE::connect();
         try {
             $sql = "SELECT * FROM khuyenmai WHERE ten_khuyen_mai LIKE :ten_khuyen_mai";
             $cmd = $db->prepare($sql);
             $cmd->bindValue(':ten_khuyen_mai', "%$ten_khuyen_mai%");
+            $cmd->execute();
+            $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+        catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở timKiemKhuyenMaiTheoTen: $error_message</p>";
+            exit();
+        }
+        finally {
+            DATABASE::close();
+        }
+    }
+    //tìm kiếm theo tên gần đúng phân trang
+    public function timKiemKhuyenMaiTheoTenPhanTrang($ten_khuyen_mai,   $trang, $soluong)
+     {
+        $db = DATABASE::connect();
+        try {
+            $batDau = ($trang - 1) * $soluong;
+            if($batDau < 0)
+                $batDau = 0;
+            $sql = "SELECT * FROM khuyenmai WHERE ten_khuyen_mai LIKE :ten_khuyen_mai  ORDER BY id LIMIT :batDau, :soluong";
+            $cmd = $db->prepare($sql);
+            $cmd->bindValue(':ten_khuyen_mai', "%$ten_khuyen_mai%");
+            $cmd->bindValue(':batDau', $batDau, PDO::PARAM_INT);
+            $cmd->bindValue(':soluong', $soluong, PDO::PARAM_INT);
             $cmd->execute();
             $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
             return $result;

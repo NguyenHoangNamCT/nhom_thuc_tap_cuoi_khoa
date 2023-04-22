@@ -6,6 +6,13 @@
     else
       $trangHienTai = 1;
 
+    
+      if(isset($_REQUEST['txtTuKhoa']))
+      $tuKhoa = $_REQUEST['txtTuKhoa'];
+    if(isset($_REQUEST['loaiTimKiem']))
+      $loaiTimKiem = $_REQUEST['loaiTimKiem'];
+
+
     //đếm số lượng nd có trong database
     $tongnd = $nd->laySoLuongNguoiDung();
     //số lượng nd trong mộT trang
@@ -48,9 +55,17 @@
             if(!isset($tuKhoa))
               $mangND = $nd->layNguoiDungPhanTrang($trangHienTai, $soLuong);
             else if($loaiTimKiem == "theoTenDangNhap")
-              $mangND = $nd->layNguoiDungTheoTenDangNhapTK($tuKhoa, $trangHienTai, $soLuong);
+            { 
+              $mangND = $nd->layNguoiDungTheoTenDangNhapTKPhanTrang($tuKhoa, $trangHienTai, $soLuong);
+              $tongnd = count( $nd->layNguoiDungTheoTenDangNhapTK($tuKhoa));
+              $tongsotrang = ceil($tongnd / $soLuong);
+            }
+             
             else if($loaiTimKiem == "theoEmail")
-              $mangND = $nd->layThongTinNguoiDungTheoEmail($tuKhoa, $trangHienTai, $soLuong);
+            { 
+              $mangND = $nd->layThongTinNguoiDungTheoEmailPhanTrang($tuKhoa, $trangHienTai, $soLuong);
+              $tongnd = count($nd->layThongTinNguoiDungTheoEmail($tuKhoa));
+              $tongsotrang = ceil($tongnd / $soLuong);}
             foreach ($mangND as $arr) { 
           ?>
           <tr>
