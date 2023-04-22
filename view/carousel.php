@@ -1,6 +1,11 @@
 
-<!-- Giao diện phân trang -->
 <ul class="pagination justify-content-center">
+  <li class="page-item">
+    <a class="page-link" href="#" aria-label="Trang đầu">
+      <span aria-hidden="true">&laquo;&laquo;</span>
+      <span class="sr-only">Trang đầu</span>
+    </a>
+  </li>
   <li class="page-item">
     <a class="page-link" href="#" aria-label="Trước">
       <span aria-hidden="true">&laquo;</span>
@@ -16,6 +21,12 @@
     <a class="page-link" href="#" aria-label="Tiếp">
       <span aria-hidden="true">&raquo;</span>
       <span class="sr-only">Tiếp</span>
+    </a>
+  </li>
+  <li class="page-item">
+    <a class="page-link" href="#" aria-label="Trang cuối">
+      <span aria-hidden="true">&raquo;&raquo;</span>
+      <span class="sr-only">Trang cuối</span>
     </a>
   </li>
 </ul>
