@@ -137,6 +137,31 @@ class SANPHAM{
         }
     }
 
+    //tìm kiếm sp theo tên gần đúng
+    public function timkiemSanPhamPhanTrang($tenSP, $trang, $soluong) {
+        $db = DATABASE::connect();
+        try {
+            $batDau = ($trang - 1) * $soluong;
+            if($batDau < 0)
+                $batDau = 0;
+            $sql = "SELECT sp.*, th.tenthuonghieu, l.ten_loai_san_pham FROM sanpham sp, loaisanpham l, thuonghieu th where sp.id_loai_san_pham = l.id and sp.id_thuong_hieu = th.id and ten_san_pham LIKE :tenSP order by sp.id limit :batDau, :soluong";
+            $cmd = $db->prepare($sql);
+            $cmd->bindValue(':tenSP', '%' . $tenSP . '%');
+            $cmd->bindValue(':batDau', $batDau, PDO::PARAM_INT);
+            $cmd->bindValue(':soluong', $soluong, PDO::PARAM_INT);
+            $cmd->execute();
+            return $cmd->fetchAll(PDO::FETCH_ASSOC);
+        }
+        catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở timkiemSanPham: $error_message</p>";
+            exit();
+        }
+        finally {
+            DATABASE::close();
+        }
+    }
+
     //tìm kiếm sp theo giá tiền
     public function timKiemSanPhamTheoGiaTien($gia_tien) {
         $db = DATABASE::connect();
@@ -157,7 +182,6 @@ class SANPHAM{
             DATABASE::close();
         }
     }
-    
     //tìm kiếm sp theo giá tiền
     public function timKiemSanPhamTheoGiaTienToiDa($gia_tien) {
         $db = DATABASE::connect();
@@ -178,14 +202,65 @@ class SANPHAM{
             DATABASE::close();
         }
     }
-
+    
     //tìm kiếm sp theo giá tiền
+    public function timKiemSanPhamTheoGiaTienToiDaPhanTrang($gia_tien, $trang, $soluong) {
+        $db = DATABASE::connect();
+        try {
+            $batDau = ($trang - 1) * $soluong;
+            if($batDau < 0)
+                $batDau = 0;
+            $sql = "SELECT sp.*, th.tenthuonghieu, l.ten_loai_san_pham FROM sanpham sp, loaisanpham l, thuonghieu th where sp.id_loai_san_pham = l.id and sp.id_thuong_hieu = th.id and gia_tien <= :gia_tien order by sp.id limit :batDau, :soluong";
+            $cmd = $db->prepare($sql);
+            $cmd->bindValue(':gia_tien', $gia_tien);
+            $cmd->bindValue(':batDau', $batDau, PDO::PARAM_INT);
+            $cmd->bindValue(':soluong', $soluong, PDO::PARAM_INT);
+            $cmd->execute();
+            $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+        catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở timKiemSanPhamTheoGiaTien: $error_message</p>";
+            exit();
+        }
+        finally {
+            DATABASE::close();
+        }
+    }
+
     public function timKiemSanPhamTheoGiaTienToiThieu($gia_tien) {
         $db = DATABASE::connect();
         try {
             $sql = "SELECT sp.*, th.tenthuonghieu, l.ten_loai_san_pham FROM sanpham sp, loaisanpham l, thuonghieu th where sp.id_loai_san_pham = l.id and sp.id_thuong_hieu = th.id and gia_tien >= :gia_tien";
             $cmd = $db->prepare($sql);
             $cmd->bindValue(':gia_tien', $gia_tien);
+            $cmd->execute();
+            $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+        catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở timKiemSanPhamTheoGiaTien: $error_message</p>";
+            exit();
+        }
+        finally {
+            DATABASE::close();
+        }
+    }
+
+    //tìm kiếm sp theo giá tiền
+    public function timKiemSanPhamTheoGiaTienToiThieuPhanTrang($gia_tien, $trang, $soluong) {
+        $db = DATABASE::connect();
+        try {
+            $batDau = ($trang - 1) * $soluong;
+            if($batDau < 0)
+                $batDau = 0;
+            $sql = "SELECT sp.*, th.tenthuonghieu, l.ten_loai_san_pham FROM sanpham sp, loaisanpham l, thuonghieu th where sp.id_loai_san_pham = l.id and sp.id_thuong_hieu = th.id and gia_tien >= :gia_tien order by sp.id limit :batDau, :soluong";
+            $cmd = $db->prepare($sql);
+            $cmd->bindValue(':gia_tien', $gia_tien);
+            $cmd->bindValue(':batDau', $batDau, PDO::PARAM_INT);
+            $cmd->bindValue(':soluong', $soluong, PDO::PARAM_INT);
             $cmd->execute();
             $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
             return $result;

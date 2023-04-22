@@ -5,6 +5,12 @@
     else
       $trangHienTai = 1;
 
+
+    if(isset($_REQUEST['txtTuKhoa']))
+      $tuKhoa = $_REQUEST['txtTuKhoa'];
+    if(isset($_REQUEST['loaiTimKiem']))
+      $loaiTimKiem = $_REQUEST['loaiTimKiem'];
+
     //đếm số lượng sản phẩm có trong database
     $tongsp = $sp->laySoLuongSanPham();
     //số lượng sản phẩm trong mộT trang
@@ -38,12 +44,28 @@
         <?php
           if(!isset($tuKhoa))
             $mangSP = $sp->laySanPhamPhanTrang($trangHienTai, $soLuongSPTrenMotTrang);
-          else if($loaiTimKiem == "theoTen")
-            $mangSP = $sp->timKiemSanPham($tuKhoa);
-          else if($loaiTimKiem == "theoGiaToiDa")
-            $mangSP = $sp->timKiemSanPhamTheoGiaTienToiDa($tuKhoa);
-          else if($loaiTimKiem == "theoGiaToiThieu")
-            $mangSP = $sp->timKiemSanPhamTheoGiaTienToiThieu($tuKhoa);
+          else if($loaiTimKiem == "theoTen"){
+            $mangSP = $sp->timkiemSanPhamPhanTrang($tuKhoa, $trangHienTai, $soLuongSPTrenMotTrang);
+            //đếm tổng số lượng sản phẩm kiếm được từ database
+            $tongsp = count($sp->timKiemSanPham($tuKhoa));
+            //làm tròn lên 
+            $tongsotrang = ceil($tongsp / $soLuongSPTrenMotTrang);
+          }
+          else if($loaiTimKiem == "theoGiaToiDa"){
+            $mangSP = $sp->timKiemSanPhamTheoGiaTienToiDaPhanTrang($tuKhoa, $trangHienTai, $soLuongSPTrenMotTrang);
+            //đếm tổng số lượng sản phẩm kiếm được từ database
+            $tongsp = count($sp->timKiemSanPhamTheoGiaTienToiDa($tuKhoa));
+            //làm tròn lên 
+            $tongsotrang = ceil($tongsp / $soLuongSPTrenMotTrang);
+          }
+          else if($loaiTimKiem == "theoGiaToiThieu"){
+            $mangSP = $sp->timKiemSanPhamTheoGiaTienToiThieuPhanTrang($tuKhoa, $trangHienTai, $soLuongSPTrenMotTrang);
+            //đếm tổng số lượng sản phẩm kiếm được từ database
+            $tongsp = count($sp->timKiemSanPhamTheoGiaTienToiThieu($tuKhoa));
+            //làm tròn lên 
+            $tongsotrang = ceil($tongsp / $soLuongSPTrenMotTrang);
+          }
+            
           foreach($mangSP as $arr){
         ?>
         <tr>

@@ -20,10 +20,19 @@
   </li>
 
   <?php
+    if(isset($tuKhoa))
+      $guiTuKhoaKieu_Get = "&txtTuKhoa=".$tuKhoa;
+    else
+      $guiTuKhoaKieu_Get = '';
+    if(isset($loaiTimKiem))
+      $guiLoaiTimKiemKieu_Get = "&loaiTimKiem=".$loaiTimKiem;
+    else
+      $guiLoaiTimKiemKieu_Get = '';
+
     // Hiển thị các nút phân trang
     for ($i = max(1, $trangHienTai - 2); $i <= min($trangHienTai + 2, $tongsotrang); $i++) {
       $active = ($i == $trangHienTai) ? ' active' : '';
-      echo '<li class="page-item' . $active . '"><a class="page-link" href="?trangHienTai='.$i.'">' . $i . '</a></li>';
+      echo '<li class="page-item' . $active . '"><a class="page-link" href="?trangHienTai='.$i.$guiTuKhoaKieu_Get.$guiLoaiTimKiemKieu_Get.'">' . $i . '</a></li>';
     }
   ?>
 
