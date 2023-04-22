@@ -1,5 +1,16 @@
 <?php
     require("../view/top.php");
+    if(isset($_REQUEST['trangHienTai']))
+      $trangHienTai = $_REQUEST['trangHienTai'];
+    else
+      $trangHienTai = 1;
+
+    //đếm số lượng sản phẩm có trong database
+    $tongsp = $sp->laySoLuongSanPham();
+    //số lượng sản phẩm trong mộT trang
+    $soLuongSPTrenMotTrang = 20;
+    //làm tròn lên 
+    $tongsotrang = ceil($tongsp / $soLuongSPTrenMotTrang);
 
 ?> 
 <div class="container">
@@ -26,7 +37,7 @@
       <tbody>
         <?php
           if(!isset($tuKhoa))
-            $mangSP = $sp->layDanhSachSanPham();
+            $mangSP = $sp->laySanPhamPhanTrang($trangHienTai, $soLuongSPTrenMotTrang);
           else if($loaiTimKiem == "theoTen")
             $mangSP = $sp->timKiemSanPham($tuKhoa);
           else if($loaiTimKiem == "theoGiaToiDa")
@@ -54,6 +65,9 @@
       </tbody>
     </table>
   </div>
+  <?php 
+    require("../../view/carousel.php");
+  ?>
 </div>
 
 </div>
