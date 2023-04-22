@@ -1,3 +1,9 @@
+<style>
+  .pagination .page-item.active .page-link {
+    background-color: #ffc107;
+    color: #fff;
+  }
+</style>
 
 <ul class="pagination justify-content-center">
   <li class="page-item">
@@ -12,11 +18,21 @@
       <span class="sr-only"></span>
     </a>
   </li>
-  <li class="page-item"><a class="page-link" href="#">1</a></li>
-  <li class="page-item"><a class="page-link" href="#">2</a></li>
-  <li class="page-item"><a class="page-link" href="#">3</a></li>
-  <li class="page-item"><a class="page-link" href="#">4</a></li>
-  <li class="page-item"><a class="page-link" href="#">5</a></li>
+
+  <?php
+    // Số trang tối đa
+    $soTrang = 100;
+
+    // Số trang hiện tại
+    $trangHienTai = 1;
+
+    // Hiển thị các nút phân trang
+    for ($i = max(1, $trangHienTai - 2); $i <= min($trangHienTai + 2, $soTrang); $i++) {
+      $active = ($i == $trangHienTai) ? ' active' : '';
+      echo '<li class="page-item' . $active . '"><a class="page-link" href="#">' . $i . '</a></li>';
+    }
+  ?>
+
   <li class="page-item">
     <a class="page-link" href="#" aria-label="Tiếp">
       <span aria-hidden="true">&raquo;</span>
