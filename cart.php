@@ -15,7 +15,7 @@
         else if(isset($message)){
       ?>
           <div class="alert alert-danger">
-            Cập nhật giỏ hàng <strong>Thất bại!</strong> <?php echo $message; ?>
+            Cập nhật giỏ hàng <strong>Thất bại!</strong> <?php echo '<br>'; echo $message; ?>
           </div>
       <?php 
         } 

@@ -119,12 +119,12 @@ switch($action){
         }
         if(isset($message)){
             foreach($mangVuotSoLuong as $key => $str){
-                $pos = strpos($str, "_"); // Tìm vị trí của ký tự "_"
-                $strTMP = substr($key, 0, $pos); // Cắt chuỗi từ vị trí đầu đến vị trí của ký tự "_"
+                $pos = strpos($key, "_"); // Tìm vị trí của ký tự "_"
+                $keyTMP = substr($key, 0, $pos); // Cắt chuỗi từ vị trí đầu đến vị trí của ký tự "_"
                 if($message == '')
-                    $message .= $strTMP.': Chỉ còn ' . $sp->laySoLuongSanPhamTheoID($arr['id_san_pham']). 'sản phẩm.';
+                    $message .= $keyTMP.': Chỉ còn ' . $str . ' sản phẩm';
                 else
-                    $message .= ', ' . $strTMP.': Chỉ còn ' . $sp->laySoLuongSanPhamTheoID($arr['id_san_pham']). 'sản phẩm.';
+                    $message .= ', ' . $keyTMP.': Chỉ còn ' . $str . ' sản phẩm';
             }
             if($count > 1)
                 $messageTMP = 'Các sản phẩm '. $message .' Vui lòng nhập số lượng sản phẩm nhỏ hơn số lượng có trong kho';
