@@ -1,5 +1,17 @@
 <?php
     require("../view/top.php");
+
+    if(isset($_REQUEST['trangHienTai']))
+      $trangHienTai = $_REQUEST['trangHienTai'];
+    else
+      $trangHienTai = 1;
+
+    //đếm số lượng sản phẩm có trong database
+    $tongth = $th->laySoLuongThuongHieu();
+    //số lượng sản phẩm trong mộT trang
+    $soLuong = 5;
+    //làm tròn lên 
+    $tongsotrang = ceil($tongth / $soLuong);
 ?> 
 <div class="container">
   <h2>Quản lý Thương hiệu</h2>
@@ -40,6 +52,9 @@
       </tbody>
     </table>
   </div>
+  <?php 
+    require("../../view/carousel.php");
+  ?>
 </div>
 
 </div>

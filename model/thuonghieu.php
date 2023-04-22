@@ -185,7 +185,22 @@ class THUONGHIEU{
             exit();
         }
     }
-
+    //đếm tổng số lượng thương hiệu
+    public function laySoLuongThuongHieu() {
+        $db = DATABASE::connect();
+        try {
+            $sql = "SELECT COUNT(*) as so_luong FROM thuonghieu";
+            $result = $db->query($sql);
+            $row = $result->fetch(PDO::FETCH_ASSOC);
+            return $row['so_luong'];
+        } catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở laySoLuongThuongHieu: $error_message</p>";
+            exit();
+        } finally {
+            DATABASE::close();
+        }
+    }
 
 }
 ?>

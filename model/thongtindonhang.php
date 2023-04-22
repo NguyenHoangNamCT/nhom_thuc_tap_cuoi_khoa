@@ -124,6 +124,22 @@ class THONGTINDONHANG{
             DATABASE::close();
         }
     }
+     //đếm tổng số lượng thông tin đơn hàng
+     public function laySoLuongThongTinDonHang() {
+        $db = DATABASE::connect();
+        try {
+            $sql = "SELECT COUNT(*) as so_luong FROM thongtindonhang";
+            $result = $db->query($sql);
+            $row = $result->fetch(PDO::FETCH_ASSOC);
+            return $row['so_luong'];
+        } catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở laySoLuongThongTinDonHang: $error_message</p>";
+            exit();
+        } finally {
+            DATABASE::close();
+        }
+    }
     
 }
 ?>
