@@ -23,7 +23,6 @@
           <th>Họ Tên</th>
           <th>Email</th>
           <th>Số Điện Thoại</th>
-          <th>Nội Dung</th>
           <th>Sửa</th>
           <th>Xóa</th>
         </tr>
@@ -37,7 +36,6 @@
           <td><?php echo $arr["ho_ten"]; ?></td>
           <td><?php echo $arr["email"]; ?></td>
           <td><?php echo $arr["so_dien_thoai"]; ?></td>
-          <td><?php echo $arr["noi_dung"]; ?></td>
           <td><a class="btn btn-warning" href="index.php?action=sua&id=<?php echo $arr["id"]; ?>"><span class="glyphicon glyphicon-edit"></span> Sửa</a></td>
           <td><a class="btn btn-danger" href="index.php?action=xoa&id=<?php echo $arr["id"]; ?>"><span class="glyphicon glyphicon-trash"></span> Xoá</a></td>
         </tr>

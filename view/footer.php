@@ -1,3 +1,10 @@
+<?php 
+require('model/lienhe.php');
+
+$lh = new LIENHE(); 
+?>
+
+
 
 <footer class="bg-dark text-light">
   <div class="container py-3">
@@ -5,8 +12,19 @@
       <div class="col-md-6">
         <h4>Về chúng tôi</h4>
         <p class ="message">Giới thiệu sơ lược: là một website làm ra nhầm báo cáo tiến độ học tập.</p>
-        <p>Số điện thoại: 0123456789</p>
-        <p>Email: vlxd@gmail.com</p>
+        <?php
+                // Lấy danh sách liên hệ
+                $rows = $lh->layDanhSachLienHe();
+                if (count($rows) > 0) {
+                    $lienhe = $rows[0];
+                    $email = $lienhe['email'];
+                    $sdt = $lienhe['so_dien_thoai'];
+                    $ho_ten = $lienhe['ho_ten'];
+                    echo "<p>Email: $email</p>";
+                    echo "<p>Số điện thoại: $sdt</p>";
+                    echo "<p>Họ tên: $ho_ten</p>";
+                }
+            ?>
         <p>Địa chỉ: Long Xuyên, An Giang</p>
       </div>
       <div class="col-md-6">
