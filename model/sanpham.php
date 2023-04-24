@@ -390,7 +390,7 @@ class SANPHAM{
                 $batDau = 0;
             $sql = "SELECT sp.*, th.tenthuonghieu, l.ten_loai_san_pham FROM sanpham sp, loaisanpham l, thuonghieu th where sp.id_loai_san_pham = l.id and sp.id_thuong_hieu = th.id order by sp.id LIMIT :batDau, :soluong";
             if($orderBy!=NULL)
-                $sql = "SELECT sp.*, th.tenthuonghieu, l.ten_loai_san_pham FROM sanpham sp, loaisanpham l, thuonghieu th where sp.id_loai_san_pham = l.id and sp.id_thuong_hieu = th.id ".$orderBy." LIMIT :batDau, :soluong";
+                $sql = "SELECT sp.*, th.tenthuonghieu, l.ten_loai_san_pham FROM sanpham sp, loaisanpham l, thuonghieu th where sp.id_loai_san_pham = l.id and sp.id_thuong_hieu = th.id $orderBy LIMIT :batDau, :soluong";
 
             
             $cmd = $dbcon->prepare($sql);

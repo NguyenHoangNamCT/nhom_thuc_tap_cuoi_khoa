@@ -10,9 +10,38 @@
           Sắp sếp sản phẩm
         </div>
         <div class="card-body d-flex justify-content-center">
-          <a href="?sapXep=theoLuotMua" class="btn btn-success mx-1">Bán chạy</a>
-          <a href="?sapXep=theoGia" class="btn btn-success mx-1">Giá</a>
-          <a href="?sapXep=theoLuotXem" class="btn btn-success mx-1">Lượt xem</a>
+          <?php
+          //Nếu có lọc ở trang 1 thì các trang sau sẽ được lọc
+            if(isset($_REQUEST['IDLoaiSP']))
+              $l_id = $_REQUEST['IDLoaiSP'];
+            if(isset($_REQUEST['IDThuongHieu']))
+              $th_id = $_REQUEST['IDThuongHieu']; 
+            if(isset($_REQUEST['txtTuKhoa']))
+              $tuKhoa = $_REQUEST['txtTuKhoa'];
+            //Nếu có sắp xếp ở trang 1 thì các trang sau cũng sẽ được sắp xếp
+            if(isset($_REQUEST['orderBy']))
+              $orderBy = $_REQUEST['orderBy'];
+            if(isset($l_id))
+              $guiIDLoaiSanPhamKieu_Get = "&IDLoaiSP=".$l_id;
+            else 
+              $guiIDLoaiSanPhamKieu_Get = "";
+            if(isset($orderBy))
+              $guiOrderByKieu_Get = "&orderBy=".$orderBy;
+            else
+              $guiOrderByKieu_Get = "";
+            if(isset($tuKhoa))
+              $guiTuKhoaKieu_Get = "&txtTuKhoa=".$tuKhoa;
+            else
+              $guiTuKhoaKieu_Get = '';
+            if(isset($th_id))
+              $guiIDThuongHieuKieu_Get = "&IDThuongHieu=".$th_id;
+            else
+              $guiIDThuongHieuKieu_Get = "";
+            $danhSachDuLieuGuiDI = $guiTuKhoaKieu_Get.$guiOrderByKieu_Get.$guiIDLoaiSanPhamKieu_Get.$guiIDThuongHieuKieu_Get."";
+          ?>
+          <a href="?sapXep=theoLuotMua<?php echo $danhSachDuLieuGuiDI; ?>" class="btn btn-success mx-1">Bán chạy</a>
+          <a href="?sapXep=theoGia<?php echo $danhSachDuLieuGuiDI; ?>" class="btn btn-success mx-1">Giá</a>
+          <a href="?sapXep=theoLuotXem<?php echo $danhSachDuLieuGuiDI; ?>" class="btn btn-success mx-1">Lượt xem</a>
         </div>
       </div>
      </div>
@@ -20,54 +49,44 @@
      <br>
      <br>
     <?php
-      //Nếu có lọc ở trang 1 thì các trang sau sẽ được lọc
-      if(isset($_REQUEST['IDLoaiSP']))
-        $l_id = $_REQUEST['IDLoaiSP'];
-      if(isset($_REQUEST['IDThuongHieu']))
-        $th_id = $_REQUEST['IDThuongHieu'];
-      
-      //Nếu có sắp xếp ở trang 1 thì các trang sau cũng sẽ được sắp xếp
-      if(isset($_REQUEST['orderBy']))
-        $orderBy = $_REQUEST['orderBy'];
-
       //nếu có sắp xếp thì sắp xếp
       if(isset($_REQUEST['sapXep'])){
         $loaiSapXep = $_REQUEST['sapXep'];
       
-      if($loaiSapXep == "theoGia"){
-        if(isset($_SESSION['giamDanTheoGia'])){
-          $orderBy = "order by (sp.gia_tien * (1 - sp.giam_gia/100)) DESC";
-          unset($_SESSION['giamDanTheoGia']);
-        }
-        else{
-          $orderBy = "order by (sp.gia_tien * (1 - sp.giam_gia/100))";
-          $_SESSION['giamDanTheoGia'] = true;
-        }
-        
-      }
-    
-      if($loaiSapXep == "theoLuotMua"){
-        if(!isset($_SESSION['giamDanTheoLuotMua'])){
-          $orderBy = "order by sp.luot_mua DESC";
-          $_SESSION['giamDanTheoLuotMua'] = true;
-        }
-        else{
-          $orderBy = "order by  sp.luot_mua";
-          unset($_SESSION['giamDanTheoLuotMua']);
-        }
-      }
-
-      if($loaiSapXep == "theoLuotXem"){
-        if(!isset($_SESSION['giamDanTheoLuotXem'])){
-          $orderBy = "order by sp.luot_xem DESC";
-          $_SESSION['giamDanTheoLuotXem'] = true;
+        if($loaiSapXep == "theoGia"){
+          if(isset($_SESSION['giamDanTheoGia'])){
+            $orderBy = "order by (sp.gia_tien * (1 - sp.giam_gia/100)) DESC";
+            unset($_SESSION['giamDanTheoGia']);
+          }
+          else{
+            $orderBy = "order by (sp.gia_tien * (1 - sp.giam_gia/100))";
+            $_SESSION['giamDanTheoGia'] = true;
+          }
           
         }
-        else{
-          $orderBy = "order by  sp.luot_xem";
-          unset($_SESSION['giamDanTheoLuotXem']);
+    
+        if($loaiSapXep == "theoLuotMua"){
+          if(!isset($_SESSION['giamDanTheoLuotMua'])){
+            $orderBy = "order by sp.luot_mua DESC";
+            $_SESSION['giamDanTheoLuotMua'] = true;
+          }
+          else{
+            $orderBy = "order by  sp.luot_mua";
+            unset($_SESSION['giamDanTheoLuotMua']);
+          }
         }
-      }
+
+        if($loaiSapXep == "theoLuotXem"){
+          if(!isset($_SESSION['giamDanTheoLuotXem'])){
+            $orderBy = "order by sp.luot_xem DESC";
+            $_SESSION['giamDanTheoLuotXem'] = true;
+            
+          }
+          else{
+            $orderBy = "order by  sp.luot_xem";
+            unset($_SESSION['giamDanTheoLuotXem']);
+          }
+        }
     }
     else{
       if(!isset($orderBy))
@@ -80,9 +99,6 @@
     else
       $trangHienTai = 1;
 
-    if(isset($_REQUEST['txtTuKhoa']))
-      $tuKhoa = $_REQUEST['txtTuKhoa'];
-
     //đếm số lượng sản phẩm có trong database
     $tongsp = $sp->laySoLuongSanPham();
     //số lượng sản phẩm trong mộT trang
@@ -90,28 +106,28 @@
     //làm tròn lên 
     $tongsotrang = ceil($tongsp / $soLuongSPTrenMotTrang);
 
+    //Khi người dùng bấm tìm kiếm
     if(isset($tuKhoa)){
       $mangSP = $sp->timkiemSanPhamPhanTrang($tuKhoa, $trangHienTai, $soLuongSPTrenMotTrang, $orderBy);
       //đếm số lượng sản phẩm có trong database
-      $tongsp = count($sp->timkiemSanPham($tuKhoa));   
+      $tongsp = count($sp->timkiemSanPham($tuKhoa));
       //làm tròn lên 
       $tongsotrang = ceil($tongsp/$soLuongSPTrenMotTrang);
-    }
+    }//Khi người dùng bấm lọc theo loại
     else if (isset($l_id)){
       $mangSP = $sp->locSanPhamTheoIdLoaiSanPhamPhanTrang($l_id, $trangHienTai, $soLuongSPTrenMotTrang, $orderBy);
       //đếm số lượng sản phẩm có trong database
       $tongsp = $sp->demSoSanPhamTheoIDLoaiSP($l_id);   
       //làm tròn lên 
       $tongsotrang = ceil($tongsp/$soLuongSPTrenMotTrang);
-    }
+    }//khi người dùng bấm lọc theo thương hiệu
     else if(isset($th_id)){
       $mangSP = $sp->locSanPhamTheoIDThuongHieuPhanTrang($th_id, $trangHienTai, $soLuongSPTrenMotTrang, $orderBy);
       //đếm số lượng sản phẩm có trong database
       $tongsp = $sp->demSoSanPhamTheoIDThuongHieu($th_id);   
       //làm tròn lên 
       $tongsotrang = ceil($tongsp/$soLuongSPTrenMotTrang);
-      
-    }
+    }//người dùng không kêu làm gì thì sẽ vào đây lấy tất cả
     else
       $mangSP = $sp->laySanPhamPhanTrang($trangHienTai, $soLuongSPTrenMotTrang, $orderBy);
     $mangLoaiSP = $lsp->layLoaiSP();
