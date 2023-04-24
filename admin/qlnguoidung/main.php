@@ -110,6 +110,7 @@
               <form action="" class="" method="post">
                 <!-- Gửi dữ liệu ẩn -->
                 <input type="hidden" name="action" value="timKiemNguoiDung">
+                <input type="hidden" name="trangHienTai" value="1">
                 <!-- END -->
                 <label for="txtTuKhoa">Tìm kiếm theo:</label>
                 <input type="text" class="form-control" name="txtTuKhoa" id="txtTuKhoa" placeholder="Tìm kiếm">
