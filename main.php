@@ -1,5 +1,5 @@
 <?php include("view/top.php"); ?>
-
+<?php include("quangcao.php"); ?>
 <br><br>
 <div class="container">  
   <div class="row"> <!-- Tất cả mặt hàng - Xử lý phân trang -->

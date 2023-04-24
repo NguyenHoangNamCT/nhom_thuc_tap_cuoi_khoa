@@ -204,6 +204,27 @@ class QUANGCAO{
             DATABASE::close();
         }
     }
+
+    // Hiển thị danh sách quảng cáo
+    public function hienThiQuangCao() {
+        $db = DATABASE::connect();
+        try {
+            $sql = "SELECT * FROM quangcao WHERE trang_thai = 1";
+            $cmd = $db->prepare($sql);
+            $cmd->execute();
+            $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+        catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở hienThiQuangCao: $error_message</p>";
+            exit();
+        }
+        finally {
+            DATABASE::close();
+        }
+    }
+
     
     
 }

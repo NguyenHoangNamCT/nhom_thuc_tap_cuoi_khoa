@@ -14,8 +14,8 @@
     $tongsotrang = ceil($tonglh / $soLuong);
 ?> 
 <div class="container">
-  <h2>Quản lý sản phẩm</h2>
-  <a href="index.php?action=them" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Thêm sản phẩm</a>
+  <h2>Quản lý Liên Hệ</h2>
+  <a href="index.php?action=them" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Thêm Liên Hệ</a>
   <div class="table-responsive">
     <table class="table table-hover">
       <thead>
