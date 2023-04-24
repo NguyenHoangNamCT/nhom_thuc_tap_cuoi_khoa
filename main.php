@@ -15,7 +15,7 @@
             if(isset($_REQUEST['IDLoaiSP']))
               $l_id = $_REQUEST['IDLoaiSP'];
             if(isset($_REQUEST['IDThuongHieu']))
-              $th_id = $_REQUEST['IDThuongHieu']; 
+              $th_id = $_REQUEST['IDThuongHieu'];
             if(isset($_REQUEST['txtTuKhoa']))
               $tuKhoa = $_REQUEST['txtTuKhoa'];
             //Nếu có sắp xếp ở trang 1 thì các trang sau cũng sẽ được sắp xếp
