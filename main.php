@@ -7,7 +7,7 @@
      <div class="d-flex justify-content-center">
       <div class="card col-sm-6">
         <div class="card-header">
-          Lọc sản phẩm
+          Sắp sếp sản phẩm
         </div>
         <div class="card-body d-flex justify-content-center">
           <a href="?sapXep=theoLuotMua" class="btn btn-success mx-1">Bán chạy</a>
@@ -20,12 +20,19 @@
      <br>
      <br>
     <?php
-    if(isset($_REQUEST['orderBy']))
-      $orderBy = $_REQUEST['orderBy'];
+      //Nếu có lọc ở trang 1 thì các trang sau sẽ được lọc
+      if(isset($_REQUEST['IDLoaiSP']))
+        $l_id = $_REQUEST['IDLoaiSP'];
+      if(isset($_REQUEST['IDThuongHieu']))
+        $th_id = $_REQUEST['IDThuongHieu'];
+      
+      //Nếu có sắp xếp ở trang 1 thì các trang sau cũng sẽ được sắp xếp
+      if(isset($_REQUEST['orderBy']))
+        $orderBy = $_REQUEST['orderBy'];
 
-    //nếu có sắp xếp thì sắp xếp
-    if(isset($_REQUEST['sapXep'])){
-      $loaiSapXep = $_REQUEST['sapXep'];
+      //nếu có sắp xếp thì sắp xếp
+      if(isset($_REQUEST['sapXep'])){
+        $loaiSapXep = $_REQUEST['sapXep'];
       
       if($loaiSapXep == "theoGia"){
         if(isset($_SESSION['giamDanTheoGia'])){
@@ -90,33 +97,32 @@
       //làm tròn lên 
       $tongsotrang = ceil($tongsp/$soLuongSPTrenMotTrang);
     }
+    else if (isset($l_id)){
+      $mangSP = $sp->locSanPhamTheoIdLoaiSanPhamPhanTrang($l_id, $trangHienTai, $soLuongSPTrenMotTrang, $orderBy);
+      //đếm số lượng sản phẩm có trong database
+      $tongsp = $sp->demSoSanPhamTheoIDLoaiSP($l_id);   
+      //làm tròn lên 
+      $tongsotrang = ceil($tongsp/$soLuongSPTrenMotTrang);
+    }
+    else if(isset($th_id)){
+      $mangSP = $sp->locSanPhamTheoIDThuongHieuPhanTrang($th_id, $trangHienTai, $soLuongSPTrenMotTrang, $orderBy);
+      //đếm số lượng sản phẩm có trong database
+      $tongsp = $sp->demSoSanPhamTheoIDThuongHieu($th_id);   
+      //làm tròn lên 
+      $tongsotrang = ceil($tongsp/$soLuongSPTrenMotTrang);
+      
+    }
     else
       $mangSP = $sp->laySanPhamPhanTrang($trangHienTai, $soLuongSPTrenMotTrang, $orderBy);
     $mangLoaiSP = $lsp->layLoaiSP();
 
-    
-
-    //nếu có lọc theo thương hiệu thì k cần hiển thị danh sách sản phẩm
-    // if(!isset($th_id))
-    //Hiển thị các sản phẩm theo từng loại sản phẩm riêng biệt
-    // foreach($mangLoaiSP as $arr_i)
-    // {
-      //nếu có yêu cầu lọc theo loại sản phẩm thì chỉ hiển thị các sản phẩm của loại đó. không thì k hiện luôn
-      // if(isset($l_id) && $arr_j['id_loai_san_pham'] == $l_id)
-      //   continue;
-      //nếu 10 sản phẩm trong trang có tồn tại trong loại sản phẩm đó thì mới in tên của loại sản phẩm đó ra
-      // if(SANPHAM::mangSanPhamKhongCoTrongLoaiSP($mangSP, $arr_i['id']) == false)
-      //   echo '<h3>'.$arr_i['ten_loai_san_pham'].'</h3>';
-      // else
-      //   continue;
       foreach($mangSP as $arr_j)
       {
         if(isset($l_id) && $arr_j['id_loai_san_pham'] != $l_id)
           continue;
         if(isset($th_id) && $arr_j['id_thuong_hieu'] != $th_id)
           continue;
-        // if($arr_j['id_loai_san_pham'] == $arr_i['id'])
-        // {
+
   ?>
    <div class="col-sm-3 container" style="margin-bottom: 1.5rem;">
     <div class="card" style="width:300px">
@@ -126,6 +132,8 @@
         <!-- <p><?php //echo $arr_j['id']; ?></p>
         <p>Lượt mua: <?php //echo $arr_j['luot_mua']; ?></p>
         <p>Lượt xem: <?php //echo $arr_j['luot_xem']; ?></p> -->
+        <p>Mã loại: <?php echo $arr_j['id_loai_san_pham']; ?></p>
+        <P>Mã thương hiệu: <?php echo $arr_j['id_thuong_hieu']; ?></P>
         <!-- End test code -->
         <a href="?action=xemChiTiet&id=<?php echo $arr_j['id']; ?>"><h4 class="card-title"><?php echo $arr_j['ten_san_pham']; ?></h4></a>
         <p class="card-text"><del><?php echo number_format($arr_j['gia_tien']); ?></del> <?php echo $arr_j['giam_gia'].'%'; ?></p>
@@ -138,45 +146,8 @@
     </div>
   </div>   
   <?php 
-        // }//đóng ngoặc của if
       }
   ?>
-
-<!-- Fix lại hiển thị trang chủ -->
-
-    <?php
-      // //nếu có yêu cầu lọc sản phẩm theo thương hiệu thì hiển thị các sản phẩm thuộc thương hiệu đó
-      // if(isset($th_id))
-      //   foreach($mangThuongHieu as $arr_i)
-      //   {
-      //     if($arr_i['id'] != $th_id)
-      //       continue;
-      //     echo '<h3>'.$arr_i['TenThuongHieu'].'</h3>';
-      //     foreach($mangSP as $arr_j)
-      //       if($arr_j['id_thuong_hieu'] == $arr_i['id'])
-      //       {
-    ?>
-    <!-- <div class="col-sm-3 container" style="margin-bottom: 1.5rem;">
-      <div class="card" style="width:300px">
-        <a href="?action=xemChiTiet&id=<?php echo $arr_j['id']; ?>"><img alt="<?php echo $arr_j['hinh_anh']; ?>" class="card-img" src="images/<?php echo $arr_j['hinh_anh']; ?>" alt="Card image" style="width:100%"></a>
-
-        <div class="card-body">
-          <a href="?action=xemChiTiet&id=<?php echo $arr_j['id']; ?>"><h4 class="card-title"><?php echo $arr_j['ten_san_pham']; ?></h4></a>
-          <p class="card-text"><del><?php echo number_format($arr_j['gia_tien']); ?></del> <?php echo $arr_j['giam_gia'].'%'; ?></p>
-          <h5 class="card-text" style="color: red;"><?php echo number_format($arr_j['gia_tien']*(1-$arr_j['giam_gia']/100)).' đ'; ?></h5>
-          <p>loại sản phẩm: <?php echo $arr_j['ten_loai_san_pham']; ?></p>
-          <p>Thương hiệu: <?php echo $arr_j['tenthuonghieu']; ?></p>
-          <p>Trạng thái: <?php if($arr_j['so_luong'] > 0) echo "Còn hàng"; else echo "HếT hàng"; ?></p>
-
-          <a href="?action=xemChiTiet&id=<?php echo $arr_j['id']; ?>" class="btn btn-primary">Chi tiết</a>
-          <a href="?action=choVaoGio&id=<?php echo $arr_j['id']; ?>&soLuong=1" class="btn btn-primary">Đặt mua</a>
-        </div>
-      </div>
-    </div>    -->
-    <?php
-        //     }
-        // }
-    ?>
   </div>
 </div>
 <?php include("view/carousel.php"); ?>

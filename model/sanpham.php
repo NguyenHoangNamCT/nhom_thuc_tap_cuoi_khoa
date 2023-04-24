@@ -444,6 +444,107 @@ class SANPHAM{
         }
     }
 
+    //Lọc sản phẩm theo id loại sản phẩm
+    public function locSanPhamTheoIdLoaiSanPhamPhanTrang($idLoaiSP, $trang, $soluong, $orderBy = NULL) {
+        $db = DATABASE::connect();
+        try {
+            $batDau = ($trang - 1) * $soluong;
+            if($batDau < 0)
+                $batDau = 0;
+            $sql = "SELECT sp.*, th.tenthuonghieu, l.ten_loai_san_pham 
+                    FROM sanpham sp, loaisanpham l, thuonghieu th 
+                    WHERE sp.id_loai_san_pham = l.id AND sp.id_thuong_hieu = th.id AND id_loai_san_pham = :idLoaiSP";
+            if($orderBy != NULL)
+                $sql .= " ".$orderBy;
+            $sql .= " LIMIT :batDau, :soluong";
+            $cmd = $db->prepare($sql);
+            $cmd->bindValue(':idLoaiSP', $idLoaiSP, PDO::PARAM_INT);
+            $cmd->bindValue(':batDau', $batDau, PDO::PARAM_INT);
+            $cmd->bindValue(':soluong', $soluong, PDO::PARAM_INT);
+            $cmd->execute();
+            return $cmd->fetchAll(PDO::FETCH_ASSOC);
+        }
+        catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở timkiemSanPhamTheoLoaiPhanTrang: $error_message</p>";
+            exit();
+        }
+        finally {
+            DATABASE::close();
+        }
+    }
+
+    //Lọc sản phẩm theo ID thương hiệu có phân trang
+    public function locSanPhamTheoIDThuongHieuPhanTrang($id_thuong_hieu, $trang, $soluong, $orderBy = NULL) {
+        $db = DATABASE::connect();
+        try {
+            $batDau = ($trang - 1) * $soluong;
+            if($batDau < 0)
+                $batDau = 0;
+                $sql = "SELECT sp.*, th.tenthuonghieu, l.ten_loai_san_pham FROM sanpham sp, loaisanpham l, thuonghieu th WHERE sp.id_loai_san_pham = l.id AND sp.id_thuong_hieu = th.id AND sp.id_thuong_hieu = :id_thuong_hieu LIMIT :batDau, :soluong";
+            if($orderBy != NULL)    
+                $sql = "SELECT sp.*, th.tenthuonghieu, l.ten_loai_san_pham FROM sanpham sp, loaisanpham l, thuonghieu th WHERE sp.id_loai_san_pham = l.id AND sp.id_thuong_hieu = th.id AND sp.id_thuong_hieu = :id_thuong_hieu $orderBy LIMIT :batDau, :soluong";
+            $cmd = $db->prepare($sql);
+            $cmd->bindValue(':id_thuong_hieu', $id_thuong_hieu, PDO::PARAM_INT);
+            $cmd->bindValue(':batDau', $batDau, PDO::PARAM_INT);
+            $cmd->bindValue(':soluong', $soluong, PDO::PARAM_INT);
+            $cmd->execute();
+            return $cmd->fetchAll(PDO::FETCH_ASSOC);
+        }
+        catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở locSanPhamTheoIDThuongHieu: $error_message</p>";
+            exit();
+        }
+        finally {
+            DATABASE::close();
+        }
+    }
+
+    //đếm số sản phẩm theo id loại sản phẩm
+    public function demSoSanPhamTheoIDLoaiSP($idLoaiSP) {
+        $db = DATABASE::connect();
+        try {
+            $sql = "SELECT COUNT(*) FROM sanpham WHERE id_loai_san_pham = :idLoaiSP";
+            $cmd = $db->prepare($sql);
+            $cmd->bindValue(':idLoaiSP', $idLoaiSP);
+            $cmd->execute();
+            return $cmd->fetchColumn();
+        }
+        catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở demSoSanPhamTheoIDLoaiSP: $error_message</p>";
+            exit();
+        }
+        finally {
+            DATABASE::close();
+        }
+    }
+
+    //đếm số sản phẩm theo id thương hiệu
+    public function demSoSanPhamTheoIDThuongHieu($idThuongHieu) {
+        $db = DATABASE::connect();
+        try {
+            $sql = "SELECT COUNT(*) FROM sanpham WHERE id_thuong_hieu = :idThuongHieu";
+            $cmd = $db->prepare($sql);
+            $cmd->bindValue(':idThuongHieu', $idThuongHieu);
+            $cmd->execute();
+            return $cmd->fetchColumn();
+        }
+        catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở demSoSanPhamTheoIDThuongHieu: $error_message</p>";
+            exit();
+        }
+        finally {
+            DATABASE::close();
+        }
+    }
+    
+    
+
+    
+
     //-------------------------- PHương thức tĩnh --------------------------
     public static function mangSanPhamKhongCoTrongLoaiSP($mangSanPham, $idLoai) {
         foreach ($mangSanPham as $arr) {
