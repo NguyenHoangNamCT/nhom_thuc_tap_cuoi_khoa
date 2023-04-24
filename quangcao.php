@@ -1,49 +1,60 @@
-<div class="container mt-5">
-  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
-    </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="https://picsum.photos/800/400?random=1" class="d-block w-100" alt="First slide">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Quảng Cáo 1</h5>
-          <p>Mô tả.</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="https://picsum.photos/800/400?random=2" class="d-block w-100" alt="Second slide">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Quảng Cáo 2</h5>
-          <p>Mô tả.</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="https://picsum.photos/800/400?random=3" class="d-block w-100" alt="Third slide">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Quảng Cáo 3</h5>
-          <p>Mô tả.</p>
-        </div>
+<?php
+   require_once ('model/quangcao.php');
+   $quangCao = new QuangCao();
+   $quangCaoList = $quangCao->layDanhSachQuangCao();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Quảng cáo</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+  <style>
+    .carousel-item img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <div class="container my-5">
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <?php 
+         
+          for ($i = 0; $i < count($quangCaoList); $i++) {
+            echo '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' . $i . '"';
+            if ($i === 0) {
+              echo ' class="active" aria-current="true"';
+            }
+            echo ' aria-label="Slide ' . ($i + 1) . '"></button>';
+          }
+        ?>
       </div>
       <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="https://picsum.photos/800/400?random=4" class="d-block w-100" alt="First slide">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Quảng Cáo 4</h5>
-          <p>Mô tả.</p>
-        </div>
+        <?php 
+          foreach ($quangCaoList as $index => $quangCao) {
+            echo '<div class="carousel-item' . ($index === 0 ? ' active' : '') . '">';
+            echo '<a href="' . $quangCao['url'] . '"><img src="images/' . $quangCao['hinh_anh'] . '" alt="' . $quangCao['tieu_de'] . '"></a>';
+            echo '<div class="carousel-caption d-none d-md-block">';
+            echo '<h5>' . $quangCao['tieu_de'] . '</h5>';
+            echo '</div>';
+            echo '</div>';
+          }
+        ?>
       </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Trước</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Sau</span>
-    </button>
   </div>
-</div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
