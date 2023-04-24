@@ -7,13 +7,12 @@
 
 <ul class="pagination justify-content-center">
   <li class="page-item">
-    <a class="page-link" href="#" aria-label="Trang đầu">
+    <a class="page-link" href="?trangHienTai=1" aria-label="Trang đầu">
       <span aria-hidden="true">&laquo;&laquo;</span>
-      <span class="sr-only"></span>
     </a>
   </li>
   <li class="page-item">
-    <a class="page-link" href="#" aria-label="Trước">
+    <a class="page-link" href="?trangHienTai=<?php echo max($trangHienTai - 1, 1); ?>" aria-label="Trước">
       <span aria-hidden="true">&laquo;</span>
       <span class="sr-only"></span>
     </a>
@@ -37,15 +36,13 @@
   ?>
 
   <li class="page-item">
-    <a class="page-link" href="#" aria-label="Tiếp">
+    <a class="page-link" href="?trangHienTai=<?php echo min($tongsotrang, $trangHienTai + 1) ?>" aria-label="Tiếp">
       <span aria-hidden="true">&raquo;</span>
-      <span class="sr-only"></span>
     </a>
   </li>
   <li class="page-item">
-    <a class="page-link" href="#" aria-label="Trang cuối">
-      <span aria-hidden="true">&raquo;&raquo;</span>
-      <span class="sr-only"></span>
+    <a class="page-link" href="?trangHienTai=<?php echo $tongsotrang; ?>" aria-label="Trang cuối">
+      <span aria-hidden="true">&raquo;&raquo; </span>
     </a>
   </li>
 </ul>

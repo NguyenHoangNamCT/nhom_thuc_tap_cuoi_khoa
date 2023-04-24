@@ -4,6 +4,19 @@
 <div class="container">  
   <div class="row"> <!-- Tất cả mặt hàng - Xử lý phân trang -->
      <a name="sptatca"></a>
+     <div class="d-flex justify-content-center">
+      <div class="card col-sm-6">
+        <div class="card-header">
+          Lọc sản phẩm
+        </div>
+        <div class="card-body d-flex justify-content-center">
+          <a href="" class="btn btn-success mx-1">Bán chạy</a>
+          <a href="" class="btn btn-success mx-1">Giá tối đa</a>
+          <a href="" class="btn btn-success mx-1">Giá tối thiểu</a>
+          <a href="" class="btn btn-success mx-1">Xem nhiều</a>
+        </div>
+      </div>
+     </div>
      <h2 align='center'>Tất cả sản phẩm </h2>
      <br>
      <br>
@@ -13,6 +26,9 @@
     else
       $trangHienTai = 1;
 
+    if(isset($_REQUEST['txtTuKhoa']))
+      $tuKhoa = $_REQUEST['txtTuKhoa'];
+
     //đếm số lượng sản phẩm có trong database
     $tongsp = $sp->laySoLuongSanPham();
     //số lượng sản phẩm trong mộT trang
@@ -20,7 +36,15 @@
     //làm tròn lên 
     $tongsotrang = ceil($tongsp / $soLuongSPTrenMotTrang);
 
-    $mangSP = $sp->laySanPhamPhanTrang($trangHienTai, $soLuongSPTrenMotTrang);
+    if(isset($tuKhoa)){
+      $mangSP = $sp->timkiemSanPhamPhanTrang($tuKhoa, $trangHienTai, $soLuongSPTrenMotTrang);
+      //đếm số lượng sản phẩm có trong database
+      $tongsp = count($sp->timkiemSanPham($tuKhoa));   
+      //làm tròn lên 
+      $tongsotrang = ceil($tongsp/$soLuongSPTrenMotTrang);
+    }
+    else
+      $mangSP = $sp->laySanPhamPhanTrang($trangHienTai, $soLuongSPTrenMotTrang);
     $mangLoaiSP = $lsp->layLoaiSP();
 
     //nếu có lọc theo thương hiệu thì k cần hiển thị danh sách sản phẩm

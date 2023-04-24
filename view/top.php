@@ -65,8 +65,12 @@
       
 
       <form method="post" class="d-flex" style="margin-left: 0.55rem;">
-        <div style="margin-right: 0.55rem;"><input name="txtTuKhoa" class="form-control" type="search" placeholder="Search" aria-label="Search"></div>
+        <!-- Gửi dữ liệu ẩn -->
         <input type="hidden" name="action" value="timKiem">
+          <!-- Mỗi lần tìm kiếm thì reset trang hiện tại về 1 -->
+        <input type="hidden" name="trangHienTai" value="1">
+        <!-- End -->
+        <div style="margin-right: 0.55rem;"><input name="txtTuKhoa" class="form-control" type="search" placeholder="Search" aria-label="Search"></div>
         <button type="submit" class="btn btn-outline-warning me-2 bi-search">Tìm kiếm</button>
         <a class="btn btn-outline-warning me-2 bi-cart3" href="?action=xemGioHang">Giỏ hàng</a>
         

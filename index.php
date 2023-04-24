@@ -241,11 +241,11 @@ switch($action){
         $dg->themDanhGia($_SESSION['nguoiDung']['id'], $sp_id, $rating, $noiDung, $images);
         include('detail.php');
         break;
-    // case 'timKiem':
-    //     $tk = true;
-    //     $tenDT = $_REQUEST['txtTuKhoa'];
-    //     include('main.php');
-    //     break;
+    case 'timKiem':
+        if(isset($_REQUEST['txtTuKhoa']))
+            $tuKhoa = $_REQUEST['txtTuKhoa'];
+        include('main.php');
+        break;
     case "gioithieu":
 		include('gioithieu.php');
 		break;
