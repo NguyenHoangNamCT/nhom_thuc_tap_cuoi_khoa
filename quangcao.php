@@ -3,22 +3,8 @@
    $quangCao = new QuangCao();
    $quangCaoList = $quangCao->layDanhSachQuangCao();
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Quảng cáo</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-  <style>
-    .carousel-item img {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-    }
-  </style>
-</head>
-<body>
+
+
   <div class="container my-5">
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-indicators">
@@ -40,7 +26,7 @@
             {
             
               echo '<div class="carousel-item' . ($index === 0 ? ' active' : '') . '">';
-              echo '<a href="' . $quangCao['url'] . '"><img src="images/' . $quangCao['hinh_anh'] . '" alt="' . $quangCao['tieu_de'] . '"></a>';
+              echo '<a href="' . $quangCao['url'] . '"><img width="100%" height="300px" src="images/' . $quangCao['hinh_anh'] . '" alt="' . $quangCao['tieu_de'] . '"></a>';
               echo '<div class="carousel-caption d-none d-md-block">';
               echo '<h5>' . $quangCao['tieu_de'] . '</h5>';
               echo '</div>';
@@ -59,5 +45,4 @@
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+
