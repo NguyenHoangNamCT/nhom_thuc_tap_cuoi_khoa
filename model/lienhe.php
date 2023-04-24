@@ -1,14 +1,13 @@
 <?php
 class LIENHE{
-    public function themLienHe($ho_ten, $email, $so_dien_thoai, $noi_dung) {
+    public function themLienHe($ho_ten, $email, $so_dien_thoai) {
         $db = DATABASE::connect();
         try {
-            $sql = "INSERT INTO lienhe (ho_ten, email, so_dien_thoai, noi_dung) VALUES (:ho_ten, :email, :so_dien_thoai, :noi_dung)";
+            $sql = "INSERT INTO lienhe (ho_ten, email, so_dien_thoai) VALUES (:ho_ten, :email, :so_dien_thoai)";
             $cmd = $db->prepare($sql);
             $cmd->bindValue(':ho_ten', $ho_ten);
             $cmd->bindValue(':email', $email);
             $cmd->bindValue(':so_dien_thoai', $so_dien_thoai);
-            $cmd->bindValue(':noi_dung', $noi_dung);
             $cmd->execute();
             $lastInsertedId = $db->lastInsertId();
             return $lastInsertedId;
@@ -41,16 +40,15 @@ class LIENHE{
         }
     }
 
-    public function suaLienHe($id, $hoTen, $email, $soDienThoai, $noiDung) {
+    public function suaLienHe($id, $hoTen, $email, $soDienThoai) {
         $db = DATABASE::connect();
         try {
-            $sql = "UPDATE lienhe SET ho_ten = :hoTen, email = :email, so_dien_thoai = :soDienThoai, noi_dung = :noiDung WHERE id = :id";
+            $sql = "UPDATE lienhe SET ho_ten = :hoTen, email = :email, so_dien_thoai = :soDienThoai WHERE id = :id";
             $cmd = $db->prepare($sql);
             $cmd->bindValue(':id', $id, PDO::PARAM_INT);
             $cmd->bindValue(':hoTen', $hoTen);
             $cmd->bindValue(':email', $email);
             $cmd->bindValue(':soDienThoai', $soDienThoai);
-            $cmd->bindValue(':noiDung', $noiDung);
             $cmd->execute();
             $rowCount = $cmd->rowCount();
             return $rowCount;
@@ -133,6 +131,26 @@ class LIENHE{
             echo "<p>Lỗi truy vấn: $error_message</p>";
             exit();
         } finally {
+            DATABASE::close();
+        }
+    }
+    
+    // hiển thị liên hệ
+    public function hienThiLienHe() {
+        $db = DATABASE::connect();
+        try {
+            $sql = "SELECT * FROM lienhe";
+            $cmd = $db->prepare($sql);
+            $cmd->execute();
+            $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+        catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở hienThiLienHe: $error_message</p>";
+            exit();
+        }
+        finally {
             DATABASE::close();
         }
     }

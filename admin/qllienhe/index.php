@@ -27,8 +27,7 @@ switch($action){
 		$ho_ten = $_POST['txtHoTen'];
 		$email = $_POST['txtEmail'];
 		$so_dien_thoai = $_POST['txtSoDienThoai'];
-		$noi_dung = $_POST['txtNoiDung'];
-		$lh->themLienHe($ho_ten, $email, $so_dien_thoai, $noi_dung);
+		$lh->themLienHe($ho_ten, $email, $so_dien_thoai);
 		include("main.php");
 		break;
 	case "xoa":
@@ -45,8 +44,7 @@ switch($action){
 		$ho_ten = $_POST['txtHoTen'];
 		$email = $_POST['txtEmail'];
 		$so_dien_thoai = $_POST['txtSoDienThoai'];
-		$noi_dung = $_POST['txtNoiDung'];
-		$lh->suaLienHe($id, $ho_ten, $email, $so_dien_thoai, $noi_dung);
+		$lh->suaLienHe($id, $ho_ten, $email, $so_dien_thoai);
 		include("main.php");
 		break;
 	//----------------------------------------------------
