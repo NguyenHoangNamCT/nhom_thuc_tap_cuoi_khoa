@@ -43,10 +43,12 @@ switch($action){
         break;
     case "locSanPhamTheoLoai":
         $l_id = $_GET['id'];
+        //Nếu đã bấm vào lọc thì xoá biến từ khoá
         include("main.php");
         break;
     case "locSanPhamTheoThuongHieu":
         $th_id = $_GET['id'];
+        //Nếu đã bấm vào lọc thì xoá biến từ khoá
         include("main.php");
         break;
     case "dangNhap":  

@@ -11,7 +11,7 @@
         </div>
         <div class="card-body d-flex justify-content-center">
           <?php
-          //Nếu có lọc ở trang 1 thì các trang sau sẽ được lọc
+            //Nếu có lọc ở trang 1 thì các trang sau sẽ được lọc
             if(isset($_REQUEST['IDLoaiSP']))
               $l_id = $_REQUEST['IDLoaiSP'];
             if(isset($_REQUEST['IDThuongHieu']))

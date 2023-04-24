@@ -42,7 +42,6 @@
       <span class="sr-only"></span>
     </a>
   </li>
-
   <?php
     // Hiển thị các nút phân trang
     for ($i = max(1, $trangHienTai - 2); $i <= min($trangHienTai + 2, $tongsotrang); $i++) {
