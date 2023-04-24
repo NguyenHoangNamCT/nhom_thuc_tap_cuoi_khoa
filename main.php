@@ -12,12 +12,12 @@
         <div class="card-body d-flex justify-content-center">
           <?php
             //Nếu có lọc ở trang 1 thì các trang sau sẽ được lọc
-            if(isset($_REQUEST['IDLoaiSP']))
-              $l_id = $_REQUEST['IDLoaiSP'];
-            if(isset($_REQUEST['IDThuongHieu']))
-              $th_id = $_REQUEST['IDThuongHieu'];
-            if(isset($_REQUEST['txtTuKhoa']))
-              $tuKhoa = $_REQUEST['txtTuKhoa'];
+            if(isset($_GET['IDLoaiSP']) && !isset($tuKhoa))
+              $l_id = $_GET['IDLoaiSP'];
+            if(isset($_GET['IDThuongHieu']) && !isset($tuKhoa))
+              $th_id = $_GET['IDThuongHieu'];
+            if(isset($_GET['txtTuKhoa']))
+              $tuKhoa = $_GET['txtTuKhoa'];
             //Nếu có sắp xếp ở trang 1 thì các trang sau cũng sẽ được sắp xếp
             if(isset($_REQUEST['orderBy']))
               $orderBy = $_REQUEST['orderBy'];
@@ -38,6 +38,7 @@
             else
               $guiIDThuongHieuKieu_Get = "";
             $danhSachDuLieuGuiDI = $guiTuKhoaKieu_Get.$guiOrderByKieu_Get.$guiIDLoaiSanPhamKieu_Get.$guiIDThuongHieuKieu_Get."";
+            var_dump($danhSachDuLieuGuiDI);
           ?>
           <a href="?sapXep=theoLuotMua<?php echo $danhSachDuLieuGuiDI; ?>" class="btn btn-success mx-1">Bán chạy</a>
           <a href="?sapXep=theoGia<?php echo $danhSachDuLieuGuiDI; ?>" class="btn btn-success mx-1">Giá</a>
