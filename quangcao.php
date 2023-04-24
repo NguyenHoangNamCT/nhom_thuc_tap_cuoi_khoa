@@ -35,14 +35,17 @@
       </div>
       <div class="carousel-inner">
         <?php 
-          foreach ($quangCaoList as $index => $quangCao) {
-            echo '<div class="carousel-item' . ($index === 0 ? ' active' : '') . '">';
-            echo '<a href="' . $quangCao['url'] . '"><img src="images/' . $quangCao['hinh_anh'] . '" alt="' . $quangCao['tieu_de'] . '"></a>';
-            echo '<div class="carousel-caption d-none d-md-block">';
-            echo '<h5>' . $quangCao['tieu_de'] . '</h5>';
-            echo '</div>';
-            echo '</div>';
-          }
+          foreach ($quangCaoList as $index => $quangCao) 
+            if($quangCao['trang_thai'] == 1)
+            {
+            
+              echo '<div class="carousel-item' . ($index === 0 ? ' active' : '') . '">';
+              echo '<a href="' . $quangCao['url'] . '"><img src="images/' . $quangCao['hinh_anh'] . '" alt="' . $quangCao['tieu_de'] . '"></a>';
+              echo '<div class="carousel-caption d-none d-md-block">';
+              echo '<h5>' . $quangCao['tieu_de'] . '</h5>';
+              echo '</div>';
+              echo '</div>';
+            }
         ?>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
