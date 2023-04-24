@@ -38,7 +38,6 @@
             else
               $guiIDThuongHieuKieu_Get = "";
             $danhSachDuLieuGuiDI = $guiTuKhoaKieu_Get.$guiOrderByKieu_Get.$guiIDLoaiSanPhamKieu_Get.$guiIDThuongHieuKieu_Get."";
-            var_dump($danhSachDuLieuGuiDI);
           ?>
           <a href="?sapXep=theoLuotMua<?php echo $danhSachDuLieuGuiDI; ?>" class="btn btn-success mx-1">Bán chạy</a>
           <a href="?sapXep=theoGia<?php echo $danhSachDuLieuGuiDI; ?>" class="btn btn-success mx-1">Giá</a>
