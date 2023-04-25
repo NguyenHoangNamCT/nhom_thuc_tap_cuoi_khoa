@@ -1,6 +1,6 @@
 <?php 
 
-//không cho khách thăm web và khách hàng vào xem quản lí chi tiết đơn hàng
+//không cho khách thăm web và khách hàng vào xem quản lí đơn hàng
 if(!isset($_SESSION['nguoiDung']) || $_SESSION['nguoiDung']['loai_nguoi_dung'] == 3){
 	header("Location: ../../");//chuyển qua trang index
 	exit;
