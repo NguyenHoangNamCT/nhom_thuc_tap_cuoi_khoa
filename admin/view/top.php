@@ -118,13 +118,6 @@
       </li>
 
       <li>
-        <a href="../qlkhuyenmai/" class="nav-link text-white">
-          <span class="bi-kanban"></span>
-          Quản lý Khuyến Mãi
-        </a>
-      </li>
-
-      <li>
         <a href="../qllienhe/" class="nav-link text-white">
           <span class="bi-kanban"></span>
           Quản lý Liên Hệ
