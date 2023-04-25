@@ -211,5 +211,22 @@ class KHUYENMAI{
         }
     }
 
+    //khuyến mãi tất cả
+    function apDungKhuyenMaiTrenTatCaSanPham()
+    {
+        $db = DATABASE::connect();
+        try {
+            $sql = "UPDATE sanpham SET gia_ban = gia_ban * (1 - (SELECT gia_tri FROM khuyenmai WHERE trang_thai = 1) / 100) WHERE trang_thai = 1";
+            $cmd = $db->prepare($sql);
+            $cmd->execute();
+            return true;
+        } catch (PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở apDungKhuyenMaiTrenTatCaSanPham: $error_message</p>";
+            exit();
+        } finally {
+            DATABASE::close();
+        }
+    }
 }
 ?>
