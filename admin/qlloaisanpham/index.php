@@ -1,4 +1,9 @@
 <?php 
+//không cho khách thăm web và khách hàng vào xem quản lí loại sản phẩm
+if(!isset($_SESSION['nguoiDung']) || $_SESSION['nguoiDung']['loai_nguoi_dung'] == 3){
+	header("Location: ../../");//chuyển qua trang index
+	exit;
+}
 require('../../model/database.php');
 require('../../model/loaisanpham.php');
 if(isset($_REQUEST["action"])){

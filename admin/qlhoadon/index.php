@@ -1,4 +1,9 @@
 <?php 
+//không cho khách thăm web và khách hàng vào xem quản lí hoá đơn
+if(!isset($_SESSION['nguoiDung']) || $_SESSION['nguoiDung']['loai_nguoi_dung'] == 3){
+	header("Location: ../../");//chuyển qua trang index
+	exit;
+}
 require('../../model/database.php');
 require('../../model/donhang.php');
 require('../../model/hoadon.php');

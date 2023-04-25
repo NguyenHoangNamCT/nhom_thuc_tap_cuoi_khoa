@@ -1,4 +1,9 @@
 <?php
+//chỉ cho quản lý vào xem quản lí loại người dùng
+if(!isset($_SESSION['nguoiDung']) || $_SESSION['nguoiDung']['loai_nguoi_dung'] != 1){
+	header("Location: ../../");//chuyển qua trang index
+	exit;
+}
     require('../../model/database.php');
     require('../../model/nguoidung.php');
     if(isset($_REQUEST['action']))

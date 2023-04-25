@@ -1,8 +1,10 @@
 <?php 
+//chỉ cho quản lý xem quản lí liên hệ
+if(!isset($_SESSION['nguoiDung']) || $_SESSION['nguoiDung']['loai_nguoi_dung'] != 1){
+	header("Location: ../../");//chuyển qua trang index
+	exit;
+}
 require('../../model/database.php');
-// require('../../model/sanpham.php');
-// require('../../model/loaisanpham.php');
-// require('../../model/thuonghieu.php');
 require('../../model/lienhe.php');
 if(isset($_REQUEST["action"])){
     $action = $_REQUEST["action"];
