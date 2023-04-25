@@ -45,7 +45,7 @@
 
           if (!empty($khuyenMaiList)) {
             $i = 0;
-            foreach ($khuyenMaiList as $khuyenMai) {
+            foreach ($khuyenMaiList as $km) {
               echo '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' . $i . '"';
               if ($i === 0) {
                 echo ' class="active" aria-current="true"';
@@ -55,13 +55,13 @@
             }
 
             echo '<div class="carousel-inner">';
-            foreach ($khuyenMaiList as $index => $khuyenMai) {
+            foreach ($khuyenMaiList as $index => $km) {
               echo '<div class="carousel-item' . ($index === 0 ? ' active' : '') . '">';
-              echo '<img src="images/' . $khuyenMai['hinh_anh'] . '" alt="' . $khuyenMai['ten_khuyen_mai'] . '">';
+              echo '<img src="images/' . $km['hinh_anh'] . '" alt="' . $km['ten_khuyen_mai'] . '">';
               echo '<div class="carousel-caption d-none d-md-block">';
-              echo '<h5>' . $khuyenMai['ten_khuyen_mai'] . '</h5>';
-              echo '<p>Bắt đầu từ: ' . date('d/m/Y', strtotime($khuyenMai['ngay_bat_dau'])) . '</p>';
-              echo '<p>Kết thúc vào: ' . date('d/m/Y', strtotime($khuyenMai['ngay_ket_thuc'])) . '</p>';
+              echo '<h5>' . $km['ten_khuyen_mai'] . '</h5>';
+              echo '<p>Bắt đầu từ: ' . date('d/m/Y', strtotime($km['ngay_bat_dau'])) . '</p>';
+              echo '<p>Kết thúc vào: ' . date('d/m/Y', strtotime($km['ngay_ket_thuc'])) . '</p>';
               echo '</div>';
               echo '</div>';
             }
