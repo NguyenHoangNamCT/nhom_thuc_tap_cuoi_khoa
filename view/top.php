@@ -56,9 +56,9 @@
         </li>
 
         <a class="nav-link active" aria-current="page" href="?action=gioithieu" style="color: yellow;">Giới Thiệu</a>
-        
+        <?php if(isset($_SESSION['nguoiDung']) && $_SESSION['nguoiDung']['loai_nguoi_dung'] != 3) {?>
         <a class="nav-link active" aria-current="page" href="admin/qlsanpham/" style="color: yellow;">Trang quản lý</a>
-
+        <?php } ?>
         
       </ul>
 

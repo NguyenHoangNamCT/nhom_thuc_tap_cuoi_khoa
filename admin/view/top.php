@@ -110,19 +110,7 @@
         </a>
       </li>
 
-      <li>
-        <a href="../qlnguoidung/" class="nav-link text-white">
-          <span class="bi-kanban"></span>
-          Quản lý người dùng
-        </a>
-      </li>
 
-      <li>
-        <a href="../qllienhe/" class="nav-link text-white">
-          <span class="bi-kanban"></span>
-          Quản lý Liên Hệ
-        </a>
-      </li>
 
       <li>
         <a href="../qlquangcao/" class="nav-link text-white">
@@ -152,7 +140,23 @@
         </a>
       </li>
 
-     
+      <!-- Chỉ cho quản lý xem 2 thả QL liên hệ, người dùng -->
+      <?php if(isset($_SESSION['nguoiDung']) && $_SESSION['nguoiDung']['loai_nguoi_dung'] == 1){ ?>
+      <li>
+        <a href="../qllienhe/" class="nav-link text-white">
+          <span class="bi-kanban"></span>
+          Quản lý Liên Hệ
+        </a>
+      </li>
+
+      <li>
+        <a href="../qlnguoidung/" class="nav-link text-white">
+          <span class="bi-kanban"></span>
+          Quản lý người dùng
+        </a>
+      </li>
+      <?php } ?>
+
 
     </ul>
     <hr>
