@@ -3,7 +3,7 @@
 
    $km = new KHUYENMAI();
    $khuyenMaiList = $km->hienThiKhuyenMai();
-   var_dump($khuyenMaiList);
+   
    
 ?>
 
