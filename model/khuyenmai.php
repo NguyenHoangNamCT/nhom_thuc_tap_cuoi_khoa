@@ -191,7 +191,25 @@ class KHUYENMAI{
             DATABASE::close();
         }
     }
-    
+     // Hiển thị danh sách KHUYẾN MÃI
+     public function hienThiKhuyenMai() {
+        $db = DATABASE::connect();
+        try {
+            $sql = "SELECT * FROM khuyenmai WHERE trang_thai = 1";
+            $cmd = $db->prepare($sql);
+            $cmd->execute();
+            $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+        catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở hienThiKhuyenMai: $error_message</p>";
+            exit();
+        }
+        finally {
+            DATABASE::close();
+        }
+    }
 
 }
 ?>
