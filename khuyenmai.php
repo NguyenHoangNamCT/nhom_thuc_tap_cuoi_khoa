@@ -28,6 +28,10 @@
     <?php foreach($khuyenMaiList as $key => $arr){ ?>
     <div class="carousel-item <?php if($key == 0) echo 'active'; ?>">
       <img src="images/<?php echo $arr['hinh_anh']; ?>" alt="Los Angeles" class="d-block w-100" style="height: 500px;">
+      <div class="carousel-caption">
+        <h3><?php echo $arr['ten_khuyen_mai']; ?></p>
+        <h3><?php echo $arr['ngay_bat_dau'].' '.$arr['ngay_ket_thuc']; ?></p>
+      </div>
     </div>
     <?php } ?>
   </div>
@@ -41,3 +45,5 @@
   <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
   </button>
+
+  </div>
