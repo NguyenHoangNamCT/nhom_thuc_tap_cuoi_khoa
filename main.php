@@ -168,6 +168,8 @@
 </div>
 <?php include("view/carousel.php"); ?>
 <br></br>
+<?php include("khuyenmai.php"); ?>
+
 <?php include('topview.php'); ?>
 <br></br>
 <?php include('view/footer.php'); ?>

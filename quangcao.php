@@ -1,11 +1,7 @@
 <?php
    require('model/quangcao.php');
-   require('model/khuyenmai.php');
-
 
    $quangCao = new QUANGCAO();
-   $km = new KHUYENMAI();
-
    $quangCaoList = $quangCao->hienThiQuangCao();
    
 ?>
@@ -28,9 +24,7 @@
       <div class="carousel-inner">
         <?php 
           foreach ($quangCaoList as $index => $quangCao) 
-            if($quangCao['trang_thai'] == 1)
             {
-            
               echo '<div class="carousel-item' . ($index === 0 ? ' active' : '') . '">';
               echo '<a href="' . $quangCao['url'] . '"><img width="100%" height="500px" src="images/' . $quangCao['hinh_anh'] . '" alt="' . $quangCao['tieu_de'] . '"></a>';
               echo '<div class="carousel-caption d-none d-md-block">';
@@ -39,12 +33,9 @@
               echo '</div>';
             }
         ?>
-
       </div>
 
  
-
-
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
