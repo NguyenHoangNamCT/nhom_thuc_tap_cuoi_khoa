@@ -39,8 +39,9 @@
       <label for="loai-nguoi-dung">Loại người dùng:</label>
       <select class="form-control" id="loai-nguoi-dung" name="loai_nguoi_dung" required>
         <option value="">--Chọn loại người dùng--</option>
-        <option value="admin">Admin</option>
-        <option value="member">Member</option>
+        <option value="1">Quản Lí</option>
+        <option value="2">Nhân Viên</option>
+        <option value="3">Khách Hàng</option>
       </select>
     </div>
     <div class="form-group">

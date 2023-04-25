@@ -76,7 +76,7 @@
               <td><?php echo $arr['dien_thoai']; ?></td>
               <td><?php echo $arr['email']; ?></td>
               <td><?php echo $arr['ngay_dang_ky']; ?></td>
-              <td><?php echo $arr['loai_nguoi_dung']; ?></td>
+              <td><?php if ($arr['loai_nguoi_dung'] ==1 ) echo "quản lí"; else if ($arr['loai_nguoi_dung']==2) echo "nhân viên"; else echo "khách hang"; ?></td>
 			  <td><img src="../../images/<?php echo $arr['hinh_anh']; ?>" alt="<?php echo $arr['ho_ten']; ?>" width="100"></td>
               <td><?php echo ($arr['trang_thai'] == 1) ? 'Kích hoạt' : 'Không kích hoạt'; ?></td>
               <td><a class="btn btn-warning" href="index.php?action=sua&id=<?php echo $arr["id"]; ?>"><span class="glyphicon glyphicon-edit"></span> Sửa</a></td>
