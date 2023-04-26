@@ -179,6 +179,29 @@ class CHITIETDONHANG{
             DATABASE::close();
         }
     }
-    
+
+    public function layDanhSachSanPhamDaMuaCuaNguoiDung($idNguoiDung) {
+        $dbcon = DATABASE::connect();
+        try {
+            $sql = "SELECT chitietdonhang.so_luong, chitietdonhang.don_gia, sanpham.id_loai_san_pham, sanpham.id_thuong_hieu, sanpham.ten_san_pham, sanpham.mo_ta, sanpham.gia_tien, sanpham.giam_gia, sanpham.hinh_anh, sanpham.luot_xem, sanpham.luot_mua, donhang.ngay_dat        
+            FROM chitietdonhang, sanpham, donhang
+            WHERE chitietdonhang.id_san_pham = sanpham.id
+            AND chitietdonhang.id_don_hang = donhang.id 
+            AND donhang.id_nguoi_dung = :idNguoiDung
+            order by chitietdonhang.id_don_hang DESC";
+            $cmd = $dbcon->prepare($sql);
+            $cmd->bindValue(':idNguoiDung', $idNguoiDung, PDO::PARAM_INT);
+            $cmd->execute();
+            $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn: $error_message</p>";
+            exit();
+        } finally {
+            DATABASE::close();
+        }
+    }
+        
 }
 ?>
