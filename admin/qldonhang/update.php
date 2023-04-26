@@ -65,9 +65,9 @@
     <select class="form-select" aria-label="Default select example" name="txtTinhTrangDH"  id="txtTinhTrangDH">
       <option value="">--Chọn trạng thái đơn hàng hiện tại--</option>
       <option <?php if($arr['tinh_trang_don_hang'] == 0) echo "selected"; ?> value="0">Chưa thanh toán</option>
-      <option <?php if($arr['tinh_trang_don_hang'] == 1) echo "selected"; ?>value="1">Đã thanh toán</option>
-      <option <?php if($arr['tinh_trang_don_hang'] == 2) echo "selected"; ?>value="3">Đang vận chuyển</option>
-      <option <?php if($arr['tinh_trang_don_hang'] == 3) echo "selected"; ?>value="4">Đã giao</option>
+      <option <?php if($arr['tinh_trang_don_hang'] == 1) echo "selected"; ?> value="1">Đã thanh toán</option>
+      <option <?php if($arr['tinh_trang_don_hang'] == 2) echo "selected"; ?> value="2">Đang vận chuyển</option>
+      <option <?php if($arr['tinh_trang_don_hang'] == 3) echo "selected"; ?> value="3">Đã giao</option>
     </select>
   </div>
 
