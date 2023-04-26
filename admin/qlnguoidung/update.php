@@ -45,9 +45,9 @@
       <label for="loai-nguoi-dung">Loại người dùng:</label>
       <select class="form-control" id="loai-nguoi-dung" name="loai_nguoi_dung" required>
         <option value="">--Chọn loại người dùng--</option>
-        <option value="1">Quản Lí</option>
-        <option value="2">Nhân Viên</option>
-        <option value="3">Khách Hàng</option>
+        <option <?php if($arr['loai_nguoi_dung'] == 1) echo "selected"; ?> value="1">Quản Lí</option>
+        <option <?php if($arr['loai_nguoi_dung'] == 2) echo "selected"; ?> value="2">Nhân Viên</option>
+        <option <?php if($arr['loai_nguoi_dung'] == 3) echo "selected"; ?> value="3">Khách Hàng</option>
       </select>
     </div>
     <div class="form-group">
