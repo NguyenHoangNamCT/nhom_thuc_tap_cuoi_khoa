@@ -257,6 +257,9 @@ switch($action){
     case "dieukhoansudung":
         include('dieukhoansudung.php');
         break;
+    case "xemDonMua":
+        include('donmua.php');
+        break;
     default:
         break;
 }

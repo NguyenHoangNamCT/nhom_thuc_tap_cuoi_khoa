@@ -23,7 +23,7 @@
               $orderBy = $_REQUEST['orderBy'];
             if(isset($l_id))
               $guiIDLoaiSanPhamKieu_Get = "&IDLoaiSP=".$l_id;
-            else 
+            else
               $guiIDLoaiSanPhamKieu_Get = "";
             if(isset($orderBy))
               $guiOrderByKieu_Get = "&orderBy=".$orderBy;

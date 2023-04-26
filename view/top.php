@@ -90,6 +90,7 @@
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
           <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#hoSoCaNhan">Hồ sơ cá nhân</a></li>
           <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#doiMK">Đổi mật khẩu</a></li>
+          <li><a class="dropdown-item" href="?action=xemDonMua">Đơn mua</a></li>
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item" href="?action=dangXuat">Sign out</a></li>
         </ul>
