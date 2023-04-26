@@ -54,7 +54,7 @@ class DONHANG{
         $ngay_dat_mysql = date('Y-m-d H:i:s', strtotime($ngay_dat));
         $db = DATABASE::connect();
         try{
-            $sql = "UPDATE donhang SET ngay_dat = NOW(), dia_chi_giao_hang = :dia_chi_giao_hang, dien_thoai_nguoi_nhan = :dien_thoai_nguoi_nhan, tong_tien = :tong_tien, tinh_trang_don_hang = :tinh_trang_don_hang WHERE id = :id_don_hang";
+            $sql = "UPDATE donhang SET ngay_dat = :ngay_dat, dia_chi_giao_hang = :dia_chi_giao_hang, dien_thoai_nguoi_nhan = :dien_thoai_nguoi_nhan, tong_tien = :tong_tien, tinh_trang_don_hang = :tinh_trang_don_hang WHERE id = :id_don_hang";
             $cmd = $db->prepare($sql);
             $cmd->bindValue(':ngay_dat', $ngay_dat_mysql);
             $cmd->bindValue(':dia_chi_giao_hang', $dia_chi_giao_hang);
