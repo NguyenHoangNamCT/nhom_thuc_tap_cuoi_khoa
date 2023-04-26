@@ -239,7 +239,6 @@ switch($action){
                 $images .= ', ' . $tenDuyNhat;
             move_uploaded_file($tmp_name,"images/".$tenDuyNhat);
         }
-        var_dump($sp_id, $rating, $noiDung, $images);
         $dg->themDanhGia($_SESSION['nguoiDung']['id'], $sp_id, $rating, $noiDung, $images);
         include('detail.php');
         break;
