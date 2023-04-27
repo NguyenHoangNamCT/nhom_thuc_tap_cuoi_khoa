@@ -37,8 +37,12 @@ switch($action){
 		$thuongHieu = $_POST['selectThuongHieu'];
 		$soLuong = $_POST['txtSoLuong'];
 		$moTa = $_POST['txtMoTa'];
-		$hinh = $_FILES['filehinhanh']['name'];
-		$sp->themSanPham($loaiSP, $thuongHieu, $tenSP, $moTa, $giaTien, $giamGia, $soLuong, $hinh);
+		$hinh = $_FILES['filehinhanh'];
+		$tenHinhAnh =$hinh['name'];
+		$tmpHinhAnh =$hinh['tmp_name'];
+		$duongDanHinhAnh = '../../images/' . $tenHinhAnh;
+		move_uploaded_file($tmpHinhAnh, $duongDanHinhAnh);
+		$sp->themSanPham($loaiSP, $thuongHieu, $tenSP, $moTa, $giaTien, $giamGia, $soLuong, $tenHinhAnh);
 		include("main.php");
 		break;
 	case "xoa":
@@ -62,10 +66,15 @@ switch($action){
 		$hinh = $_FILES['filehinhanh']['name'];
 
 		if($hinh != '')
+		{
+			$hinhAnh_tmp = $_FILES['filehinhanh']['tmp_name'];
+			$hinhAnh_path = "../../images/" .$hinh;
+			move_uploaded_file($hinhAnh_tmp, $hinhAnh_path);
 			$sp->suaSanPham($id, $loaiSP, $thuongHieu, $tenSP, $moTa, $giaTien, $giamGia, $soLuong, $hinh);
-		else
+		}
+		else{
 			$sp->suaSanPham($id, $loaiSP, $thuongHieu, $tenSP, $moTa, $giaTien, $giamGia, $soLuong);
-
+		}
 		include("main.php");
 		break;
 	case "timKiemSanPham":
