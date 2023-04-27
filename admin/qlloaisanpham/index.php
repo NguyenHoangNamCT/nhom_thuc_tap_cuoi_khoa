@@ -26,10 +26,15 @@ switch($action){
 	case "XuLyThem":
 		$tenLoaiSP = $_POST['txtTenLoaiSP'];
 		$moTa = $_POST['txtMoTa'];
-		$hinhAnh = $_FILES['filehinhanh']['name'];
-		$l->themLoaiSanPham($tenLoaiSP, $moTa, 0, $hinhAnh);
+		$hinhAnh = $_FILES['filehinhanh'];
+		$tenHinhAnh = $hinhAnh['name'];
+		$tmpHinhAnh = $hinhAnh['tmp_name'];
+		$duongDanHinhAnh = '../../images/' . $tenHinhAnh;
+		move_uploaded_file($tmpHinhAnh, $duongDanHinhAnh);
+		$l->themLoaiSanPham($tenLoaiSP, $moTa, 0, $tenHinhAnh);
 		include("main.php");
 		break;
+		
 	case "xoa":
 		$id = $_GET['id'];
 		$l->xoaLoaiSanPham($id);
@@ -45,13 +50,18 @@ switch($action){
 		$tenLoaiSP = $_POST['txtTenLoaiSP'];
 		$moTa = $_POST['txtMoTa'];
 		$hinhAnh = $_FILES['filehinhanh']['name'];
-		if($hinhAnh != '')
+		if($hinhAnh != '') {
+			$hinhAnh_tmp = $_FILES['filehinhanh']['tmp_name'];
+			$hinhAnh_path = "../../images/" . $hinhAnh;
+			move_uploaded_file($hinhAnh_tmp, $hinhAnh_path);
 			$l->suaLoaiSanPham($id, $tenLoaiSP, $moTa, $hinhAnh);
-		else
+		}
+		else {
 			$l->suaLoaiSanPham($id, $tenLoaiSP, $moTa);
-		//------------------------------
+		}
 		include("main.php");
 		break;
+		
 	case "timKiemLoaiSanPham":
 		$tuKhoa = $_POST['txtTuKhoa'];
 		$loaiTimKiem = $_POST['loaiTimKiem'];
