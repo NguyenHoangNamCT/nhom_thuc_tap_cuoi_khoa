@@ -28,11 +28,15 @@ if(!isset($_SESSION['nguoiDung']) || $_SESSION['nguoiDung']['loai_nguoi_dung'] !
             $dien_thoai = $_POST["dien_thoai"];
             $email = $_POST["email"];
             $loai_nguoi_dung = $_POST["loai_nguoi_dung"];
-            $hinh_anh = $_FILES["hinh_anh"]["name"];
-            $trang_thai = $_POST["trang_thai"];
-            $nd->themNguoiDung($ten_dang_nhap, $mat_khau, $ho_ten, $dia_chi, $dien_thoai, $email, $loai_nguoi_dung, $hinh_anh);
+            $hinh_anh = $_FILES["hinh_anh"];
+            $ten_hinh_anh = $hinh_anh["name"];
+            $tmp_hinh_anh = $hinh_anh["tmp_name"];
+            $duong_dan_hinh_anh = '../../images/' . $ten_hinh_anh;
+            move_uploaded_file($tmp_hinh_anh, $duong_dan_hinh_anh);
+            $nd->themNguoiDung($ten_dang_nhap, $mat_khau, $ho_ten, $dia_chi, $dien_thoai, $email, $loai_nguoi_dung, $ten_hinh_anh);
             include('main.php');
             break;
+            
         case 'xoa':
             $id = $_GET['id'];
             $nd->xoaNguoiDung($id);
@@ -51,16 +55,24 @@ if(!isset($_SESSION['nguoiDung']) || $_SESSION['nguoiDung']['loai_nguoi_dung'] !
             $dien_thoai = $_POST["dien_thoai"];
             $email = $_POST["email"];
             $loai_nguoi_dung = $_POST["loai_nguoi_dung"];
-            $hinh_anh = $_FILES["hinh_anh"]["name"];
             $trang_thai = $_POST["trang_thai"];
-         
-
+            
+            if ($_FILES["hinh_anh"]["error"] == UPLOAD_ERR_OK) {
+                $hinh_anh = $_FILES["hinh_anh"]["name"];
+                $tmp_hinh_anh = $_FILES["hinh_anh"]["tmp_name"];
+                $duong_dan_hinh_anh = "../../images/" . $hinh_anh;
+                move_uploaded_file($tmp_hinh_anh, $duong_dan_hinh_anh);
+            } else {
+                $hinh_anh = '';
+            }
+        
             if($hinh_anh != '')
                 $nd->suaNguoiDung($id, $ten_dang_nhap, $mat_khau, $ho_ten, $dia_chi, $dien_thoai, $email, $loai_nguoi_dung, $trang_thai, $hinh_anh);
             else
                 $nd->suaNguoiDung($id, $ten_dang_nhap, $mat_khau, $ho_ten, $dia_chi, $dien_thoai, $email, $loai_nguoi_dung, $trang_thai);
             include('main.php');
             break;
+            
         // case 'thayDoiTrangThai':
         //     $id = $_GET['id'];
         //     $trangThai = $_GET['trangThai'];
