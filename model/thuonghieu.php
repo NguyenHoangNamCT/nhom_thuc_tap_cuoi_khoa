@@ -107,7 +107,7 @@ class THUONGHIEU{
         }
     }
 
-    // Cập nhật 
+    // Cập nhật ..
     public function suaThuongHieu($id, $tenThuongHieu, $moTa, $trangWeb, $logo = NULL){
         $db = DATABASE::connect();
         try{
@@ -122,7 +122,7 @@ class THUONGHIEU{
             $cmd->bindValue(':moTa', $moTa);
             $cmd->bindValue(':trangWeb', $trangWeb);
             if($logo != NULL)
-            $cmd->bindValue(':logo', $logo, PDO::PARAM_STR);
+                $cmd->bindValue(':logo', $logo, PDO::PARAM_STR);
             $cmd->execute();
             $rowCount = $cmd->rowCount();
             return $rowCount;

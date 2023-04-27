@@ -25,15 +25,14 @@ switch($action){
 		break;
 	case "XuLyThem":
 		$tieuDe = $_POST['txtTieuDe'];
-		$hinhAnh = $_FILES['filehinhanh']['name'];
 		$trangThai = $_POST['txtTrangThai'];
 		$url = $_POST['txtUrl'];
-		if ($_FILES["filehinhanh"]["error"] == UPLOAD_ERR_OK) {
-			$tmpHinhAnh = $_FILES["filehinhanh"]["tmp_name"];
-			$duongDanHinhAnh = "../../images/" . $hinhAnh;
-			move_uploaded_file($tmpHinhAnh, $duongDanHinhAnh);
-		}
-		$qc->themQuangCao($tieuDe, $hinhAnh, $url, $trangThai);
+		$hinhAnh = $_FILES['filehinhanh'];
+		$tenHinhAnh = $hinhAnh['name'];
+		$tmpHinhAnh = $hinhAnh['tmp_name'];
+		$duongDanHinhAnh = '../../images/' . $tenHinhAnh;
+		move_uploaded_file($tmpHinhAnh, $duongDanHinhAnh);
+		$qc->themQuangCao($tieuDe, $tenHinhAnh, $url, $trangThai);
 		include("main.php");
 		break;
 	
