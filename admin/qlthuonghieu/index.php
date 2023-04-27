@@ -46,14 +46,13 @@ switch($action){
 		include("update.php");
 		break;
 	case "xuLySua":
-	
 		$id = $_POST['id'];
 		$tenTH = $_POST['txtTenTH'];
 		$moTa = $_POST['txtMoTa'];
 		$trangweb = $_POST['txtTrangWeb'];
-		$logo = $_FILES['filehinhanh']['name'];
+		$logo = uniqid() . '_' .$_FILES['filehinhanh']['name'];
 		
-		if($logo == ''){
+		if($logo != ''){
 			$Logo_tmp = $_FILES['filehinhanh']['tmp_name'];
 			$Logo_path = "../../images/" .$logo;
 			move_uploaded_file($Logo_tmp, $Logo_path);

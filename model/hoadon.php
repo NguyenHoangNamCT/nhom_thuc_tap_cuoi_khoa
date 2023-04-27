@@ -1,12 +1,11 @@
 <?php
 class HOADON{
-    public function themHoaDon($id_don_hang, $ngay_tao, $tong_tien) {
+    public function themHoaDon($id_don_hang, $tong_tien) {
         $db = DATABASE::connect();
         try {
-            $sql = "INSERT INTO hoadon (id_don_hang, ngay_tao, tong_tien) VALUES (:id_don_hang, :ngay_tao, :tong_tien)";
+            $sql = "INSERT INTO hoadon (id_don_hang, ngay_tao, tong_tien) VALUES (:id_don_hang, NOW(), :tong_tien)";
             $cmd = $db->prepare($sql);
             $cmd->bindValue(':id_don_hang', $id_don_hang);
-            $cmd->bindValue(':ngay_tao', $ngay_tao);
             $cmd->bindValue(':tong_tien', $tong_tien);
             $cmd->execute();
             $rowCount = $cmd->rowCount();

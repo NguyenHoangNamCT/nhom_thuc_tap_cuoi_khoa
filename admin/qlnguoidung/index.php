@@ -89,23 +89,29 @@ if(!isset($_SESSION['nguoiDung']) || $_SESSION['nguoiDung']['loai_nguoi_dung'] !
         //     $_SESSION['nguoiDung'] = $nd->laythongtinnguoidung($email);
         //     include('main.php');
         //     break;
-        case "updateUser":
+        case "updateUser":         
             $id = $_POST["id"];
             $ho_ten = $_POST["txthoten"];
             $dia_chi = $_POST["txtDC"];
             $dien_thoai = $_POST["txtdienthoai"];
             $email = $_POST["txtemail"];
-            $hinh_anh = $_FILES["fhinh"]["name"];
+            $hinh_anh = uniqid() . '_' .$_FILES["fhinh"]["name"];
+            $mangFile = $_FILES['fhinh'];
             
-            if($hinh_anh != '')
+            if($hinh_anh != ''){
+                $tmp_hinh_anh = $mangFile['tmp_name'];
+                $hinh_anh_path = "../../images/" .$hinh_anh;
+                move_uploaded_file($tmp_hinh_anh, $hinh_anh_path);
                 $nd->capNhatNguoiDung($id, $ho_ten, $dia_chi, $dien_thoai, $email, $hinh_anh);
-            else
+                $message = "Cập nhật thành công !!!";
+            }
+            else{
                 $nd->capNhatNguoiDung($id, $ho_ten, $dia_chi, $dien_thoai, $email);
+                $message = "Cập nhật thành công !!!";
+            }
             $_SESSION['nguoiDung'] = $nd->layThongTinNguoiDungTheoID($id);
-            $message = "Cập nhật thành công !!!";
             include('main.php');
             break;
-
         case 'doiMatKhau':
             $matKhauCu = $_POST['txtmatKhauCu'];
             $matKhauMoi = $_POST['txtmatKhauMoi'];

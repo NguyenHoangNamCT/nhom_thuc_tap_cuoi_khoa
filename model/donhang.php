@@ -80,14 +80,11 @@ class DONHANG{
     public function layDanhSachDonHang() {
         $db = DATABASE::connect();
         try {
-            $sql = "SELECT * FROM donhang";
-            $result = $db->query($sql);
-            $list = array();
-            foreach($result as $item){
-                $list[] = $item;
-            }
-            $result->closeCursor();
-            return $list;
+            $sql = 'SELECT * FROM donhang';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $loaiDonHang = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $loaiDonHang;
         }
         catch(PDOException $e){
             $error_message=$e->getMessage();
@@ -125,6 +122,23 @@ class DONHANG{
             $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
             $cmd->closeCursor();
             return $result;
+        }
+        catch(PDOException $e){
+            $error_message=$e->getMessage();
+            echo "<p>Lỗi truy vấn: $error_message</p>";
+            exit();
+        }
+    }
+
+    //lấy danh sách đơn hàng
+    public function layDanhSachDonHangTheoIDNguoiDung($id_nguoi_dung) {
+        $conn = DATABASE::connect();
+        try {
+            $sql = 'SELECT * FROM donhang where id_nguoi_dung = :id_nguoi_dung order by id DESC';
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(':id_nguoi_dung', $id_nguoi_dung, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         catch(PDOException $e){
             $error_message=$e->getMessage();
@@ -172,6 +186,62 @@ class DONHANG{
             DATABASE::close();
         }
     }
+
+    public function layDanhSachDonHangDaMuaCuaNguoiDung($idNguoiDung) {
+        $dbcon = DATABASE::connect();
+        try {
+            $sql = "SELECT chitietdonhang.so_luong, chitietdonhang.don_gia, chitietdonhang.id_don_hang, sanpham.id_loai_san_pham, sanpham.id_thuong_hieu, sanpham.ten_san_pham, sanpham.mo_ta, sanpham.gia_tien, sanpham.giam_gia, sanpham.hinh_anh, sanpham.luot_xem, sanpham.luot_mua, donhang.ngay_dat        
+            FROM chitietdonhang, sanpham, donhang
+            WHERE chitietdonhang.id_san_pham = sanpham.id
+            AND chitietdonhang.id_don_hang = donhang.id 
+            AND donhang.id_nguoi_dung = :idNguoiDung
+            order by chitietdonhang.id_don_hang DESC";
+            $cmd = $dbcon->prepare($sql);
+            $cmd->bindValue(':idNguoiDung', $idNguoiDung, PDO::PARAM_INT);
+            $cmd->execute();
+            $result = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn: $error_message</p>";
+            exit();
+        } finally {
+            DATABASE::close();
+        }
+    }
+
+    //dùng để xoá sạch đơn hàng đã mua của một ngườI dùng. cái này để test code thoi
+    // public function xoaDonHangVipPro($id_don_hang){
+    //     $db = DATABASE::connect();
+    //     try{
+    //         $sql1 = "DELETE FROM hoadon WHERE id_don_hang =". $id_don_hang;
+    //         $sql2 = "DELETE FROM chitietdonhang  WHERE id_don_hang = $id_don_hang";
+    //         $sql3 = "DELETE FROM thongtindonhang WHERE id = $id_don_hang";
+    //         $sql = "DELETE FROM donhang WHERE id = $id_don_hang";
+
+    //         $cmd1 = $db->prepare($sql1);
+    //         $cmd1->execute();
+
+    //         $cmd2 = $db->prepare($sql2);
+    //         $cmd2->execute();
+
+    //         $cmd3 = $db->prepare($sql3);
+    //         $cmd3->execute();
+
+    //         $cmd = $db->prepare($sql);
+    //         $cmd->execute();
+
+    //         return;
+    //     }
+    //     catch(PDOException $e){
+    //         $error_message = $e->getMessage();
+    //         echo "<p>Lỗi truy vấn ở xoaDonHang: $error_message</p>";
+    //         exit();
+    //     }
+    //     finally {
+    //         DATABASE::close();
+    //     }
+    // }
     
 
 }

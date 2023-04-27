@@ -9,6 +9,7 @@ require('model/donhang.php');
 require('model/chitietdonhang.php');
 require('model/thongtindonhang.php');
 require('model/danhgia.php');
+require('model/hoadon.php');
 //------------------------------
 
 if(isset($_REQUEST["action"])){
@@ -28,6 +29,7 @@ $dh = new DONHANG();
 $ctdh = new CHITIETDONHANG();
 $ttdh = new THONGTINDONHANG();
 $dg = new DANHGIA();
+$hd = new HOADON();
 
 $mangLoaiSP = $lsp->layLoaiSP();
 $mangThuongHieu = $th->layThuongHieu();
@@ -170,6 +172,8 @@ switch($action){
         //Thêm thông tin đơn hàng
         $ttdh->themThongTinDonHang($idDH, $_SESSION['nguoiDung']['ho_ten'], $diaChi, $sdt, "0001-01-01 00:00:00", $phiVanChuyen, "kHÔNG CÓ GHI CHÚ");
 
+        $hd->themHoaDon($idDH, $tongTien);
+
         //Xoá hết thông tin giỏ hàng
         $gh->xoaSachGioHang($_SESSION['nguoiDung']['id']);
         
@@ -181,12 +185,18 @@ switch($action){
         $dia_chi = $_POST["txtDC"];
         $dien_thoai = $_POST["txtdienthoai"];
         $email = $_POST["txtemail"];
-        $hinh_anh = $_FILES["fhinh"]["name"];
+        $hinh_anh = uniqid() . '_' .$_FILES["fhinh"]["name"];
+        $mangFile = $_FILES['fhinh'];
         
-        if($hinh_anh != '')
-            $nd->capNhatNguoiDung($id, $ho_ten, $dia_chi, $dien_thoai, $email, $hinh_anh);
-        else
-            $nd->capNhatNguoiDung($id, $ho_ten, $dia_chi, $dien_thoai, $email);
+        if($hinh_anh != ''){
+			$tmp_hinh_anh = $mangFile['tmp_name'];
+			$hinh_anh_path = "images/" .$hinh_anh;
+			move_uploaded_file($tmp_hinh_anh, $hinh_anh_path);
+			$nd->capNhatNguoiDung($id, $ho_ten, $dia_chi, $dien_thoai, $email, $hinh_anh);
+		}
+		else{
+			$nd->capNhatNguoiDung($id, $ho_ten, $dia_chi, $dien_thoai, $email);
+		}
         $_SESSION['nguoiDung'] = $nd->layThongTinNguoiDungTheoID($id);
         // $message = "Cập nhật thành công !!!";
         include('main.php');
