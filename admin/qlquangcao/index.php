@@ -20,17 +20,23 @@ switch($action){
     case "macdinh": 
         include("main.php");
         break;
-    case "them":
+	case "them":
 		include("add.php");
 		break;
-		case "XuLyThem":
+	case "XuLyThem":
 		$tieuDe = $_POST['txtTieuDe'];
 		$hinhAnh = $_FILES['filehinhanh']['name'];
 		$trangThai = $_POST['txtTrangThai'];
 		$url = $_POST['txtUrl'];
+		if ($_FILES["filehinhanh"]["error"] == UPLOAD_ERR_OK) {
+			$tmpHinhAnh = $_FILES["filehinhanh"]["tmp_name"];
+			$duongDanHinhAnh = "../../images/" . $hinhAnh;
+			move_uploaded_file($tmpHinhAnh, $duongDanHinhAnh);
+		}
 		$qc->themQuangCao($tieuDe, $hinhAnh, $url, $trangThai);
 		include("main.php");
 		break;
+	
 	case "xoa":
 		$id = $_GET['id'];
 		$qc->xoaQuangCao($id);
@@ -47,10 +53,16 @@ switch($action){
 		$trangThai = $_POST['txtTrangThai'];
 		$hinhAnh = $_FILES['filehinhanh']['name'];
 
-		if($hinhAnh != '')
+		if($hinhAnh != ''){
+			$hinhAnh_tmp = $_FILES['filehinhanh']['tmp_name'];
+			$hinhAnh_path = "../../images/" . $hinhAnh;
+			move_uploaded_file($hinhAnh_tmp, $hinhAnh_path);
 			$qc->suaQuangCao($id, $tieuDe, $url, $trangThai, $hinhAnh);
+		}
 		else
-			$qc->suaQuangCao($id, $tieuDe, $url, $trangThai);
+			{
+				$qc->suaQuangCao($id, $tieuDe, $url, $trangThai);
+			}
 
 		include("main.php");
 		break;
