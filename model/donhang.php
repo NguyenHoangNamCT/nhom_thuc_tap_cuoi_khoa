@@ -210,6 +210,25 @@ class DONHANG{
         }
     }
 
+    public function huyDonHang($idDonHang) {
+        $dbcon = DATABASE::connect();
+        try {
+            $sql = "UPDATE donhang SET da_huy = 1 WHERE id = :idDonHang";
+            $cmd = $dbcon->prepare($sql);
+            $cmd->bindValue(':idDonHang', $idDonHang, PDO::PARAM_INT);
+            $result = $cmd->execute();
+            return $result;
+        } catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn: $error_message</p>";
+            exit();
+        } finally {
+            DATABASE::close();
+        }
+    }
+    
+    
+
     //dùng để xoá sạch đơn hàng đã mua của một ngườI dùng. cái này để test code thoi
     // public function xoaDonHangVipPro($id_don_hang){
     //     $db = DATABASE::connect();

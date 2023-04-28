@@ -269,6 +269,11 @@ switch($action){
     case "xemDonMua":
         include('donmua.php');
         break;
+    case "huyDon":
+        $id = $_GET['id_don_hang'];
+        $dh->huyDonHang($id);
+        include('donmua.php');
+        break;
     default:
         break;
 }
