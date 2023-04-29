@@ -165,10 +165,10 @@
       }
   ?>
   </div>
-</div>
 <?php include("view/carousel.php"); ?>
 <br></br>
 
 <?php include('topview.php'); ?>
+</div>
 <br></br>
 <?php include('view/footer.php'); ?>
