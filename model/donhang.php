@@ -76,6 +76,28 @@ class DONHANG{
         }
     }
 
+    public function capNhatTrangThaiDonHang($id_don_hang, $tinh_trang_don_hang) {
+        //chuyển $ngay_dat_mysql sang dạng date time
+        $db = DATABASE::connect();
+        try{
+            $sql = "UPDATE donhang SET tinh_trang_don_hang = :tinh_trang_don_hang WHERE id = :id_don_hang";
+            $cmd = $db->prepare($sql);
+            $cmd->bindValue(':tinh_trang_don_hang', $tinh_trang_don_hang);
+            $cmd->bindValue(':id_don_hang', $id_don_hang);
+            $cmd->execute();
+            $rowCount = $cmd->rowCount();
+            return $rowCount;
+        }
+        catch(PDOException $e){
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở capNhatTrangThaiDonHang: $error_message</p>";
+            exit();
+        }
+        finally {
+            DATABASE::close();
+        }
+    }
+
     //lấy danh sách đơn hàng
     public function layDanhSachDonHang() {
         $db = DATABASE::connect();

@@ -274,6 +274,12 @@ switch($action){
         $dh->huyDonHang($id);
         include('donmua.php');
         break;
+    case "nguoiDungDaNhanDuocHang":
+        $id = $_GET['idDonHang'];
+        $da_nhan_hang = 3;
+        $dh->capNhatTrangThaiDonHang($id, $da_nhan_hang);
+        include("donmua.php");
+        break;
     default:
         break;
 }
