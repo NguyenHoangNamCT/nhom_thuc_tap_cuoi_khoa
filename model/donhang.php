@@ -81,7 +81,7 @@ class DONHANG{
         $db = DATABASE::connect();
         try {
             $sql = 'SELECT * FROM donhang';
-            $stmt = $conn->prepare($sql);
+            $stmt = $db->prepare($sql);
             $stmt->execute();
             $loaiDonHang = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $loaiDonHang;
