@@ -5,8 +5,8 @@
   <div class="row"> 
     <div class="container mt-3 col">
       <?php
-        //nếu cập nhật số lương thành công thì thông báo
-        if(!isset($capNhatThatBai))
+        //nếu cập nhật số lương thành công thì thông báo. isset $capNhatThanh cong để khi load ban đầu không thông báo cập nhật thành công
+        if(!isset($capNhatThatBai) && isset($capNhatThanhCong))
           echo '
           <div class="alert alert-success">
             Cập nhật giỏ hàng <strong>Thành công.</strong>
