@@ -63,7 +63,7 @@
       </div>
     </div>
 <div class="container">
-  <div class="card">
+  <div class="card my-2">
       <div class="card-header">
         <h2 class="mt-3" style="color: #FF4500;">Đánh giá sản phẩm</h2>
         <div class="d-flex">
@@ -72,16 +72,16 @@
               $trungBingDanhGia = $dg->tongDiemDanhGiaSanPham($sp_id)/$dg->demSoLuongDanhGiaSanPham($sp_id);
               for($i=1; $i <= 5; $i++){
               if($i <= floor($trungBingDanhGia))
-                echo '<span class="bi-star-fill"></span>';
+                echo '<span class="bi-star-fill display-6"></span>';
               else if($i == ceil($trungBingDanhGia)){
-                echo '<span class="bi-star-half"></span>';
+                echo '<span class="bi-star-half display-6"></span>';
               }
               else
-                echo '<span class="bi-star"></span>';
+                echo '<span class="bi-star display-6"></span>';
               }
             ?>
           </div>
-          <p class="ms-2"><?php echo round($trungBingDanhGia, 1)." trên 5"; ?></p>
+          <p class="ms-2 display-6"><?php echo round($trungBingDanhGia, 1)." trên 5"; ?></p>
         </div>
       </div>
   <div class="row">
