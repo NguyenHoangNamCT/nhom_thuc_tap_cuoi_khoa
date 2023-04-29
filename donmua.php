@@ -64,7 +64,8 @@
                       <?php
                         $luotMua = $ctdh->demSoLuotMuaSanPham($_SESSION['nguoiDung']['id'], $arr['id_san_pham']);
                         $luotDanhGia = $dg->demSoDanhGiaCuaNguoiDungChoSanPham($_SESSION['nguoiDung']['id'], $arr['id_san_pham']);
-                        if($arr_i['da_huy'] != 1 && $arr_i['tinh_trang_don_hang'] == 3 && $luotMua > $luotDanhGia)
+                        $dieuKien = ($arr_i['da_huy'] != 1 && $arr_i['tinh_trang_don_hang'] == 3 && $luotMua > $luotDanhGia);
+                        if($dieuKien)
                         { 
                       ?>
                       <a href="" class="btn btn-warning ms-auto" style=""  data-bs-toggle="modal" data-bs-target="#modalDanhGia" >Đánh giá sản phẩm</a>
@@ -75,7 +76,7 @@
                         if($luotDanhGia >= 1)
                         { 
                       ?>
-                      <a href="?action=xemDanhGia&id=<?php echo $arr['id_san_pham']; ?>" class = "btn btn-success ms-auto">Xem đánh giá trước đây của bạn</a>
+                      <a href="?action=xemDanhGia&id=<?php echo $arr['id_san_pham']; ?>" class = "btn btn-success <?php if(!$dieuKien) echo "ms-auto"; else echo "ms-2"; ?>">Xem đánh giá trước đây của bạn</a>
                       <?php 
                         } 
                       ?>

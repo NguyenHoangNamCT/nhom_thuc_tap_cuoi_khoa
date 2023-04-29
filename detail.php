@@ -73,14 +73,15 @@
               for($i=1; $i <= 5; $i++){
               if($i <= floor($trungBingDanhGia))
                 echo '<span class="bi-star-fill"></span>';
-              else if($i < $trungBingDanhGia)
+              else if($i == ceil($trungBingDanhGia)){
                 echo '<span class="bi-star-half"></span>';
-              else 
+              }
+              else
                 echo '<span class="bi-star"></span>';
               }
             ?>
           </div>
-          <p class="ms-2"><?php echo "    ".$trungBingDanhGia." trên 5"; ?></p>
+          <p class="ms-2"><?php echo round($trungBingDanhGia, 1)." trên 5"; ?></p>
         </div>
       </div>
   <div class="row">
