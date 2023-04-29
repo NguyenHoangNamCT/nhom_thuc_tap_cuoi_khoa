@@ -75,7 +75,7 @@
                         if($luotDanhGia >= 1)
                         { 
                       ?>
-                      <a href="" class = "btn btn-success ms-auto">Xem đánh giá trước đây của bạn</a>
+                      <a href="?action=xemDanhGia&id=<?php echo $arr['id_san_pham']; ?>" class = "btn btn-success ms-auto">Xem đánh giá trước đây của bạn</a>
                       <?php 
                         } 
                       ?>

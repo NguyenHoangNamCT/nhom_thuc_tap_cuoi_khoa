@@ -280,6 +280,10 @@ switch($action){
         $dh->capNhatTrangThaiDonHang($id, $da_nhan_hang);
         include("donmua.php");
         break;
+    case "xemDanhGia":
+        $sp_id = $_GET['id'];
+        include("detail.php");
+        break;
     default:
         break;
 }
