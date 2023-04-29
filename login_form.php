@@ -69,7 +69,7 @@
     <input type="hidden" name="action" value="xuLyDangNhap">
     <!-- ------------------ -->
     <hr>
-    <a href="" data-bs-toggle="modal" data-bs-target="#modalDK" class="w-50 btn btn-lg btn" type="submit" style="background-color: #00CC00;" >Đăng ký</a>
+    <a href="" data-bs-toggle="modal" data-bs-target="#modalDk" class="w-50 btn btn-lg btn" type="submit" style="background-color: #00CC00;" >Đăng ký</a>
     <!-- Gữi dữ liệu ẩn -->
     <!-- END -->
     <p class="mt-5 mb-3 text-muted">&copy; 2023 D&Nshop</p>
