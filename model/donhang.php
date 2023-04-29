@@ -190,7 +190,7 @@ class DONHANG{
     public function layDanhSachDonHangDaMuaCuaNguoiDung($idNguoiDung) {
         $dbcon = DATABASE::connect();
         try {
-            $sql = "SELECT chitietdonhang.so_luong, chitietdonhang.don_gia, chitietdonhang.id_don_hang, sanpham.id_loai_san_pham, sanpham.id_thuong_hieu, sanpham.ten_san_pham, sanpham.mo_ta, sanpham.gia_tien, sanpham.giam_gia, sanpham.hinh_anh, sanpham.luot_xem, sanpham.luot_mua, donhang.ngay_dat        
+            $sql = "SELECT chitietdonhang.so_luong, chitietdonhang.don_gia, chitietdonhang.id_don_hang, chitietdonhang.id_san_pham, sanpham.id_loai_san_pham, sanpham.id_thuong_hieu, sanpham.ten_san_pham, sanpham.mo_ta, sanpham.gia_tien, sanpham.giam_gia, sanpham.hinh_anh, sanpham.luot_xem, sanpham.luot_mua, donhang.ngay_dat        
             FROM chitietdonhang, sanpham, donhang
             WHERE chitietdonhang.id_san_pham = sanpham.id
             AND chitietdonhang.id_don_hang = donhang.id 

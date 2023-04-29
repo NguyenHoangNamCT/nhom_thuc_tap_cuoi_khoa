@@ -23,7 +23,6 @@
         <?php 
           $luotMua = $ctdh->demSoLuotMuaSanPham($_SESSION['nguoiDung']['id'], $sp_id);
           $luotDanhGia = $dg->demSoDanhGiaCuaNguoiDungChoSanPham($_SESSION['nguoiDung']['id'], $sp_id);
-          var_dump($luotMua, $luotDanhGia);
           if($luotMua > $luotDanhGia){
         ?>
         <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalDanhGia" href="">Đánh giá</a>

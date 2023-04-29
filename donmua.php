@@ -17,6 +17,7 @@
     <?php 
       //chỗ này lấy danh sách đơn hàng theo id của người dùng
       $mangDonHang = $dh->layDanhSachDonHangTheoIDNguoiDung($_SESSION['nguoiDung']['id']);
+      var_dump($mangDonHang);
       foreach($mangDonHang as $arr_i){
         // $dh->xoaDonHangVipPro($arr_i['id']); //nếu muốn xoá hết đơn hàng của người dùng này thì mới mở dòng này ra
     ?>
@@ -53,15 +54,26 @@
                   <div class="">
                     <img style="width: 135px; height: 135px; object-fit: cover;" src="images/<?php echo $arr['hinh_anh']; ?>" class="" alt="">
                   </div>
-                  <div class="ps-3">
+                  <div class="container ps-3">
                     <p class="card-title"><b><?php echo $arr['ten_san_pham'] ?></b></p>
                     <div class="d-flex">
                       <p class="card-text">Đơn giá: <del><?php echo number_format($arr['gia_tien']).'đ'; ?></del><p class="px-1" style="color: red;"><?php echo number_format($arr['don_gia']).'đ'; ?></p></p>
                     </div>
                     <p class="card-text">Số lượng: <?php echo $arr['so_luong']; ?></p>
-                    <p>Thành tiền: <?php echo number_format($arr['don_gia']*$arr['so_luong']).'đ'; ?></p>
+                    <div class="d-flex">
+                      <p>Thành tiền: <?php echo number_format($arr['don_gia']*$arr['so_luong']).'đ'; ?></p>
+                      <?php
+                        $luotMua = $ctdh->demSoLuotMuaSanPham($_SESSION['nguoiDung']['id'], $arr['id_san_pham']);
+                        $luotDanhGia = $dg->demSoDanhGiaCuaNguoiDungChoSanPham($_SESSION['nguoiDung']['id'], $arr['id_san_pham']);
+                        if($arr_i['da_huy'] != 1 && $arr_i['tinh_trang_don_hang'] == 3 && $luotMua > $luotDanhGia)
+                        { 
+                      ?>
+                      <a href="" class="btn btn-warning ms-auto" style="">Đánh giá sản phẩm</a>
+                      <?php 
+                        }
+                      ?>
+                    </div>
                   </div>
-                  
                 </div>
           <?php 
             }
