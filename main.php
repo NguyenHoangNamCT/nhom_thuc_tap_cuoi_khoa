@@ -102,7 +102,7 @@
     //đếm số lượng sản phẩm có trong database
     $tongsp = $sp->laySoLuongSanPham();
     //số lượng sản phẩm trong mộT trang
-    $soLuongSPTrenMotTrang = 10;
+    $soLuongSPTrenMotTrang = 8;
     //làm tròn lên 
     $tongsotrang = ceil($tongsp / $soLuongSPTrenMotTrang);
 
