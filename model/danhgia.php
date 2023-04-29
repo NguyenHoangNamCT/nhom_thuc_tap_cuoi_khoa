@@ -105,6 +105,27 @@ class DANHGIA{
             DATABASE::close();
         }
     }
+
+    //đếm số lượt đánh giá của sản phẩm này từ ngưỜi dùng này
+    public function demSoDanhGiaCuaNguoiDungChoSanPham($idNguoiDung, $idSanPham) {
+        $dbcon = DATABASE::connect();
+        try {
+            $sql = "SELECT COUNT(*) FROM danhgia WHERE id_nguoi_dung = :idNguoiDung AND id_san_pham = :idSanPham";
+            $cmd = $dbcon->prepare($sql);
+            $cmd->bindValue(':idNguoiDung', $idNguoiDung, PDO::PARAM_INT);
+            $cmd->bindValue(':idSanPham', $idSanPham, PDO::PARAM_INT);
+            $cmd->execute();
+            $result = $cmd->fetchColumn();
+            return $result;
+        } catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn: $error_message</p>";
+            exit();
+        } finally {
+            DATABASE::close();
+        }
+    }
+    
     
 
 }

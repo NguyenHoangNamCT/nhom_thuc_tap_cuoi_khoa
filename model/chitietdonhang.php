@@ -202,6 +202,29 @@ class CHITIETDONHANG{
             DATABASE::close();
         }
     }
+
+
+    //đếm số lượt sản phẩm này của người dùng này
+    public function demSoLuotMuaSanPham($id_nguoi_dung, $id_san_pham) {
+        $dbcon = DATABASE::connect();
+        try {
+            $sql = "SELECT COUNT(*) FROM chitietdonhang
+                    JOIN donhang ON chitietdonhang.id_don_hang = donhang.id
+                    WHERE donhang.id_nguoi_dung = :id_nguoi_dung AND chitietdonhang.id_san_pham = :id_san_pham";
+            $cmd = $dbcon->prepare($sql);
+            $cmd->bindValue(':id_nguoi_dung', $id_nguoi_dung, PDO::PARAM_INT);
+            $cmd->bindValue(':id_san_pham', $id_san_pham, PDO::PARAM_INT);
+            $cmd->execute();
+            $result = $cmd->fetchColumn();
+            return $result;
+        } catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn: $error_message</p>";
+            exit();
+        } finally {
+            DATABASE::close();
+        }
+    }
         
 }
 ?>

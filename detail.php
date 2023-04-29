@@ -20,7 +20,16 @@
         <label for="">Số lượng</label>
         <input style="margin-bottom: 0.1rem;" type="number" class="form-control" name="soLuong" value="1">
         <input type="submit" class="btn btn-warning" value="Cho vào giỏ">
+        <?php 
+          $luotMua = $ctdh->demSoLuotMuaSanPham($_SESSION['nguoiDung']['id'], $sp_id);
+          $luotDanhGia = $dg->demSoDanhGiaCuaNguoiDungChoSanPham($_SESSION['nguoiDung']['id'], $sp_id);
+          var_dump($luotMua, $luotDanhGia);
+          if($luotMua > $luotDanhGia){
+        ?>
         <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalDanhGia" href="">Đánh giá</a>
+        <?php 
+          } 
+        ?>
       </form>
     </div>
 
@@ -101,68 +110,6 @@
     <?php 
       } 
     ?>
-
-    <div class="col-md-12">
-      <div class="card mb-4">
-        <div class="card-body">
-        <div class="d-flex">
-          <div class="flex-shrink-0">
-            <img src="https://via.placeholder.com/64" class="rounded-circle" alt="Ảnh đại diện của khách hàng">
-          </div>
-          <div class="flex-grow-1 ps-3">
-            <h5 class="card-title pt-3">Nguyễn Văn A</h5>
-          </div>
-        </div>
-          <p class="card-text" style="clear: both;">Sản phẩm rất tốt. Tôi rất hài lòng với chất lượng của sản phẩm này.</p>
-          <div class="d-flex justify-content-between align-items-center">
-            <div class="rating-stars text-warning ">
-              <span class="bi-star-fill"></span>
-              <span class="bi-star-fill"></span>
-              <span class="bi-star-fill"></span>
-              <span class="bi-star-half"></span>
-              <span class="bi-star"></span>
-            </div>
-            <div class="">
-              <img src="https://via.placeholder.com/150" class="img-fluid " alt="Hình ảnh đánh giá">
-              <img src="https://via.placeholder.com/150" class="img-fluid " alt="Hình ảnh đánh giá">
-              <img src="https://via.placeholder.com/150" class="img-fluid" alt="Hình ảnh đánh giá">
-              <img src="https://via.placeholder.com/150" class="img-fluid" alt="Hình ảnh đánh giá">
-              <img src="https://via.placeholder.com/150" class="img-fluid" alt="Hình ảnh đánh giá">
-            </div>
-          </div>  
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-12">
-      <div class="card mb-4">
-        <div class="card-body">
-          <div class="d-flex">
-            <div class="flex-shrink-0">
-              <img src="https://via.placeholder.com/64" class="rounded-circle" alt="Ảnh đại diện của khách hàng">
-            </div>
-            <div class="flex-grow-1 ps-3">
-              <h5 class="card-title pt-3">Nguyễn Thị B</h5>
-            </div>
-          </div>
-          <p class="card-text">Sản phẩm không tốt như mong đợi. Chất lượng kém và không đáp ứng được nhu cầu sử dụng.</p>
-          <div class="d-flex justify-content-between align-items-center">
-            <div class="rating-stars text-warning ">
-              <span class="bi-star-fill"></span>
-              <span class="bi-star-fill"></span>
-              <span class="bi-star-fill"></span>
-              <span class="bi-star-half"></span>
-              <span class="bi-star"></span>
-            </div>
-            <div class="">
-              <img src="https://via.placeholder.com/150" class="img-fluid " alt="Hình ảnh đánh giá">
-              <img src="https://via.placeholder.com/150" class="img-fluid " alt="Hình ảnh đánh giá">
-              <img src="https://via.placeholder.com/150" class="img-fluid" alt="Hình ảnh đánh giá">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 </div>  
