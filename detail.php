@@ -67,6 +67,15 @@
   <div class="row">
     <?php 
       $mangDanhGia = $dg->layDanhSachDanhGiaTheoIDSanPham($sp_id); 
+      //sắp xếp lại ưu tiên đánh giá của người dùng đang đăng nhập lên trên
+      $count = 0;
+      foreach($mangDanhGia as $key => $arr){
+        if($arr['id_nguoi_dung'] == $_SESSION['nguoiDung']['id']){
+          $temp = $mangDanhGia[$key];
+          $mangDanhGia[$key] = $mangDanhGia[$count];
+          $mangDanhGia[$count++] = $temp;
+        }
+      }
       foreach($mangDanhGia as $arr){
         $nguoiDungThamGiaDanhGia = $nd->layThongTinNguoiDungTheoID($arr['id_nguoi_dung']);
     ?>
@@ -75,7 +84,7 @@
           <div class="card-body">
           <div class="d-flex">
             <div class="flex-shrink-0">
-              <img width="64" src="images/<?php echo $nguoiDungThamGiaDanhGia['hinh_anh']; ?>" class="rounded-circle" alt="Ảnh đại diện của khách hàng">
+              <img  style="width: 60px; height: 60px; object-fit: cover;" src="images/<?php echo $nguoiDungThamGiaDanhGia['hinh_anh']; ?>" class="rounded-circle" alt="Ảnh đại diện của khách hàng">
             </div>
             <div class="flex-grow-1 ps-3">
               <h5 class="card-title pt-3">Nguyễn Văn A</h5>
