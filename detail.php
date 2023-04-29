@@ -62,8 +62,27 @@
         </ul>
       </div>
     </div>
-    <div class="container">
-  <h2 class="mt-3" style="color: #FF4500;">Danh sách đánh giá sản phẩm</h2>
+<div class="container">
+  <div class="card">
+      <div class="card-header">
+        <h2 class="mt-3" style="color: #FF4500;">Đánh giá sản phẩm</h2>
+        <div class="d-flex">
+          <div class="text-warning">
+            <?php
+              $trungBingDanhGia = $dg->tongDiemDanhGiaSanPham($sp_id)/$dg->demSoLuongDanhGiaSanPham($sp_id);
+              for($i=1; $i <= 5; $i++){
+              if($i <= floor($trungBingDanhGia))
+                echo '<span class="bi-star-fill"></span>';
+              else if($i < $trungBingDanhGia)
+                echo '<span class="bi-star-half"></span>';
+              else 
+                echo '<span class="bi-star"></span>';
+              }
+            ?>
+          </div>
+          <p class="ms-2"><?php echo "    ".$trungBingDanhGia." trên 5"; ?></p>
+        </div>
+      </div>
   <div class="row">
     <?php 
       $mangDanhGia = $dg->layDanhSachDanhGiaTheoIDSanPham($sp_id); 
@@ -119,6 +138,7 @@
       } 
     ?>
   </div>
+</div>
 </div>
 </div>  
 

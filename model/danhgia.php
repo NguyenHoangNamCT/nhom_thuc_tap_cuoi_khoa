@@ -126,7 +126,43 @@ class DANHGIA{
         }
     }
     
-    
+    //đếm số lượt đánh giá của sản phẩm
+    public function demSoLuongDanhGiaSanPham($id_san_pham) {
+        $dbcon = DATABASE::connect();
+        try {
+            $sql = "SELECT COUNT(*) FROM danhgia WHERE id_san_pham = :id_san_pham";
+            $cmd = $dbcon->prepare($sql);
+            $cmd->bindValue(':id_san_pham', $id_san_pham, PDO::PARAM_INT);
+            $cmd->execute();
+            $result = $cmd->fetchColumn();
+            return $result;
+        } catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở demSoLuongDanhGiaSanPham: $error_message</p>";
+            exit();
+        } finally {
+            DATABASE::close();
+        }
+    }
+
+    //Tổng điểm đánh giá của sản phẩm
+    public function tongDiemDanhGiaSanPham($id_san_pham) {
+        $dbcon = DATABASE::connect();
+        try {
+            $sql = "SELECT SUM(diem_danh_gia) FROM danhgia WHERE id_san_pham = :id_san_pham";
+            $cmd = $dbcon->prepare($sql);
+            $cmd->bindValue(':id_san_pham', $id_san_pham, PDO::PARAM_INT);
+            $cmd->execute();
+            $result = $cmd->fetchColumn();
+            return $result;
+        } catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn: $error_message</p>";
+            exit();
+        } finally {
+            DATABASE::close();
+        }
+    }
 
 }
 ?>
