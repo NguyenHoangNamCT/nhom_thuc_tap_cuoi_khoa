@@ -36,7 +36,6 @@ $ph = new PHANHOI();
 $mangLoaiSP = $lsp->layLoaiSP();
 $mangThuongHieu = $th->layThuongHieu();
 
-var_dump($action);
 
 switch($action){
     case "macdinh": 
