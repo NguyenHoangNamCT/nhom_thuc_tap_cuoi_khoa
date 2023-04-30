@@ -132,20 +132,46 @@
                 ?>
               </div>
             </div> 
-            
-            <hr>
-            <h6 class="card-subtitle mb-2 text-muted">Phản hồi từ người bán:</h6>
-            <p class="card-text">Cảm ơn bạn đã đánh giá sản phẩm của chúng tôi. Chúng tôi sẽ cố gắng hoàn thiện sản phẩm hơn nữa để đáp ứng nhu cầu của khách hàng.</p>
-            <div class="container input-group mb-3">
+            <?php 
+              $mangPhanHoi = $ph->layDanhSachPhanHoiTheoIDDanhGia($arr['id']);
+              if(count($mangPhanHoi) > 0)
+                  echo '<hr class="ms-5"> <h6  class="card-subtitle mb-2 text-muted ms-5">Phản hồi từ người bán:</h6>';
+              
+              foreach($mangPhanHoi as $arr_j){
+            ?>
+            <!-- Thẻ div bên dưới in thông tin phản hồi của ngưỜi dùng -->
+            <div class="ms-5">
+              <hr>
+              <div class="d-flex">
+                <div class="flex-shrink-0 ms-2">
+                  <img  style="width: 60px; height: 60px; object-fit: cover;" src="images/<?php echo $arr_j['hinh_anh']; ?>" class="rounded-circle" alt="Ảnh đại diện của khách hàng">
+                </div>
+                <div class="flex-grow-1 ps-3">
+                  <h5 class="card-title pt-3"><?php echo $arr_j['ho_ten']; ?></h5>
+                </div>
+              </div>
+              <p class="card-text"><?php echo $arr_j['noi_dung']; ?></p>
+            </div>
+            <?php 
+              }
+            ?>
+            <?php 
+              if($_SESSION['nguoiDung']['loai_nguoi_dung'] != 3){
+            ?>
+            <div class="container input-group mb-3 my-2">
               <form class="form-control d-flex" action="" method="post">
                 <!-- Gửi dữ liệu ẩn -->
-                <input type="hidden" name="aciton" value="themPhanHoi">
-                <input type="hidden" name="idDanhGia" value="<?php $arr['id']; ?>">
+                <input type="hidden" name="action" value="themPhanHoi">
+                <input type="hidden" name="idDanhGia" value="<?php echo $arr['id']; ?>">
+                <input type="hidden" name="idSanPham" value="<?php echo $sp_id; ?>">
                 <!-- End -->
                 <input type="text" class="form-control" name="inputPhanHoi" placeholder="Nhập phản hồi của bạn">
-                <button class="btn btn-primary" type="button">Gửi phản hồi</button>
+                <button class="btn btn-primary" type="submit">Gửi phản hồi của tôi</button>
               </form>
             </div>
+            <?php 
+              }
+            ?>
             
           </div>
         </div>

@@ -36,6 +36,8 @@ $ph = new PHANHOI();
 $mangLoaiSP = $lsp->layLoaiSP();
 $mangThuongHieu = $th->layThuongHieu();
 
+var_dump($action);
+
 switch($action){
     case "macdinh": 
         include("main.php");
@@ -293,8 +295,13 @@ switch($action){
         include("detail.php");
         break;
     case "themPhanHoi":
+        // var_dump("saldkfa;sdgl;káldk sad;lkf lskadl;f kád;lkf l';sadkf';k a;s dkfl'; ádkl;f kádl kzgl sdjagl s';LJLKKSJGFLKK JSDLKFJLAS DJGLesjlasjfj lk");
+        // var_dump("saldkfa;sdgl;káldk sad;lkf lskadl;f kád;lkf l';sadkf';k a;s dkfl'; ádkl;f kádl kzgl sdjagl s';LJLKKSJGFLKK JSDLKFJLAS DJGLesjlasjfj lk");
+        // var_dump("saldkfa;sdgl;káldk sad;lkf lskadl;f kád;lkf l';sadkf';k a;s dkfl'; ádkl;f kádl kzgl sdjagl s';LJLKKSJGFLKK JSDLKFJLAS DJGLesjlasjfj lk");
+        // var_dump("saldkfa;sdgl;káldk sad;lkf lskadl;f kád;lkf l';sadkf';k a;s dkfl'; ádkl;f kádl kzgl sdjagl s';LJLKKSJGFLKK JSDLKFJLAS DJGLesjlasjfj lk");
         $idDanhGia = $_POST['idDanhGia'];
         $noiDungPhanHoi = $_POST['inputPhanHoi'];
+        $sp_id = $_GET['id'];
         $ph->themPhanHoi($_SESSION['nguoiDung']['id'], $idDanhGia, $noiDungPhanHoi);
         include("detail.php");
         break;

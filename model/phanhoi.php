@@ -20,6 +20,25 @@ class PHANHOI{
             DATABASE::close();
         }
     }
+
+    public function layDanhSachPhanHoiTheoIDDanhGia($idDanhGia) {
+        $db = DATABASE::connect();
+        try {
+            $sql = "SELECT ph.*, nd.hinh_anh, nd.ho_ten from phanhoi ph, nguoidung nd where ph.id_nguoi_dung = nd.id";
+            $cmd = $db->prepare($sql);
+            $cmd->bindValue(':idDanhGia', $idDanhGia);
+            $cmd->execute();
+            return $cmd->fetchAll();
+        }
+        catch(PDOException $e) {
+            $error_message = $e->getMessage();
+            echo "<p>Lỗi truy vấn ở layDanhSachPhanHoiTheoIDDanhGia: $error_message</p>";
+            exit();
+        }
+        finally {
+            DATABASE::close();
+        }
+    }
     
 
 }
