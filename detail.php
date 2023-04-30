@@ -69,24 +69,31 @@
         <div class="d-flex">
           <div class="text-warning">
             <?php
-              $trungBingDanhGia = $dg->tongDiemDanhGiaSanPham($sp_id)/$dg->demSoLuongDanhGiaSanPham($sp_id);
-              for($i=1; $i <= 5; $i++){
-              if($i <= floor($trungBingDanhGia))
-                echo '<span class="bi-star-fill display-6"></span>';
-              else if($i == ceil($trungBingDanhGia)){
-                echo '<span class="bi-star-half display-6"></span>';
+              if($dg->tongDiemDanhGiaSanPham($sp_id) != NULL){
+                $trungBingDanhGia = $dg->tongDiemDanhGiaSanPham($sp_id)/$dg->demSoLuongDanhGiaSanPham($sp_id);
+                for($i=1; $i <= 5; $i++){
+                if($i <= floor($trungBingDanhGia))
+                  echo '<span class="bi-star-fill display-6"></span>';
+                else if($i == ceil($trungBingDanhGia)){
+                  echo '<span class="bi-star-half display-6"></span>';
+                }
+                else
+                  echo '<span class="bi-star display-6"></span>';
+                }
               }
               else
-                echo '<span class="bi-star display-6"></span>';
-              }
+                echo 'Sản phẩm chưa có đánh giá';
             ?>
           </div>
+          <?php if($dg->tongDiemDanhGiaSanPham($sp_id) != NULL){ ?>
           <p class="ms-2 display-6"><?php echo round($trungBingDanhGia, 1)." trên 5"; ?></p>
+          <?php } ?>
         </div>
       </div>
   <div class="row">
     <?php 
-      $mangDanhGia = $dg->layDanhSachDanhGiaTheoIDSanPham($sp_id, $_SESSION['nguoiDung']['id']); 
+      $mangDanhGia = $dg->layDanhSachDanhGiaTheoIDSanPham($sp_id); 
+      // $mangDanhGia = $dg->layDanhSachDanhGiaTheoIDSanPham($sp_id, $_SESSION['nguoiDung']['id']); 
       //sắp xếp lại ưu tiên đánh giá của người dùng đang đăng nhập lên trên
       $count = 0;
       foreach($mangDanhGia as $key => $arr){
