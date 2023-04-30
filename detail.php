@@ -63,7 +63,7 @@
       </div>
     </div>
 <div class="container">
-  <div class="card my-2">
+  <div class="card my-2 border-0">
       <div class="card-header">
         <h2 class="mt-3" style="color: #FF4500;">Đánh giá sản phẩm</h2>
         <div class="d-flex">
@@ -96,6 +96,7 @@
           $mangDanhGia[$count++] = $temp;
         }
       }
+      $hehe = 0;
       foreach($mangDanhGia as $arr){
         $nguoiDungThamGiaDanhGia = $nd->layThongTinNguoiDungTheoID($arr['id_nguoi_dung']);
     ?>
@@ -133,10 +134,10 @@
               </div>
             </div> 
             <?php 
+              
               $mangPhanHoi = $ph->layDanhSachPhanHoiTheoIDDanhGia($arr['id']);
               if(count($mangPhanHoi) > 0)
                   echo '<hr class="ms-5"> <h6  class="card-subtitle mb-2 text-muted ms-5">Phản hồi từ người bán:</h6>';
-              
               foreach($mangPhanHoi as $arr_j){
             ?>
             <!-- Thẻ div bên dưới in thông tin phản hồi của ngưỜi dùng -->
