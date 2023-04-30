@@ -10,6 +10,7 @@ require('model/chitietdonhang.php');
 require('model/thongtindonhang.php');
 require('model/danhgia.php');
 require('model/hoadon.php');
+require('model/phanhoi.php');
 //------------------------------
 
 if(isset($_REQUEST["action"])){
@@ -30,6 +31,7 @@ $ctdh = new CHITIETDONHANG();
 $ttdh = new THONGTINDONHANG();
 $dg = new DANHGIA();
 $hd = new HOADON();
+$ph = new PHANHOI();
 
 $mangLoaiSP = $lsp->layLoaiSP();
 $mangThuongHieu = $th->layThuongHieu();
@@ -229,8 +231,14 @@ switch($action){
         $dia_chi = $_POST["dia_chi"];
         $dien_thoai = $_POST["dien_thoai"];
         $email = $_POST["email"];
-        $hinh_anh = $_FILES["hinh_anh"]["name"];
-        $nd->themNguoiDung($ten_dang_nhap, $mat_khau, $ho_ten, $dia_chi, $dien_thoai, $email, "Member", $hinh_anh);
+        
+        $hinhAnh = $_FILES['hinh_anh'];
+		$tenHinhAnh = $hinhAnh['name'];
+		$tmpHinhAnh = $hinhAnh['tmp_name'];
+		$duongDanHinhAnh = 'images/' . $tenHinhAnh;
+		move_uploaded_file($tmpHinhAnh, $duongDanHinhAnh);
+        $nd->themNguoiDung($ten_dang_nhap, $mat_khau, $ho_ten, $dia_chi, $dien_thoai, $email, 3, $tenHinhAnh);
+
         include('main.php');
         break;
     case "themDanhGia":
@@ -282,6 +290,12 @@ switch($action){
         break;
     case "xemDanhGia":
         $sp_id = $_GET['id'];
+        include("detail.php");
+        break;
+    case "themPhanHoi":
+        $idDanhGia = $_POST['idDanhGia'];
+        $noiDungPhanHoi = $_POST['inputPhanHoi'];
+        $ph->themPhanHoi($_SESSION['nguoiDung']['id'], $idDanhGia, $noiDungPhanHoi);
         include("detail.php");
         break;
     default:

@@ -4,7 +4,7 @@ class DANHGIA{
     public function layDanhSachDanhGiaTheoIDSanPham($id_san_pham) {
         $db = DATABASE::connect();
         try {
-            $sql = "SELECT * FROM danhgia WHERE id_san_pham = :id_san_pham";
+            $sql = "SELECT danhgia.*, nguoidung.ho_ten FROM danhgia, nguoidung WHERE danhgia.id_nguoi_dung = nguoidung.id and id_san_pham = :id_san_pham";
             $cmd = $db->prepare($sql);
             $cmd->bindValue(':id_san_pham', $id_san_pham, PDO::PARAM_INT);
             $cmd->execute();

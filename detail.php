@@ -86,7 +86,7 @@
       </div>
   <div class="row">
     <?php 
-      $mangDanhGia = $dg->layDanhSachDanhGiaTheoIDSanPham($sp_id); 
+      $mangDanhGia = $dg->layDanhSachDanhGiaTheoIDSanPham($sp_id, $_SESSION['nguoiDung']['id']); 
       //sắp xếp lại ưu tiên đánh giá của người dùng đang đăng nhập lên trên
       $count = 0;
       foreach($mangDanhGia as $key => $arr){
@@ -107,7 +107,7 @@
               <img  style="width: 60px; height: 60px; object-fit: cover;" src="images/<?php echo $nguoiDungThamGiaDanhGia['hinh_anh']; ?>" class="rounded-circle" alt="Ảnh đại diện của khách hàng">
             </div>
             <div class="flex-grow-1 ps-3">
-              <h5 class="card-title pt-3">Nguyễn Văn A</h5>
+              <h5 class="card-title pt-3"><?php echo $arr['ho_ten']; ?></h5>
             </div>
           </div>
             <p class="card-text" style="clear: both;"> <?php echo $arr['noi_dung']; ?> </p>
@@ -131,7 +131,22 @@
                   }
                 ?>
               </div>
-            </div>  
+            </div> 
+            
+            <hr>
+            <h6 class="card-subtitle mb-2 text-muted">Phản hồi từ người bán:</h6>
+            <p class="card-text">Cảm ơn bạn đã đánh giá sản phẩm của chúng tôi. Chúng tôi sẽ cố gắng hoàn thiện sản phẩm hơn nữa để đáp ứng nhu cầu của khách hàng.</p>
+            <div class="container input-group mb-3">
+              <form class="form-control d-flex" action="" method="post">
+                <!-- Gửi dữ liệu ẩn -->
+                <input type="hidden" name="aciton" value="themPhanHoi">
+                <input type="hidden" name="idDanhGia" value="<?php $arr['id']; ?>">
+                <!-- End -->
+                <input type="text" class="form-control" name="inputPhanHoi" placeholder="Nhập phản hồi của bạn">
+                <button class="btn btn-primary" type="button">Gửi phản hồi</button>
+              </form>
+            </div>
+            
           </div>
         </div>
       </div>
