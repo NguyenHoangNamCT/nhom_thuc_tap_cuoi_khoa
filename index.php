@@ -304,6 +304,19 @@ switch($action){
         $ph->themPhanHoi($_SESSION['nguoiDung']['id'], $idDanhGia, $noiDungPhanHoi);
         include("detail.php");
         break;
+    case "xoaDanhGia":
+        $sp_id = $_GET['id'];
+        $idDanhGia = $_GET['idDanhGia'];
+        $ph->xoaPhanHoiTheoIDDanhGia($idDanhGia);
+        $dg->xoaDanhGia($idDanhGia);
+        include("detail.php");
+        break;
+    case "xoaPhanHoi":
+        $sp_id = $_GET['id'];
+        $idPhanHoi = $_GET['idPhanHoi'];
+        $ph->xoaPhanHoi($idPhanHoi);
+        include("detail.php");
+        break;
     default:
         break;
 }

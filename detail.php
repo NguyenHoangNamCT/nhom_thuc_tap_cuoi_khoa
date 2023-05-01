@@ -111,12 +111,21 @@
         <div class="card mb-4">
           <div class="card-body">
           <div class="d-flex">
-            <div class="flex-shrink-0">
-              <img  style="width: 60px; height: 60px; object-fit: cover;" src="images/<?php echo $nguoiDungThamGiaDanhGia['hinh_anh']; ?>" class="rounded-circle" alt="Ảnh đại diện của khách hàng">
+            <div class="d-flex">
+              <div class="flex-shrink-0">
+                <img  style="width: 60px; height: 60px; object-fit: cover;" src="images/<?php echo $nguoiDungThamGiaDanhGia['hinh_anh']; ?>" class="rounded-circle" alt="Ảnh đại diện của khách hàng">
+              </div>
+              <div class="flex-grow-1 ps-3">
+                <h5 class="card-title pt-3"><?php echo $arr['ho_ten']; ?></h5>
+              </div>
             </div>
-            <div class="flex-grow-1 ps-3">
-              <h5 class="card-title pt-3"><?php echo $arr['ho_ten']; ?></h5>
-            </div>
+            <?php 
+              if(isset($_SESSION['nguoiDung']) && $_SESSION['nguoiDung']['id'] == $nguoiDungThamGiaDanhGia['id']){
+            ?>
+            <a href="?action=xoaDanhGia&id=<?php echo $sp_id; ?>&idDanhGia=<?php echo $arr['id']; ?>" class="btn btn-outline-danger ms-auto"><span class="bi bi-trash"></span></a>
+            <?php 
+              }
+            ?>
           </div>
             <p class="card-text" style="clear: both;"> <?php echo $arr['noi_dung']; ?> </p>
             <div class="d-flex justify-content-between align-items-center">
@@ -151,12 +160,21 @@
             <div class="ms-5">
               <hr>
               <div class="d-flex">
-                <div class="flex-shrink-0 ms-2">
-                  <img  style="width: 60px; height: 60px; object-fit: cover;" src="images/<?php echo $arr_j['hinh_anh']; ?>" class="rounded-circle" alt="Ảnh đại diện của khách hàng">
+                <div class="d-flex">
+                  <div class="flex-shrink-0 ms-2">
+                    <img  style="width: 60px; height: 60px; object-fit: cover;" src="images/<?php echo $arr_j['hinh_anh']; ?>" class="rounded-circle" alt="Ảnh đại diện của khách hàng">
+                  </div>
+                  <div class="flex-grow-1 ps-3">
+                    <h5 class="card-title pt-3"><?php echo $arr_j['ho_ten']; ?></h5>
+                  </div>
                 </div>
-                <div class="flex-grow-1 ps-3">
-                  <h5 class="card-title pt-3"><?php echo $arr_j['ho_ten']; ?></h5>
-                </div>
+                <?php 
+                  if(isset($_SESSION['nguoiDung']) && $_SESSION['nguoiDung']['id'] == $nguoiDungThamGiaDanhGia['id']){
+                ?>
+                <a href="?action=xoaPhanHoi&idPhanHoi=<?php echo $arr_j['id']; ?>&id=<?php echo $sp_id; ?>" class="btn btn-outline-danger ms-auto"><span class="bi bi-trash"></span></a>
+                <?php 
+                  }
+                ?>
               </div>
               <p class="card-text"><?php echo $arr_j['noi_dung']; ?></p>
             </div>

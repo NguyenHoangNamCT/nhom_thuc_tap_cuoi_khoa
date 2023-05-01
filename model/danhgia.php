@@ -164,5 +164,23 @@ class DANHGIA{
         }
     }
 
+    public function xoaPhanHoiTheoIDDanhGia($id_danh_gia) {
+    $db = DATABASE::connect();
+    try {
+        $sql = "DELETE FROM phanhoi WHERE id_danh_gia = :id_danh_gia";
+        $cmd = $db->prepare($sql);
+        $cmd->bindValue(':id_danh_gia', $id_danh_gia, PDO::PARAM_INT);
+        $cmd->execute();
+        return true;
+    } catch(PDOException $e) {
+        $error_message = $e->getMessage();
+        echo "<p>Lỗi truy vấn ở xoaPhanHoiTheoIDDanhGia: $error_message</p>";
+        exit();
+    } finally {
+        DATABASE::close();
+    }
+}
+
+
 }
 ?>
