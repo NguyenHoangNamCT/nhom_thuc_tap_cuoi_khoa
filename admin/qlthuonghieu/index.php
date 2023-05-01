@@ -50,10 +50,11 @@ switch($action){
 		$tenTH = $_POST['txtTenTH'];
 		$moTa = $_POST['txtMoTa'];
 		$trangweb = $_POST['txtTrangWeb'];
-		$logo = uniqid() . '_' .$_FILES['filehinhanh']['name'];
+		$logo = $_FILES['filehinhanh']['name'];
 		
 		if($logo != ''){
 			$Logo_tmp = $_FILES['filehinhanh']['tmp_name'];
+			$logo = uniqid() . '_' .$logo;
 			$Logo_path = "../../images/" .$logo;
 			move_uploaded_file($Logo_tmp, $Logo_path);
 			$th->suaThuongHieu($id, $tenTH, $moTa, $trangweb, $logo);
