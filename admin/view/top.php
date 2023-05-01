@@ -79,7 +79,7 @@
       <li class="nav-item">
         <a href="" class="nav-link active" aria-current="page">
           <span class="bi-house-fill"></span>
-          Sản phẩm
+          Quản Lý
         </a>
       </li>
 
