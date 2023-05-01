@@ -21,7 +21,7 @@
       <thead>
         <tr>
           <th>ID Đơn Hàng</th>
-          <th>ID Sản Phẩm</th>
+          <th>Tên Sản Phẩm</th>
           <th>Số lượng</th>
           <th>Đơn Giá</th>
           <th>Sửa</th>
