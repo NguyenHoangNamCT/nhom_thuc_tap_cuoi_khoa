@@ -1,7 +1,7 @@
 <?php include("view/top.php"); ?>
 
 <br><br>
-<div class="container"  style="min-height: 64vh;">  
+<div class="container"  style="min-height: 68vh;">  
   <div class="row"> 
     <div class="container mt-3 col">
       <?php
