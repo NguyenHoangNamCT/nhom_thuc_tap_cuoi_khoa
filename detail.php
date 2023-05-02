@@ -21,13 +21,15 @@
         <input style="margin-bottom: 0.1rem;" type="number" class="form-control" name="soLuong" value="1">
         <input type="submit" class="btn btn-warning" value="Cho vào giỏ">
         <?php 
-          $luotMua = $ctdh->demSoLuotMuaSanPham($_SESSION['nguoiDung']['id'], $sp_id);
-          $luotDanhGia = $dg->demSoDanhGiaCuaNguoiDungChoSanPham($_SESSION['nguoiDung']['id'], $sp_id);
-          if($luotMua > $luotDanhGia){
+          if(isset($_SESSION['nguoiDung'])){
+            $luotMua = $ctdh->demSoLuotMuaSanPham($_SESSION['nguoiDung']['id'], $sp_id);
+            $luotDanhGia = $dg->demSoDanhGiaCuaNguoiDungChoSanPham($_SESSION['nguoiDung']['id'], $sp_id);
+            if($luotMua > $luotDanhGia){
         ?>
         <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalDanhGia" href="">Đánh giá</a>
         <?php 
-          } 
+            } 
+          }
         ?>
       </form>
     </div>
@@ -95,15 +97,16 @@
       $mangDanhGia = $dg->layDanhSachDanhGiaTheoIDSanPham($sp_id); 
       // $mangDanhGia = $dg->layDanhSachDanhGiaTheoIDSanPham($sp_id, $_SESSION['nguoiDung']['id']); 
       //sắp xếp lại ưu tiên đánh giá của người dùng đang đăng nhập lên trên
-      $count = 0;
-      foreach($mangDanhGia as $key => $arr){
-        if($arr['id_nguoi_dung'] == $_SESSION['nguoiDung']['id']){
-          $temp = $mangDanhGia[$key];
-          $mangDanhGia[$key] = $mangDanhGia[$count];
-          $mangDanhGia[$count++] = $temp;
+      if(isset($_SESSION['nguoiDung'])){
+        $count = 0;
+        foreach($mangDanhGia as $key => $arr){
+          if($arr['id_nguoi_dung'] == $_SESSION['nguoiDung']['id']){
+            $temp = $mangDanhGia[$key];
+            $mangDanhGia[$key] = $mangDanhGia[$count];
+            $mangDanhGia[$count++] = $temp;
+          }
         }
       }
-      $hehe = 0;
       foreach($mangDanhGia as $arr){
         $nguoiDungThamGiaDanhGia = $nd->layThongTinNguoiDungTheoID($arr['id_nguoi_dung']);
     ?>
@@ -182,7 +185,7 @@
               }
             ?>
             <?php 
-              if($_SESSION['nguoiDung']['loai_nguoi_dung'] != 3){
+              if(isset($_SESSION['nguoiDung']) && $_SESSION['nguoiDung']['loai_nguoi_dung'] != 3){
             ?>
             <div class="container input-group mb-3 my-2">
               <form class="form-control d-flex" action="" method="post">
