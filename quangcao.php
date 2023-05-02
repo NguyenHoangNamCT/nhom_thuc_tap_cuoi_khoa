@@ -26,7 +26,7 @@
           foreach ($quangCaoList as $index => $quangCao) 
             {
               echo '<div class="carousel-item' . ($index === 0 ? ' active' : '') . '">';
-              echo '<a href="' . $quangCao['url'] . '"><img width="100%" height="500px" src="images/' . $quangCao['hinh_anh'] . '" alt="' . $quangCao['tieu_de'] . '"></a>';
+              echo '<a href="' . $quangCao['url'] . '"><img style="width: 1440px; height: 500px; object-fit: cover;" src="images/' . $quangCao['hinh_anh'] . '" alt="' . $quangCao['tieu_de'] . '"></a>';
               echo '<div class="carousel-caption d-none d-md-block">';
               echo '<h5>' . $quangCao['tieu_de'] . '</h5>';
               echo '</div>';
