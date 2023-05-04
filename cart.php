@@ -30,7 +30,10 @@
       <table class="table table-borderless" align="center">
         <h2>Giỏ Hàng</h2>
         <?php 
-          $mangGioHang = $gh->layGioHang($_SESSION['nguoiDung']['id']);
+          if(isset($_SESSION['nguoiDung']))
+            $mangGioHang = $gh->layGioHang($_SESSION['nguoiDung']['id']);
+          else
+            $mangGioHang = array();
           if(count($mangGioHang) < 1)
             echo '<p>   Giỏ hàng trống</p>';
           else
@@ -82,7 +85,9 @@
         ?>
       </table>
     <td><button type="submit" class="btn btn-success">Cập nhật số lượng</button></td>
+    <?php if(count($mangGioHang) > 0){ ?>
     <td><a class="btn btn-warning" href="?action=datMua"><span class=""></span>Đặt mua</a></td>
+    <?php } ?>
                 </form>
     </div>
 

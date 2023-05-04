@@ -85,7 +85,7 @@
       <?php if(isset($_SESSION['nguoiDung'])){ ?>
         <div class="dropdown">
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle ms-2" data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="images/<?php echo $_SESSION['nguoiDung']['hinh_anh']; ?>" alt="" width="50" height="50" class="rounded-circle me-2">
+          <img src="images/<?php echo $_SESSION['nguoiDung']['hinh_anh']; ?>" alt="" style="width: 50px; height: 50px; object-fit: cover;" class="rounded-circle me-2">
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
           <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#hoSoCaNhan">Hồ sơ cá nhân</a></li>
