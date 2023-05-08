@@ -172,7 +172,7 @@
                   </div>
                 </div>
                 <?php 
-                  if(isset($_SESSION['nguoiDung']) && $_SESSION['nguoiDung']['id'] == $nguoiDungThamGiaDanhGia['id']){
+                  if(isset($_SESSION['nguoiDung']) && $_SESSION['nguoiDung']['id'] == $arr_j['id_nguoi_dung']){
                 ?>
                 <a href="?action=xoaPhanHoi&idPhanHoi=<?php echo $arr_j['id']; ?>&id=<?php echo $sp_id; ?>" class="btn btn-outline-danger ms-auto"><span class="bi bi-trash"></span></a>
                 <?php 
