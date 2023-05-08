@@ -50,7 +50,7 @@
         <tr>
           <td><?php echo $arr["tieu_de"]; ?></td>
           <td><?php echo $arr["url"]; ?></td>
-          <td><?php if($arr["trang_thai"] == 0) echo "Trong Thời Gian"; else echo "Ngoài Thời Gian"; ?></td>
+          <td><?php if($arr["trang_thai"] == 1) echo "Trong Thời Gian"; else echo "Ngoài Thời Gian"; ?></td>
           <td><img src="../../images/<?php echo $arr["hinh_anh"]; ?>" width="80" class="img-thumbnail"></td>
           <td><a class="btn btn-warning" href="index.php?action=sua&id=<?php echo $arr["id"]; ?>"><span class="glyphicon glyphicon-edit"></span> Sửa</a></td>
           <td><a class="btn btn-danger" href="index.php?action=xoa&id=<?php echo $arr["id"]; ?>"><span class="glyphicon glyphicon-trash"></span> Xoá</a></td>
