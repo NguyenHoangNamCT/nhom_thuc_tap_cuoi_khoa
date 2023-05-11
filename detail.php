@@ -17,9 +17,11 @@
         <input type="hidden" name="action" value="choVaoGio">
         <input type="hidden" name="id" value="<?php echo $thongTinSanPham["id"]; ?>">
         <!-- END -->
+        <?php if(isset($_SESSION['nguoiDung'])){ ?>
         <label for="">Số lượng</label>
         <input style="margin-bottom: 0.1rem;" type="number" class="form-control" name="soLuong" value="1">
         <input type="submit" class="btn btn-warning" value="Cho vào giỏ">
+        <?php } ?>
         <?php 
           if(isset($_SESSION['nguoiDung'])){
             $luotMua = $ctdh->demSoLuotMuaSanPham($_SESSION['nguoiDung']['id'], $sp_id);

@@ -72,8 +72,9 @@
         <!-- End -->
         <div style="margin-right: 0.55rem;"><input name="txtTuKhoa" class="form-control" type="search" placeholder="Search" aria-label="Search"></div>
         <button type="submit" class="btn btn-outline-warning me-2 bi-search">Tìm kiếm</button>
+        <?php if(isset($_SESSION['nguoiDung'])){ ?>
         <a class="btn btn-outline-warning me-2 bi-cart3" href="?action=xemGioHang">Giỏ hàng</a>
-        
+        <?php } ?>
         <?php 
             if(!isset($_SESSION['nguoiDung']))
               echo '<a class="btn btn-warning me-2" href="?action=dangNhap">Login</a>';

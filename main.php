@@ -157,7 +157,9 @@
         <p>Trạng thái: <?php if($arr_j['so_luong'] > 0) echo "Còn hàng"; else echo "HếT hàng"; ?></p>
 
         <a href="?action=xemChiTiet&id=<?php echo $arr_j['id']; ?>" class="btn btn-primary">Chi tiết</a>
+        <?php if(isset($_SESSION['nguoiDung'])){ ?>
         <a href="?action=choVaoGio&id=<?php echo $arr_j['id']; ?>&soLuong=1" class="btn btn-primary">Đặt mua</a>
+        <?php } ?>
       </div>
     </div>
   </div>   
