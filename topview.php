@@ -11,12 +11,12 @@
                 <a class="text-warning" href="?action=detail&product_id=<?php echo $arr["id"]; ?>" style="font-weight:bold;font-size:23px;"><?php echo $arr["ten_san_pham"]; ?></a>
             </div>
             <div class="panel-body">
-                <a href="?action=detail&product_id=<?php echo $arr["id"]; ?>"><img src="images/<?php echo $arr["hinh_anh"]; ?>" class="img-responsive"  style="width: 300px; height: 300px; object-fit: cover;" alt="<?php echo $arr["ten_san_pham"]; ?>"></a>
+                <a href="?action=xemChiTiet&id=<?php echo $arr["id"]; ?>"><img src="images/<?php echo $arr["hinh_anh"]; ?>" class="img-responsive"  style="width: 300px; height: 300px; object-fit: cover;" alt="<?php echo $arr["ten_san_pham"]; ?>"></a>
                 <p><strong>Giá bán: <span class="text-danger"><?php echo number_format($arr["gia_tien"]); ?>đ</span></strong></p>
             </div>
             <div class="panel-footer">
-                <a class="btn btn-success" href="?action=detail&product_id=<?php echo $arr["id"]; ?>">Chi tiết</a>
-                <a class="btn btn-danger" href="">Chọn mua</a>
+                <a class="btn btn-success" href="?action=xemChiTiet&id=<?php echo $arr["id"]; ?>">Chi tiết</a>
+                <a class="btn btn-danger" href="?action=choVaoGio&id=<?php echo $arr['id']."&soLuong=1"; ?>">Chọn mua</a>
             </div>
         </div>
     </div>
