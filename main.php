@@ -3,9 +3,10 @@
 <br><br>
 <div class="container">  
   <div class="row"> <!-- Tất cả mặt hàng - Xử lý phân trang -->
+      <h2 align='center'>Tất cả sản phẩm</h2>
      <a name="sptatca"></a>
      <div class="d-flex justify-content-center">
-      <div class="card col-sm-6">
+      <div class="card col-sm-12">
         <div class="card-header">
           Sắp sếp sản phẩm
         </div>
@@ -45,7 +46,6 @@
         </div>
       </div>
      </div>
-     <h2 align='center'>Tất cả sản phẩm</h2>
      <br>
      <br>
     <?php
